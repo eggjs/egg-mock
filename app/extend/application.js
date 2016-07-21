@@ -223,6 +223,34 @@ module.exports = {
   },
 
   /**
+   * mock csrf
+   * @method App#mockCsrf
+   * @return {App} this
+   * @sice 1.11
+   */
+  mockCsrf() {
+    mm(this.context, 'assertCSRF', function() {});
+    return this;
+  },
+
+  /**
+   * mock ctoken
+   * @method App#mockCtoken
+   * @return {App} this
+   * @sice 2.5.0
+   */
+  mockCtoken() {
+    const ctoken = 'mock-ctoken';
+    this.mockCookies({
+      ctoken: ctoken,
+    });
+    this.mockHeaders({
+      'x-csrf-token': ctoken,
+    });
+    return this;
+  },
+
+  /**
    * mock urllib
    * @method App#mockUrllib
    * @param {String} mockUrl - url
