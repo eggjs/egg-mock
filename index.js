@@ -4,7 +4,6 @@ const mm = require('mm');
 const cluster = require('./lib/cluster');
 const app = require('./lib/app');
 
-
 /**
  * @namespace mm
  */
@@ -47,7 +46,7 @@ module.exports = Object.assign(mm, {
 
   /**
    * mock console level
-   * @param  {String} level
+   * @param {String} level - logger level
    */
   consoleLevel(level) {
     level = (level || '').toUpperCase();
