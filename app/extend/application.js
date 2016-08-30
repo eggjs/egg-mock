@@ -36,7 +36,7 @@ module.exports = {
     }
 
     // 使用者自定义mock，可以覆盖上面的 mock
-    for (let key in data) {
+    for (const key in data) {
       mm(this.context, key, data[key]);
     }
 
@@ -113,7 +113,7 @@ module.exports = {
       const fn = data;
       if (is.generatorFunction(origin) && !is.generatorFunction(fn)) {
         // 确保 mockProxy(name, proxyName, normalFunction) 也能够兼容
-        mm(obj, name, function*() {
+        mm(obj, name, function* () {
           return fn.apply(this, arguments);
         });
         return;
@@ -124,7 +124,7 @@ module.exports = {
     }
 
     if (is.generatorFunction(origin)) {
-      mm(obj, name, function*() {
+      mm(obj, name, function* () {
         if (data instanceof Error) {
           throw data;
         }
@@ -153,7 +153,7 @@ module.exports = {
   mockRequest(req) {
     req = req || {};
     const headers = req.headers || {};
-    for (let key in req.headers) {
+    for (const key in req.headers) {
       headers[key.toLowerCase()] = req.headers[key];
     }
     if (!headers['x-forwarded-for']) {
@@ -242,7 +242,7 @@ module.exports = {
   mockCtoken() {
     const ctoken = 'mock-ctoken';
     this.mockCookies({
-      ctoken: ctoken,
+      ctoken,
     });
     this.mockHeaders({
       'x-csrf-token': ctoken,
@@ -325,7 +325,7 @@ module.exports = {
           error: null,
           ctx: opt.ctx,
           req: {
-            url: url,
+            url,
             options: opt,
             size: mockResult.requestSize,
           },
@@ -363,7 +363,7 @@ module.exports = {
    * override loadAgent
    * @method App#loadAgent
    */
-  loadAgent: function() {},
+  loadAgent() {},
 
   /**
    * mock serverEnv
@@ -371,7 +371,7 @@ module.exports = {
    * @param  {String} env - serverEnv
    * @return {App} this
    */
-  mockEnv: function(env) {
+  mockEnv(env) {
     mm(this.config, 'env', env);
     mm(this.config, 'serverEnv', env);
     return this;
@@ -383,7 +383,7 @@ function findHeaders(headers, key) {
     return null;
   }
   key = key.toLowerCase();
-  for (let headerKey in headers) {
+  for (const headerKey in headers) {
     if (key === headerKey.toLowerCase()) {
       return headers[headerKey];
     }
