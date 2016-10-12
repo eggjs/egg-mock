@@ -35,7 +35,7 @@ $ npm i egg-mock --save-dev
 通过 `mm.app` 启动应用，可以使用 App 的 API 模拟数据
 
 ```js
-const mm = require('@ali/mm');
+const mm = require('egg-mock');
 const request = require('supertest');
 
 describe('some test', function () {
