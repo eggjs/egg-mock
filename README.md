@@ -101,28 +101,30 @@ before(function(done) {
 });
 ```
 
-插件测试会通过 [@ali/egg-web-names](http://gitlab.alibaba-inc.com/egg/egg-web-names) 找默认框架，也可以指定 customEgg，比如希望在 chair 和 midway 同时测试此插件。
+如果想测试插件挂载到某个框架里测试,可以通过 [egg-web-names](https://github.com/eggjs/egg-web-names) 找默认框架，也可以指定 customEgg，比如希望在 aliyun-egg 和 framework-b 同时测试此插件。
 
 ```js
-describe('chair', function() {
-  before(function(done) {
-    this.app = mm.app({
+describe('aliyun-egg', function() {
+  let app;
+  before(() => {
+    app = mm.app({
       baseDir: 'apps/demo',
-      customEgg: path.join(__dirname, 'node_modules/@ali/egg'),
+      customEgg: path.join(__dirname, 'node_modules/aliyun-egg'),
     });
-    this.app.ready(done);
+    return app.ready();
   });
-})
+});
 
-describe('midway', function() {
-  before(function(done) {
-    this.app = mm.app({
+describe('framework-b', function() {
+  let app;
+  before(() => {
+    app = mm.app({
       baseDir: 'apps/demo',
-      customEgg: path.join(__dirname, 'node_modules/midway'),
+      customEgg: path.join(__dirname, 'node_modules/framework-b'),
     });
-    this.app.ready(done);
+    return app.ready();
   });
-})
+});
 ```
 
 如果当前目录确实是一个 egg 插件，但是又不想当它是一个插件来测试，可以通过 `options.plugin` 选项来关闭：
@@ -148,27 +150,21 @@ before(function(done) {
 创建一个多进程应用，因为是多进程应用，无法获取 worker 的属性，只能通过 supertest 请求。
 
 ```js
+const mm = require('egg-mock');
 describe('test/app.js', function() {
   let app, config;
-  before(function(done) {
+  before(() => {
     app = mm.cluster();
-    app.ready(done);
+    return app.ready();
   });
-  before(function(done) {
-    request(app.callback())
-    .get('/config')
-    .end(function(err, res) {
-      should.not.exists(err);
-      // 获取 app.config，在 controller
-      // this.body = this.app.config;
-      config = res.body;
-      done();
-    })
-  });
-  after(function() {
-    app.close();
-  })
+  after(() => app.close());
   afterEach(mm.restore);
+
+  it('some test', () => {
+    return request(app.callback())
+    .get('/config')
+    .expect(200)
+  });
 });
 ```
 
@@ -194,7 +190,7 @@ mm.app({
 
 **建议配置 cache 一起使用，不然读取缓存不会重新加载，导致 env 不会生效。**
 
-具体值见 http://gitlab.alibaba-inc.com/egg/egg-loader/blob/master/lib/base_loader.js#L102
+具体值见 https://github.com/eggjs/egg-core/blob/master/lib/loader/egg_loader.js#L82
 
 ### mm.consoleLevel(level)
 
@@ -235,7 +231,7 @@ mm.app({
 
 #### customEgg {String/Boolean}
 
-指定框架路径，默认会根据 [@ali/egg-web-names](http://gitlab.alibaba-inc.com/egg/egg-web-names) 的先后顺序搜索框架路径。
+指定框架路径，默认会根据 [egg-web-names](https://github.com/eggjs/egg-web-names) 的先后顺序搜索框架路径。
 
 对于框架的测试用例，可以指定 true，见上面示例。
 
@@ -247,10 +243,6 @@ mm.app({
   customEgg: path.join(__dirname, 'fixtures/chair'),
 })
 ```
-
-#### antxpath {String}
-
-传入外部的 antx 配置
 
 #### plugin
 
@@ -315,39 +307,6 @@ const ctx = app.mockContext();
 console.log(ctx.session.foo);
 ```
 
-### app.mockProxy(proxy, methodName, fn)
-
-使用此 mock，args 是经过 proxyArgsConvertor 返回的结果, 可以保证单元测试的参数通过参数类型检查。
-
-```js
-app.mockProxy('authManager', 'retrieveDataPermission', function* (ctx, methodName, args) {
-  return { foo: 'bar' };
-});
-```
-
-也可以便捷地 mock proxy 返回特定数据
-
-```js
-app.mockProxy('account', 'getAccountInfo', { name: 'foo' });
-```
-
-### app.mockProxyError(proxy, methodName[, error])
-
-便捷地 mock proxy 抛出指定异常
-
-```js
-app.mockProxyError('account', 'getAccountInfo', new Error('mock error'));
-app.mockProxyError('account2', 'getAccountInfo', 'mock error string is ok');
-```
-
-### app.mockProxyByScene(proxy, methodName, scene)
-
-按照场景来 mock proxy 的返回内容。所有的场景数据都放在 `${baseDir}/mocks_data/proxy/${proxyName}/${methodName}/${scene}.js` 的文件中。
-
-```js
-app.mockProxyByScene('account', 'getAccountInfo', 'scene_1');
-```
-
 ### app.mockService(service, methodName, fn)
 
 模拟 service，和 mockProxy 类似
@@ -358,7 +317,7 @@ app.mockProxyByScene('account', 'getAccountInfo', 'scene_1');
 
 ### app.mockServiceByScene(service, methodName, scene)
 
-按照场景来 mock service 的返回内容，和 `mockProxyByScene` 类似。所有的场景数据都放在 `${baseDir}/mocks_data/service/${serviceName}/${methodName}/${scene}.js` 的文件中。
+按照场景来 mock service 的返回内容，所有的场景数据都放在 `${baseDir}/mocks_data/service/${serviceName}/${methodName}/${scene}.js` 的文件中。
 
 ```js
 app.mockServiceByScene('foo', 'bar', 'scene_1');
@@ -390,40 +349,25 @@ request(app.callback())
 .expect({stat: 'ok'}, done);
 ```
 
-### app.mockAntx()
-
-模拟 antx
-
-```js
-app.get('/', function*() {
-  this.body = this.app.antx.a;
-})
-
-app.mockAntx({ a: 1 });
-request(app.callback())
-.post('/')
-.expect('1', done);
-```
-
 ### app.mockUrllib(url, method, data)
 
 模拟 urllib
 
 ```js
 app.get('/', function*() {
-  const ret = yield this.curl('http://www.alipay.com');
+  const ret = yield this.curl('https://eggjs.org ');
   this.body = ret.data.toString();
 });
 
-app.mockUrllib('http://www.alipay.com', {
+app.mockUrllib('https://eggjs.org ', {
   // 模拟的参数，可以是 buffer / string / json，
   // 都会转换成 buffer
   // 按照请求时的 options.dataType 来做对应的转换
-  data: 'mock alipay',
+  data: 'mock taobao',
 });
 request(app.callback())
 .post('/')
-.expect('mock alipay', done);
+.expect('mock taobao', done);
 ```
 
 ## Questions & Suggestions
