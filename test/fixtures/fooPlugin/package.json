@@ -1,0 +1,6 @@
+{
+  "name": "@ali/fooPlugin",
+  "eggPlugin": {
+    "name": "fooPlugin"
+  }
+}
