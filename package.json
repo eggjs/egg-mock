@@ -14,8 +14,8 @@
   "scripts": {
     "lint": "eslint lib app index.js test/*.test.js",
     "test": "npm run lint && npm run test-local",
-    "test-local": "egg-bin test",
-    "cov": "TEST_TIMEOUT=40000 egg-bin cov",
+    "test-local": "egg-bin test -r intelli-espower-loader",
+    "cov": "egg-bin cov -r intelli-espower-loader",
     "ci": "npm run lint && npm run cov",
     "autod": "autod -w --prefix '^'",
     "autod-china": "autod --registry=https://registry.npm.taobao.org",
@@ -38,6 +38,9 @@
     "egg-ci": "^1.0.3",
     "eslint": "^3.4.0",
     "eslint-config-egg": "^3.1.0",
+    "intelli-espower-loader": "^1.0.1",
+    "pedding": "^1.0.0",
+    "power-assert": "^1.4.1",
     "should": "^8.3.0",
     "supertest": "^2.0.0"
   },
