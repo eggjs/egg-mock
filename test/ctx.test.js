@@ -6,7 +6,7 @@ const mm = require('..');
 const customEgg = path.join(__dirname, '../node_modules/egg');
 const fixtures = path.join(__dirname, 'fixtures');
 
-describe.only('test/ctx.test.js', function() {
+describe('test/ctx.test.js', function() {
 
   afterEach(mm.restore);
 
