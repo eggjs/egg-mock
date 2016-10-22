@@ -73,6 +73,7 @@ module.exports = {
       const arr = service.split('.');
       if (arr.length <= 3) {
         service = this[arr.length === 1 ? 'serviceClasses' : 'subServiceClasses'];
+        console.log(service);
         arr.forEach(function(item) {
           service = service[item];
         });

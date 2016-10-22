@@ -1,6 +1,7 @@
 'use strict';
 
 const path = require('path');
+const assert = require('power-assert');
 const mm = require('..');
 
 const customEgg = path.join(__dirname, '../node_modules/egg');
@@ -21,31 +22,31 @@ describe('test/ctx.test.js', function() {
 
   it('should has logger, app, request', () => {
     const ctx = app.mockContext();
-    ctx.app.should.be.a.Object;
-    ctx.request.url.should.equal('/');
-    ctx.request.ip.should.equal('127.0.0.1');
-    ctx.logger.should.be.a.Object;
-    ctx.coreLogger.should.be.a.Object;
+    assert(ctx.app instanceof Object);
+    assert(ctx.logger instanceof Object);
+    assert(ctx.coreLogger instanceof Object);
+    assert(ctx.request.url === '/');
+    assert(ctx.request.ip === '127.0.0.1');
   });
 
   it('should ctx.ip work', () => {
     const ctx = app.mockContext();
     ctx.request.headers['x-forwarded-for'] = '';
-    ctx.request.ip.should.equal('127.0.0.1');
+    assert(ctx.request.ip === '127.0.0.1');
   });
 
   it('should has services', function* () {
     const ctx = app.mockContext();
     const data = yield ctx.service.foo.get('foo');
-    data.should.equal('bar');
+    assert(data === 'bar');
   });
 
   describe('curl()', () => {
     it('should call curl work', function* () {
       const ctx = app.mockContext();
       const result = yield ctx.curl('https://my.alipay.com');
-      result.status.should.equal(302);
-      result.headers.location.should.equal('/portal/i.htm');
+      assert(result.status === 302);
+      assert(result.headers.location === '/portal/i.htm');
     });
   });
 

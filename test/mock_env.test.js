@@ -1,6 +1,7 @@
 'use strict';
 
 const path = require('path');
+const assert = require('power-assert');
 const mm = require('..');
 const fixtures = path.join(__dirname, 'fixtures');
 
@@ -18,7 +19,7 @@ describe('test/mock_env.test.js', function() {
 
   it('should mock env succes', function() {
     app.mockEnv('prod');
-    app.config.env.should.equal('prod');
-    app.config.serverEnv.should.equal('prod');
+    assert(app.config.env === 'prod');
+    assert(app.config.serverEnv === 'prod');
   });
 });

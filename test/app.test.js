@@ -2,6 +2,7 @@
 
 const request = require('supertest');
 const path = require('path');
+const assert = require('power-assert');
 const mm = require('..');
 const fixtures = path.join(__dirname, 'fixtures');
 
@@ -198,7 +199,7 @@ function call(method) {
       this.app2.close();
     });
     it('should equal', function() {
-      this.app1.should.equal(this.app2);
+      assert(this.app1 === this.app2);
     });
   });
 }

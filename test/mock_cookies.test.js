@@ -25,7 +25,7 @@ describe('test/mock_cookies.test.js', function() {
     request(this.app.callback())
     .get('/')
     .expect(function(res) {
-      res.body.should.eql({});
+      assert.deepEqual(res.body, {});
     })
     .expect(200, done);
   });
@@ -35,7 +35,7 @@ describe('test/mock_cookies.test.js', function() {
       foo: 'bar cookie',
     });
     const ctx = this.app.mockContext();
-    ctx.getCookie('foo').should.equal('bar cookie');
+    assert(ctx.getCookie('foo') === 'bar cookie');
 
     request(this.app.callback())
     .get('/')

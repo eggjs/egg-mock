@@ -18,8 +18,8 @@ describe('test/cluster.test.js', function() {
       cache: false,
       coverage: false,
     });
-    app.callback().should.equal(app);
-    app.listen().should.equal(app);
+    assert(app.callback() === app);
+    assert(app.listen() === app);
     app.ready(function() {
       assert(app.process);
       app.close();
@@ -135,7 +135,7 @@ describe('test/cluster.test.js', function() {
         customEgg: path.join(__dirname, '../node_modules/egg'),
       });
 
-      app1.should.equal(app2);
+      assert(app1 === app2);
     });
 
     it('should return new app if cached app has been closed', function() {
@@ -149,22 +149,9 @@ describe('test/cluster.test.js', function() {
         baseDir: 'demo',
         customEgg: path.join(__dirname, '../node_modules/egg'),
       });
-      app2.should.not.equal(app1);
+      assert(app2 !== app1);
     });
 
-    it('should return new app if cached app has been closeped', function() {
-      const app1 = mm.cluster({
-        baseDir: 'demo',
-        customEgg: path.join(__dirname, '../node_modules/egg'),
-      });
-
-      app1.close();
-      const app2 = mm.cluster({
-        baseDir: 'demo',
-        customEgg: path.join(__dirname, '../node_modules/egg'),
-      });
-      app2.should.not.equal(app1);
-    });
   });
 
   describe('cluster with eggPath', function() {
