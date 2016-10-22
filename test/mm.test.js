@@ -1,6 +1,5 @@
 'use strict';
 
-require('should');
 const path = require('path');
 const fs = require('fs');
 const mm = require('..');
@@ -8,7 +7,7 @@ const mm = require('..');
 const customEgg = path.join(__dirname, '../node_modules/egg');
 const baseDir = path.join(__dirname, 'fixtures/apps/env-app');
 
-describe.only('test/mm.test.js', function() {
+describe('test/mm.test.js', function() {
 
   afterEach(mm.restore);
 
