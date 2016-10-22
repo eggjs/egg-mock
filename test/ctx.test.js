@@ -41,13 +41,4 @@ describe('test/ctx.test.js', function() {
     assert(data === 'bar');
   });
 
-  describe('curl()', () => {
-    it('should call curl work', function* () {
-      const ctx = app.mockContext();
-      const result = yield ctx.curl('https://my.alipay.com');
-      assert(result.status === 302);
-      assert(result.headers.location === '/portal/i.htm');
-    });
-  });
-
 });

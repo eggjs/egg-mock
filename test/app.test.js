@@ -6,7 +6,7 @@ const assert = require('power-assert');
 const mm = require('..');
 const fixtures = path.join(__dirname, 'fixtures');
 
-describe('test/app.test.js', function() {
+describe.only('test/app.test.js', function() {
   afterEach(mm.restore);
 
   // 测试 mm.app
