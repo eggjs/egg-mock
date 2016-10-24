@@ -1,4 +1,11 @@
 
+0.0.6 / 2016-10-24
+==================
+
+  * feat: cluster should wait process exit (#11)
+  * docs:update readme (#9)
+  * docs: update readme
+
 0.0.5 / 2016-10-11
 ==================
 
