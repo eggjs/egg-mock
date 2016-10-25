@@ -136,13 +136,13 @@ describe('test/cluster.test.js', function() {
     });
 
     it('should return cached cluster app', function* () {
-      const app1 = mm.cluster({
+      app1 = mm.cluster({
         baseDir: 'demo',
         customEgg: path.join(__dirname, '../node_modules/egg'),
       });
       yield app1.ready();
 
-      const app2 = mm.cluster({
+      app2 = mm.cluster({
         baseDir: 'demo',
         customEgg: path.join(__dirname, '../node_modules/egg'),
       });
@@ -152,14 +152,14 @@ describe('test/cluster.test.js', function() {
     });
 
     it('should return new app if cached app has been closed', function* () {
-      const app1 = mm.cluster({
+      app1 = mm.cluster({
         baseDir: 'demo',
         customEgg: path.join(__dirname, '../node_modules/egg'),
       });
       yield app1.ready();
       yield app1.close();
 
-      const app2 = mm.cluster({
+      app2 = mm.cluster({
         baseDir: 'demo',
         customEgg: path.join(__dirname, '../node_modules/egg'),
       });

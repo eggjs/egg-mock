@@ -1,4 +1,4 @@
-'ues strict';
+'use strict'
 
 module.exports = {
   write: true,
@@ -9,6 +9,11 @@ module.exports = {
   ],
   devdep: [
     'autod',
+    'egg',
+    'egg-bin',
+    'egg-ci',
+    'eslint',
+    'eslint-config-egg',
   ],
   keep: [
   ],
