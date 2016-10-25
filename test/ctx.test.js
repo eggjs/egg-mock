@@ -19,6 +19,7 @@ describe('test/ctx.test.js', function() {
     });
     app.ready(done);
   });
+  after(() => app.close());
 
   it('should has logger, app, request', () => {
     const ctx = app.mockContext();

@@ -14,6 +14,7 @@ describe('test/mock_session.test.js', function() {
     });
     app.ready(done);
   });
+  after(() => app.close());
   afterEach(mm.restore);
 
   it('should mock session', function() {

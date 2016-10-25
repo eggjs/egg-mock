@@ -14,6 +14,8 @@ describe('test/mock_csrf.test.js', function() {
       customEgg: path.join(__dirname, '../node_modules/egg'),
     });
   });
+  after(() => app.close());
+  afterEach(mm.restore);
 
   it('should work', function(done) {
     app.mockCsrf();

@@ -18,6 +18,8 @@ describe('test/mock_headers.test.js', function() {
     });
     return app.ready();
   });
+  after(() => app.close());
+  afterEach(mm.restore);
 
   it('should not exists without mock', function(done) {
     app.mockContext();

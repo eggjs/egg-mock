@@ -14,51 +14,57 @@ describe('test/mm.test.js', function() {
 
   describe('mm.env()', function() {
 
+    let app;
+    afterEach(() => app.close());
+
     it('should mock unittest', function() {
-      const app = mm.app({ baseDir: 'apps/env-app', cache: false, customEgg });
+      app = mm.app({ baseDir: 'apps/env-app', cache: false, customEgg });
       assert(app.config.fakeplugin.foo === 'bar-unittest');
       assert(app.config.logger.dir === path.join(baseDir, 'logs/env-app'));
     });
 
     it('should mock test', function() {
       mm.env('test');
-      const app = mm.app({ baseDir: 'apps/env-app', cache: false, customEgg });
+      app = mm.app({ baseDir: 'apps/env-app', cache: false, customEgg });
       assert(app.config.fakeplugin.foo === 'bar-test');
       assert(app.config.logger.dir === path.join(baseDir, 'logs/env-app'));
     });
 
     it('should mock prod', function() {
       mm.env('prod');
-      const app = mm.app({ baseDir: 'apps/env-app', cache: false, customEgg });
+      app = mm.app({ baseDir: 'apps/env-app', cache: false, customEgg });
       assert(app.config.fakeplugin.foo === 'bar-prod');
       assert(app.config.logger.dir === path.join(baseDir, 'logs/env-app'));
     });
 
     it('should mock default', function() {
       mm.env('default');
-      const app = mm.app({ baseDir: 'apps/env-app', cache: false, customEgg });
+      app = mm.app({ baseDir: 'apps/env-app', cache: false, customEgg });
       assert(app.config.fakeplugin.foo === 'bar-default');
       assert(app.config.logger.dir === path.join(baseDir, 'logs/env-app'));
     });
 
     it('should mock unittest', function() {
       mm.env('unittest');
-      const app = mm.app({ baseDir: 'apps/env-app', cache: false, customEgg });
+      app = mm.app({ baseDir: 'apps/env-app', cache: false, customEgg });
       assert(app.config.fakeplugin.foo === 'bar-unittest');
       assert(app.config.logger.dir === path.join(baseDir, 'logs/env-app'));
     });
 
     it('should mock local', function() {
       mm.env('local');
-      const app = mm.app({ baseDir: 'apps/env-app', cache: false, customEgg });
+      app = mm.app({ baseDir: 'apps/env-app', cache: false, customEgg });
       assert(app.config.fakeplugin.foo === 'bar-default');
       assert(app.config.logger.dir === path.join(baseDir, 'logs/env-app'));
     });
   });
 
   describe('mm.app({clean: false})', function() {
+    let app;
+    after(() => app.close());
+
     it('keep log dir', function() {
-      mm.app({ baseDir: 'apps/app-not-clean', clean: false, customEgg });
+      app = mm.app({ baseDir: 'apps/app-not-clean', clean: false, customEgg });
       assert(fs.existsSync(path.join(__dirname, 'fixtures/apps/app-not-clean/logs/keep')));
     });
   });

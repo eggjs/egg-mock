@@ -1,22 +1,17 @@
-'use strict';
+'ues strict';
 
 module.exports = {
   write: true,
   prefix: '^',
-   test: [
-     'test',
-     'benchmark',
-   ],
-  devdep: [
-    'egg',
-    'egg-ci',
-    'egg-bin',
-    'autod',
-    'eslint',
-    'eslint-config-egg',
-    'supertest'
-  ],
+  devprefix: '^',
   exclude: [
-    './test/fixtures',
+    'test/fixtures',
   ],
-}
+  devdep: [
+    'autod',
+  ],
+  keep: [
+  ],
+  semver: [
+  ],
+};

@@ -11,12 +11,15 @@ const customEgg = path.join(__dirname, '../node_modules/egg');
 
 describe('test/agent.test.js', () => {
 
+  let app;
+  afterEach(() => app.close());
+
   it('mock agent ok', function* () {
     const baseDir = path.join(fixtures, 'agent');
     const filepath = path.join(baseDir, 'run/test.txt');
     rimraf.sync(filepath);
 
-    const app = mm.app({
+    app = mm.app({
       baseDir,
       customEgg,
     });
@@ -28,7 +31,7 @@ describe('test/agent.test.js', () => {
   it('mock agent again ok', done => {
     const baseDir = path.join(fixtures, 'agent');
 
-    const app = mm.app({
+    app = mm.app({
       baseDir,
       customEgg,
     });

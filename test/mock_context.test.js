@@ -14,6 +14,7 @@ describe('test/mock_context.test.js', function() {
     });
     app.ready(done);
   });
+  after(() => app.close());
   afterEach(mm.restore);
 
   it('should work with bucLogin', function() {

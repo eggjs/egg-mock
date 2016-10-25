@@ -23,8 +23,8 @@ describe('test/mock_urllib.test.js', function() {
     server = app.listen();
     url = `http://127.0.0.1:${server.address().port}/mock_url`;
   });
-
-  afterEach(() => app.mockRestore());
+  after(() => app.close());
+  afterEach(mm.restore);
 
   it('should mock url get and get reponse event on urllib', function(done) {
     done = pedding(2, done);

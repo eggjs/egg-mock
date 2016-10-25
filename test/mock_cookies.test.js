@@ -8,21 +8,22 @@ const fixtures = path.join(__dirname, 'fixtures');
 
 describe('test/mock_cookies.test.js', function() {
 
-  afterEach(mm.restore);
-
+  let app;
   before(function(done) {
-    this.app = mm.app({
+    app = mm.app({
       baseDir: path.join(fixtures, 'apps/mock_cookies'),
       customEgg: path.join(__dirname, '../node_modules/egg'),
     });
-    this.app.ready(done);
+    app.ready(done);
   });
+  after(() => app.close());
+  afterEach(mm.restore);
 
   it('should not return when don\'t mock cookies', function(done) {
-    const ctx = this.app.mockContext();
+    const ctx = app.mockContext();
     assert(!ctx.getCookie('foo'));
 
-    request(this.app.callback())
+    request(app.callback())
     .get('/')
     .expect(function(res) {
       assert.deepEqual(res.body, {});
@@ -31,13 +32,13 @@ describe('test/mock_cookies.test.js', function() {
   });
 
   it('should mock cookies', function(done) {
-    this.app.mockCookies({
+    app.mockCookies({
       foo: 'bar cookie',
     });
-    const ctx = this.app.mockContext();
+    const ctx = app.mockContext();
     assert(ctx.getCookie('foo') === 'bar cookie');
 
-    request(this.app.callback())
+    request(app.callback())
     .get('/')
     .expect({
       cookieValue: 'bar cookie',

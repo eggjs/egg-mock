@@ -6,7 +6,6 @@ const mm = require('..');
 const fixtures = path.join(__dirname, 'fixtures');
 
 describe('test/mock_env.test.js', function() {
-  afterEach(mm.restore);
 
   let app;
   before(() => {
@@ -16,6 +15,8 @@ describe('test/mock_env.test.js', function() {
     });
     return app.ready();
   });
+  after(() => app.close());
+  afterEach(mm.restore);
 
   it('should mock env succes', function() {
     app.mockEnv('prod');

@@ -14,9 +14,8 @@ describe('test/mock_ctoken.test.js', function() {
     });
     return app.ready();
   });
-  afterEach(function() {
-    app.mockRestore();
-  });
+  after(() => app.close());
+  afterEach(mm.restore);
 
   it('should return without ctoken', function(done) {
     app.mockCtoken();

@@ -11,38 +11,42 @@ describe('test/cluster.test.js', function() {
 
   afterEach(mm.restore);
 
-  it('should have members', function(done) {
-    const app = mm.cluster({
-      baseDir: path.join(fixtures, 'demo'),
-      customEgg: path.join(__dirname, '../node_modules/egg'),
-      cache: false,
-      coverage: false,
-    });
-    assert(app.callback() === app);
-    assert(app.listen() === app);
-    app.ready(function() {
-      assert(app.process);
-      app.close();
-      done();
-    });
-  });
-
-  describe('cluster with fullpath baseDir', function() {
-    before(function(done) {
-      this.app = mm.cluster({
+  describe('normal', () => {
+    let app;
+    before(() => {
+      app = mm.cluster({
         baseDir: path.join(fixtures, 'demo'),
         customEgg: path.join(__dirname, '../node_modules/egg'),
         cache: false,
         coverage: false,
       });
-      this.app.ready(done);
+      return app.ready();
     });
-    after(function() {
-      this.app.close();
+    after(() => app.close());
+
+    it('should have members', function* () {
+      assert(app.callback() === app);
+      assert(app.listen() === app);
+      yield app.ready();
+      assert(app.process);
     });
+  });
+
+  describe('cluster with fullpath baseDir', function() {
+    let app;
+    before(function(done) {
+      app = mm.cluster({
+        baseDir: path.join(fixtures, 'demo'),
+        customEgg: path.join(__dirname, '../node_modules/egg'),
+        cache: false,
+        coverage: false,
+      });
+      app.ready(done);
+    });
+    after(() => app.close());
 
     it('should work', function(done) {
-      request(this.app.callback())
+      request(app.callback())
         .get('/hello')
         .expect('hi')
         .expect(200, done);
@@ -50,21 +54,20 @@ describe('test/cluster.test.js', function() {
   });
 
   describe('cluster with shortpath baseDir', function() {
+    let app;
     before(function(done) {
-      this.app = mm.cluster({
+      app = mm.cluster({
         baseDir: 'demo',
         customEgg: path.join(__dirname, '../node_modules/egg'),
         cache: false,
         coverage: false,
       });
-      this.app.ready(done);
+      app.ready(done);
     });
-    after(function() {
-      this.app.close();
-    });
+    after(() => app.close());
 
     it('should work', function(done) {
-      request(this.app.callback())
+      request(app.callback())
         .get('/hello')
         .expect('hi')
         .expect(200, done);
@@ -72,21 +75,20 @@ describe('test/cluster.test.js', function() {
   });
 
   describe('cluster with customEgg=string', function() {
+    let app;
     before(function(done) {
-      this.app = mm.cluster({
+      app = mm.cluster({
         baseDir: 'apps/barapp',
         customEgg: path.join(fixtures, 'bar'),
         cache: false,
         coverage: false,
       });
-      this.app.ready(done);
+      app.ready(done);
     });
-    after(function() {
-      this.app.close();
-    });
+    after(() => app.close());
 
     it('should work', function(done) {
-      request(this.app.callback())
+      request(app.callback())
       .get('/')
       .expect({
         foo: 'bar',
@@ -97,24 +99,23 @@ describe('test/cluster.test.js', function() {
   });
 
   describe('cluster with customEgg=true', function() {
+    let app;
     before(function(done) {
       mm(process, 'cwd', function() {
         return path.join(fixtures, 'bar');
       });
-      this.app = mm.cluster({
+      app = mm.cluster({
         baseDir: path.join(fixtures, 'apps/barapp'),
         customEgg: true,
         cache: false,
         coverage: false,
       });
-      this.app.ready(done);
+      app.ready(done);
     });
-    after(function() {
-      this.app.close();
-    });
+    after(() => app.close());
 
     it('should work', function(done) {
-      request(this.app.callback())
+      request(app.callback())
       .get('/')
       .expect({
         foo: 'bar',
@@ -125,30 +126,45 @@ describe('test/cluster.test.js', function() {
   });
 
   describe('cluster with cache', function() {
-    it('should return cached cluster app', function() {
+    let app1;
+    let app2;
+    afterEach(() => {
+      const promises = [];
+      app1 && promises.push(app1.close());
+      app2 && promises.push(app2.close());
+      return Promise.all(promises);
+    });
+
+    it('should return cached cluster app', function* () {
       const app1 = mm.cluster({
         baseDir: 'demo',
         customEgg: path.join(__dirname, '../node_modules/egg'),
       });
+      yield app1.ready();
+
       const app2 = mm.cluster({
         baseDir: 'demo',
         customEgg: path.join(__dirname, '../node_modules/egg'),
       });
+      yield app2.ready();
 
       assert(app1 === app2);
     });
 
-    it('should return new app if cached app has been closed', function() {
+    it('should return new app if cached app has been closed', function* () {
       const app1 = mm.cluster({
         baseDir: 'demo',
         customEgg: path.join(__dirname, '../node_modules/egg'),
       });
+      yield app1.ready();
+      yield app1.close();
 
-      app1.close();
       const app2 = mm.cluster({
         baseDir: 'demo',
         customEgg: path.join(__dirname, '../node_modules/egg'),
       });
+      yield app2.ready();
+
       assert(app2 !== app1);
     });
 
@@ -156,9 +172,8 @@ describe('test/cluster.test.js', function() {
 
   describe('cluster with eggPath', function() {
     let app;
-    after(function() {
-      app.close();
-    });
+    after(() => app.close());
+
     it('should get eggPath', function(done) {
       app = mm.cluster({
         baseDir: 'demo',
@@ -176,9 +191,8 @@ describe('test/cluster.test.js', function() {
 
   describe('cluster with workers', function() {
     let app;
-    after(function() {
-      app.close();
-    });
+    after(() => app.close());
+
     it('should get 2 workers', function(done) {
       app = mm.cluster({
         baseDir: 'demo',
@@ -195,9 +209,8 @@ describe('test/cluster.test.js', function() {
 
   describe('cluster with opts', function() {
     let app;
-    after(function() {
-      app.close();
-    });
+    after(() => app.close());
+
     it('should pass execArgv', function(done) {
       app = mm.cluster({
         baseDir: 'custom_egg',

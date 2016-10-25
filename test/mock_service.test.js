@@ -16,6 +16,7 @@ describe('test/mock_service.test.js', function() {
     });
     yield app.ready();
   });
+  after(() => app.close());
   afterEach(mm.restore);
 
   it('should return from service', function(done) {
