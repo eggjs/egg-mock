@@ -1,22 +1,22 @@
-'use strict';
+'use strict'
 
 module.exports = {
   write: true,
   prefix: '^',
-   test: [
-     'test',
-     'benchmark',
-   ],
+  devprefix: '^',
+  exclude: [
+    'test/fixtures',
+  ],
   devdep: [
-    'egg',
-    'egg-ci',
-    'egg-bin',
     'autod',
+    'egg',
+    'egg-bin',
+    'egg-ci',
     'eslint',
     'eslint-config-egg',
-    'supertest'
   ],
-  exclude: [
-    './test/fixtures',
+  keep: [
   ],
-}
+  semver: [
+  ],
+};

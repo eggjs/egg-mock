@@ -20,7 +20,7 @@
 [download-image]: https://img.shields.io/npm/dm/egg-mock.svg?style=flat-square
 [download-url]: https://npmjs.org/package/egg-mock
 
-Mock library for Egg testing.
+一个数据模拟的库，更方便的测试 Egg 应用。
 
 ## Install
 
@@ -30,9 +30,9 @@ $ npm i egg-mock --save-dev
 
 ## Usage
 
-### Create testcase
+### 创建测试用例
 
-Launch a mock server with `mm.app`
+通过 `mm.app` 启动应用，可以使用 App 的 API 模拟数据
 
 ```js
 // test/index.test.js
@@ -59,13 +59,13 @@ describe('some test', () => {
 });
 ```
 
-Retrieve Agent instance through `app.agent` after `mm.app` started.
+使用 `mm.app` 启动后可以通过 `app.agent` 访问到 agent 对象。
 
-Using `mm.cluster` launch cluster server, you can use the same API as `mm.app`;
+使用 `mm.cluster` 启动多进程测试，API 与 `mm.app` 一致。
 
-### Test Application
+### 应用开发者
 
-`baseDir` is optional that is `process.cwd()` by default.
+应用开发者不需要传入 baseDir，其为当前路径
 
 ```js
 before(() => {
@@ -76,9 +76,9 @@ before(() => {
 });
 ```
 
-### Test Framework
+### 框架开发者
 
-customEgg is optional that is `process.cwd()` by default.
+框架开发者需要指定 customEgg，会将当前路径指定为框架入口
 
 ```js
 before(() => {
@@ -90,9 +90,9 @@ before(() => {
 });
 ```
 
-### Test Plugin
+### 插件开发者
 
-If `eggPlugin.name` is defined in `package.json`, it's a plugin that will be loaded to plugin list automatically.
+在插件目录下执行测试用例时，只要 `package.json` 中有 `eggPlugin.name` 字段，就会自动把当前目录加到插件列表中。
 
 ```js
 before(() => {
@@ -104,7 +104,7 @@ before(() => {
 });
 ```
 
-You can also test the plugin in different framework, e.g. test [aliyun-egg](https://github.com/eggjs/aliyun-egg) and framework-b in one plugin.
+也可以通过 customEgg 指定其他框架，比如希望在 aliyun-egg 和 framework-b 同时测试此插件。
 
 ```js
 describe('aliyun-egg', () => {
@@ -130,7 +130,7 @@ describe('framework-b', () => {
 });
 ```
 
-If it's detected as an plugin, but you don't want it to be, you can use `plugin = false`.
+如果当前目录确实是一个 egg 插件，但是又不想当它是一个插件来测试，可以通过 `options.plugin` 选项来关闭：
 
 ```js
 before(() => {
@@ -147,11 +147,11 @@ before(() => {
 
 ### mm.app(options)
 
-Create a mock application.
+创建一个 mock 的应用。
 
 ### mm.cluster(options)
 
-Create a mock cluster server, but you can't use API in application, you should test using `supertest`.
+创建一个多进程应用，因为是多进程应用，无法获取 worker 的属性，只能通过 supertest 请求。
 
 ```js
 const mm = require('egg-mock');
@@ -171,7 +171,7 @@ describe('test/app.js', () => {
 });
 ```
 
-You can disable coverage, because it's slow.
+默认会启用覆盖率，因为覆盖率比较慢，可以设置 coverage 关闭
 
 ```js
 mm.cluster({
@@ -181,40 +181,42 @@ mm.cluster({
 
 ### mm.env(env)
 
-Mock env when starting
+设置环境变量，主要用于启动阶段，运行阶段可以使用 app.mockEnv。
 
 ```js
-// production environment
+// 模拟生成环境
 mm.env('prod');
 mm.app({
   cache: false,
 });
 ```
 
-Environment list https://github.com/eggjs/egg-core/blob/master/lib/loader/egg_loader.js#L82
+具体值见 https://github.com/eggjs/egg-core/blob/master/lib/loader/egg_loader.js#L82
 
 ### mm.consoleLevel(level)
 
-Mock level that print to stdout/stderr
+mock 终端日志打印级别
 
 ```js
 // 不输出到终端
 mm.consoleLevel('NONE');
 ```
 
-level list: `DEBUG`, `INFO`, `WARN`, `ERROR`, `NONE`
+可选 level 为 `DEBUG`, `INFO`, `WARN`, `ERROR`, `NONE`
 
 ### mm.restore
 
-restore all mock data, e.g. `afterEach(mm.restore)`
+还原所有 mock 数据，一般需要结合 `afterEach(mm.restore)` 使用
 
 ### options
 
-Options for `mm.app` and `mm.cluster`
+mm.app 和 mm.cluster 的配置参数
 
 #### baseDir {String}
 
-The directory of application, default is `process.cwd()`.
+当前应用的目录，如果是应用本身的测试可以不填默认为 $CWD。
+
+指定完整路径
 
 ```js
 mm.app({
@@ -222,7 +224,7 @@ mm.app({
 })
 ```
 
-You can use a string based on `$CWD/test/fixtures` for short
+也支持缩写，找 test/fixtures 目录下的
 
 ```js
 mm.app({
@@ -232,7 +234,7 @@ mm.app({
 
 #### customEgg {String/Boolean}
 
-The directory of framework
+指定框架路径
 
 ```js
 mm.app({
@@ -241,33 +243,38 @@ mm.app({
 })
 ```
 
-It can be true when test an framework
+对于框架的测试用例，可以指定 true，会自动加载当前路径。
 
 #### plugin
 
-The directory of plugin, it's detected automatically.
+指定插件的路径，只用于插件测试。设置为 true 会将当前路径设置到插件列表。
 
 ```js
 mm.app({
   baseDir: 'apps/demo',
+  plugin: true,
 })
 ```
 
 #### plugins {Object}
 
-Define a list of plugins
+传入插件列表，可以自定义多个插件
 
 #### cache {Boolean}
 
-Determine whether enable cache. it's cached by baseDir.
+是否需要缓存，默认开启。
+
+是通过 baseDir 缓存的，如果不需要可以关闭，但速度会慢。
 
 #### clean {Boolean}
 
-Clean all logs directory, default is true.
+是否需要清理 log 目录，默认开启。
 
-If you are using `ava`, disable it.
+如果是通过 ava 等并行测试框架进行测试，需要手动在执行测试前进行统一的日志清理，不能通过 mm 来处理，设置 `clean` 为 `false`。
 
 ### app.mockContext(options)
+
+模拟上下文数据
 
 ```js
 const ctx = app.mockContext({
@@ -290,7 +297,7 @@ console.log(ctx.getCookie('foo'));
 
 ### app.mockHeaders(data)
 
-Mock request header
+模拟请求头
 
 ### app.mockSession(data)
 
@@ -301,7 +308,6 @@ app.mockSession({
 const ctx = app.mockContext();
 console.log(ctx.session.foo);
 ```
-
 
 ### app.mockService(service, methodName, fn)
 
@@ -317,13 +323,15 @@ it('should mock user name', function* () {
 
 ### app.mockServiceError(service, methodName, error)
 
-You can mock an error for service
+可以模拟一个错误
 
 ```js
 app.mockServiceError('user', 'home', new Error('mock error'));
 ```
 
 ### app.mockCsrf();
+
+模拟 csrf，不用传递 token
 
 ```js
 app.mockCsrf();
@@ -334,7 +342,7 @@ request(app.callback())
 
 ### app.mockUrllib(url, method, data)
 
-Mock `ctx.curl`
+模拟 curl
 
 ```js
 app.get('/', function*() {

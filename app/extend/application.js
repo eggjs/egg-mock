@@ -71,16 +71,11 @@ module.exports = {
   mockService(service, methodName, fn) {
     if (typeof service === 'string') {
       const arr = service.split('.');
-      if (arr.length <= 3) {
-        service = this[arr.length === 1 ? 'serviceClasses' : 'subServiceClasses'];
-        arr.forEach(function(item) {
-          service = service[item];
-        });
-        // 兼容不是类的 service 写法
-        service = service.prototype || service;
-      } else {
-        throw new Error('Do not support more than 3 level, but got ' + service);
+      service = this.serviceClasses;
+      for (const key of arr) {
+        service = service[key];
       }
+      service = service.prototype || service;
     }
     this._mockFn(service, methodName, fn);
     return this;
@@ -134,7 +129,7 @@ module.exports = {
     }
 
     if (isFunction(origin)) {
-      mm(obj, name, function() {
+      mm(obj, name, () => {
         if (data instanceof Error) {
           throw data;
         }
@@ -229,24 +224,7 @@ module.exports = {
    * @sice 1.11
    */
   mockCsrf() {
-    mm(this.context, 'assertCSRF', function() {});
-    return this;
-  },
-
-  /**
-   * mock ctoken
-   * @method App#mockCtoken
-   * @return {App} this
-   * @sice 2.5.0
-   */
-  mockCtoken() {
-    const ctoken = 'mock-ctoken';
-    this.mockCookies({
-      ctoken,
-    });
-    this.mockHeaders({
-      'x-csrf-token': ctoken,
-    });
+    mm(this.context, 'assertCSRF', () => {});
     return this;
   },
 
