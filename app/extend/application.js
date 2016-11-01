@@ -129,7 +129,7 @@ module.exports = {
     }
 
     if (isFunction(origin)) {
-      mm(obj, name, function() {
+      mm(obj, name, () => {
         if (data instanceof Error) {
           throw data;
         }
@@ -224,24 +224,7 @@ module.exports = {
    * @sice 1.11
    */
   mockCsrf() {
-    mm(this.context, 'assertCSRF', function() {});
-    return this;
-  },
-
-  /**
-   * mock ctoken
-   * @method App#mockCtoken
-   * @return {App} this
-   * @sice 2.5.0
-   */
-  mockCtoken() {
-    const ctoken = 'mock-ctoken';
-    this.mockCookies({
-      ctoken,
-    });
-    this.mockHeaders({
-      'x-csrf-token': ctoken,
-    });
+    mm(this.context, 'assertCSRF', () => {});
     return this;
   },
 

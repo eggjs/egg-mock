@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function() {
+module.exports = () => {
   exports.test = function*() {
     return 'hello';
   };

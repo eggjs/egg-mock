@@ -6,10 +6,10 @@ const assert = require('power-assert');
 const mm = require('..');
 const fixtures = path.join(__dirname, 'fixtures');
 
-describe('test/mock_cookies.test.js', function() {
+describe('test/mock_cookies.test.js', () => {
 
   let app;
-  before(function(done) {
+  before(done => {
     app = mm.app({
       baseDir: path.join(fixtures, 'apps/mock_cookies'),
       customEgg: path.join(__dirname, '../node_modules/egg'),
@@ -19,7 +19,7 @@ describe('test/mock_cookies.test.js', function() {
   after(() => app.close());
   afterEach(mm.restore);
 
-  it('should not return when don\'t mock cookies', function(done) {
+  it('should not return when don\'t mock cookies', done => {
     const ctx = app.mockContext();
     assert(!ctx.getCookie('foo'));
 
@@ -31,7 +31,7 @@ describe('test/mock_cookies.test.js', function() {
     .expect(200, done);
   });
 
-  it('should mock cookies', function(done) {
+  it('should mock cookies', done => {
     app.mockCookies({
       foo: 'bar cookie',
     });

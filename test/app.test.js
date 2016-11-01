@@ -6,23 +6,21 @@ const assert = require('power-assert');
 const mm = require('..');
 const fixtures = path.join(__dirname, 'fixtures');
 
-describe('test/app.test.js', function() {
+describe('test/app.test.js', () => {
   afterEach(mm.restore);
 
-  // 测试 mm.app
+  // test mm.app
   call('app');
-  // 测试 mm.cluster
+  // test mm.cluster
   call('cluster');
 });
 
 function call(method) {
   let app;
-  describe(`mm.${method}()`, function() {
-    before(function(done) {
+  describe(`mm.${method}()`, () => {
+    before(done => {
       const baseDir = path.join(fixtures, 'app');
-      mm(process, 'cwd', function() {
-        return baseDir;
-      });
+      mm(process, 'cwd', () => baseDir);
       app = mm[method]({
         customEgg: path.join(__dirname, '../node_modules/egg'),
         cache: false,
@@ -32,7 +30,7 @@ function call(method) {
     });
     after(() => app.close());
 
-    it('should work', function(done) {
+    it('should work', done => {
       request(app.callback())
       .get('/')
       .expect('foo')
@@ -40,12 +38,10 @@ function call(method) {
     });
   });
 
-  describe(`mm.${method}({ baseDir, plugin=string })`, function() {
+  describe(`mm.${method}({ baseDir, plugin=string })`, () => {
     const pluginDir = path.join(fixtures, 'fooPlugin');
-    before(function(done) {
-      mm(process, 'cwd', function() {
-        return pluginDir;
-      });
+    before(done => {
+      mm(process, 'cwd', () => pluginDir);
       app = mm[method]({
         baseDir: path.join(__dirname, 'fixtures/apps/foo'),
         customEgg: path.join(__dirname, '../node_modules/egg'),
@@ -57,7 +53,7 @@ function call(method) {
     });
     after(() => app.close());
 
-    it('should work', function(done) {
+    it('should work', done => {
       request(app.callback())
       .get('/')
       .expect({
@@ -67,12 +63,10 @@ function call(method) {
     });
   });
 
-  describe(`mm.${method}({ baseDir, plugin=true })`, function() {
+  describe(`mm.${method}({ baseDir, plugin=true })`, () => {
     const pluginDir = path.join(fixtures, 'fooPlugin');
-    before(function(done) {
-      mm(process, 'cwd', function() {
-        return pluginDir;
-      });
+    before(done => {
+      mm(process, 'cwd', () => pluginDir);
       app = mm[method]({
         baseDir: path.join(__dirname, 'fixtures/apps/foo'),
         customEgg: path.join(__dirname, '../node_modules/egg'),
@@ -84,7 +78,7 @@ function call(method) {
     });
     after(() => app.close());
 
-    it('should work', function(done) {
+    it('should work', done => {
       request(app.callback())
       .get('/')
       .expect({
@@ -94,8 +88,8 @@ function call(method) {
     });
   });
 
-  describe(`mm.${method}({ baseDir, plugins })`, function() {
-    before(function(done) {
+  describe(`mm.${method}({ baseDir, plugins })`, () => {
+    before(done => {
       app = mm[method]({
         baseDir: path.join(__dirname, 'fixtures/apps/foo'),
         plugins: {
@@ -112,7 +106,7 @@ function call(method) {
     });
     after(() => app.close());
 
-    it('should work', function(done) {
+    it('should work', done => {
       request(app.callback())
       .get('/')
       .expect({
@@ -122,8 +116,8 @@ function call(method) {
     });
   });
 
-  describe(`mm.${method}({ baseDir, customEgg=fullpath})`, function() {
-    before(function(done) {
+  describe(`mm.${method}({ baseDir, customEgg=fullpath})`, () => {
+    before(done => {
       app = mm[method]({
         baseDir: 'apps/barapp',
         customEgg: path.join(fixtures, 'bar'),
@@ -134,7 +128,7 @@ function call(method) {
     });
     after(() => app.close());
 
-    it('should work', function(done) {
+    it('should work', done => {
       request(app.callback())
       .get('/')
       .expect({
@@ -146,9 +140,9 @@ function call(method) {
   });
 
 
-  describe(`mm.${method}({ baseDir, customEgg=true})`, function() {
-    before(function(done) {
-      mm(process, 'cwd', function() {
+  describe(`mm.${method}({ baseDir, customEgg=true})`, () => {
+    before(done => {
+      mm(process, 'cwd', () => {
         return path.join(fixtures, 'bar');
       });
       app = mm[method]({
@@ -161,7 +155,7 @@ function call(method) {
     });
     after(() => app.close());
 
-    it('should work', function(done) {
+    it('should work', done => {
       request(app.callback())
       .get('/')
       .expect({
@@ -172,10 +166,10 @@ function call(method) {
     });
   });
 
-  describe(`mm.${method}({ baseDir, cache=true })`, function() {
+  describe(`mm.${method}({ baseDir, cache=true })`, () => {
     let app1;
     let app2;
-    before(function(done) {
+    before(done => {
       app1 = mm[method]({
         customEgg: path.join(__dirname, '../node_modules/egg'),
         baseDir: 'cache',
@@ -183,7 +177,7 @@ function call(method) {
       });
       app1.ready(done);
     });
-    before(function(done) {
+    before(done => {
       app2 = mm[method]({
         customEgg: path.join(__dirname, '../node_modules/egg'),
         baseDir: 'cache',
@@ -196,7 +190,7 @@ function call(method) {
       app2.close(),
     ]));
 
-    it('should equal', function() {
+    it('should equal', () => {
       assert(app1 === app2);
     });
   });

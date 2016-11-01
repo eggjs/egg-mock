@@ -5,7 +5,7 @@ const assert = require('power-assert');
 const mm = require('..');
 const fixtures = path.join(__dirname, 'fixtures');
 
-describe('test/mock_env.test.js', function() {
+describe('test/mock_env.test.js', () => {
 
   let app;
   before(() => {
@@ -18,7 +18,7 @@ describe('test/mock_env.test.js', function() {
   after(() => app.close());
   afterEach(mm.restore);
 
-  it('should mock env succes', function() {
+  it('should mock env succes', () => {
     app.mockEnv('prod');
     assert(app.config.env === 'prod');
     assert(app.config.serverEnv === 'prod');

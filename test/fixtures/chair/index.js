@@ -3,7 +3,7 @@
 const egg = require('egg');
 
 function startCluster(options) {
-  // 只为了测试 eggPath 是否存在
+  // print for the testcase that will assert stdout
   console.log(options.eggPath);
   delete options.eggPath;
   egg.startCluster(options);

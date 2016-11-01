@@ -5,10 +5,10 @@ const request = require('supertest');
 const mm = require('..');
 const fixtures = path.join(__dirname, 'fixtures');
 
-describe('test/mock_csrf.test.js', function() {
+describe('test/mock_csrf.test.js', () => {
 
   let app;
-  before(function() {
+  before(() => {
     app = mm.app({
       baseDir: path.join(fixtures, 'demo'),
       customEgg: path.join(__dirname, '../node_modules/egg'),
@@ -17,7 +17,7 @@ describe('test/mock_csrf.test.js', function() {
   after(() => app.close());
   afterEach(mm.restore);
 
-  it('should work', function(done) {
+  it('should work', done => {
     app.mockCsrf();
     request(app.callback())
     .post('/')

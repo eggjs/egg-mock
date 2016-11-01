@@ -6,11 +6,11 @@ const assert = require('power-assert');
 const formatOptions = require('../lib/format_options');
 const customEgg = path.join(__dirname, '../node_modules/egg');
 
-describe('test/format_options.test.js', function() {
+describe('test/format_options.test.js', () => {
 
   afterEach(mm.restore);
 
-  it('should return the default options', function() {
+  it('should return the default options', () => {
     const options = formatOptions({ customEgg });
     assert(options);
     assert(options.coverage === true);
@@ -22,51 +22,58 @@ describe('test/format_options.test.js', function() {
     });
   });
 
-  it('should return baseDir when on windows', function() {
+  it('should return baseDir when on windows', () => {
     const baseDir = 'D:\\projectWorkSpace\\summer';
     mm(path, 'isAbsolute', path.win32.isAbsolute);
-    mm(process, 'cwd', function() {
+    mm(process, 'cwd', () => {
       return baseDir;
     });
     const options = formatOptions({ customEgg });
     assert(options.baseDir === baseDir);
   });
 
-  it('should set cache', function() {
+  it('should set cache', () => {
     const options = formatOptions({ cache: false, customEgg });
     assert(options);
     assert(options.cache === false);
   });
 
-  it('should set coverage', function() {
+  it('should disable cache when call mm.env', () => {
+    mm.env('prod');
+    const options = formatOptions({ customEgg });
+    assert(options);
+    assert(options.cache === false);
+  });
+
+  it('should set coverage', () => {
     const options = formatOptions({ coverage: false, customEgg });
     assert(options);
     assert(options.coverage === false);
   });
 
-  it('should return options when set full baseDir', function() {
+  it('should return options when set full baseDir', () => {
     const baseDir = path.join(__dirname, 'fixtures');
     const options = formatOptions({ baseDir, customEgg });
     assert(options);
     assert(options.baseDir === baseDir);
   });
 
-  it('should return options when set short baseDir', function() {
+  it('should return options when set short baseDir', () => {
     const options = formatOptions({ baseDir: 'apps/foo', customEgg });
     assert(options);
     assert(options.baseDir === path.join(__dirname, 'fixtures/apps/foo'));
   });
 
-  it('should return options when set customEgg', function() {
+  it('should return options when set customEgg', () => {
     const customEgg = path.join(__dirname, 'fixtures/bar');
     const options = formatOptions({ customEgg });
     assert(options);
     assert(options.customEgg === customEgg);
   });
 
-  it('should return options when set customEgg=true', function() {
+  it('should return options when set customEgg=true', () => {
     const baseDir = path.join(__dirname, 'fixtures/bar');
-    mm(process, 'cwd', function() {
+    mm(process, 'cwd', () => {
       return baseDir;
     });
     const options = formatOptions({ customEgg: true });
@@ -74,9 +81,9 @@ describe('test/format_options.test.js', function() {
     assert(options.customEgg === baseDir);
   });
 
-  it('should push plugins when in plugin dir', function() {
+  it('should push plugins when in plugin dir', () => {
     const baseDir = path.join(__dirname, 'fixtures/plugin');
-    mm(process, 'cwd', function() {
+    mm(process, 'cwd', () => {
       return baseDir;
     });
     const options = formatOptions({ customEgg });
@@ -87,9 +94,9 @@ describe('test/format_options.test.js', function() {
     });
   });
 
-  it('should not push pluings when in plugin dir but options.plugin = false', function() {
+  it('should not push pluings when in plugin dir but options.plugin = false', () => {
     const baseDir = path.join(__dirname, 'fixtures/plugin');
-    mm(process, 'cwd', function() {
+    mm(process, 'cwd', () => {
       return baseDir;
     });
     const options = formatOptions({
@@ -100,17 +107,17 @@ describe('test/format_options.test.js', function() {
     assert(!options.plugins.plugin1);
   });
 
-  it('should not throw when no eggPlugin', function() {
+  it('should not throw when no eggPlugin', () => {
     const baseDir = path.join(__dirname, 'fixtures/plugin_throw');
-    mm(process, 'cwd', function() {
+    mm(process, 'cwd', () => {
       return baseDir;
     });
     formatOptions({ customEgg });
   });
 
-  it('should throw when no eggPlugin and options.plugin === true', function() {
+  it('should throw when no eggPlugin and options.plugin === true', () => {
     const baseDir = path.join(__dirname, 'fixtures/plugin_throw');
-    mm(process, 'cwd', function() {
+    mm(process, 'cwd', () => {
       return baseDir;
     });
     assert.throws(() => {
@@ -121,7 +128,7 @@ describe('test/format_options.test.js', function() {
     }, `should set eggPlugin in ${baseDir}/package.json`);
   });
 
-  it('should mock process.env.HOME when EGG_SERVER_ENV is default, test, prod', function() {
+  it('should mock process.env.HOME when EGG_SERVER_ENV is default, test, prod', () => {
     const baseDir = process.cwd();
 
     mm(process.env, 'EGG_SERVER_ENV', 'local');
@@ -140,7 +147,7 @@ describe('test/format_options.test.js', function() {
     assert.equal(process.env.HOME, baseDir);
   });
 
-  it('should not mock process.env.HOME when it has mocked', function() {
+  it('should not mock process.env.HOME when it has mocked', () => {
     const baseDir = process.cwd();
 
     mm(process.env, 'HOME', '/mockpath');
@@ -148,4 +155,5 @@ describe('test/format_options.test.js', function() {
     formatOptions({ customEgg });
     assert.notEqual(process.env.HOME, baseDir);
   });
+
 });

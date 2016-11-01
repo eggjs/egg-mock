@@ -107,7 +107,7 @@ before(() => {
 也可以通过 customEgg 指定其他框架，比如希望在 aliyun-egg 和 framework-b 同时测试此插件。
 
 ```js
-describe('aliyun-egg', function() {
+describe('aliyun-egg', () => {
   let app;
   before(() => {
     app = mm.app({
@@ -118,7 +118,7 @@ describe('aliyun-egg', function() {
   });
 });
 
-describe('framework-b', function() {
+describe('framework-b', () => {
   let app;
   before(() => {
     app = mm.app({
@@ -190,8 +190,6 @@ mm.app({
   cache: false,
 });
 ```
-
-**建议配置 cache: false 一起使用，不然读取缓存不会重新加载，导致 env 不会生效。**
 
 具体值见 https://github.com/eggjs/egg-core/blob/master/lib/loader/egg_loader.js#L82
 
@@ -340,17 +338,6 @@ app.mockCsrf();
 request(app.callback())
 .post('/login')
 .expect(302, done);
-```
-
-### app.mockCtoken();
-
-模拟 ctoken，不用传递 token
-
-```js
-app.mockCtoken();
-request(app.callback())
-.post('/data.json')
-.expect({stat: 'ok'}, done);
 ```
 
 ### app.mockUrllib(url, method, data)

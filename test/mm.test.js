@@ -9,11 +9,11 @@ const mm = require('..');
 const customEgg = path.join(__dirname, '../node_modules/egg');
 const baseDir = path.join(__dirname, 'fixtures/apps/env-app');
 
-describe('test/mm.test.js', function() {
+describe('test/mm.test.js', () => {
 
   afterEach(mm.restore);
 
-  describe('mm.env()', function() {
+  describe('mm.env()', () => {
 
     let app;
     beforeEach(() => {
@@ -70,7 +70,7 @@ describe('test/mm.test.js', function() {
     });
   });
 
-  describe('mm.app({clean: false})', function() {
+  describe('mm.app({clean: false})', () => {
     let app;
     after(() => app.close());
 
@@ -81,13 +81,13 @@ describe('test/mm.test.js', function() {
     });
   });
 
-  describe('mm.consoleLevel()', function() {
-    it('shoud mock EGG_LOG', function() {
+  describe('mm.consoleLevel()', () => {
+    it('shoud mock EGG_LOG', () => {
       mm.consoleLevel('none');
       assert(process.env.EGG_LOG === 'NONE');
     });
 
-    it('shoud not mock', function() {
+    it('shoud not mock', () => {
       mm.consoleLevel('');
       assert(!process.env.EGG_LOG);
     });

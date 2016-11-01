@@ -29,13 +29,6 @@ exports.serviceOld = function* () {
   this.body = yield this.service.old.test();
 };
 
-exports.ctoken = function* () {
-  this.body = {
-    cookies: this.getCookie('customcookie'),
-    header: this.get('customheader'),
-  };
-};
-
 exports.header = function* () {
   this.body = {
     header: this.get('customheader'),
@@ -44,7 +37,7 @@ exports.header = function* () {
 
 exports.urllib = function* () {
   const url = 'http://' + this.host;
-  const method = this.query.method || 'requestThunk';
+  const method = this.query.method || 'request';
   const dataType = this.query.dataType;
   const r1 = yield this.app.urllib[method](url + '/mock_url', {
     dataType,
@@ -69,7 +62,7 @@ exports.mockUrlPost = function* () {
 
 exports.mockUrllibHeaders = function* () {
   const url = 'http://' + this.host;
-  const method = this.query.method || 'requestThunk';
+  const method = this.query.method || 'request';
   const res = yield this.app.urllib[method](url + '/mock_url');
   this.body = res.headers;
 };

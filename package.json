@@ -42,7 +42,6 @@
     "ko-sleep": "^1.0.2",
     "pedding": "^1.0.0",
     "power-assert": "^1.4.1",
-    "should": "^8.3.0",
     "supertest": "^2.0.1"
   },
   "ci": {

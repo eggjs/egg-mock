@@ -41,6 +41,7 @@ module.exports = Object.assign(mm, {
    * @see http://gitlab.alibaba-inc.com/egg/egg-loader/blob/master/lib/base_loader.js#L102
    */
   env(env) {
+    mm(process.env, 'EGG_MOCK_SERVER_ENV', env);
     mm(process.env, 'EGG_SERVER_ENV', env);
   },
 
@@ -57,14 +58,14 @@ module.exports = Object.assign(mm, {
 
 process.setMaxListeners(100);
 
-process.once('SIGQUIT', function() {
+process.once('SIGQUIT', () => {
   process.exit(0);
 });
 
-process.once('SIGTERM', function() {
+process.once('SIGTERM', () => {
   process.exit(0);
 });
 
-process.once('SIGINT', function() {
+process.once('SIGINT', () => {
   process.exit(0);
 });

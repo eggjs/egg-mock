@@ -6,12 +6,12 @@ const assert = require('power-assert');
 const mm = require('..');
 const fixtures = path.join(__dirname, 'fixtures');
 
-describe('test/mock_headers.test.js', function() {
+describe('test/mock_headers.test.js', () => {
 
   afterEach(mm.restore);
 
   let app;
-  before(function() {
+  before(() => {
     app = mm.app({
       baseDir: path.join(fixtures, 'demo'),
       customEgg: path.join(__dirname, '../node_modules/egg'),
@@ -21,7 +21,7 @@ describe('test/mock_headers.test.js', function() {
   after(() => app.close());
   afterEach(mm.restore);
 
-  it('should not exists without mock', function(done) {
+  it('should not exists without mock', done => {
     app.mockContext();
 
     request(app.callback())
@@ -32,7 +32,7 @@ describe('test/mock_headers.test.js', function() {
     .expect(200, done);
   });
 
-  it('should mock headers', function(done) {
+  it('should mock headers', done => {
     app.mockContext();
     app.mockHeaders({
       customheader: 'customheader',
@@ -45,7 +45,7 @@ describe('test/mock_headers.test.js', function() {
     .expect(200, done);
   });
 
-  it('should mock headers that is uppercase', function(done) {
+  it('should mock headers that is uppercase', done => {
     app.mockContext();
     app.mockHeaders({
       Customheader: 'customheader',

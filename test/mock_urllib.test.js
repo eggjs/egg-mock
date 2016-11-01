@@ -7,7 +7,7 @@ const assert = require('power-assert');
 const mm = require('..');
 const fixtures = path.join(__dirname, 'fixtures');
 
-describe('test/mock_urllib.test.js', function() {
+describe('test/mock_urllib.test.js', () => {
 
   let app;
   let server;
@@ -26,7 +26,7 @@ describe('test/mock_urllib.test.js', function() {
   after(() => app.close());
   afterEach(mm.restore);
 
-  it('should mock url get and get reponse event on urllib', function(done) {
+  it('should mock url get and get reponse event on urllib', done => {
     done = pedding(2, done);
     app.mockCsrf();
     app.mockUrllib(url, {
@@ -55,7 +55,7 @@ describe('test/mock_urllib.test.js', function() {
     });
   });
 
-  it('should mock url post', function(done) {
+  it('should mock url post', done => {
     app.mockCsrf();
     app.mockUrllib(url, 'post', {
       data: new Buffer('mock url post'),
@@ -70,7 +70,7 @@ describe('test/mock_urllib.test.js', function() {
     .expect(200, done);
   });
 
-  it('should mock url get and post', function(done) {
+  it('should mock url get and post', done => {
     app.mockCsrf();
     app.mockUrllib(url, {
       data: 'mock url get',
@@ -88,7 +88,7 @@ describe('test/mock_urllib.test.js', function() {
     .expect(200, done);
   });
 
-  it('should support request', function(done) {
+  it('should support request', done => {
     app.mockCsrf();
     app.mockUrllib(url, {
       data: 'mock url get',
@@ -106,7 +106,7 @@ describe('test/mock_urllib.test.js', function() {
     .expect(200, done);
   });
 
-  it('should support curl', function(done) {
+  it('should support curl', done => {
     app.mockCsrf();
     app.mockUrllib(url, {
       data: 'mock url get',
@@ -124,7 +124,7 @@ describe('test/mock_urllib.test.js', function() {
     .expect(200, done);
   });
 
-  it('should support json', function(done) {
+  it('should support json', done => {
     app.mockCsrf();
     app.mockUrllib(url, {
       data: { method: 'get' },
@@ -142,7 +142,7 @@ describe('test/mock_urllib.test.js', function() {
     .expect(200, done);
   });
 
-  it('should support text', function(done) {
+  it('should support text', done => {
     app.mockCsrf();
     app.mockUrllib(url, {
       data: 'mock url get',
@@ -160,7 +160,7 @@ describe('test/mock_urllib.test.js', function() {
     .expect(200, done);
   });
 
-  it('should exits req headers', function(done) {
+  it('should exits req headers', done => {
     app.mockCsrf();
     app.mockUrllib(url, {
       data: 'mock url test',

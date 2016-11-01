@@ -4,10 +4,10 @@ const path = require('path');
 const assert = require('power-assert');
 const mm = require('..');
 
-describe('test/mock_context.test.js', function() {
+describe('test/mock_context.test.js', () => {
 
   let app;
-  before(function(done) {
+  before(done => {
     app = mm.app({
       baseDir: 'demo',
       customEgg: path.join(__dirname, '../node_modules/egg'),
@@ -17,7 +17,7 @@ describe('test/mock_context.test.js', function() {
   after(() => app.close());
   afterEach(mm.restore);
 
-  it('should work with bucLogin', function() {
+  it('should work with bucLogin', () => {
     const ctx = app.mockContext({
       user: {
         foo: 'bar',

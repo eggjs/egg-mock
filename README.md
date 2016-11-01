@@ -61,11 +61,11 @@ describe('some test', () => {
 
 Retrieve Agent instance through `app.agent` after `mm.app` started.
 
-Using `mm.cluster` lanch cluster server, you can use the same API as `mm.app`;
+Using `mm.cluster` launch cluster server, you can use the same API as `mm.app`;
 
 ### Test Application
 
-`baseDir` is optional that is `cwd` by default.
+`baseDir` is optional that is `process.cwd()` by default.
 
 ```js
 before(() => {
@@ -78,7 +78,7 @@ before(() => {
 
 ### Test Framework
 
-customEgg is optional that is `cwd` by default.
+customEgg is optional that is `process.cwd()` by default.
 
 ```js
 before(() => {
@@ -90,7 +90,7 @@ before(() => {
 });
 ```
 
-### 插件开发者
+### Test Plugin
 
 If `eggPlugin.name` is defined in `package.json`, it's a plugin that will be loaded to plugin list automatically.
 
@@ -104,10 +104,10 @@ before(() => {
 });
 ```
 
-You can also test the plugin in different framework, e.g. test aliyun-egg and framework-b in one plugin.
+You can also test the plugin in different framework, e.g. test [aliyun-egg](https://github.com/eggjs/aliyun-egg) and framework-b in one plugin.
 
 ```js
-describe('aliyun-egg', function() {
+describe('aliyun-egg', () => {
   let app;
   before(() => {
     app = mm.app({
@@ -118,7 +118,7 @@ describe('aliyun-egg', function() {
   });
 });
 
-describe('framework-b', function() {
+describe('framework-b', () => {
   let app;
   before(() => {
     app = mm.app({
@@ -191,8 +191,6 @@ mm.app({
 });
 ```
 
-**Should use `cache: false` with env, otherwise it will use cache and won't load again.**
-
 Environment list https://github.com/eggjs/egg-core/blob/master/lib/loader/egg_loader.js#L82
 
 ### mm.consoleLevel(level)
@@ -216,7 +214,7 @@ Options for `mm.app` and `mm.cluster`
 
 #### baseDir {String}
 
-The directory of application, default is $CWD.
+The directory of application, default is `process.cwd()`.
 
 ```js
 mm.app({
@@ -332,15 +330,6 @@ app.mockCsrf();
 request(app.callback())
 .post('/login')
 .expect(302, done);
-```
-
-### app.mockCtoken();
-
-```js
-app.mockCtoken();
-request(app.callback())
-.post('/data.json')
-.expect({stat: 'ok'}, done);
 ```
 
 ### app.mockUrllib(url, method, data)
