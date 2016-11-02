@@ -204,6 +204,11 @@ mm.consoleLevel('NONE');
 
 可选 level 为 `DEBUG`, `INFO`, `WARN`, `ERROR`, `NONE`
 
+
+### mm.home(homePath)
+
+模拟操作系统用户目录
+
 ### mm.restore
 
 还原所有 mock 数据，一般需要结合 `afterEach(mm.restore)` 使用
