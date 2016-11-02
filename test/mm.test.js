@@ -92,4 +92,24 @@ describe('test/mm.test.js', () => {
       assert(!process.env.EGG_LOG);
     });
   });
+
+  describe('mm.home', () => {
+    let app;
+    const baseDir = path.join(__dirname, 'fixtures/apps/mockhome');
+    before(() => {
+      mm.home(baseDir);
+      app = mm.app({ baseDir: 'apps/mockhome', clean: false, customEgg });
+      return app.ready();
+    });
+    after(() => app.close());
+
+    it('should mock home', function* () {
+      assert(app.config.HOME === baseDir);
+    });
+
+    it('should ignore when parameter is empty', () => {
+      mm.home();
+      assert(!process.env.EGG_HOME);
+    });
+  });
 });

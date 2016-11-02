@@ -204,6 +204,10 @@ mm.consoleLevel('NONE');
 
 level list: `DEBUG`, `INFO`, `WARN`, `ERROR`, `NONE`
 
+### mm.home(homePath)
+
+mock home directory
+
 ### mm.restore
 
 restore all mock data, e.g. `afterEach(mm.restore)`

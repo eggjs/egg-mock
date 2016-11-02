@@ -54,6 +54,12 @@ module.exports = Object.assign(mm, {
     mm(process.env, 'EGG_LOG', level);
   },
 
+  home(homePath) {
+    if (homePath) {
+      mm(process.env, 'EGG_HOME', homePath);
+    }
+  },
+
 });
 
 process.setMaxListeners(100);
