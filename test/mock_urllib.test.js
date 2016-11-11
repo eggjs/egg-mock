@@ -15,7 +15,6 @@ describe('test/mock_urllib.test.js', () => {
   before(() => {
     app = mm.app({
       baseDir: path.join(fixtures, 'demo'),
-      customEgg: path.join(__dirname, '../node_modules/egg'),
     });
     return app.ready();
   });

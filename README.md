@@ -45,7 +45,6 @@ describe('some test', () => {
   before(() => {
     app = mm.app({
       baseDir: 'apps/foo'
-      customEgg: path.join(__dirname, '../node_modules/egg'),
     });
     return app.ready();
   })
@@ -69,16 +68,14 @@ Using `mm.cluster` launch cluster server, you can use the same API as `mm.app`;
 
 ```js
 before(() => {
-  app = mm.app({
-    customEgg: path.join(__dirname, '../node_modules/egg'),
-  });
+  app = mm.app();
   return app.ready();
 });
 ```
 
 ### Test Framework
 
-customEgg is optional that is `process.cwd()` by default.
+customEgg is optional, it's `node_modules/egg` by default.
 
 ```js
 before(() => {
@@ -98,7 +95,6 @@ If `eggPlugin.name` is defined in `package.json`, it's a plugin that will be loa
 before(() => {
   app = mm.app({
     baseDir: 'apps/demo',
-    customEgg: path.join(__dirname, '../node_modules/egg'),
   });
   return app.ready();
 });
@@ -136,7 +132,6 @@ If it's detected as an plugin, but you don't want it to be, you can use `plugin 
 before(() => {
   app = mm.app({
     baseDir: 'apps/demo',
-    customEgg: path.join(__dirname, 'node_modules/egg'),
     plugin: false,
   });
   return app.ready();

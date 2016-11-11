@@ -12,7 +12,6 @@ describe('test/mock_cookies.test.js', () => {
   before(done => {
     app = mm.app({
       baseDir: path.join(fixtures, 'apps/mock_cookies'),
-      customEgg: path.join(__dirname, '../node_modules/egg'),
     });
     app.ready(done);
   });
