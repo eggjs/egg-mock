@@ -13,6 +13,25 @@ describe('test/app.test.js', () => {
   call('app');
   // test mm.cluster
   call('cluster');
+
+  it('should not use cache when app is closed', function* () {
+    const baseDir = path.join(fixtures, 'app');
+    const app1 = mm.app({
+      baseDir,
+      customEgg: path.join(__dirname, '../node_modules/egg'),
+    });
+    yield app1.ready();
+    yield app1.close();
+
+    const app2 = mm.app({
+      baseDir,
+      customEgg: path.join(__dirname, '../node_modules/egg'),
+    });
+    yield app2.ready();
+    yield app2.close();
+
+    assert(app1 !== app2);
+  });
 });
 
 function call(method) {
