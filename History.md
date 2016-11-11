@@ -1,4 +1,10 @@
 
+1.2.0 / 2016-11-11
+==================
+
+  * feat: try to lookup egg that will be the default customEgg (#16)
+  * fix: don't use cache when app from cache is closed (#15)
+
 1.1.0 / 2016-11-02
 ==================
 
