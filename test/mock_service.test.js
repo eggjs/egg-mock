@@ -12,7 +12,6 @@ describe('test/mock_service.test.js', () => {
   before(function* () {
     app = mm.app({
       baseDir: path.join(fixtures, 'demo'),
-      customEgg: path.join(__dirname, '../node_modules/egg'),
     });
     yield app.ready();
   });

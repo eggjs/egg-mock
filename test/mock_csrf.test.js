@@ -11,7 +11,6 @@ describe('test/mock_csrf.test.js', () => {
   before(() => {
     app = mm.app({
       baseDir: path.join(fixtures, 'demo'),
-      customEgg: path.join(__dirname, '../node_modules/egg'),
     });
   });
   after(() => app.close());

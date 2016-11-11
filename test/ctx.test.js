@@ -4,7 +4,6 @@ const path = require('path');
 const assert = require('power-assert');
 const mm = require('..');
 
-const customEgg = path.join(__dirname, '../node_modules/egg');
 const fixtures = path.join(__dirname, 'fixtures');
 
 describe('test/ctx.test.js', () => {
@@ -15,7 +14,6 @@ describe('test/ctx.test.js', () => {
   before(done => {
     app = mm.app({
       baseDir: path.join(fixtures, 'demo'),
-      customEgg,
     });
     app.ready(done);
   });

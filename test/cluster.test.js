@@ -16,7 +16,6 @@ describe('test/cluster.test.js', () => {
     before(() => {
       app = mm.cluster({
         baseDir: path.join(fixtures, 'demo'),
-        customEgg: path.join(__dirname, '../node_modules/egg'),
         cache: false,
         coverage: false,
       });
@@ -37,7 +36,6 @@ describe('test/cluster.test.js', () => {
     before(done => {
       app = mm.cluster({
         baseDir: path.join(fixtures, 'demo'),
-        customEgg: path.join(__dirname, '../node_modules/egg'),
         cache: false,
         coverage: false,
       });
@@ -58,7 +56,6 @@ describe('test/cluster.test.js', () => {
     before(done => {
       app = mm.cluster({
         baseDir: 'demo',
-        customEgg: path.join(__dirname, '../node_modules/egg'),
         cache: false,
         coverage: false,
       });
@@ -138,13 +135,11 @@ describe('test/cluster.test.js', () => {
     it('should return cached cluster app', function* () {
       app1 = mm.cluster({
         baseDir: 'demo',
-        customEgg: path.join(__dirname, '../node_modules/egg'),
       });
       yield app1.ready();
 
       app2 = mm.cluster({
         baseDir: 'demo',
-        customEgg: path.join(__dirname, '../node_modules/egg'),
       });
       yield app2.ready();
 
@@ -154,14 +149,12 @@ describe('test/cluster.test.js', () => {
     it('should return new app if cached app has been closed', function* () {
       app1 = mm.cluster({
         baseDir: 'demo',
-        customEgg: path.join(__dirname, '../node_modules/egg'),
       });
       yield app1.ready();
       yield app1.close();
 
       app2 = mm.cluster({
         baseDir: 'demo',
-        customEgg: path.join(__dirname, '../node_modules/egg'),
       });
       yield app2.ready();
 

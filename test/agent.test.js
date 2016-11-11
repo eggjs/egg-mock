@@ -7,7 +7,6 @@ const rimraf = require('rimraf');
 const assert = require('power-assert');
 
 const fixtures = path.join(__dirname, 'fixtures');
-const customEgg = path.join(__dirname, '../node_modules/egg');
 
 describe('test/agent.test.js', () => {
 
@@ -21,7 +20,6 @@ describe('test/agent.test.js', () => {
 
     app = mm.app({
       baseDir,
-      customEgg,
     });
 
     yield app.ready();
@@ -33,7 +31,6 @@ describe('test/agent.test.js', () => {
 
     app = mm.app({
       baseDir,
-      customEgg,
     });
     app.ready(done);
   });

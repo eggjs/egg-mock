@@ -41,7 +41,6 @@ function call(method) {
       const baseDir = path.join(fixtures, 'app');
       mm(process, 'cwd', () => baseDir);
       app = mm[method]({
-        customEgg: path.join(__dirname, '../node_modules/egg'),
         cache: false,
         coverage: false,
       });
@@ -63,7 +62,6 @@ function call(method) {
       mm(process, 'cwd', () => pluginDir);
       app = mm[method]({
         baseDir: path.join(__dirname, 'fixtures/apps/foo'),
-        customEgg: path.join(__dirname, '../node_modules/egg'),
         plugin: 'fooPlugin',
         cache: false,
         coverage: false,
@@ -88,7 +86,6 @@ function call(method) {
       mm(process, 'cwd', () => pluginDir);
       app = mm[method]({
         baseDir: path.join(__dirname, 'fixtures/apps/foo'),
-        customEgg: path.join(__dirname, '../node_modules/egg'),
         plugin: true,
         cache: false,
         coverage: false,
@@ -117,7 +114,6 @@ function call(method) {
             path: path.join(fixtures, 'fooPlugin'),
           },
         },
-        customEgg: path.join(__dirname, '../node_modules/egg'),
         cache: false,
         coverage: false,
       });
@@ -190,7 +186,6 @@ function call(method) {
     let app2;
     before(done => {
       app1 = mm[method]({
-        customEgg: path.join(__dirname, '../node_modules/egg'),
         baseDir: 'cache',
         coverage: false,
       });
@@ -198,7 +193,6 @@ function call(method) {
     });
     before(done => {
       app2 = mm[method]({
-        customEgg: path.join(__dirname, '../node_modules/egg'),
         baseDir: 'cache',
         coverage: false,
       });

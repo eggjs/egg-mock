@@ -4,14 +4,13 @@ const path = require('path');
 const mm = require('mm');
 const assert = require('power-assert');
 const formatOptions = require('../lib/format_options');
-const customEgg = path.join(__dirname, '../node_modules/egg');
 
 describe('test/format_options.test.js', () => {
 
   afterEach(mm.restore);
 
   it('should return the default options', () => {
-    const options = formatOptions({ customEgg });
+    const options = formatOptions();
     assert(options);
     assert(options.coverage === true);
     assert(options.cache === true);
@@ -28,38 +27,38 @@ describe('test/format_options.test.js', () => {
     mm(process, 'cwd', () => {
       return baseDir;
     });
-    const options = formatOptions({ customEgg });
+    const options = formatOptions();
     assert(options.baseDir === baseDir);
   });
 
   it('should set cache', () => {
-    const options = formatOptions({ cache: false, customEgg });
+    const options = formatOptions({ cache: false });
     assert(options);
     assert(options.cache === false);
   });
 
   it('should disable cache when call mm.env', () => {
     mm.env('prod');
-    const options = formatOptions({ customEgg });
+    const options = formatOptions();
     assert(options);
     assert(options.cache === false);
   });
 
   it('should set coverage', () => {
-    const options = formatOptions({ coverage: false, customEgg });
+    const options = formatOptions({ coverage: false });
     assert(options);
     assert(options.coverage === false);
   });
 
   it('should return options when set full baseDir', () => {
     const baseDir = path.join(__dirname, 'fixtures');
-    const options = formatOptions({ baseDir, customEgg });
+    const options = formatOptions({ baseDir });
     assert(options);
     assert(options.baseDir === baseDir);
   });
 
   it('should return options when set short baseDir', () => {
-    const options = formatOptions({ baseDir: 'apps/foo', customEgg });
+    const options = formatOptions({ baseDir: 'apps/foo' });
     assert(options);
     assert(options.baseDir === path.join(__dirname, 'fixtures/apps/foo'));
   });
@@ -86,7 +85,7 @@ describe('test/format_options.test.js', () => {
     mm(process, 'cwd', () => {
       return baseDir;
     });
-    const options = formatOptions({ customEgg });
+    const options = formatOptions();
     assert(options);
     assert.deepEqual(options.plugins.plugin1, {
       enable: true,
@@ -101,7 +100,6 @@ describe('test/format_options.test.js', () => {
     });
     const options = formatOptions({
       plugin: false,
-      customEgg,
     });
     assert(options);
     assert(!options.plugins.plugin1);
@@ -112,7 +110,7 @@ describe('test/format_options.test.js', () => {
     mm(process, 'cwd', () => {
       return baseDir;
     });
-    formatOptions({ customEgg });
+    formatOptions();
   });
 
   it('should throw when no eggPlugin and options.plugin === true', () => {
@@ -123,7 +121,6 @@ describe('test/format_options.test.js', () => {
     assert.throws(() => {
       formatOptions({
         plugin: true,
-        customEgg,
       });
     }, `should set eggPlugin in ${baseDir}/package.json`);
   });
@@ -135,15 +132,15 @@ describe('test/format_options.test.js', () => {
     assert.notEqual(process.env.HOME, baseDir);
 
     mm(process.env, 'EGG_SERVER_ENV', 'default');
-    formatOptions({ customEgg });
+    formatOptions();
     assert.equal(process.env.HOME, baseDir);
 
     mm(process.env, 'EGG_SERVER_ENV', 'test');
-    formatOptions({ customEgg });
+    formatOptions();
     assert.equal(process.env.HOME, baseDir);
 
     mm(process.env, 'EGG_SERVER_ENV', 'prod');
-    formatOptions({ customEgg });
+    formatOptions();
     assert.equal(process.env.HOME, baseDir);
   });
 
@@ -152,7 +149,7 @@ describe('test/format_options.test.js', () => {
 
     mm(process.env, 'HOME', '/mockpath');
     mm(process.env, 'EGG_SERVER_ENV', 'default');
-    formatOptions({ customEgg });
+    formatOptions();
     assert.notEqual(process.env.HOME, baseDir);
   });
 
