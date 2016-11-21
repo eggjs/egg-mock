@@ -38,7 +38,7 @@ module.exports = Object.assign(mm, {
    * mock the serverEnv of Egg
    * @member {Function} mm#env
    * @param {String} env - contain default, test, prod, local, unittest
-   * @see http://gitlab.alibaba-inc.com/egg/egg-loader/blob/master/lib/base_loader.js#L102
+   * @see https://github.com/eggjs/egg-core/blob/master/lib/loader/egg_loader.js#L78
    */
   env(env) {
     mm(process.env, 'EGG_MOCK_SERVER_ENV', env);
