@@ -40,4 +40,12 @@ describe('test/ctx.test.js', () => {
     assert(data === 'bar');
   });
 
+  it('should not override mockData', function* () {
+    const mockData = { user: 'popomore' };
+    app.mockContext(mockData);
+    app.mockContext(mockData);
+    assert(!mockData.headers);
+    assert(!mockData.method);
+  });
+
 });

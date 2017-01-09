@@ -146,7 +146,7 @@ module.exports = {
    * @return {Request} req
    */
   mockRequest(req) {
-    req = req || {};
+    req = Object.assign({}, req);
     const headers = req.headers || {};
     for (const key in req.headers) {
       headers[key.toLowerCase()] = req.headers[key];
