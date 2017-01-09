@@ -1,4 +1,10 @@
 
+1.2.1 / 2017-01-09
+==================
+
+  * fix: can't override data when mockContext(data) (#18)
+  * fix: replace the internal link into an github link in the env comment. (#17)
+
 1.2.0 / 2016-11-11
 ==================
 
