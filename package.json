@@ -14,8 +14,8 @@
   "scripts": {
     "lint": "eslint lib app index.js test/*.test.js",
     "test": "npm run lint && npm run test-local",
-    "test-local": "egg-bin test -r intelli-espower-loader",
-    "cov": "egg-bin cov -r intelli-espower-loader",
+    "test-local": "egg-bin test",
+    "cov": "egg-bin cov",
     "ci": "npm run lint && npm run cov",
     "autod": "autod",
     "autod-china": "autod --registry=https://registry.npm.taobao.org",
@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "autod": "^2.7.1",
-    "egg": "^0.5.0",
+    "egg": "^0.7.0",
     "egg-bin": "^1.7.0",
     "egg-ci": "^1.1.0",
     "eslint": "^3.9.1",
@@ -45,13 +45,7 @@
     "supertest": "^2.0.1"
   },
   "ci": {
-    "type": "travis, appveyor",
-    "npminstall": true,
-    "version": [
-      "4",
-      "6"
-    ],
-    "command": "ci"
+    "version": "6, 7"
   },
   "homepage": "https://github.com/eggjs/egg-mock",
   "repository": {
@@ -66,7 +60,7 @@
     "mock"
   ],
   "engines": {
-    "node": ">= 4.0.0"
+    "node": ">= 6.0.0"
   },
   "author": "popomore <sakura9515@gmail.com>"
 }

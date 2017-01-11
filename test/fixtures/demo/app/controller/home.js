@@ -39,10 +39,10 @@ exports.urllib = function* () {
   const url = 'http://' + this.host;
   const method = this.query.method || 'request';
   const dataType = this.query.dataType;
-  const r1 = yield this.app.urllib[method](url + '/mock_url', {
+  const r1 = yield this.app.httpclient[method](url + '/mock_url', {
     dataType,
   });
-  const r2 = yield this.app.urllib[method](url + '/mock_url', {
+  const r2 = yield this.app.httpclient[method](url + '/mock_url', {
     method: 'POST',
     dataType,
   });
@@ -63,6 +63,6 @@ exports.mockUrlPost = function* () {
 exports.mockUrllibHeaders = function* () {
   const url = 'http://' + this.host;
   const method = this.query.method || 'request';
-  const res = yield this.app.urllib[method](url + '/mock_url');
+  const res = yield this.app.httpclient[method](url + '/mock_url');
   this.body = res.headers;
 };

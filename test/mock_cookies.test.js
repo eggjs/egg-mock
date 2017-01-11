@@ -7,7 +7,6 @@ const mm = require('..');
 const fixtures = path.join(__dirname, 'fixtures');
 
 describe('test/mock_cookies.test.js', () => {
-
   let app;
   before(done => {
     app = mm.app({
@@ -20,7 +19,7 @@ describe('test/mock_cookies.test.js', () => {
 
   it('should not return when don\'t mock cookies', done => {
     const ctx = app.mockContext();
-    assert(!ctx.getCookie('foo'));
+    assert(!ctx.cookies.get('foo'));
 
     request(app.callback())
     .get('/')
@@ -35,7 +34,7 @@ describe('test/mock_cookies.test.js', () => {
       foo: 'bar cookie',
     });
     const ctx = app.mockContext();
-    assert(ctx.getCookie('foo') === 'bar cookie');
+    assert(ctx.cookies.get('foo') === 'bar cookie');
 
     request(app.callback())
     .get('/')

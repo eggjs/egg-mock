@@ -1,9 +1,9 @@
 'use strict';
 
 module.exports = function(app) {
-  app.get('/', function*() {
+  app.get('/', function* () {
     this.body = {
-      cookieValue: this.getCookie('foo') || undefined,
+      cookieValue: this.cookies.get('foo') || undefined,
       cookiesValue: this.cookies.get('foo') || undefined,
     };
   });

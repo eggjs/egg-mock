@@ -345,25 +345,25 @@ request(app.callback())
 .expect(302, done);
 ```
 
-### app.mockUrllib(url, method, data)
+### app.mockHttpclient(url, method, data)
 
-模拟 curl
+模拟 httpclient 的请求，例如 `ctx.curl`
 
 ```js
 app.get('/', function*() {
-  const ret = yield this.curl('https://eggjs.org ');
+  const ret = yield this.curl('https://eggjs.org');
   this.body = ret.data.toString();
 });
 
-app.mockUrllib('https://eggjs.org ', {
+app.mockHttpclient('https://eggjs.org', {
   // 模拟的参数，可以是 buffer / string / json，
   // 都会转换成 buffer
   // 按照请求时的 options.dataType 来做对应的转换
   data: 'mock taobao',
 });
 request(app.callback())
-.post('/')
-.expect('mock taobao', done);
+  .post('/')
+  .expect('mock taobao', done);
 ```
 
 ## Questions & Suggestions
