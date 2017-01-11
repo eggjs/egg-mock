@@ -229,8 +229,8 @@ module.exports = {
   },
 
   /**
-   * mock urllib
-   * @method App#mockUrllib
+   * mock httpclient
+   * @method App#mockHttpclient
    * @param {String} mockUrl - url
    * @param {String} mockMethod - http method
    * @param {Object} mockResult - you data
@@ -239,9 +239,9 @@ module.exports = {
    *   - headers - response header
    * @return {Context} this
    */
-  mockUrllib(mockUrl, mockMethod, mockResult) {
+  mockHttpclient(mockUrl, mockMethod, mockResult) {
     if (!mockResult) {
-      // app.mockUrllib(mockUrl, mockResult)
+      // app.mockHttpclient(mockUrl, mockResult)
       mockResult = mockMethod;
       mockMethod = 'GET';
     }
@@ -275,12 +275,12 @@ module.exports = {
     }
     mockResult.headers = mockResult.headers || {};
 
-    const urllib = this.urllib;
-    const requestThunk = urllib.requestThunk;
+    const httpclient = this.httpclient;
+    const rawRequest = httpclient.request;
 
-    mm(urllib, 'requestThunk', _request);
-    mm(urllib, 'request', _request);
-    mm(urllib, 'curl', _request);
+    mm(httpclient, 'requestThunk', _request);
+    mm(httpclient, 'request', _request);
+    mm(httpclient, 'curl', _request);
 
     return this;
 
@@ -299,7 +299,7 @@ module.exports = {
           keepAliveSocket: mockResult.keepAliveSocket || false,
         };
 
-        urllib.emit('response', {
+        httpclient.emit('response', {
           error: null,
           ctx: opt.ctx,
           req: {
@@ -321,8 +321,13 @@ module.exports = {
         }
         return mockResult;
       }
-      return yield requestThunk.call(urllib, url, opt);
+      return yield rawRequest.call(httpclient, url, opt);
     }
+  },
+
+  mockUrllib(...args) {
+    this.deprecate('[egg-mock] Please use app.mockHttpclient instead of app.mockUrllib');
+    return this.mockHttpclient(...args);
   },
 
   /**

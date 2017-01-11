@@ -331,25 +331,25 @@ request(app.callback())
 .expect(302, done);
 ```
 
-### app.mockUrllib(url, method, data)
+### app.mockHttpclient(url, method, data)
 
-Mock `ctx.curl`
+Mock httpclient request, e.g.: `ctx.curl`
 
 ```js
 app.get('/', function*() {
-  const ret = yield this.curl('https://eggjs.org ');
+  const ret = yield this.curl('https://eggjs.org');
   this.body = ret.data.toString();
 });
 
-app.mockUrllib('https://eggjs.org ', {
-  // 模拟的参数，可以是 buffer / string / json，
-  // 都会转换成 buffer
-  // 按照请求时的 options.dataType 来做对应的转换
+app.mockHttpclient('https://eggjs.org', {
+  // can be buffer / string / json，
+  // will auto convert to buffer
+  // follow options.dataType to convert
   data: 'mock taobao',
 });
 request(app.callback())
-.post('/')
-.expect('mock taobao', done);
+  .post('/')
+  .expect('mock taobao', done);
 ```
 
 ## Questions & Suggestions

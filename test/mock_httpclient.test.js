@@ -7,8 +7,7 @@ const assert = require('power-assert');
 const mm = require('..');
 const fixtures = path.join(__dirname, 'fixtures');
 
-describe('test/mock_urllib.test.js', () => {
-
+describe('test/mock_httpclient.test.js', () => {
   let app;
   let server;
   let url;
@@ -28,7 +27,7 @@ describe('test/mock_urllib.test.js', () => {
   it('should mock url get and get reponse event on urllib', done => {
     done = pedding(2, done);
     app.mockCsrf();
-    app.mockUrllib(url, {
+    app.mockHttpclient(url, {
       data: new Buffer('mock url get'),
     });
 
@@ -40,7 +39,7 @@ describe('test/mock_urllib.test.js', () => {
     })
     .expect(200, done);
 
-    app.urllib.once('response', function(result) {
+    app.httpclient.once('response', function(result) {
       assert.deepEqual(result.res, {
         status: 200,
         statusCode: 200,
@@ -56,7 +55,7 @@ describe('test/mock_urllib.test.js', () => {
 
   it('should mock url post', done => {
     app.mockCsrf();
-    app.mockUrllib(url, 'post', {
+    app.mockHttpclient(url, 'post', {
       data: new Buffer('mock url post'),
     });
 
@@ -71,10 +70,10 @@ describe('test/mock_urllib.test.js', () => {
 
   it('should mock url get and post', done => {
     app.mockCsrf();
-    app.mockUrllib(url, {
+    app.mockHttpclient(url, {
       data: 'mock url get',
     });
-    app.mockUrllib(url, 'post', {
+    app.mockHttpclient(url, 'post', {
       data: 'mock url post',
     });
 
@@ -89,10 +88,10 @@ describe('test/mock_urllib.test.js', () => {
 
   it('should support request', done => {
     app.mockCsrf();
-    app.mockUrllib(url, {
+    app.mockHttpclient(url, {
       data: 'mock url get',
     });
-    app.mockUrllib(url, 'post', {
+    app.mockHttpclient(url, 'post', {
       data: 'mock url post',
     });
 
@@ -107,10 +106,10 @@ describe('test/mock_urllib.test.js', () => {
 
   it('should support curl', done => {
     app.mockCsrf();
-    app.mockUrllib(url, {
+    app.mockHttpclient(url, {
       data: 'mock url get',
     });
-    app.mockUrllib(url, 'post', {
+    app.mockHttpclient(url, 'post', {
       data: 'mock url post',
     });
 
@@ -125,10 +124,10 @@ describe('test/mock_urllib.test.js', () => {
 
   it('should support json', done => {
     app.mockCsrf();
-    app.mockUrllib(url, {
+    app.mockHttpclient(url, {
       data: { method: 'get' },
     });
-    app.mockUrllib(url, 'post', {
+    app.mockHttpclient(url, 'post', {
       data: { method: 'post' },
     });
 
@@ -143,10 +142,10 @@ describe('test/mock_urllib.test.js', () => {
 
   it('should support text', done => {
     app.mockCsrf();
-    app.mockUrllib(url, {
+    app.mockHttpclient(url, {
       data: 'mock url get',
     });
-    app.mockUrllib(url, 'post', {
+    app.mockHttpclient(url, 'post', {
       data: 'mock url post',
     });
 
@@ -160,6 +159,17 @@ describe('test/mock_urllib.test.js', () => {
   });
 
   it('should exits req headers', done => {
+    app.mockCsrf();
+    app.mockHttpclient(url, {
+      data: 'mock url test',
+    });
+    request(server)
+    .get('/mock_urllib')
+    .expect({})
+    .expect(200, done);
+  });
+
+  it('should deprecate mockUrllib', done => {
     app.mockCsrf();
     app.mockUrllib(url, {
       data: 'mock url test',
