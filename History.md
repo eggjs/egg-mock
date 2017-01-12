@@ -1,5 +1,10 @@
 
-1.3.0 / 2017-01-12
+2.0.0 / 2017-01-12
+==================
+
+  * refactor: use mockHttpclient instead of mockUrllib (#19)
+
+1.3.0 (deprecated) / 2017-01-12
 ==================
 
   * refactor: use mockHttpclient instead of mockUrllib (#19)
