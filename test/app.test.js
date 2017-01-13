@@ -2,7 +2,7 @@
 
 const request = require('supertest');
 const path = require('path');
-const assert = require('power-assert');
+const assert = require('assert');
 const mm = require('..');
 const fixtures = path.join(__dirname, 'fixtures');
 
@@ -31,6 +31,16 @@ describe('test/app.test.js', () => {
     yield app2.close();
 
     assert(app1 !== app2);
+  });
+
+  it('should auto find framework when egg.framework exists on package.json', function* () {
+    const baseDir = path.join(fixtures, 'yadan_app');
+    const app = mm.app({
+      baseDir,
+    });
+    yield app.ready();
+    assert(app.config.foobar === 'yadan');
+    yield app.close();
   });
 });
 

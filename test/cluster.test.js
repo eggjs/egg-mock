@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('path');
-const assert = require('power-assert');
+const assert = require('assert');
 const request = require('supertest');
 const mm = require('..');
 
@@ -200,7 +200,7 @@ describe('test/cluster.test.js', () => {
     });
   });
 
-  describe('cluster with opts', () => {
+  describe('cluster with opts.customEgg', () => {
     let app;
     after(() => app.close());
 
@@ -218,6 +218,22 @@ describe('test/cluster.test.js', () => {
       app.expect('stdout', /App Worker#1:/)
       .expect('stderr', /Debugger listening on/)
       .end(done);
+    });
+  });
+
+  describe('cluster with egg.framework=yadan', () => {
+    let app;
+    after(() => app.close());
+
+    it('should pass execArgv', done => {
+      app = mm.cluster({
+        baseDir: 'yadan_app',
+        workers: 1,
+        cache: false,
+        coverage: false,
+      });
+      app.expect('stdout', /App Worker#1:/)
+        .end(done);
     });
   });
 });

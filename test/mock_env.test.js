@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('path');
-const assert = require('power-assert');
+const assert = require('assert');
 const mm = require('..');
 const fixtures = path.join(__dirname, 'fixtures');
 
