@@ -2,7 +2,7 @@
 
 const path = require('path');
 const mm = require('mm');
-const assert = require('power-assert');
+const assert = require('assert');
 const formatOptions = require('../lib/format_options');
 
 describe('test/format_options.test.js', () => {

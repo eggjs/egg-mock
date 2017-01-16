@@ -1,6 +1,6 @@
 'use strict';
 
-const assert = require('power-assert');
+const assert = require('assert');
 const mm = require('..');
 
 describe('test/mock_context.test.js', () => {

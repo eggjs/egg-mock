@@ -2,7 +2,7 @@
 
 const path = require('path');
 const fs = require('fs');
-const assert = require('power-assert');
+const assert = require('assert');
 const sleep = require('ko-sleep');
 const mm = require('..');
 

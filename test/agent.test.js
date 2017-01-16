@@ -4,12 +4,11 @@ const path = require('path');
 const fs = require('fs');
 const mm = require('..');
 const rimraf = require('rimraf');
-const assert = require('power-assert');
+const assert = require('assert');
 
 const fixtures = path.join(__dirname, 'fixtures');
 
 describe('test/agent.test.js', () => {
-
   let app;
   afterEach(() => app.close());
 
