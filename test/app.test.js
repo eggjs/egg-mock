@@ -42,6 +42,72 @@ describe('test/app.test.js', () => {
     assert(app.config.foobar === 'yadan');
     yield app.close();
   });
+
+  it('should not get property before ready', function* () {
+    const baseDir = path.join(fixtures, 'app');
+    const app = mm.app({ baseDir });
+    assert.throws(() => {
+      app.config;
+    }, /can't get config before ready/);
+    yield app.ready();
+    yield app.close();
+  });
+
+  it('should not get property before ready', function* () {
+    const baseDir = path.join(fixtures, 'app');
+    const app = mm.app({ baseDir, cache: false });
+    assert.throws(() => {
+      app.config;
+    }, /can't get config before ready/);
+    yield app.ready();
+    yield app.close();
+  });
+
+  it('should override property with setter', function* () {
+    const baseDir = path.join(fixtures, 'app');
+    const app = mm.app({ baseDir, cache: false });
+    yield app.ready();
+
+    app.curl = mockCurl;
+    const data = yield app.curl();
+    assert(data === 'mock');
+    yield app.close();
+
+    function* mockCurl() {
+      return 'mock';
+    }
+  });
+
+  it('should ignore when set property on MockApplication', function* () {
+    const baseDir = path.join(fixtures, 'app');
+    const app = mm.app({ baseDir, cache: false });
+    yield app.ready();
+
+    app.closed = true;
+    assert(app.closed === false);
+    yield app.close();
+  });
+
+  it('should not set property before ready', function* () {
+    const baseDir = path.join(fixtures, 'app');
+    const app = mm.app({ baseDir, cache: false });
+    assert.throws(() => {
+      app.curl = function* mockCurl() {
+        return 'mock';
+      };
+    }, /can't set curl before ready/);
+    yield app.ready();
+    yield app.close();
+  });
+
+  it('should emit error when load Application fail', done => {
+    const baseDir = path.join(fixtures, 'app-fail');
+    const app = mm.app({ baseDir, cache: false });
+    app.once('error', err => {
+      assert(/load error/.test(err.message));
+      done();
+    });
+  });
 });
 
 function call(method) {

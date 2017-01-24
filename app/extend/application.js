@@ -225,6 +225,7 @@ module.exports = {
    */
   mockCsrf() {
     mm(this.context, 'assertCSRF', () => {});
+    mm(this.context, 'assertCsrf', () => {});
     return this;
   },
 

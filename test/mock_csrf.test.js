@@ -12,6 +12,7 @@ describe('test/mock_csrf.test.js', () => {
     app = mm.app({
       baseDir: path.join(fixtures, 'demo'),
     });
+    return app.ready();
   });
   after(() => app.close());
   afterEach(mm.restore);
