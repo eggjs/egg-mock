@@ -224,7 +224,7 @@ module.exports = {
    * @sice 1.11
    */
   mockCsrf() {
-    mm(this.context, 'assertCSRF', () => {});
+    mm(this.context, 'assertCsrf', () => {});
     return this;
   },
 

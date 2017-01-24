@@ -82,7 +82,6 @@ describe('test/mock_service.test.js', () => {
       foo3: 'bar',
       thirdService: '3 level service',
     }, done);
-
   });
 
   it('should return from service when mock with error', done => {
