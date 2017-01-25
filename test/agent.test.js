@@ -1,19 +1,19 @@
 'use strict';
 
-const path = require('path');
-const fs = require('fs');
 const mm = require('..');
+const fs = require('fs');
+const path = require('path');
 const rimraf = require('rimraf');
 const assert = require('assert');
 
 const fixtures = path.join(__dirname, 'fixtures');
+const baseDir = path.join(fixtures, 'agent');
 
 describe('test/agent.test.js', () => {
   let app;
   afterEach(() => app.close());
 
   it('mock agent ok', function* () {
-    const baseDir = path.join(fixtures, 'agent');
     const filepath = path.join(baseDir, 'run/test.txt');
     rimraf.sync(filepath);
 
@@ -26,11 +26,23 @@ describe('test/agent.test.js', () => {
   });
 
   it('mock agent again ok', done => {
-    const baseDir = path.join(fixtures, 'agent');
-
     app = mm.app({
       baseDir,
     });
     app.ready(done);
+  });
+
+  it('should cluster-client work', done => {
+    app = mm.app({ baseDir });
+    app.ready(() => {
+      app.agent.client.subscribe('agent sub', data => {
+        assert(data === 'agent sub');
+
+        app.client.subscribe('app sub', data => {
+          assert(data === 'app sub');
+          done();
+        });
+      });
+    });
   });
 });
