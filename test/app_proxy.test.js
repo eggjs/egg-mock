@@ -154,7 +154,7 @@ describe('test/app_proxy.test.js', () => {
         value: true,
       });
       assert(app.closed === false);
-      assert(!app.app.closed);
+      assert(!app._app.closed);
     });
   });
 
@@ -176,10 +176,10 @@ describe('test/app_proxy.test.js', () => {
     });
 
     it('should ignore when delete property on MockApplication', function* () {
-      assert(!app.app.closed);
+      assert(!app._app.closed);
       assert(app.closed === false);
       delete app.closed;
-      assert(!app.app.closed);
+      assert(!app._app.closed);
       assert(app.closed === false);
     });
   });
@@ -219,7 +219,7 @@ describe('test/app_proxy.test.js', () => {
     after(() => app.close());
 
     it('should getPrototypeOf', () => {
-      assert(Object.getPrototypeOf(app) === Object.getPrototypeOf(app.app));
+      assert(Object.getPrototypeOf(app) === Object.getPrototypeOf(app._app));
     });
   });
 
@@ -242,12 +242,12 @@ describe('test/app_proxy.test.js', () => {
         'closed',
         'close',
         'agent',
-        'app',
+        '_app',
         'on',
         'once',
       ];
       for (const key of MOCK_APP_METHOD) {
-        assert(app[key] !== app.app[key]);
+        assert(app[key] !== app._app[key]);
       }
     });
   });
