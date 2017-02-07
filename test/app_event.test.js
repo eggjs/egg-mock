@@ -59,9 +59,12 @@ describe('test/app_proxy.test.js', () => {
   });
 
   describe('throw before app init', () => {
+    let app;
+    afterEach(() => app.close());
+
     it('should listen using app.on', done => {
       const baseDir = path.join(fixtures, 'app-start-error');
-      const app = mm.app({
+      app = mm.app({
         baseDir,
         cache: false,
       });
@@ -73,7 +76,7 @@ describe('test/app_proxy.test.js', () => {
 
     it('should listen using app.once', done => {
       const baseDir = path.join(fixtures, 'app-start-error');
-      const app = mm.app({
+      app = mm.app({
         baseDir,
         cache: false,
       });
@@ -82,5 +85,6 @@ describe('test/app_proxy.test.js', () => {
         done();
       });
     });
+
   });
 });
