@@ -3,6 +3,7 @@
 const path = require('path');
 const request = require('supertest');
 const pedding = require('pedding');
+const assert = require('assert');
 const mm = require('..');
 const fixtures = path.join(__dirname, 'fixtures');
 const baseDir = path.join(fixtures, 'app-event');
@@ -57,4 +58,29 @@ describe('test/app_proxy.test.js', () => {
     });
   });
 
+  describe('throw before app init', () => {
+    it('should listen using app.on', done => {
+      const baseDir = path.join(fixtures, 'app-start-error');
+      const app = mm.app({
+        baseDir,
+        cache: false,
+      });
+      app.on('error', err => {
+        assert(err.message === 'start error');
+        done();
+      });
+    });
+
+    it('should listen using app.once', done => {
+      const baseDir = path.join(fixtures, 'app-start-error');
+      const app = mm.app({
+        baseDir,
+        cache: false,
+      });
+      app.once('error', err => {
+        assert(err.message === 'start error');
+        done();
+      });
+    });
+  });
 });
