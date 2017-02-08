@@ -70,6 +70,7 @@ describe('test/app_event.test.js', () => {
         cache: false,
       });
     });
+    afterEach(() => app.close());
 
     it('should listen using app.on', done => {
       app.on('error', err => {
