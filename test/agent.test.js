@@ -35,7 +35,7 @@ describe('test/agent.test.js', () => {
   it('should cluster-client work', done => {
     app = mm.app({ baseDir });
     app.ready(() => {
-      app.agent.client.subscribe('agent sub', data => {
+      app._agent.client.subscribe('agent sub', data => {
         assert(data === 'agent sub');
 
         app.client.subscribe('app sub', data => {

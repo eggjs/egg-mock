@@ -3,11 +3,13 @@
 const path = require('path');
 const request = require('supertest');
 const pedding = require('pedding');
+const assert = require('assert');
+const sleep = require('ko-sleep');
 const mm = require('..');
 const fixtures = path.join(__dirname, 'fixtures');
 const baseDir = path.join(fixtures, 'app-event');
 
-describe('test/app_proxy.test.js', () => {
+describe('test/app_event.test.js', () => {
   afterEach(mm.restore);
 
   describe('after ready', () => {
@@ -57,4 +59,37 @@ describe('test/app_proxy.test.js', () => {
     });
   });
 
+  describe('throw before app init', () => {
+    let app;
+    beforeEach(() => {
+      const baseDir = path.join(fixtures, 'app');
+      const customEgg = path.join(fixtures, 'error-framework');
+      app = mm.app({
+        baseDir,
+        customEgg,
+        cache: false,
+      });
+    });
+    afterEach(() => app.close());
+
+    it('should listen using app.on', done => {
+      app.on('error', err => {
+        assert(err.message === 'start error');
+        done();
+      });
+    });
+
+    it('should listen using app.once', done => {
+      app.once('error', err => {
+        assert(err.message === 'start error');
+        done();
+      });
+    });
+
+    it('should close when app init failed', function* () {
+      app.once('error', () => {});
+      yield sleep(1000);
+      yield app.close();
+    });
+  });
 });

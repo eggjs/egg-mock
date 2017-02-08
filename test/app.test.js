@@ -14,6 +14,16 @@ describe('test/app.test.js', () => {
   // test mm.cluster
   call('cluster');
 
+  it('should alias app.agent to app._agent', function* () {
+    const baseDir = path.join(fixtures, 'app');
+    const app = mm.app({
+      baseDir,
+      customEgg: path.join(__dirname, '../node_modules/egg'),
+    });
+    yield app.ready();
+    assert(app.agent === app._agent);
+  });
+
   it('should not use cache when app is closed', function* () {
     const baseDir = path.join(fixtures, 'app');
     const app1 = mm.app({
