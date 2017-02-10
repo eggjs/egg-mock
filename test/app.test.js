@@ -228,10 +228,10 @@ function call(method) {
       });
       app2.ready(done);
     });
-    after(() => Promise.all([
-      app1.close(),
-      app2.close(),
-    ]));
+    after(function* () {
+      yield app1.close();
+      yield app2.close();
+    });
 
     it('should equal', () => {
       assert(app1 === app2);

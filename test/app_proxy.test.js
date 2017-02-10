@@ -237,11 +237,10 @@ describe('test/app_proxy.test.js', () => {
     it('should be used on MockApplication', () => {
       const MOCK_APP_METHOD = [
         'ready',
-        '_ready',
-        '_readyCallbacks',
         'closed',
         'close',
         'agent',
+        '_agent',
         '_app',
         'on',
         'once',

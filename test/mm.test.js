@@ -3,7 +3,6 @@
 const path = require('path');
 const fs = require('fs');
 const assert = require('assert');
-const sleep = require('ko-sleep');
 const mm = require('..');
 
 const baseDir = path.join(__dirname, 'fixtures/apps/env-app');
@@ -19,7 +18,6 @@ describe('test/mm.test.js', () => {
       mm(process.env, 'EGG_HOME', baseDir);
     });
     afterEach(() => app.close());
-    afterEach(() => sleep(5000));
 
     it('should mock unittest', function* () {
       app = mm.app({ baseDir: 'apps/env-app', cache: false });

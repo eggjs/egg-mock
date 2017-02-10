@@ -86,10 +86,20 @@ describe('test/app_event.test.js', () => {
       });
     });
 
+    it('should throw error from ready', function* () {
+      try {
+        yield app.ready();
+      } catch (err) {
+        assert(err.message === 'start error');
+      }
+    });
+
     it('should close when app init failed', function* () {
       app.once('error', () => {});
       yield sleep(1000);
+      // app._app is undefined
       yield app.close();
     });
+
   });
 });
