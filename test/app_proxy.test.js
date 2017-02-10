@@ -250,4 +250,35 @@ describe('test/app_proxy.test.js', () => {
       }
     });
   });
+
+  describe('messenger binding', () => {
+    let app;
+    const baseDir = path.join(fixtures, 'messenger-binding');
+    before(() => {
+      app = mm.app({
+        baseDir,
+        cache: false,
+      });
+      return app.ready();
+    });
+    after(() => app.close());
+
+    it('should send message from app to agent', () => {
+      assert.deepEqual(app._agent.received, [
+        'send data when app starting',
+        'send data when app started',
+      ]);
+    });
+
+    it('should send message from agent to app', () => {
+      assert.deepEqual(app._app.received, [
+        'send data when server started',
+      ]);
+    });
+
+    it('should receive egg-ready', () => {
+      assert(app._app.eggReady === true);
+      assert(app._agent.eggReady === true);
+    });
+  });
 });
