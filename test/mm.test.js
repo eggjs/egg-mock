@@ -20,7 +20,7 @@ describe('test/mm.test.js', () => {
     afterEach(() => app.close());
 
     it('should mock unittest', function* () {
-      app = mm.app({ baseDir: 'apps/env-app', cache: false, clean: false });
+      app = mm.app({ baseDir: 'apps/env-app', cache: false });
       yield app.ready();
       assert(app.config.fakeplugin.foo === 'bar-unittest');
       assert(app.config.logger.dir === path.join(baseDir, 'logs/env-app'));
@@ -28,7 +28,7 @@ describe('test/mm.test.js', () => {
 
     it('should mock test', function* () {
       mm.env('test');
-      app = mm.app({ baseDir: 'apps/env-app', cache: false, clean: false });
+      app = mm.app({ baseDir: 'apps/env-app', cache: false });
       yield app.ready();
       assert(app.config.fakeplugin.foo === 'bar-test');
       assert(app.config.logger.dir === path.join(baseDir, 'logs/env-app'));
@@ -36,7 +36,7 @@ describe('test/mm.test.js', () => {
 
     it('should mock prod', function* () {
       mm.env('prod');
-      app = mm.app({ baseDir: 'apps/env-app', cache: false, clean: false });
+      app = mm.app({ baseDir: 'apps/env-app', cache: false });
       yield app.ready();
       assert(app.config.fakeplugin.foo === 'bar-prod');
       assert(app.config.logger.dir === path.join(baseDir, 'logs/env-app'));
@@ -44,7 +44,7 @@ describe('test/mm.test.js', () => {
 
     it('should mock default', function* () {
       mm.env('default');
-      app = mm.app({ baseDir: 'apps/env-app', cache: false, clean: false });
+      app = mm.app({ baseDir: 'apps/env-app', cache: false });
       yield app.ready();
       assert(app.config.fakeplugin.foo === 'bar-default');
       assert(app.config.logger.dir === path.join(baseDir, 'logs/env-app'));
@@ -52,7 +52,7 @@ describe('test/mm.test.js', () => {
 
     it('should mock unittest', function* () {
       mm.env('unittest');
-      app = mm.app({ baseDir: 'apps/env-app', cache: false, clean: false });
+      app = mm.app({ baseDir: 'apps/env-app', cache: false });
       yield app.ready();
       assert(app.config.fakeplugin.foo === 'bar-unittest');
       assert(app.config.logger.dir === path.join(baseDir, 'logs/env-app'));
@@ -60,7 +60,7 @@ describe('test/mm.test.js', () => {
 
     it('should mock local', function* () {
       mm.env('local');
-      app = mm.app({ baseDir: 'apps/env-app', cache: false, clean: false });
+      app = mm.app({ baseDir: 'apps/env-app', cache: false });
       yield app.ready();
       assert(app.config.fakeplugin.foo === 'bar-default');
       assert(app.config.logger.dir === path.join(baseDir, 'logs/env-app'));
