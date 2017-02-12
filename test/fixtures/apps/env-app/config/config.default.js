@@ -7,3 +7,7 @@ exports.fakeplugin = {
 exports.logger = {
   consoleLevel: 'NONE',
 };
+
+exports.development = {
+  fastReady: false,
+};
