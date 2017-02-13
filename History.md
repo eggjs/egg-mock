@@ -1,4 +1,12 @@
 
+3.0.0 / 2017-02-13
+==================
+
+  * deps: upgrade egg (#29)
+  * fix: bind messenger with app and agent (#28)
+  * feat: [BREAKING_CHANGE] can get error from .ready() (#27)
+  * test: remove unuse codes (#26)
+
 2.4.0 / 2017-02-08
 ==================
 
