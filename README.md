@@ -75,13 +75,13 @@ before(() => {
 
 ### Test Framework
 
-customEgg is optional, it's `node_modules/egg` by default.
+framework is optional, it's `node_modules/egg` by default.
 
 ```js
 before(() => {
   app = mm.app({
     baseDir: 'apps/demo',
-    customEgg: true,
+    framework: true,
   });
   return app.ready();
 });
@@ -108,7 +108,7 @@ describe('aliyun-egg', () => {
   before(() => {
     app = mm.app({
       baseDir: 'apps/demo',
-      customEgg: path.join(__dirname, 'node_modules/aliyun-egg'),
+      framework: path.join(__dirname, 'node_modules/aliyun-egg'),
     });
     return app.ready();
   });
@@ -119,7 +119,7 @@ describe('framework-b', () => {
   before(() => {
     app = mm.app({
       baseDir: 'apps/demo',
-      customEgg: path.join(__dirname, 'node_modules/framework-b'),
+      framework: path.join(__dirname, 'node_modules/framework-b'),
     });
     return app.ready();
   });
@@ -229,14 +229,14 @@ mm.app({
 })
 ```
 
-#### customEgg {String/Boolean}
+#### framework {String/Boolean}
 
 The directory of framework
 
 ```js
 mm.app({
   baseDir: 'apps/demo',
-  customEgg: path.join(__dirname, 'fixtures/egg'),
+  framework: path.join(__dirname, 'fixtures/egg'),
 })
 ```
 

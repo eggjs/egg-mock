@@ -3,4 +3,4 @@
 'use strict';
 
 const options = JSON.parse(process.argv.slice(2));
-require(options.customEgg).startCluster(options);
+require(options.framework).startCluster(options);

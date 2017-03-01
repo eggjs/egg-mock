@@ -24,11 +24,13 @@ describe('test/format_options.test.js', () => {
   it('should return baseDir when on windows', () => {
     const baseDir = 'D:\\projectWorkSpace\\summer';
     mm(path, 'isAbsolute', path.win32.isAbsolute);
-    mm(process, 'cwd', () => {
-      return baseDir;
-    });
-    const options = formatOptions();
-    assert(options.baseDir === baseDir);
+    mm(process, 'cwd', () => baseDir);
+    try {
+      formatOptions();
+      throw new Error('should not run');
+    } catch (err) {
+      assert(err.message === 'D:\\projectWorkSpace\\summer/package.json should exist');
+    }
   });
 
   it('should set cache', () => {
@@ -51,7 +53,7 @@ describe('test/format_options.test.js', () => {
   });
 
   it('should return options when set full baseDir', () => {
-    const baseDir = path.join(__dirname, 'fixtures');
+    const baseDir = path.join(__dirname, 'fixtures/app');
     const options = formatOptions({ baseDir });
     assert(options);
     assert(options.baseDir === baseDir);
