@@ -29,7 +29,7 @@ describe('test/format_options.test.js', () => {
       formatOptions();
       throw new Error('should not run');
     } catch (err) {
-      assert(err.message === 'D:\\projectWorkSpace\\summer/package.json should exist');
+      assert(/D:\\projectWorkSpace\\summer/.test(err.message));
     }
   });
 
