@@ -15,7 +15,7 @@ module.exports = Object.assign(mm, {
    * @param {Object} [options]
    * - {String} baseDir - The directory of the application
    * - {Object} plugins - Tustom you plugins
-   * - {String} customEgg - The directory of the egg framework
+   * - {String} framework - The directory of the egg framework
    * - {Boolean} [true] cache - Cache application based on baseDir
    * - {Boolean} [true] coverage - Swtich on process coverage, but it'll be slower
    * - {Boolean} [true] clean - Remove $baseDir/logs

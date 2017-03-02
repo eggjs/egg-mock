@@ -11,3 +11,5 @@ exports.logger = {
 exports.development = {
   fastReady: false,
 };
+
+exports.keys = '123';
