@@ -22,6 +22,7 @@
     "contributors": "ali-contributors"
   },
   "dependencies": {
+    "await-event": "^2.0.0",
     "co": "^4.6.0",
     "coffee": "^3.3.0",
     "debug": "^2.6.1",
