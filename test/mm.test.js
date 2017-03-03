@@ -109,4 +109,20 @@ describe('test/mm.test.js', () => {
       assert(!process.env.EGG_HOME);
     });
   });
+
+  describe('egg-mock', () => {
+    let app;
+    before(() => {
+      app = mm.app({
+        baseDir: 'apps/no-framework',
+      });
+      return app.ready();
+    });
+    after(() => app.close());
+
+    it('should not be a framework', () => {
+      app.mockEnv();
+      assert(app.config.env === 'mocked by plugin');
+    });
+  });
 });
