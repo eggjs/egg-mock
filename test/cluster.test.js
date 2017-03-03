@@ -151,7 +151,8 @@ describe('test/cluster.test.js', () => {
         baseDir: 'demo',
       });
       yield app1.ready();
-      yield app1.close();
+      // mock closed
+      app1.closed = true;
 
       app2 = mm.cluster({
         baseDir: 'demo',
