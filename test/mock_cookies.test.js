@@ -45,4 +45,17 @@ describe('test/mock_cookies.test.js', () => {
     .expect(200, done);
   });
 
+  it('should pass cookie opt', done => {
+    app.mockCookies({});
+
+    request(app.callback())
+    .get('/')
+    .set('cookie', 'foo=bar cookie')
+    .expect({
+      cookieValue: 'bar cookie',
+      cookiesValue: 'bar cookie',
+    })
+    .expect(200, done);
+  });
+
 });
