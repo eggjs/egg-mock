@@ -1,4 +1,9 @@
 
+3.1.2 / 2017-03-05
+==================
+
+  * fix: should pass all arguments when mockCookies (#33)
+
 3.1.1 / 2017-03-04
 ==================
 
