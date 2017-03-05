@@ -187,11 +187,11 @@ module.exports = {
     mm(this, 'createContext', function(req, res) {
       const ctx = createContext.call(this, req, res);
       const getCookie = ctx.cookies.get;
-      mm(ctx.cookies, 'get', function(key) {
+      mm(ctx.cookies, 'get', function(key, opts) {
         if (cookies[key]) {
           return cookies[key];
         }
-        return getCookie.call(this, key);
+        return getCookie.call(this, key, opts);
       });
       return ctx;
     });
