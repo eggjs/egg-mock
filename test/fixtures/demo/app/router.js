@@ -1,9 +1,7 @@
 'use strict';
 
 module.exports = function(app) {
-  var userRole = app.role.can('user');
-
-  app.get('/', userRole, app.controller.home.get);
+  app.get('/', app.controller.home.get);
   app.get('/hello', app.controller.home.hello);
   app.get('/service', app.controller.home.service);
   app.get('/service/old', app.controller.home.serviceOld);
