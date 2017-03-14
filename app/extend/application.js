@@ -233,7 +233,7 @@ module.exports = {
    * mock httpclient
    * @method App#mockHttpclient
    * @param {String} mockUrl - url
-   * @param {String} mockMethod - http method
+   * @param {String|Array} mockMethod - http method
    * @param {Object} mockResult - you data
    *   - data - buffer / string / json
    *   - status - http status
@@ -244,9 +244,10 @@ module.exports = {
     if (!mockResult) {
       // app.mockHttpclient(mockUrl, mockResult)
       mockResult = mockMethod;
-      mockMethod = 'GET';
+      mockMethod = '*';
     }
-    mockMethod = (mockMethod || 'GET').toUpperCase();
+    if (!Array.isArray(mockMethod)) mockMethod = [ mockMethod ];
+    mockMethod = mockMethod.map(method => (method || 'GET').toUpperCase());
 
     if (!mockResult.status) {
       mockResult.status = 200;
@@ -285,11 +286,15 @@ module.exports = {
 
     return this;
 
+    function matchMethod(method) {
+      return mockMethod.some(m => m === '*' || m === method);
+    }
+
     // support generator rather than callback and promise
     function* _request(url, opt) {
       opt = opt || {};
       opt.method = (opt.method || 'GET').toUpperCase();
-      if (url === mockUrl && opt.method === mockMethod) {
+      if (url === mockUrl && matchMethod(opt.method)) {
         const response = {
           status: mockResult.status,
           statusCode: mockResult.status,

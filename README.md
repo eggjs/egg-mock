@@ -347,6 +347,11 @@ app.mockHttpclient('https://eggjs.org', {
   // follow options.dataType to convert
   data: 'mock taobao',
 });
+// app.mockHttpclient('https://eggjs.org', 'get', mockResponse); // mock get
+// app.mockHttpclient('https://eggjs.org', [ 'get' , 'head' ], mockResponse); // mock get and head
+// app.mockHttpclient('https://eggjs.org', '*', mockResponse); // mock all methods
+// app.mockHttpclient('https://eggjs.org', mockResponse); // mock all methods by default
+
 request(app.callback())
   .post('/')
   .expect('mock taobao', done);

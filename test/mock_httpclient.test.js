@@ -24,18 +24,18 @@ describe('test/mock_httpclient.test.js', () => {
   after(() => app.close());
   afterEach(mm.restore);
 
-  it('should mock url get and get reponse event on urllib', done => {
+  it('should mock url and get reponse event on urllib', done => {
     done = pedding(2, done);
     app.mockCsrf();
     app.mockHttpclient(url, {
-      data: new Buffer('mock url get'),
+      data: new Buffer('mock response'),
     });
 
     request(server)
     .get('/urllib')
     .expect({
-      get: 'mock url get',
-      post: 'url post',
+      get: 'mock response',
+      post: 'mock response',
     })
     .expect(200, done);
 
@@ -44,7 +44,65 @@ describe('test/mock_httpclient.test.js', () => {
         status: 200,
         statusCode: 200,
         headers: {},
-        size: 12,
+        size: 13,
+        aborted: false,
+        rt: 1,
+        keepAliveSocket: false,
+      });
+      done();
+    });
+  });
+
+  it('should mock url support multi method', done => {
+    done = pedding(2, done);
+    app.mockCsrf();
+    app.mockHttpclient(url, [ 'get', 'post' ], {
+      data: new Buffer('mock response'),
+    });
+
+    request(server)
+    .get('/urllib')
+    .expect({
+      get: 'mock response',
+      post: 'mock response',
+    })
+    .expect(200, done);
+
+    app.httpclient.once('response', function(result) {
+      assert.deepEqual(result.res, {
+        status: 200,
+        statusCode: 200,
+        headers: {},
+        size: 13,
+        aborted: false,
+        rt: 1,
+        keepAliveSocket: false,
+      });
+      done();
+    });
+  });
+
+  it('should mock url method support *', done => {
+    done = pedding(2, done);
+    app.mockCsrf();
+    app.mockHttpclient(url, '*', {
+      data: new Buffer('mock response'),
+    });
+
+    request(server)
+    .get('/urllib')
+    .expect({
+      get: 'mock response',
+      post: 'mock response',
+    })
+    .expect(200, done);
+
+    app.httpclient.once('response', function(result) {
+      assert.deepEqual(result.res, {
+        status: 200,
+        statusCode: 200,
+        headers: {},
+        size: 13,
         aborted: false,
         rt: 1,
         keepAliveSocket: false,
