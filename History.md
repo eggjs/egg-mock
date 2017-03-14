@@ -1,4 +1,10 @@
 
+3.2.0 / 2017-03-14
+==================
+
+  * feat: mockHttpClient support mock multi methods (#35)
+  * test: remove userrole (#34)
+
 3.1.2 / 2017-03-05
 ==================
 
