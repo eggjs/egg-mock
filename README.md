@@ -205,7 +205,7 @@ mock home directory
 
 ### mm.restore()
 
-restore all mock data, e.g. `afterEach(mm.restore())`
+restore all mock data, e.g. `afterEach(mm.restore)`
 
 ### options
 
