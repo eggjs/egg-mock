@@ -203,7 +203,7 @@ level list: `DEBUG`, `INFO`, `WARN`, `ERROR`, `NONE`
 
 mock home directory
 
-### mm.restore
+### mm.restore()
 
 restore all mock data, e.g. `afterEach(mm.restore)`
 
