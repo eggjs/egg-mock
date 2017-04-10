@@ -20,7 +20,7 @@
 [download-image]: https://img.shields.io/npm/dm/egg-mock.svg?style=flat-square
 [download-url]: https://npmjs.org/package/egg-mock
 
-Mock library for Egg testing.
+Mock library for testing Egg applications, plugins and custom Egg frameworks with ease. `egg-mock` inherits all APIs from [node_modules/mm](https://github.com/node-modules/mm), offering more flexibility.
 
 ## Install
 
@@ -364,3 +364,5 @@ Please open an issue [here](https://github.com/eggjs/egg/issues).
 ## License
 
 [MIT](LICENSE)
+
+

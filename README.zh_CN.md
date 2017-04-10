@@ -20,7 +20,7 @@
 [download-image]: https://img.shields.io/npm/dm/egg-mock.svg?style=flat-square
 [download-url]: https://npmjs.org/package/egg-mock
 
-一个数据模拟的库，更方便的测试 Egg 应用。
+一个数据模拟的库，更方便地测试 Egg 应用、插件及自定义 Egg 框架。`egg-mock` 拓展自 [node_modules/mm](https://github.com/node-modules/mm)，你可以使用所有 `mm` 包含的 API。
 
 ## Install
 
