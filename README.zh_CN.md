@@ -38,7 +38,6 @@ $ npm i egg-mock --save-dev
 // test/index.test.js
 const path = require('path');
 const mm = require('egg-mock');
-const request = require('supertest');
 
 describe('some test', () => {
   let app;
@@ -52,9 +51,9 @@ describe('some test', () => {
   after(() => app.close());
 
   it('should request /', () => {
-    return request(app.callback())
-    .get('/')
-    .expect(200);
+    return app.httpRequest()
+      .get('/')
+      .expect(200);
   });
 });
 ```
@@ -164,9 +163,9 @@ describe('test/app.js', () => {
   after(() => app.close());
 
   it('some test', () => {
-    return request(app.callback())
-    .get('/config')
-    .expect(200)
+    return app.httpRequest()
+      .get('/config')
+      .expect(200)
   });
 });
 ```
@@ -277,6 +276,21 @@ mm.app({
 
 如果是通过 ava 等并行测试框架进行测试，需要手动在执行测试前进行统一的日志清理，不能通过 mm 来处理，设置 `clean` 为 `false`。
 
+### app.httpRequest()
+
+请求当前应用 http 服务的辅助工具。
+
+```js
+it('should work', () => {
+  return app.httpRequest()
+    .get('/')
+    .expect('hello world')
+    .expect(200);
+});
+```
+
+更多信息请查看 [supertest](https://github.com/visionmedia/supertest) 的 API 说明。
+
 ### app.mockContext(options)
 
 模拟上下文数据
@@ -340,9 +354,10 @@ app.mockServiceError('user', 'home', new Error('mock error'));
 
 ```js
 app.mockCsrf();
-request(app.callback())
-.post('/login')
-.expect(302, done);
+
+return app.httpRequest()
+  .post('/login')
+  .expect(302);
 ```
 
 ### app.mockHttpclient(url, method, data)
@@ -359,11 +374,12 @@ app.mockHttpclient('https://eggjs.org', {
   // 模拟的参数，可以是 buffer / string / json，
   // 都会转换成 buffer
   // 按照请求时的 options.dataType 来做对应的转换
-  data: 'mock taobao',
+  data: 'mock egg',
 });
-request(app.callback())
+
+return app.httpRequest()
   .post('/')
-  .expect('mock taobao', done);
+  .expect('mock egg');
 ```
 
 ## Questions & Suggestions

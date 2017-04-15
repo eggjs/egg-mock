@@ -38,7 +38,6 @@ Launch a mock server with `mm.app`
 // test/index.test.js
 const path = require('path');
 const mm = require('egg-mock');
-const request = require('supertest');
 
 describe('some test', () => {
   let app;
@@ -51,9 +50,9 @@ describe('some test', () => {
   after(() => app.close());
 
   it('should request /', () => {
-    return request(app.callback())
-    .get('/')
-    .expect(200);
+    return app.httpRequest()
+      .get('/')
+      .expect(200);
   });
 });
 ```
@@ -159,9 +158,9 @@ describe('test/app.js', () => {
   after(() => app.close());
 
   it('some test', () => {
-    return request(app.callback())
-    .get('/config')
-    .expect(200)
+    return app.httpRequest()
+      .get('/config')
+      .expect(200)
   });
 });
 ```
@@ -266,6 +265,21 @@ Clean all logs directory, default is true.
 
 If you are using `ava`, disable it.
 
+### app.httpRequest()
+
+Request current app http server.
+
+```js
+it('should work', () => {
+  return app.httpRequest()
+    .get('/')
+    .expect('hello world')
+    .expect(200);
+});
+```
+
+See [supertest](https://github.com/visionmedia/supertest) to get more APIs.
+
 ### app.mockContext(options)
 
 ```js
@@ -326,9 +340,10 @@ app.mockServiceError('user', 'home', new Error('mock error'));
 
 ```js
 app.mockCsrf();
-request(app.callback())
-.post('/login')
-.expect(302, done);
+
+return app.httpRequest()
+  .post('/login')
+  .expect(302);
 ```
 
 ### app.mockHttpclient(url, method, data)
@@ -345,16 +360,16 @@ app.mockHttpclient('https://eggjs.org', {
   // can be buffer / string / json，
   // will auto convert to buffer
   // follow options.dataType to convert
-  data: 'mock taobao',
+  data: 'mock egg',
 });
 // app.mockHttpclient('https://eggjs.org', 'get', mockResponse); // mock get
 // app.mockHttpclient('https://eggjs.org', [ 'get' , 'head' ], mockResponse); // mock get and head
 // app.mockHttpclient('https://eggjs.org', '*', mockResponse); // mock all methods
 // app.mockHttpclient('https://eggjs.org', mockResponse); // mock all methods by default
 
-request(app.callback())
+return app.httpRequest()
   .post('/')
-  .expect('mock taobao', done);
+  .expect('mock egg');
 ```
 
 ## Questions & Suggestions
@@ -364,5 +379,3 @@ Please open an issue [here](https://github.com/eggjs/egg/issues).
 ## License
 
 [MIT](LICENSE)
-
-
