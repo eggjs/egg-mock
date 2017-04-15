@@ -5,7 +5,7 @@ const http = require('http');
 const merge = require('merge-descriptors');
 const is = require('is-type-of');
 const assert = require('assert');
-const isFunction = is.function;
+const supertestRequest = require('supertest');
 
 module.exports = {
   /**
@@ -102,9 +102,9 @@ module.exports = {
 
   _mockFn(obj, name, data) {
     const origin = obj[name];
-    assert(isFunction(origin), `property ${name} in original object must be function`);
+    assert(is.function(origin), `property ${name} in original object must be function`);
 
-    if (isFunction(data)) {
+    if (is.function(data)) {
       const fn = data;
       if (is.generatorFunction(origin) && !is.generatorFunction(fn)) {
         // 确保 mockProxy(name, proxyName, normalFunction) 也能够兼容
@@ -128,7 +128,7 @@ module.exports = {
       return;
     }
 
-    if (isFunction(origin)) {
+    if (is.function(origin)) {
       mm(obj, name, () => {
         if (data instanceof Error) {
           throw data;
@@ -364,6 +364,16 @@ module.exports = {
     mm(this.config, 'env', env);
     mm(this.config, 'serverEnv', env);
     return this;
+  },
+
+  /**
+   * http request helper
+   * @method App#httpRequest
+   * @return {SupertestRequest} req - supertest request
+   * @see https://github.com/visionmedia/supertest
+   */
+  httpRequest() {
+    return supertestRequest(this.callback());
   },
 };
 
