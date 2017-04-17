@@ -279,6 +279,8 @@ describe('test/app_proxy.test.js', () => {
     it('should receive egg-ready', () => {
       assert(app._app.eggReady === true);
       assert(app._agent.eggReady === true);
+      assert(app._agent.eggReadyData.baseDir === baseDir);
+      assert(app._app.eggReadyData.baseDir === baseDir);
     });
   });
 });

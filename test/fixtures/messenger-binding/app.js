@@ -8,7 +8,8 @@ module.exports = app => {
   app.ready(() => {
     app.messenger.sendToAgent('action', 'send data when app started');
   });
-  app.messenger.on('egg-ready', () => {
+  app.messenger.on('egg-ready', data => {
     app.eggReady = true;
+    app.eggReadyData = data;
   });
 };
