@@ -39,9 +39,11 @@ exports.urllib = function* () {
   const url = 'http://' + this.host;
   const method = this.query.method || 'request';
   const dataType = this.query.dataType;
-  const r1 = yield this.app.httpclient[method](url + '/mock_url', {
+  let r = this.app.httpclient[method](url + '/mock_url', {
     dataType,
   });
+  if (method === 'request') r = r.then(d => d);
+  const r1 = yield r;
   const r2 = yield this.app.httpclient[method](url + '/mock_url', {
     method: 'POST',
     dataType,

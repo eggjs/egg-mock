@@ -291,7 +291,7 @@ module.exports = {
     }
 
     // support generator rather than callback and promise
-    function* _request(url, opt) {
+    function _request(url, opt) {
       opt = opt || {};
       opt.method = (opt.method || 'GET').toUpperCase();
       if (url === mockUrl && matchMethod(opt.method)) {
@@ -325,9 +325,9 @@ module.exports = {
         } else if (opt.dataType === 'text') {
           mockResult.data = mockResult.data.toString();
         }
-        return mockResult;
+        return Promise.resolve(mockResult);
       }
-      return yield rawRequest.call(httpclient, url, opt);
+      return rawRequest.call(httpclient, url, opt);
     }
   },
 
