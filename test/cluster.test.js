@@ -146,16 +146,18 @@ describe('test/cluster.test.js', () => {
       assert(app1 === app2);
     });
 
-    it('should return new app if cached app has been closed', function* () {
+    it.only('should return new app if cached app has been closed', function* () {
       app1 = mm.cluster({
         baseDir: 'demo',
       });
+      app1.debug();
       yield app1.ready();
       yield app1.close();
 
       app2 = mm.cluster({
         baseDir: 'demo',
       });
+      app2.debug();
       yield app2.ready();
 
       assert(app2 !== app1);
