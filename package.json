@@ -7,6 +7,7 @@
   "description": "mock server for egg",
   "main": "index.js",
   "files": [
+    "app.js",
     "index.js",
     "app",
     "lib"
@@ -38,7 +39,7 @@
   },
   "devDependencies": {
     "autod": "^2.8.0",
-    "egg": "^1.1.0",
+    "egg": "^1.2.1",
     "egg-bin": "^3.3.2",
     "egg-ci": "^1.6.0",
     "eslint": "^3.19.0",

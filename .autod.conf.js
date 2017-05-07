@@ -18,5 +18,6 @@ module.exports = {
   keep: [
   ],
   semver: [
+    'eslint-config-egg@3',
   ],
 };

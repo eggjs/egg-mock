@@ -1,12 +1,11 @@
 'use strict';
 
 const path = require('path');
-const mm = require('mm');
 const assert = require('assert');
+const mm = require('..');
 const formatOptions = require('../lib/format_options');
 
 describe('test/format_options.test.js', () => {
-
   afterEach(mm.restore);
 
   it('should return the default options', () => {
@@ -154,5 +153,4 @@ describe('test/format_options.test.js', () => {
     formatOptions();
     assert.notEqual(process.env.HOME, baseDir);
   });
-
 });
