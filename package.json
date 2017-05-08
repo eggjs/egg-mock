@@ -35,7 +35,8 @@
     "merge-descriptors": "^1.0.1",
     "mm": "^2.1.0",
     "rimraf": "^2.6.1",
-    "supertest": "^3.0.0"
+    "supertest": "^3.0.0",
+    "urllib": "^2.22.0"
   },
   "devDependencies": {
     "autod": "^2.8.0",
@@ -43,7 +44,7 @@
     "egg-bin": "^3.3.2",
     "egg-ci": "^1.6.0",
     "eslint": "^3.19.0",
-    "eslint-config-egg": "^3.2.0",
+    "eslint-config-egg": "^4.0.0",
     "mkdirp": "^0.5.1",
     "pedding": "^1.1.0",
     "sdk-base": "^3.0.1"
