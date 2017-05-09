@@ -112,7 +112,9 @@ describe('test/mock_service_cluster.test.js', () => {
     });
 
     it('should return custom mock error', () => {
-      app.mockServiceError('foo', 'get', new Error('mock service foo.get error2'));
+      const err = new Error('mock service foo.get error2');
+      err.foo = 'bar';
+      app.mockServiceError('foo', 'get', err);
       return app.httpRequest()
       .get('/service')
       .expect(/mock service foo\.get error2/)
