@@ -12,6 +12,8 @@ describe('test/mock_cluster_restore.test.js', () => {
   });
   after(() => app.close());
 
+  afterEach(mm.restore);
+
   it('should mock cluster restore work', function* () {
     app.mockSession({
       user: {
