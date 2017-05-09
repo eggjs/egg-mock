@@ -29,6 +29,12 @@ describe('test/cluster.test.js', () => {
       yield app.ready();
       assert(app.process);
     });
+
+    it('should throw error when mock function not exists', () => {
+      assert.throws(() => {
+        app.mockNotExists();
+      }, /method "mockNotExists" not exists on app/);
+    });
   });
 
   describe('cluster with fullpath baseDir', () => {

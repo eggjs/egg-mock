@@ -1,28 +1,75 @@
 'use strict';
 
-const assert = require('assert');
 const mm = require('..');
 
 describe('test/mock_session.test.js', () => {
-
-  let app;
-  before(done => {
-    app = mm.app({
-      baseDir: 'demo',
-    });
-    app.ready(done);
-  });
-  after(() => app.close());
   afterEach(mm.restore);
 
-  it('should mock session', () => {
-    app.mockSession({
-      user: {
-        foo: 'bar',
-      },
+  describe('single process mode', () => {
+    let app;
+    before(() => {
+      app = mm.app({
+        baseDir: 'demo',
+      });
+      return app.ready();
     });
-    const ctx = app.mockContext();
+    after(() => app.close());
 
-    assert(ctx.session.user.foo === 'bar');
+    it('should mock session', () => {
+      app.mockSession({
+        user: {
+          foo: 'bar',
+        },
+        hello: 'egg mock session data',
+      });
+      return app.httpRequest()
+        .get('/session')
+        .expect({
+          user: {
+            foo: 'bar',
+          },
+          hello: 'egg mock session data',
+        });
+    });
+
+    it('should mock restore', () => {
+      return app.httpRequest()
+        .get('/session')
+        .expect({});
+    });
+  });
+
+  describe('cluster process mode', () => {
+    let app;
+    before(() => {
+      app = mm.cluster({
+        baseDir: 'demo',
+      });
+      return app.ready();
+    });
+    after(() => app.close());
+
+    it('should mock session', () => {
+      app.mockSession({
+        user: {
+          foo: 'bar',
+        },
+        hello: 'egg mock session data',
+      });
+      return app.httpRequest()
+        .get('/session')
+        .expect({
+          user: {
+            foo: 'bar',
+          },
+          hello: 'egg mock session data',
+        });
+    });
+
+    it('should mock restore', () => {
+      return app.httpRequest()
+        .get('/session')
+        .expect({});
+    });
   });
 });

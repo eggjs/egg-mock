@@ -7,7 +7,18 @@ const app = require('./lib/app');
 /**
  * @namespace mm
  */
-module.exports = Object.assign(mm, {
+
+function mock(...args) {
+  return mm(...args);
+}
+module.exports = mock;
+
+// inherit & extends mm
+Object.assign(mock, mm, {
+  restore() {
+    cluster.restore();
+    mm.restore();
+  },
 
   /**
    * Create a egg mocked application
@@ -59,7 +70,6 @@ module.exports = Object.assign(mm, {
       mm(process.env, 'EGG_HOME', homePath);
     }
   },
-
 });
 
 process.setMaxListeners(100);
