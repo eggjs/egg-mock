@@ -1,4 +1,11 @@
 
+3.6.0 / 2017-05-10
+==================
+
+  * chore: add tsd (#43)
+  * feat: support mock function on cluster mode (#44)
+  * deps: upgrade dependencies (#42)
+
 3.5.0 / 2017-04-25
 ==================
 
