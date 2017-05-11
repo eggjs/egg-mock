@@ -8,7 +8,7 @@ const mm = require('..');
 
 const fixtures = path.join(__dirname, 'fixtures');
 
-describe.only('test/mock_cluster_restore.test.js', () => {
+describe('test/mock_cluster_restore.test.js', () => {
   let app;
   before(() => {
     app = mm.cluster({
