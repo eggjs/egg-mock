@@ -4,6 +4,9 @@ const mm = require('mm');
 const cluster = require('./lib/cluster');
 const app = require('./lib/app');
 
+// egg-bin will set this flag to require files for instrument
+if (process.env.EGG_BIN_PREREQUIRE) require('./lib/prerequire');
+
 /**
  * @namespace mm
  */
