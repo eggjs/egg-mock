@@ -242,4 +242,23 @@ describe('test/cluster.test.js', () => {
         .end(done);
     });
   });
+
+  describe('prerequire', () => {
+    let app;
+    after(() => app.close());
+
+    it('should load files', done => {
+      mm(process.env, 'EGG_BIN_PREREQUIRE', 'true');
+      mm(process.env, 'DEBUG', 'egg-mock:prerequire');
+      app = mm.cluster({
+        baseDir: 'yadan_app',
+        workers: 1,
+        cache: false,
+      });
+      app
+        .expect('stderr', /prerequire app\/extend\/application.js/)
+        .expect('code', 0)
+        .end(done);
+    });
+  });
 });
