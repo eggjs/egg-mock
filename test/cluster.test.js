@@ -200,8 +200,8 @@ describe('test/cluster.test.js', () => {
         cache: false,
         coverage: false,
       });
-      app.expect('stdout', /App Worker#1:/)
-      .expect('stdout', /App Worker#2:/)
+      app.expect('stdout', /app_worker#1:/)
+      .expect('stdout', /app_worker#2:/)
       .end(done);
     });
   });
@@ -221,7 +221,7 @@ describe('test/cluster.test.js', () => {
           execArgv: [ '--debug' ],
         },
       });
-      app.expect('stdout', /App Worker#1:/)
+      app.expect('stdout', /app_worker#1:/)
       .expect('stderr', /Debugger listening on/)
       .end(done);
     });
@@ -238,7 +238,7 @@ describe('test/cluster.test.js', () => {
         cache: false,
         coverage: false,
       });
-      app.expect('stdout', /App Worker#1:/)
+      app.expect('stdout', /app_worker#1:/)
         .end(done);
     });
   });
