@@ -1,4 +1,9 @@
 
+3.7.2 / 2017-06-07
+==================
+
+  * fix(httpclient): miss headers on options when emit response (#49)
+
 3.7.1 / 2017-06-01
 ==================
 
