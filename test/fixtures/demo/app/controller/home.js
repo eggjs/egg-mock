@@ -47,6 +47,9 @@ exports.urllib = function* () {
   const r2 = yield this.app.httpclient[method](url + '/mock_url', {
     method: 'POST',
     dataType,
+    headers: {
+      'x-custom': 'custom',
+    },
   });
   this.body = {
     get: Buffer.isBuffer(r1.data) ? r1.data.toString() : r1.data,

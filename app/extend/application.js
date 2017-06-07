@@ -294,6 +294,7 @@ module.exports = {
     function _request(url, opt) {
       opt = opt || {};
       opt.method = (opt.method || 'GET').toUpperCase();
+      opt.headers = opt.headers || {};
       if (url === mockUrl && matchMethod(opt.method)) {
         const response = {
           status: mockResult.status,

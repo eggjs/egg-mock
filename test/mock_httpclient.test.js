@@ -40,6 +40,10 @@ describe('test/mock_httpclient.test.js', () => {
     .expect(200, done);
 
     app.httpclient.once('response', function(result) {
+      assert('url' in result.req);
+      assert('size' in result.req);
+      assert('options' in result.req);
+
       assert.deepEqual(result.res, {
         status: 200,
         statusCode: 200,
@@ -50,6 +54,26 @@ describe('test/mock_httpclient.test.js', () => {
         keepAliveSocket: false,
       });
       done();
+    });
+
+    let count = 0;
+    app.httpclient.on('response', function(result) {
+      if (count === 0) {
+        assert.deepEqual(result.req.options, {
+          dataType: undefined,
+          method: 'GET',
+          headers: {},
+        });
+      } else if (count === 1) {
+        assert.deepEqual(result.req.options, {
+          dataType: undefined,
+          method: 'POST',
+          headers: {
+            'x-custom': 'custom',
+          },
+        });
+      }
+      count++;
     });
   });
 
