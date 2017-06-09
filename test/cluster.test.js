@@ -141,11 +141,13 @@ describe('test/cluster.test.js', () => {
     it('should return cached cluster app', function* () {
       app1 = mm.cluster({
         baseDir: 'demo',
+        coverage: false,
       });
       yield app1.ready();
 
       app2 = mm.cluster({
         baseDir: 'demo',
+        coverage: false,
       });
       yield app2.ready();
 
@@ -155,12 +157,14 @@ describe('test/cluster.test.js', () => {
     it('should return new app if cached app has been closed', function* () {
       app1 = mm.cluster({
         baseDir: 'demo',
+        coverage: false,
       });
       yield app1.ready();
       yield app1.close();
 
       app2 = mm.cluster({
         baseDir: 'demo',
+        coverage: false,
       });
       yield app2.ready();
 
@@ -200,6 +204,7 @@ describe('test/cluster.test.js', () => {
         cache: false,
         coverage: false,
       });
+      app.debug();
       app.expect('stdout', /app_worker#1:/)
       .expect('stdout', /app_worker#2:/)
       .end(done);
@@ -218,9 +223,10 @@ describe('test/cluster.test.js', () => {
         cache: false,
         coverage: false,
         opt: {
-          execArgv: [ '--debug' ],
+          execArgv: [ '--inspect' ],
         },
       });
+      app.debug();
       app.expect('stdout', /app_worker#1:/)
       .expect('stderr', /Debugger listening on/)
       .end(done);
@@ -254,6 +260,7 @@ describe('test/cluster.test.js', () => {
         baseDir: 'yadan_app',
         workers: 1,
         cache: false,
+        coverage: false,
       });
       app
         .expect('stderr', /prerequire app\/extend\/application.js/)

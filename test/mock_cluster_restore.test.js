@@ -13,6 +13,7 @@ describe('test/mock_cluster_restore.test.js', () => {
   before(() => {
     app = mm.cluster({
       baseDir: 'demo',
+      coverage: false,
     });
     return app.ready();
   });
@@ -47,6 +48,7 @@ describe('test/mock_cluster_restore.test.js', () => {
     before(() => {
       app = mm.cluster({
         baseDir: 'apps/app-throw',
+        coverage: false,
       });
       return app.ready();
     });

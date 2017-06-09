@@ -7,6 +7,7 @@ describe('test/mock_cluster_without_security.test.js', () => {
   before(() => {
     app = mm.cluster({
       baseDir: 'disable-security',
+      coverage: false,
     });
     return app.ready();
   });
