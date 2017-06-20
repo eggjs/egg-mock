@@ -18,7 +18,7 @@
     "test": "npm run lint && npm run test-local && npm run test-ts",
     "test-ts": "ts-node test/index.test.ts",
     "test-local": "egg-bin test",
-    "cov": "egg-bin cov",
+    "cov": "cross-env SPAWN_WRAP_DEBUG=1 egg-bin cov",
     "ci": "npm run lint && npm run cov && npm run test-ts",
     "autod": "autod",
     "autod-china": "autod --registry=https://registry.npm.taobao.org",
@@ -44,6 +44,7 @@
   "devDependencies": {
     "@types/node": "^7.0.18",
     "autod": "^2.8.0",
+    "cross-env": "^5.0.1",
     "egg": "^1.4.0",
     "egg-bin": "^4.0.0",
     "egg-ci": "^1.7.0",
