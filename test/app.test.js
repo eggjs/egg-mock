@@ -86,6 +86,30 @@ describe('test/app.test.js', () => {
     }
     yield app.close();
   });
+
+
+  it('should create new instance when close fail', function* () {
+    mm(process.env, 'CLOSE_THROW', 'true');
+    const app1 = mm.app({
+      baseDir: 'app-close-fail',
+      cache: true,
+    });
+    yield app1.ready();
+    try {
+      yield app1.close();
+      assert(false, 'should not run');
+    } catch (err) {
+      assert(err.message === 'app close error');
+    }
+
+    const app2 = mm.app({
+      baseDir: 'app-close-fail',
+      cache: true,
+    });
+    yield app2.ready();
+    assert(app1 !== app2);
+  });
+
 });
 
 function call(method) {
@@ -262,31 +286,6 @@ function call(method) {
     });
   });
 
-  describe(`mm.${method}({ baseDir, cache=true }) when close`, () => {
-    let app1;
-    let app2;
-    after(function* () {
-      yield app1.close();
-      yield app2.close();
-    });
-
-    it('should different', function* () {
-      app1 = mm[method]({
-        baseDir: 'cache',
-        cache: true,
-      });
-      yield app1.ready();
-      // someone set this property directly
-      app1.closed = true;
-
-      app2 = mm[method]({
-        baseDir: 'cache',
-        cache: true,
-      });
-      yield app2.ready();
-      assert(app1 !== app2);
-    });
-  });
 
   describe(`mm.${method}({clean: false})`, () => {
     let app;
