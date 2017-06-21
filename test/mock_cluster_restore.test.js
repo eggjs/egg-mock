@@ -18,7 +18,6 @@ describe('test/mock_cluster_restore.test.js', () => {
     return app.ready();
   });
   after(() => app.close());
-
   afterEach(mm.restore);
 
   it('should mock cluster restore work', function* () {
