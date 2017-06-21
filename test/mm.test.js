@@ -67,17 +67,6 @@ describe('test/mm.test.js', () => {
     });
   });
 
-  describe('mm.app({clean: false})', () => {
-    let app;
-    after(() => app.close());
-
-    it('keep log dir', function* () {
-      app = mm.app({ baseDir: 'apps/app-not-clean', clean: false });
-      yield app.ready();
-      assert(fs.existsSync(path.join(__dirname, 'fixtures/apps/app-not-clean/logs/keep')));
-    });
-  });
-
   describe('mm.consoleLevel()', () => {
     it('shoud mock EGG_LOG', () => {
       mm.consoleLevel('none');

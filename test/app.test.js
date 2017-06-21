@@ -4,6 +4,7 @@ const request = require('supertest');
 const path = require('path');
 const assert = require('assert');
 const awaitEvent = require('await-event');
+const fs = require('mz/fs');
 const mm = require('..');
 const fixtures = path.join(__dirname, 'fixtures');
 
@@ -286,4 +287,16 @@ function call(method) {
       assert(app1 !== app2);
     });
   });
+
+  describe(`mm.${method}({clean: false})`, () => {
+    let app;
+    after(() => app.close());
+
+    it('keep log dir', function* () {
+      app = mm[method]({ baseDir: 'apps/app-not-clean', clean: false });
+      yield app.ready();
+      assert(yield fs.exists(path.join(__dirname, 'fixtures/apps/app-not-clean/logs/keep')));
+    });
+  });
+
 }
