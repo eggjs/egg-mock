@@ -26,6 +26,7 @@ describe('test/cluster.test.js', () => {
     it('should have members', function* () {
       assert(app.callback() === app);
       assert(app.listen() === app);
+      assert(/^http:\/\/127.0.0.1:\d+$/.test(app.url));
       yield app.ready();
       assert(app.process);
     });

@@ -3,6 +3,7 @@
 const request = require('supertest');
 const path = require('path');
 const assert = require('assert');
+const awaitEvent = require('await-event');
 const mm = require('..');
 const fixtures = path.join(__dirname, 'fixtures');
 
@@ -53,14 +54,36 @@ describe('test/app.test.js', () => {
     yield app.close();
   });
 
-  // TODO: implement ready(err)
-  it.skip('should emit error when load Application fail', done => {
+  it('should emit error when load Application fail', done => {
     const baseDir = path.join(fixtures, 'app-fail');
     const app = mm.app({ baseDir, cache: false });
     app.once('error', err => {
       assert(/load error/.test(err.message));
       done();
     });
+  });
+
+  it('should ready error when loading Application fail', function* () {
+    const baseDir = path.join(fixtures, 'app-loading-fail');
+    const app = mm.app({ baseDir, cache: false });
+    try {
+      yield app.ready();
+      assert(false, 'should not run');
+    } catch (err) {
+      assert(err.message === 'loading error');
+    }
+  });
+
+  it('should close when agent load fail', function* () {
+    const baseDir = path.join(fixtures, 'agent-fail');
+    const app = mm.app({ baseDir, cache: false });
+    try {
+      yield awaitEvent(app, 'error');
+      assert(false, 'should not run');
+    } catch (err) {
+      assert(err.message === 'agent load error');
+    }
+    yield app.close();
   });
 });
 
@@ -235,6 +258,32 @@ function call(method) {
 
     it('should equal', () => {
       assert(app1 === app2);
+    });
+  });
+
+  describe(`mm.${method}({ baseDir, cache=true }) when close`, () => {
+    let app1;
+    let app2;
+    after(function* () {
+      yield app1.close();
+      yield app2.close();
+    });
+
+    it('should different', function* () {
+      app1 = mm[method]({
+        baseDir: 'cache',
+        cache: true,
+      });
+      yield app1.ready();
+      // someone set this property directly
+      app1.closed = true;
+
+      app2 = mm[method]({
+        baseDir: 'cache',
+        cache: true,
+      });
+      yield app2.ready();
+      assert(app1 !== app2);
     });
   });
 }
