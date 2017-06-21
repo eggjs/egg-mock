@@ -1,4 +1,10 @@
 
+3.8.0 / 2017-06-21
+==================
+
+  * deps: upgrade dependencies (#51)
+  * test: disable coverage when mm.cluster (#50)
+
 3.7.2 / 2017-06-07
 ==================
 
