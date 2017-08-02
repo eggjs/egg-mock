@@ -382,7 +382,7 @@ const { app, mock, assert } = require('egg-mock/bootstrap');
 describe('test app', () => {
   it('should request success', () => {
     // mock data will be restored each case
-    mock(app, 'method', { foo: 'bar' });
+    mock.data(app, 'method', { foo: 'bar' });
     return app.httpRequest()
       .get('/foo')
       .expect(res => {
