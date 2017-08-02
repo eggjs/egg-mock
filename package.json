@@ -10,6 +10,7 @@
     "app.js",
     "index.js",
     "index.d.ts",
+    "bootstrap.js",
     "app",
     "lib"
   ],
@@ -37,6 +38,7 @@
     "ko-sleep": "^1.0.3",
     "merge-descriptors": "^1.0.1",
     "mm": "^2.1.0",
+    "power-assert": "^1.4.4",
     "rimraf": "^2.6.1",
     "supertest": "^3.0.0",
     "urllib": "^2.22.0"
@@ -57,7 +59,7 @@
     "typescript": "^2.3.2"
   },
   "ci": {
-    "version": "6, 7"
+    "version": "6, 8"
   },
   "homepage": "https://github.com/eggjs/egg-mock",
   "repository": {
