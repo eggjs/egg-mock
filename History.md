@@ -1,4 +1,10 @@
 
+3.9.0 / 2017-08-02
+==================
+
+**features**
+  * [[`9e1642c`](http://github.com/eggjs/egg-mock/commit/9e1642c7fc569d3cc4a73c9ede6511a18cca6fc5)] - feat: add bootstrap (#53) (Yiyu He <<dead-horse@users.noreply.github.com>>)
+
 3.8.0 / 2017-06-21
 ==================
 
