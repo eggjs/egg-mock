@@ -3,6 +3,8 @@
 const request = require('supertest');
 const path = require('path');
 const assert = require('assert');
+const awaitEvent = require('await-event');
+const fs = require('mz/fs');
 const mm = require('..');
 const fixtures = path.join(__dirname, 'fixtures');
 
@@ -53,8 +55,7 @@ describe('test/app.test.js', () => {
     yield app.close();
   });
 
-  // TODO: implement ready(err)
-  it.skip('should emit error when load Application fail', done => {
+  it('should emit error when load Application fail', done => {
     const baseDir = path.join(fixtures, 'app-fail');
     const app = mm.app({ baseDir, cache: false });
     app.once('error', err => {
@@ -62,6 +63,53 @@ describe('test/app.test.js', () => {
       done();
     });
   });
+
+  it('should ready error when loading Application fail', function* () {
+    const baseDir = path.join(fixtures, 'app-loading-fail');
+    const app = mm.app({ baseDir, cache: false });
+    try {
+      yield app.ready();
+      assert(false, 'should not run');
+    } catch (err) {
+      assert(err.message === 'loading error');
+    }
+  });
+
+  it('should close when agent load fail', function* () {
+    const baseDir = path.join(fixtures, 'agent-fail');
+    const app = mm.app({ baseDir, cache: false });
+    try {
+      yield awaitEvent(app, 'error');
+      assert(false, 'should not run');
+    } catch (err) {
+      assert(err.message === 'agent load error');
+    }
+    yield app.close();
+  });
+
+
+  it('should create new instance when close fail', function* () {
+    mm(process.env, 'CLOSE_THROW', 'true');
+    const app1 = mm.app({
+      baseDir: 'app-close-fail',
+      cache: true,
+    });
+    yield app1.ready();
+    try {
+      yield app1.close();
+      assert(false, 'should not run');
+    } catch (err) {
+      assert(err.message === 'app close error');
+    }
+
+    const app2 = mm.app({
+      baseDir: 'app-close-fail',
+      cache: true,
+    });
+    yield app2.ready();
+    assert(app1 !== app2);
+  });
+
 });
 
 function call(method) {
@@ -237,4 +285,17 @@ function call(method) {
       assert(app1 === app2);
     });
   });
+
+
+  describe(`mm.${method}({clean: false})`, () => {
+    let app;
+    after(() => app.close());
+
+    it('keep log dir', function* () {
+      app = mm[method]({ baseDir: 'apps/app-not-clean', clean: false });
+      yield app.ready();
+      assert(yield fs.exists(path.join(__dirname, 'fixtures/apps/app-not-clean/logs/keep')));
+    });
+  });
+
 }

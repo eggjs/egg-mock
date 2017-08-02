@@ -1,7 +1,6 @@
 'use strict';
 
 const path = require('path');
-const fs = require('fs');
 const assert = require('assert');
 const mm = require('..');
 
@@ -64,17 +63,6 @@ describe('test/mm.test.js', () => {
       yield app.ready();
       assert(app.config.fakeplugin.foo === 'bar-default');
       assert(app.config.logger.dir === path.join(baseDir, 'logs/env-app'));
-    });
-  });
-
-  describe('mm.app({clean: false})', () => {
-    let app;
-    after(() => app.close());
-
-    it('keep log dir', function* () {
-      app = mm.app({ baseDir: 'apps/app-not-clean', clean: false });
-      yield app.ready();
-      assert(fs.existsSync(path.join(__dirname, 'fixtures/apps/app-not-clean/logs/keep')));
     });
   });
 

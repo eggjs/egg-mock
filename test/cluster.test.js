@@ -26,6 +26,7 @@ describe('test/cluster.test.js', () => {
     it('should have members', function* () {
       assert(app.callback() === app);
       assert(app.listen() === app);
+      assert(/^http:\/\/127.0.0.1:\d+$/.test(app.url));
       yield app.ready();
       assert(app.process);
     });
@@ -186,7 +187,7 @@ describe('test/cluster.test.js', () => {
         coverage: false,
       });
       app
-      .debug()
+      // .debug()
       .expect('stdout', /\/path\/to\/eggPath/)
       .end(done);
     });
@@ -204,7 +205,7 @@ describe('test/cluster.test.js', () => {
         cache: false,
         coverage: false,
       });
-      app.debug();
+      // app.debug();
       app.expect('stdout', /app_worker#1:/)
       .expect('stdout', /app_worker#2:/)
       .end(done);
@@ -226,7 +227,7 @@ describe('test/cluster.test.js', () => {
           execArgv: [ '--inspect' ],
         },
       });
-      app.debug();
+      // app.debug();
       app.expect('stdout', /app_worker#1:/)
       .expect('stderr', /Debugger listening on/)
       .end(done);
