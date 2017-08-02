@@ -372,6 +372,25 @@ return app.httpRequest()
   .expect('mock egg');
 ```
 
+## Bootstrap
+
+We also provide a bootstrap file to reduce duplicated code:
+
+```js
+const { app, mm, assert } = require('egg-mock/bootstrap');
+
+describe('test app', () => {
+  it('should request success', () => {
+    mm(app, 'method', { foo: 'bar' });
+    return app.httpRequest()
+      .get('/foo')
+      .expect(res => {
+        assert(!res.headers.foo);
+      });
+  });
+});
+```
+
 ## Questions & Suggestions
 
 Please open an issue [here](https://github.com/eggjs/egg/issues).
