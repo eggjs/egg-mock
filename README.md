@@ -374,19 +374,21 @@ return app.httpRequest()
 
 ## Bootstrap
 
-We also provide a bootstrap file to reduce duplicated code:
+We also provide a bootstrap file for applications' unit test to reduce duplicated code:
 
 ```js
-const { app, mm, assert } = require('egg-mock/bootstrap');
+const { app, mock, assert } = require('egg-mock/bootstrap');
 
 describe('test app', () => {
   it('should request success', () => {
-    mm(app, 'method', { foo: 'bar' });
+    // mock data will be restored each case
+    mock(app, 'method', { foo: 'bar' });
     return app.httpRequest()
       .get('/foo')
       .expect(res => {
         assert(!res.headers.foo);
-      });
+      })
+      .expect(/bar/);
   });
 });
 ```
