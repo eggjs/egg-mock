@@ -1,4 +1,10 @@
 
+3.9.1 / 2017-08-14
+==================
+
+**fixes**
+  * [[`d6cafaa`](http://github.com/eggjs/egg-mock/commit/d6cafaa531d9bbcc0fc987e7d6fdefd6a515e785)] - fix: fix agent type after ready (#54) (zōng yǔ <<gxcsoccer@users.noreply.github.com>>)
+
 3.9.0 / 2017-08-02
 ==================
 
