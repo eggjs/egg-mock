@@ -32,12 +32,12 @@ describe('test/mock_httpclient.test.js', () => {
     });
 
     request(server)
-    .get('/urllib')
-    .expect({
-      get: 'mock response',
-      post: 'mock response',
-    })
-    .expect(200, done);
+      .get('/urllib')
+      .expect({
+        get: 'mock response',
+        post: 'mock response',
+      })
+      .expect(200, done);
 
     app.httpclient.once('response', function(result) {
       assert('url' in result.req);
@@ -85,12 +85,12 @@ describe('test/mock_httpclient.test.js', () => {
     });
 
     request(server)
-    .get('/urllib')
-    .expect({
-      get: 'mock response',
-      post: 'mock response',
-    })
-    .expect(200, done);
+      .get('/urllib')
+      .expect({
+        get: 'mock response',
+        post: 'mock response',
+      })
+      .expect(200, done);
 
     app.httpclient.once('response', function(result) {
       assert.deepEqual(result.res, {
@@ -114,12 +114,12 @@ describe('test/mock_httpclient.test.js', () => {
     });
 
     request(server)
-    .get('/urllib')
-    .expect({
-      get: 'mock response',
-      post: 'mock response',
-    })
-    .expect(200, done);
+      .get('/urllib')
+      .expect({
+        get: 'mock response',
+        post: 'mock response',
+      })
+      .expect(200, done);
 
     app.httpclient.once('response', function(result) {
       assert.deepEqual(result.res, {
@@ -142,12 +142,12 @@ describe('test/mock_httpclient.test.js', () => {
     });
 
     request(server)
-    .get('/urllib')
-    .expect({
-      get: 'url get',
-      post: 'mock url post',
-    })
-    .expect(200, done);
+      .get('/urllib')
+      .expect({
+        get: 'url get',
+        post: 'mock url post',
+      })
+      .expect(200, done);
   });
 
   it('should mock url get and post', done => {
@@ -160,12 +160,12 @@ describe('test/mock_httpclient.test.js', () => {
     });
 
     request(server)
-    .get('/urllib')
-    .expect({
-      get: 'mock url get',
-      post: 'mock url post',
-    })
-    .expect(200, done);
+      .get('/urllib')
+      .expect({
+        get: 'mock url get',
+        post: 'mock url post',
+      })
+      .expect(200, done);
   });
 
   it('should support request', done => {
@@ -178,12 +178,12 @@ describe('test/mock_httpclient.test.js', () => {
     });
 
     request(server)
-    .get('/urllib?method=request')
-    .expect({
-      get: 'mock url get',
-      post: 'mock url post',
-    })
-    .expect(200, done);
+      .get('/urllib?method=request')
+      .expect({
+        get: 'mock url get',
+        post: 'mock url post',
+      })
+      .expect(200, done);
   });
 
   it('should support curl', done => {
@@ -196,12 +196,12 @@ describe('test/mock_httpclient.test.js', () => {
     });
 
     request(server)
-    .get('/urllib?method=curl')
-    .expect({
-      get: 'mock url get',
-      post: 'mock url post',
-    })
-    .expect(200, done);
+      .get('/urllib?method=curl')
+      .expect({
+        get: 'mock url get',
+        post: 'mock url post',
+      })
+      .expect(200, done);
   });
 
   it('should support json', done => {
@@ -214,12 +214,12 @@ describe('test/mock_httpclient.test.js', () => {
     });
 
     request(server)
-    .get('/urllib?dataType=json')
-    .expect({
-      get: { method: 'get' },
-      post: { method: 'post' },
-    })
-    .expect(200, done);
+      .get('/urllib?dataType=json')
+      .expect({
+        get: { method: 'get' },
+        post: { method: 'post' },
+      })
+      .expect(200, done);
   });
 
   it('should support text', done => {
@@ -232,12 +232,12 @@ describe('test/mock_httpclient.test.js', () => {
     });
 
     request(server)
-    .get('/urllib?dataType=text')
-    .expect({
-      get: 'mock url get',
-      post: 'mock url post',
-    })
-    .expect(200, done);
+      .get('/urllib?dataType=text')
+      .expect({
+        get: 'mock url get',
+        post: 'mock url post',
+      })
+      .expect(200, done);
   });
 
   it('should exits req headers', done => {
@@ -246,9 +246,9 @@ describe('test/mock_httpclient.test.js', () => {
       data: 'mock url test',
     });
     request(server)
-    .get('/mock_urllib')
-    .expect({})
-    .expect(200, done);
+      .get('/mock_urllib')
+      .expect({})
+      .expect(200, done);
   });
 
   it('should deprecate mockUrllib', done => {
@@ -257,8 +257,8 @@ describe('test/mock_httpclient.test.js', () => {
       data: 'mock url test',
     });
     request(server)
-    .get('/mock_urllib')
-    .expect({})
-    .expect(200, done);
+      .get('/mock_urllib')
+      .expect({})
+      .expect(200, done);
   });
 });

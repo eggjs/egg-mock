@@ -92,12 +92,12 @@ describe('test/cluster.test.js', () => {
 
     it('should work', done => {
       request(app.callback())
-      .get('/')
-      .expect({
-        foo: 'bar',
-        foobar: 'bar',
-      })
-      .expect(200, done);
+        .get('/')
+        .expect({
+          foo: 'bar',
+          foobar: 'bar',
+        })
+        .expect(200, done);
     });
   });
 
@@ -119,12 +119,12 @@ describe('test/cluster.test.js', () => {
 
     it('should work', done => {
       request(app.callback())
-      .get('/')
-      .expect({
-        foo: 'bar',
-        foobar: 'bar',
-      })
-      .expect(200, done);
+        .get('/')
+        .expect({
+          foo: 'bar',
+          foobar: 'bar',
+        })
+        .expect(200, done);
     });
   });
 
@@ -186,9 +186,9 @@ describe('test/cluster.test.js', () => {
         coverage: false,
       });
       app
-      .debug()
-      .expect('stdout', /\/path\/to\/eggPath/)
-      .end(done);
+        .debug()
+        .expect('stdout', /\/path\/to\/eggPath/)
+        .end(done);
     });
   });
 
@@ -206,8 +206,8 @@ describe('test/cluster.test.js', () => {
       });
       app.debug();
       app.expect('stdout', /app_worker#1:/)
-      .expect('stdout', /app_worker#2:/)
-      .end(done);
+        .expect('stdout', /app_worker#2:/)
+        .end(done);
     });
   });
 
@@ -228,8 +228,8 @@ describe('test/cluster.test.js', () => {
       });
       app.debug();
       app.expect('stdout', /app_worker#1:/)
-      .expect('stderr', /Debugger listening on/)
-      .end(done);
+        .expect('stderr', /Debugger listening on/)
+        .end(done);
     });
   });
 
