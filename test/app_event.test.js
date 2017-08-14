@@ -29,9 +29,9 @@ describe('test/app_event.test.js', () => {
       app.on('eventByRequest', done);
 
       request(app.callback())
-      .get('/event')
-      .expect(200)
-      .expect('done', done);
+        .get('/event')
+        .expect(200)
+        .expect('done', done);
     });
   });
 

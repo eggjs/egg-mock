@@ -20,8 +20,8 @@ describe('test/mock_csrf.test.js', () => {
   it('should work', done => {
     app.mockCsrf();
     request(app.callback())
-    .post('/')
-    .expect(200)
-    .expect('done', done);
+      .post('/')
+      .expect(200)
+      .expect('done', done);
   });
 });

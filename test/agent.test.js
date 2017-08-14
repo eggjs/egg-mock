@@ -45,4 +45,10 @@ describe('test/agent.test.js', () => {
       });
     });
   });
+
+  it('should agent work ok after ready', function* () {
+    app = mm.app({ baseDir });
+    yield app.ready();
+    assert(app._agent.type === 'agent');
+  });
 });

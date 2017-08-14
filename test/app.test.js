@@ -80,9 +80,9 @@ function call(method) {
 
     it('should work', done => {
       request(app.callback())
-      .get('/')
-      .expect('foo')
-      .expect(200, done);
+        .get('/')
+        .expect('foo')
+        .expect(200, done);
     });
   });
 
@@ -102,11 +102,11 @@ function call(method) {
 
     it('should work', done => {
       request(app.callback())
-      .get('/')
-      .expect({
-        fooPlugin: true,
-      })
-      .expect(200, done);
+        .get('/')
+        .expect({
+          fooPlugin: true,
+        })
+        .expect(200, done);
     });
   });
 
@@ -126,11 +126,11 @@ function call(method) {
 
     it('should work', done => {
       request(app.callback())
-      .get('/')
-      .expect({
-        fooPlugin: true,
-      })
-      .expect(200, done);
+        .get('/')
+        .expect({
+          fooPlugin: true,
+        })
+        .expect(200, done);
     });
   });
 
@@ -153,11 +153,11 @@ function call(method) {
 
     it('should work', done => {
       request(app.callback())
-      .get('/')
-      .expect({
-        fooPlugin: true,
-      })
-      .expect(200, done);
+        .get('/')
+        .expect({
+          fooPlugin: true,
+        })
+        .expect(200, done);
     });
   });
 
@@ -175,12 +175,12 @@ function call(method) {
 
     it('should work', done => {
       request(app.callback())
-      .get('/')
-      .expect({
-        foo: 'bar',
-        foobar: 'bar',
-      })
-      .expect(200, done);
+        .get('/')
+        .expect({
+          foo: 'bar',
+          foobar: 'bar',
+        })
+        .expect(200, done);
     });
   });
 
@@ -202,12 +202,12 @@ function call(method) {
 
     it('should work', done => {
       request(app.callback())
-      .get('/')
-      .expect({
-        foo: 'bar',
-        foobar: 'bar',
-      })
-      .expect(200, done);
+        .get('/')
+        .expect({
+          foo: 'bar',
+          foobar: 'bar',
+        })
+        .expect(200, done);
     });
   });
 

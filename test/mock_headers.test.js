@@ -24,11 +24,11 @@ describe('test/mock_headers.test.js', () => {
     app.mockContext();
 
     request(app.callback())
-    .get('/header')
-    .expect(function(res) {
-      assert(res.body.header === '');
-    })
-    .expect(200, done);
+      .get('/header')
+      .expect(function(res) {
+        assert(res.body.header === '');
+      })
+      .expect(200, done);
   });
 
   it('should mock headers', done => {
@@ -37,11 +37,11 @@ describe('test/mock_headers.test.js', () => {
       customheader: 'customheader',
     });
     request(app.callback())
-    .get('/header')
-    .expect(function(res) {
-      assert(res.body.header === 'customheader');
-    })
-    .expect(200, done);
+      .get('/header')
+      .expect(function(res) {
+        assert(res.body.header === 'customheader');
+      })
+      .expect(200, done);
   });
 
   it('should mock headers that is uppercase', done => {
@@ -50,10 +50,10 @@ describe('test/mock_headers.test.js', () => {
       Customheader: 'customheader',
     });
     request(app.callback())
-    .get('/header')
-    .expect(function(res) {
-      assert(res.body.header === 'customheader');
-    })
-    .expect(200, done);
+      .get('/header')
+      .expect(function(res) {
+        assert(res.body.header === 'customheader');
+      })
+      .expect(200, done);
   });
 });

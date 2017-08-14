@@ -22,11 +22,11 @@ describe('test/mock_cookies.test.js', () => {
     assert(!ctx.cookies.get('foo'));
 
     request(app.callback())
-    .get('/')
-    .expect(function(res) {
-      assert.deepEqual(res.body, {});
-    })
-    .expect(200, done);
+      .get('/')
+      .expect(function(res) {
+        assert.deepEqual(res.body, {});
+      })
+      .expect(200, done);
   });
 
   it('should mock cookies', done => {
@@ -37,25 +37,25 @@ describe('test/mock_cookies.test.js', () => {
     assert(ctx.cookies.get('foo') === 'bar cookie');
 
     request(app.callback())
-    .get('/')
-    .expect({
-      cookieValue: 'bar cookie',
-      cookiesValue: 'bar cookie',
-    })
-    .expect(200, done);
+      .get('/')
+      .expect({
+        cookieValue: 'bar cookie',
+        cookiesValue: 'bar cookie',
+      })
+      .expect(200, done);
   });
 
   it('should pass cookie opt', done => {
     app.mockCookies({});
 
     request(app.callback())
-    .get('/')
-    .set('cookie', 'foo=bar cookie')
-    .expect({
-      cookieValue: 'bar cookie',
-      cookiesValue: 'bar cookie',
-    })
-    .expect(200, done);
+      .get('/')
+      .set('cookie', 'foo=bar cookie')
+      .expect({
+        cookieValue: 'bar cookie',
+        cookiesValue: 'bar cookie',
+      })
+      .expect(200, done);
   });
 
 });
