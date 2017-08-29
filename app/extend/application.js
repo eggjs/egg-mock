@@ -106,10 +106,14 @@ module.exports = {
 
     if (is.function(data)) {
       const fn = data;
-      if (is.generatorFunction(origin) && !is.generatorFunction(fn)) {
-        // 确保 mockProxy(name, proxyName, normalFunction) 也能够兼容
-        mm(obj, name, function* () {
-          return fn.apply(this, arguments);
+      // if original is generator function or async function
+      // but the mock function is normal function, need to change it return a promise
+      if ((is.generatorFunction(origin) || is.asyncFunction(origin)) &&
+      (!is.generatorFunction(fn) && !is.asyncFunction(fn))) {
+        mm(obj, name, function(...args) {
+          return new Promise(resolve => {
+            resolve(fn.apply(this, args));
+          });
         });
         return;
       }
@@ -118,12 +122,12 @@ module.exports = {
       return;
     }
 
-    if (is.generatorFunction(origin)) {
-      mm(obj, name, function* () {
-        if (data instanceof Error) {
-          throw data;
-        }
-        return data;
+    if (is.generatorFunction(origin) || is.asyncFunction(origin)) {
+      mm(obj, name, () => {
+        return new Promise((resolve, reject) => {
+          if (data instanceof Error) return reject(data);
+          resolve(data);
+        });
       });
       return;
     }

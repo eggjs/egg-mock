@@ -6,17 +6,13 @@ const assert = require('assert');
 const mm = require('..');
 const fixtures = path.join(__dirname, 'fixtures');
 
-if (parseInt(process.version.slice(1)) >= 8) {
-  require('./mock_service.async.js');
-}
-
 describe('test/mock_service.test.js', () => {
   let app;
-  before(function* () {
+  before(async () => {
     app = mm.app({
-      baseDir: path.join(fixtures, 'demo'),
+      baseDir: path.join(fixtures, 'demo-async'),
     });
-    yield app.ready();
+    await app.ready();
   });
   after(() => app.close());
   afterEach(mm.restore);
@@ -60,13 +56,6 @@ describe('test/mock_service.test.js', () => {
       }, done);
   });
 
-  it('should support old service format', done => {
-    app.mockService('old', 'test', 'test');
-    request(app.callback())
-      .get('/service/old')
-      .expect('test', done);
-  });
-
   it('should throw', () => {
     assert.throws(() => {
       app.mockService('foo', 'not_exist', 'foo');
@@ -74,7 +63,7 @@ describe('test/mock_service.test.js', () => {
   });
 
   it('should return from service when mock with generator', done => {
-    app.mockService('foo', 'get', function* () {
+    app.mockService('foo', 'get', async () => {
       return 'foo';
     });
     request(app.callback())
@@ -102,7 +91,7 @@ describe('test/mock_service.test.js', () => {
   });
 
   it('should return from service when mock with error', done => {
-    app.mockService('foo', 'get', function* () {
+    app.mockService('foo', 'get', async () => {
       throw new Error('mock service foo.get error');
     });
     request(app.callback())
