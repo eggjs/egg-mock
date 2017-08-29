@@ -1,4 +1,10 @@
 
+3.10.0 / 2017-08-30
+==================
+
+**features**
+  * [[`f3654df`](http://github.com/eggjs/egg-mock/commit/f3654df99d4bee2ea0ee1ef580af7af66f21255d)] - feat: base promise to support async function (#55) (Yiyu He <<dead_horse@qq.com>>)
+
 3.9.1 / 2017-08-14
 ==================
 
