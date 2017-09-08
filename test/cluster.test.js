@@ -223,12 +223,12 @@ describe('test/cluster.test.js', () => {
         cache: false,
         coverage: false,
         opt: {
-          execArgv: [ '--inspect' ],
+          execArgv: [ '--trace-sync-io' ],
         },
       });
       app.debug();
       app.expect('stdout', /app_worker#1:/)
-        .expect('stderr', /Debugger listening on/)
+        .expect('stderr', /Detected use of sync API/)
         .end(done);
     });
   });
