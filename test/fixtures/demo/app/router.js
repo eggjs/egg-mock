@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(app) {
-  app.get('/', app.controller.home.get);
+  app.get('home', '/', app.controller.home.get);
   app.get('/hello', app.controller.home.hello);
   app.get('/service', app.controller.home.service);
   app.get('/service/old', app.controller.home.serviceOld);
@@ -10,7 +10,7 @@ module.exports = function(app) {
   app.get('/mock_url', app.controller.home.mockUrlGet);
   app.post('/mock_url', app.controller.home.mockUrlPost);
   app.get('/mock_urllib', app.controller.home.mockUrllibHeaders);
-  app.get('/session', app.controller.session);
+  app.get('session', '/session', app.controller.session);
 
   app.post('/', app.controller.home.post);
 };

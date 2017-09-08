@@ -4,9 +4,10 @@ const request = require('supertest');
 const path = require('path');
 const assert = require('assert');
 const mm = require('..');
-const fixtures = path.join(__dirname, 'fixtures');
 
 describe('test/app.test.js', () => {
+  const fixtures = path.join(__dirname, 'fixtures');
+
   afterEach(mm.restore);
 
   // test mm.app

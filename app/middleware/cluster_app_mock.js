@@ -7,7 +7,7 @@ module.exports = () => {
     if (this.path !== '/__egg_mock_call_function') return yield next;
 
     debug('%s %s, body: %j', this.method, this.url, this.request.body);
-    const { method, args } = this.request.body;
+    const { method, property, args, needResult } = this.request.body;
     if (!method) {
       this.status = 422;
       this.body = {
@@ -24,13 +24,24 @@ module.exports = () => {
       };
       return;
     }
-    if (typeof this.app[method] !== 'function') {
-      this.status = 422;
-      this.body = {
-        success: false,
-        error: `method "${method}" not exists on app`,
-      };
-      return;
+    if (property) {
+      if (!this.app[property] || typeof this.app[property][method] !== 'function') {
+        this.status = 422;
+        this.body = {
+          success: false,
+          error: `method "${method}" not exists on app.${property}`,
+        };
+        return;
+      }
+    } else {
+      if (typeof this.app[method] !== 'function') {
+        this.status = 422;
+        this.body = {
+          success: false,
+          error: `method "${method}" not exists on app`,
+        };
+        return;
+      }
     }
 
     debug('call %s with %j', method, args);
@@ -56,7 +67,15 @@ module.exports = () => {
       }
     }
 
-    this.app[method](...args);
-    this.body = { success: true };
+    let result;
+    if (property) {
+      result = this.app[property][method](...args);
+    } else {
+      result = this.app[method](...args);
+    }
+    if (!needResult) {
+      result = undefined;
+    }
+    this.body = { success: true, result };
   };
 };
