@@ -5,9 +5,9 @@ const path = require('path');
 const assert = require('assert');
 const mm = require('..');
 
-describe('test/app.test.js', () => {
-  const fixtures = path.join(__dirname, 'fixtures');
+const fixtures = path.join(__dirname, 'fixtures');
 
+describe('test/app.test.js', () => {
   afterEach(mm.restore);
 
   // test mm.app
