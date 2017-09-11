@@ -5,7 +5,7 @@ const http = require('http');
 const merge = require('merge-descriptors');
 const is = require('is-type-of');
 const assert = require('assert');
-const supertestRequest = require('supertest');
+const supertestRequest = require('../../lib/supertest');
 
 module.exports = {
   /**
@@ -378,7 +378,7 @@ module.exports = {
    * @see https://github.com/visionmedia/supertest
    */
   httpRequest() {
-    return supertestRequest(this.callback());
+    return supertestRequest(this);
   },
 };
 

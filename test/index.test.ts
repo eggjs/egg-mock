@@ -36,7 +36,7 @@ app.ready().then(() => {
 
   app.mockHttpclient('https://eggjs.org', [ 'get' , 'head' ], { data: 'foo' });
 
-  app.mockHttpclient('https://eggjs.org', '*', { data: 'bar' }); 
+  app.mockHttpclient('https://eggjs.org', '*', { data: 'bar' });
 
   app.httpRequest().post('/user').set('a', 'b').send().expect(200);
   console.log('   ts run ok');
