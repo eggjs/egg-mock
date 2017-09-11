@@ -1,4 +1,10 @@
 
+3.11.0 / 2017-09-11
+==================
+
+**features**
+  * [[`f1a08a6`](http://github.com/eggjs/egg-mock/commit/f1a08a654a08313c0848828ee9051f8bf174fc6a)] - feat: support httpRequest().get(routerName) (#56) (fengmk2 <<fengmk2@gmail.com>>)
+
 3.10.0 / 2017-08-30
 ==================
 
