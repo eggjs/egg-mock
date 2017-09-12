@@ -293,13 +293,18 @@ module.exports = {
     function matchMethod(method) {
       return mockMethod.some(m => m === '*' || m === method);
     }
+    function matchUrl(url) {
+      if (url === mockUrl) return true;
+      if (mockUrl instanceof RegExp && url.match(mockUrl)) return true;
+      return false;
+    }
 
     // support generator rather than callback and promise
     function _request(url, opt) {
       opt = opt || {};
       opt.method = (opt.method || 'GET').toUpperCase();
       opt.headers = opt.headers || {};
-      if (url === mockUrl && matchMethod(opt.method)) {
+      if (matchUrl(url) && matchMethod(opt.method)) {
         const response = {
           status: mockResult.status,
           statusCode: mockResult.status,

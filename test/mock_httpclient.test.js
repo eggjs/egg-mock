@@ -261,4 +261,19 @@ describe('test/mock_httpclient.test.js', () => {
       .expect({})
       .expect(200, done);
   });
+
+  it('should mock url and get reponse event on urllib', done => {
+    app.mockCsrf();
+    app.mockHttpclient(/\/mock_url$/, {
+      data: new Buffer('mock response'),
+    });
+
+    request(server)
+      .get('/urllib')
+      .expect({
+        get: 'mock response',
+        post: 'mock response',
+      })
+      .expect(200, done);
+  });
 });
