@@ -378,7 +378,8 @@ You can also use Regular Expression for matching url.
 app.mockHttpclient(/\/users\/[a-z]$/i, {
   data: {
     name: 'egg',
-  }, });
+  },
+});
 ```
 
 ## Bootstrap
