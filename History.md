@@ -1,4 +1,10 @@
 
+3.12.0 / 2017-09-12
+==================
+
+**others**
+  * [[`25a0e28`](http://github.com/eggjs/egg-mock/commit/25a0e28e85209ec08a593b38cd434ed389ef8887)] - feat(mockHttpclient): use Regular Expression for matching url (#57) (Haoliang Gao <<sakura9515@gmail.com>>)
+
 3.11.0 / 2017-09-11
 ==================
 
