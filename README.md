@@ -372,6 +372,15 @@ return app.httpRequest()
   .expect('mock egg');
 ```
 
+You can also use Regular Expression for matching url.
+
+```js
+app.mockHttpclient(/\/users\/[a-z]$/i, {
+  data: {
+    name: 'egg',
+  }, });
+```
+
 ## Bootstrap
 
 We also provide a bootstrap file for applications' unit test to reduce duplicated code:
