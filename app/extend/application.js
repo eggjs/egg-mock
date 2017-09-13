@@ -5,6 +5,7 @@ const http = require('http');
 const merge = require('merge-descriptors');
 const is = require('is-type-of');
 const assert = require('assert');
+const extend = require('extend2');
 const supertestRequest = require('../../lib/supertest');
 
 module.exports = {
@@ -305,14 +306,15 @@ module.exports = {
       opt.method = (opt.method || 'GET').toUpperCase();
       opt.headers = opt.headers || {};
       if (matchUrl(url) && matchMethod(opt.method)) {
+        const result = extend(true, {}, mockResult);
         const response = {
-          status: mockResult.status,
-          statusCode: mockResult.status,
-          headers: mockResult.headers,
-          size: mockResult.responseSize,
+          status: result.status,
+          statusCode: result.status,
+          headers: result.headers,
+          size: result.responseSize,
           aborted: false,
           rt: 1,
-          keepAliveSocket: mockResult.keepAliveSocket || false,
+          keepAliveSocket: result.keepAliveSocket || false,
         };
 
         httpclient.emit('response', {
@@ -321,21 +323,21 @@ module.exports = {
           req: {
             url,
             options: opt,
-            size: mockResult.requestSize,
+            size: result.requestSize,
           },
           res: response,
         });
         if (opt.dataType === 'json') {
           try {
-            mockResult.data = JSON.parse(mockResult.data);
+            result.data = JSON.parse(result.data);
           } catch (err) {
             err.name = 'JSONResponseFormatError';
             throw err;
           }
         } else if (opt.dataType === 'text') {
-          mockResult.data = mockResult.data.toString();
+          result.data = result.data.toString();
         }
-        return Promise.resolve(mockResult);
+        return Promise.resolve(result);
       }
       return rawRequest.call(httpclient, url, opt);
     }

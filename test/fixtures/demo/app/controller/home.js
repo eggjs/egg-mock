@@ -71,3 +71,11 @@ exports.mockUrllibHeaders = function* () {
   const res = yield this.app.httpclient[method](url + '/mock_url');
   this.body = res.headers;
 };
+
+exports.dataType = function* () {
+  const url = 'http://' + this.host;
+  const res = yield this.app.httpclient.request(url + '/mock_url', {
+    dataType: 'json',
+  });
+  this.body = res.data;
+};

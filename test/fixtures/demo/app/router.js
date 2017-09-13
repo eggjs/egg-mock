@@ -10,6 +10,7 @@ module.exports = function(app) {
   app.get('/mock_url', app.controller.home.mockUrlGet);
   app.post('/mock_url', app.controller.home.mockUrlPost);
   app.get('/mock_urllib', app.controller.home.mockUrllibHeaders);
+  app.get('/data_type', app.controller.home.dataType);
   app.get('session', '/session', app.controller.session);
 
   app.post('/', app.controller.home.post);
