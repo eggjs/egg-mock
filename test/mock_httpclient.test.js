@@ -276,4 +276,25 @@ describe('test/mock_httpclient.test.js', () => {
       })
       .expect(200, done);
   });
+
+  it('should use copy of mock data', function* () {
+    app.mockCsrf();
+    app.mockHttpclient(/\/mock_url$/, {
+      data: { a: 1 },
+    });
+
+    yield request(server)
+      .get('/data_type')
+      .expect({
+        a: 1,
+      })
+      .expect(200);
+
+    yield request(server)
+      .get('/data_type')
+      .expect({
+        a: 1,
+      })
+      .expect(200);
+  });
 });
