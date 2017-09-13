@@ -1,4 +1,10 @@
 
+3.12.1 / 2017-09-13
+==================
+
+**others**
+  * [[`e7f518a`](http://github.com/eggjs/egg-mock/commit/e7f518a92e1686973bea557eb0a21f1d293ab0b4)] - fix(mockHttpclient): should use the copy of mockResult (#58) (Haoliang Gao <<sakura9515@gmail.com>>)
+
 3.12.0 / 2017-09-12
 ==================
 
