@@ -1,4 +1,15 @@
 
+3.12.2 / 2017-09-22
+==================
+
+**fixes**
+  * [[`5935564`](http://github.com/eggjs/egg-mock/commit/5935564d1e649f8702c0f3f79e67efde10717542)] - fix: missing methods package (dainli <<dainli@outlook.com>>)
+
+**others**
+  * [[`e7f518a`](http://github.com/eggjs/egg-mock/commit/e7f518a92e1686973bea557eb0a21f1d293ab0b4)] - fix(mockHttpclient): should use the copy of mockResult (#58) (Haoliang Gao <<sakura9515@gmail.com>>)
+ * [new tag]         3.12.1     -> 3.12.1
+
+
 3.12.1 / 2017-09-13
 ==================
 
