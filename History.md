@@ -1,4 +1,10 @@
 
+3.13.0 / 2017-10-10
+==================
+
+**features**
+  * [[`30ca0c9`](http://github.com/eggjs/egg-mock/commit/30ca0c980f3ee8b1f60f5213f0768fe5eeaaf49a)] - feat: port can be customized (#60) (Haoliang Gao <<sakura9515@gmail.com>>)
+
 3.12.2 / 2017-09-22
 ==================
 
