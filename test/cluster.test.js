@@ -19,6 +19,7 @@ describe('test/cluster.test.js', () => {
         cache: false,
         coverage: false,
       });
+      // app.debug();
       return app.ready();
     });
     after(() => app.close());
@@ -34,6 +35,10 @@ describe('test/cluster.test.js', () => {
       assert.throws(() => {
         app.mockNotExists();
       }, /method "mockNotExists" not exists on app/);
+    });
+
+    it('should listen on port', () => {
+      app.expect('stdout', /egg started on http:\/\/127.0.0.1:17\d{3}/);
     });
   });
 
@@ -266,6 +271,24 @@ describe('test/cluster.test.js', () => {
         .expect('stderr', /prerequire app\/extend\/application.js/)
         .expect('code', 0)
         .end(done);
+    });
+  });
+
+  describe('custom port', () => {
+    let app;
+    after(() => app.close());
+
+    it('should use it', function* () {
+      app = mm.cluster({
+        baseDir: path.join(fixtures, 'demo'),
+        cache: false,
+        coverage: false,
+        port: 5566,
+      });
+      // app.debug();
+      yield app.ready();
+
+      app.expect('stdout', /egg started on http:\/\/127.0.0.1:5566/);
     });
   });
 });
