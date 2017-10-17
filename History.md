@@ -1,4 +1,10 @@
 
+3.13.1 / 2017-10-17
+==================
+
+**fixes**
+  * [[`9d071b2`](http://github.com/eggjs/egg-mock/commit/9d071b28c5ef341ee63ccb06f00f724922c698b2)] - fix: support mock the same property multiple times (#61) (Yiyu He <<dead_horse@qq.com>>)
+
 3.13.0 / 2017-10-10
 ==================
 
