@@ -8,6 +8,8 @@ const assert = require('assert');
 const extend = require('extend2');
 const supertestRequest = require('../../lib/supertest');
 
+const ORIGIN_TYPES = Symbol('egg-mock:originTypes');
+
 module.exports = {
   /**
    * mock Context
@@ -105,11 +107,18 @@ module.exports = {
     const origin = obj[name];
     assert(is.function(origin), `property ${name} in original object must be function`);
 
+    // keep origin properties' type to support mock multitimes
+    if (!obj[ORIGIN_TYPES]) obj[ORIGIN_TYPES] = {};
+    let type = obj[ORIGIN_TYPES][name];
+    if (!type) {
+      type = obj[ORIGIN_TYPES][name] = is.generatorFunction(origin) || is.asyncFunction(origin) ? 'async' : 'sync';
+    }
+
     if (is.function(data)) {
       const fn = data;
       // if original is generator function or async function
       // but the mock function is normal function, need to change it return a promise
-      if ((is.generatorFunction(origin) || is.asyncFunction(origin)) &&
+      if (type === 'async' &&
       (!is.generatorFunction(fn) && !is.asyncFunction(fn))) {
         mm(obj, name, function(...args) {
           return new Promise(resolve => {
@@ -123,7 +132,7 @@ module.exports = {
       return;
     }
 
-    if (is.generatorFunction(origin) || is.asyncFunction(origin)) {
+    if (type === 'async') {
       mm(obj, name, () => {
         return new Promise((resolve, reject) => {
           if (data instanceof Error) return reject(data);
@@ -133,15 +142,12 @@ module.exports = {
       return;
     }
 
-    if (is.function(origin)) {
-      mm(obj, name, () => {
-        if (data instanceof Error) {
-          throw data;
-        }
-        return data;
-      });
-      return;
-    }
+    mm(obj, name, () => {
+      if (data instanceof Error) {
+        throw data;
+      }
+      return data;
+    });
   },
 
   /**
