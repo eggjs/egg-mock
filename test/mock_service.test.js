@@ -46,6 +46,23 @@ describe('test/mock_service.test.js', () => {
       }, done);
   });
 
+  it('mock repeat succeess', done => {
+    app.mockService('foo', 'get', 'foo');
+    app.mockService('foo', 'get', 'foo');
+    app.mockService('foo', 'getSync', 'foo');
+    app.mockService('foo', 'getSync', 'foo');
+    app.mockService('bar.foo', 'get', 'foo');
+    app.mockService('bar.foo', 'get', 'foo');
+    request(app.callback())
+      .get('/service')
+      .expect({
+        foo1: 'foo',
+        foo2: 'foo',
+        foo3: 'foo',
+        thirdService: 'third',
+      }, done);
+  });
+
   it('should return from service when mock with normal function', done => {
     app.mockService('foo', 'get', () => 'foo');
     app.mockService('foo', 'getSync', () => 'foo');
