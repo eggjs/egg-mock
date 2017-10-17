@@ -63,6 +63,28 @@ describe('test/mock_service.test.js', () => {
       }, done);
   });
 
+  it('mock error succeess', function*() {
+    app.mockService('foo', 'get', new Error('async error'));
+    try {
+      const ctx = app.mockContext();
+      yield ctx.service.foo.get();
+      throw new Error('should not execute');
+    } catch (err) {
+      assert(err.message === 'async error');
+    }
+  });
+
+  it('mock sync error succeess', function*() {
+    app.mockService('foo', 'getSync', new Error('sync error'));
+    try {
+      const ctx = app.mockContext();
+      yield ctx.service.foo.getSync();
+      throw new Error('should not execute');
+    } catch (err) {
+      assert(err.message === 'sync error');
+    }
+  });
+
   it('should return from service when mock with normal function', done => {
     app.mockService('foo', 'get', () => 'foo');
     app.mockService('foo', 'getSync', () => 'foo');
