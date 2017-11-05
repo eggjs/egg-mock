@@ -1,4 +1,4 @@
-import * as mm from '../index';
+import mm from '../index';
 import * as path from 'path';
 const fixtures = path.join(__dirname, 'fixtures');
 
