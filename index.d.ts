@@ -120,5 +120,5 @@ export interface EggMock {
    */
   restore(): void;
 }
-declare const mm:EggMock;
+declare const mm: EggMock;
 export default mm;

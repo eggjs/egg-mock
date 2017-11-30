@@ -55,3 +55,13 @@ mm.home('a')
 // mm.cluster();
 
 mm.env('test');
+
+// test for bootstrap
+(global as any).before = () => {};
+(global as any).afterEach = () => {};
+
+import { mock, app as bootApp, assert } from '../bootstrap';
+bootApp.ready;
+mock.restore;
+assert(true);
+mock.app;
