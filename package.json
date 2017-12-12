@@ -26,6 +26,7 @@
     "contributors": "ali-contributors"
   },
   "dependencies": {
+    "@types/power-assert": "^1.4.29",
     "await-event": "^2.1.0",
     "co": "^4.6.0",
     "coffee": "^4.1.0",

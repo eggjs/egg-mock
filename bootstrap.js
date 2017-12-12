@@ -1,7 +1,7 @@
 'use strict';
 
 const assert = require('power-assert');
-const mock = require('./index');
+const mock = require('./index').default;
 
 const options = {};
 if (process.env.EGG_BASE_DIR) options.baseDir = process.env.EGG_BASE_DIR;

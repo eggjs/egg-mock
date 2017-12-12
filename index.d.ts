@@ -1,61 +1,58 @@
 import { Application, Context } from 'egg';
 
-declare module 'egg' {
-  export interface Application { // tslint:disble-line
-    ready(): Promise<void>;
-    close(): Promise<void>;
-    callback(): any;
+export interface BaseMockApplication<T, C> extends Application { // tslint:disble-line
+  ready(): Promise<void>;
+  close(): Promise<void>;
+  callback(): any;
 
-    /**
-     * mock Context
-     */
-    mockContext(data?: any): Context;
+  /**
+   * mock Context
+   */
+  mockContext(data?: any): C;
 
-    /**
-     * mock cookie session
-     */
-    mockSession(data: any): Application;
+  /**
+   * mock cookie session
+   */
+  mockSession(data: any): T;
 
-    mockCookies(cookies: any): Application;
+  mockCookies(cookies: any): T;
 
-    mockHeaders(headers: any): Application;
+  mockHeaders(headers: any): T;
 
-    /**
-     * Mock service
-     */
-    mockService(service: string, methodName: string, fn: any): Application;
+  /**
+   * Mock service
+   */
+  mockService(service: string, methodName: string, fn: any): T;
 
-    /**
-     * mock service that return error
-     */
-    mockServiceError(service: string, methodName: string, err?: Error): Application;
+  /**
+   * mock service that return error
+   */
+  mockServiceError(service: string, methodName: string, err?: Error): T;
 
-    mockHttpclient(mockUrl: string, mockMethod: string | string[], mockResult: {
-      data?: Buffer | string | JSON;
-      status?: number;
-      headers?: any;
-    }): Application;
+  mockHttpclient(mockUrl: string, mockMethod: string | string[], mockResult: {
+    data?: Buffer | string | JSON;
+    status?: number;
+    headers?: any;
+  }): Application;
 
-    mockHttpclient(mockUrl: string, mockResult: {
-      data?: Buffer | string | JSON;
-      status?: number;
-      headers?: any;
-    }): Application;
+  mockHttpclient(mockUrl: string, mockResult: {
+    data?: Buffer | string | JSON;
+    status?: number;
+    headers?: any;
+  }): Application;
 
-    /**
-     * mock csrf
-     */
-    mockCsrf(): Application;
+  /**
+   * mock csrf
+   */
+  mockCsrf(): T;
 
-    /**
-     * http request helper
-     */
-    httpRequest(): any;
-  }
-
+  /**
+   * http request helper
+   */
+  httpRequest(): any;
 }
 
-interface MockOption {
+export interface MockOption {
   /**
    * The directory of the application
    */
@@ -90,16 +87,18 @@ interface MockOption {
 type EnvType = 'default' | 'test' | 'prod' | 'local' | 'unittest';
 type LogLevel = 'DEBUG' | 'INFO' | 'WARN' | 'ERROR' | 'NONE';
 
-interface EggMock {
+interface MockApplication extends BaseMockApplication<Application, Context> { }
+
+export interface EggMock {
   /**
    * Create a egg mocked application
    */
-  app(option?: MockOption): Application;
+  app(option?: MockOption): MockApplication;
 
   /**
    * Create a mock cluster server, but you can't use API in application, you should test using supertest
    */
-  cluster(option?: MockOption): Application;
+  cluster(option?: MockOption): MockApplication;
 
   /**
    * mock the serverEnv of Egg
@@ -121,7 +120,5 @@ interface EggMock {
    */
   restore(): void;
 }
-
-declare var mm: EggMock;
-
-export = mm;
+declare const mm: EggMock;
+export default mm;
