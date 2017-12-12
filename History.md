@@ -1,4 +1,10 @@
 
+3.14.0 / 2017-12-12
+==================
+
+**others**
+  * [[`be9bcd2`](http://github.com/eggjs/egg-mock/commit/be9bcd22c91044b0efdbc3db6b8109cf625002b1)] - refactor: modify d.ts and support bootstrap (Eward Song <<eward.song@gmail.com>>)
+
 3.13.1 / 2017-10-17
 ==================
 
