@@ -14,4 +14,8 @@ module.exports = function(app) {
   app.get('session', '/session', app.controller.session);
 
   app.post('/', app.controller.home.post);
+
+  app.get('/user', app.controller.user.get);
+  app.post('/user', app.controller.user.post);
+  app.post('/file', app.controller.file);
 };
