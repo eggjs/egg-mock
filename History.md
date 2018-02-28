@@ -1,4 +1,13 @@
 
+3.14.1 / 2018-02-28
+==================
+
+**fixes**
+  * [[`d38d615`](http://github.com/eggjs/egg-mock/commit/d38d615c3f9bc79eb09c6864ab9d5833a50d029a)] - fix: mockUrl accepts RegExp (#64) (Brick <<brick.c.yang@gmail.com>>)
+
+**others**
+  * [[`23c1075`](http://github.com/eggjs/egg-mock/commit/23c1075f5aaaa866b0243061d0eadf21ce67d382)] - test: add post with multipart file test cases (#63) (fengmk2 <<fengmk2@gmail.com>>)
+
 3.14.0 / 2017-12-12
 ==================
 
