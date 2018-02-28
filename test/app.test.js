@@ -85,6 +85,15 @@ function call(method) {
         .expect('foo')
         .expect(200, done);
     });
+
+    it('should emit server event on app', () => {
+      return app.httpRequest()
+        .get('/keepAliveTimeout')
+        .expect(200)
+        .expect({
+          keepAliveTimeout: 5000,
+        });
+    });
   });
 
   describe(`mm.${method}({ baseDir, plugin=string })`, () => {
