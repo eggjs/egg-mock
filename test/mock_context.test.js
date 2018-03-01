@@ -70,7 +70,6 @@ describe('test/mock_context.test.js', () => {
       .post('/file')
       .field('title', 'file title')
       .attach('file', __filename)
-      .expect(200)
       .expect({
         fields: {
           title: 'file title',
@@ -79,6 +78,7 @@ describe('test/mock_context.test.js', () => {
         user: {
           foo: 'bar',
         },
-      });
+      })
+      .expect(200);
   });
 });

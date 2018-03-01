@@ -1,6 +1,7 @@
+'use strict';
+
 module.exports = function* () {
   const stream = yield this.getFileStream();
-  console.log(stream);
   const fields = stream.fields;
   this.body = {
     fields,
