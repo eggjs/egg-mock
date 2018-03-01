@@ -57,7 +57,7 @@ describe('test/mock_context.test.js', () => {
       });
   });
 
-  it('should work on POST file with user login', () => {
+  it.only('should work on POST file with user login', () => {
     const ctx = app.mockContext({
       user: {
         foo: 'bar',
