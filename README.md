@@ -50,8 +50,8 @@ describe('some test', () => {
   after(() => app.close());
 
   it('should request /', () => {
-    return app.httpRequest()
-      .get('/')
+    return app.httpRequest('/')
+      .expect('some text')
       .expect(200);
   });
 });
@@ -158,8 +158,7 @@ describe('test/app.js', () => {
   after(() => app.close());
 
   it('some test', () => {
-    return app.httpRequest()
-      .get('/config')
+    return app.httpRequest('/config')
       .expect(200)
   });
 });
@@ -265,7 +264,7 @@ Clean all logs directory, default is true.
 
 If you are using `ava`, disable it.
 
-### app.httpRequest()
+### app.httpRequest(...args)
 
 Request current app http server.
 
@@ -275,6 +274,20 @@ it('should work', () => {
     .get('/')
     .expect('hello world')
     .expect(200);
+});
+
+// or shorthand
+it('should work with shorthand', () => {
+  return app.httpRequest('/')
+    .expect('hello world')
+    .expect(200);
+});
+
+// or use assert
+it('should work with assert', async () => {
+  const { res, status } = await app.httpRequest('/');
+  assert(res.text === 'hello world');
+  assert(status === 200);
 });
 ```
 
@@ -323,7 +336,7 @@ it('should mock user name', function* () {
   app.mockService('user', 'getName', function* (ctx, methodName, args) {
     return 'popomore';
   });
-  const ctx = app.mockContext();  
+  const ctx = app.mockContext();
   yield ctx.service.user.getName();
 });
 ```

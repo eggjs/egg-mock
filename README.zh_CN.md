@@ -44,15 +44,15 @@ describe('some test', () => {
   before(() => {
     app = mm.app({
       baseDir: 'apps/foo'
-      customEgg: path.join(__dirname, '../node_modules/egg'),
+      framework: path.join(__dirname, '../node_modules/egg'),
     });
     return app.ready();
   })
   after(() => app.close());
 
   it('should request /', () => {
-    return app.httpRequest()
-      .get('/')
+    return app.httpRequest('/')
+      .expect('some text')
       .expect(200);
   });
 });
@@ -69,7 +69,7 @@ describe('some test', () => {
 ```js
 before(() => {
   app = mm.app({
-    customEgg: path.join(__dirname, '../node_modules/egg'),
+    framework: path.join(__dirname, '../node_modules/egg'),
   });
   return app.ready();
 });
@@ -77,13 +77,13 @@ before(() => {
 
 ### 框架开发者
 
-框架开发者需要指定 customEgg，会将当前路径指定为框架入口
+框架开发者需要指定 framework，会将当前路径指定为框架入口
 
 ```js
 before(() => {
   app = mm.app({
     baseDir: 'apps/demo',
-    customEgg: true,
+    framework: true,
   });
   return app.ready();
 });
@@ -97,13 +97,13 @@ before(() => {
 before(() => {
   app = mm.app({
     baseDir: 'apps/demo',
-    customEgg: path.join(__dirname, '../node_modules/egg'),
+    framework: path.join(__dirname, '../node_modules/egg'),
   });
   return app.ready();
 });
 ```
 
-也可以通过 customEgg 指定其他框架，比如希望在 aliyun-egg 和 framework-b 同时测试此插件。
+也可以通过 framework 指定其他框架，比如希望在 aliyun-egg 和 framework-b 同时测试此插件。
 
 ```js
 describe('aliyun-egg', () => {
@@ -111,7 +111,7 @@ describe('aliyun-egg', () => {
   before(() => {
     app = mm.app({
       baseDir: 'apps/demo',
-      customEgg: path.join(__dirname, 'node_modules/aliyun-egg'),
+      framework: path.join(__dirname, 'node_modules/aliyun-egg'),
     });
     return app.ready();
   });
@@ -122,7 +122,7 @@ describe('framework-b', () => {
   before(() => {
     app = mm.app({
       baseDir: 'apps/demo',
-      customEgg: path.join(__dirname, 'node_modules/framework-b'),
+      framework: path.join(__dirname, 'node_modules/framework-b'),
     });
     return app.ready();
   });
@@ -135,7 +135,7 @@ describe('framework-b', () => {
 before(() => {
   app = mm.app({
     baseDir: 'apps/demo',
-    customEgg: path.join(__dirname, 'node_modules/egg'),
+    framework: path.join(__dirname, 'node_modules/egg'),
     plugin: false,
   });
   return app.ready();
@@ -163,8 +163,7 @@ describe('test/app.js', () => {
   after(() => app.close());
 
   it('some test', () => {
-    return app.httpRequest()
-      .get('/config')
+    return app.httpRequest('/config')
       .expect(200)
   });
 });
@@ -236,14 +235,14 @@ mm.app({
 })
 ```
 
-#### customEgg {String/Boolean}
+#### framework {String/Boolean}
 
 指定框架路径
 
 ```js
 mm.app({
   baseDir: 'apps/demo',
-  customEgg: path.join(__dirname, 'fixtures/egg'),
+  framework: path.join(__dirname, 'fixtures/egg'),
 })
 ```
 
@@ -276,7 +275,7 @@ mm.app({
 
 如果是通过 ava 等并行测试框架进行测试，需要手动在执行测试前进行统一的日志清理，不能通过 mm 来处理，设置 `clean` 为 `false`。
 
-### app.httpRequest()
+### app.httpRequest(...args)
 
 请求当前应用 http 服务的辅助工具。
 
@@ -286,6 +285,20 @@ it('should work', () => {
     .get('/')
     .expect('hello world')
     .expect(200);
+});
+
+// 支持简写
+it('should work with shorthand', () => {
+  return app.httpRequest('/')
+    .expect('hello world')
+    .expect(200);
+});
+
+// 或使用 assert 风格
+it('should work with assert', async () => {
+  const { res, status } = await app.httpRequest('/');
+  assert(res.text === 'hello world');
+  assert(status === 200);
 });
 ```
 
@@ -335,7 +348,7 @@ it('should mock user name', function* () {
   app.mockService('user', 'getName', function* (ctx, methodName, args) {
     return 'popomore';
   });
-  const ctx = app.mockContext();  
+  const ctx = app.mockContext();
   yield ctx.service.user.getName();
 });
 ```

@@ -387,11 +387,14 @@ module.exports = {
   /**
    * http request helper
    * @method App#httpRequest
+   * @param {Array} args - if pass args, then will auto call `get(...args)`
    * @return {SupertestRequest} req - supertest request
    * @see https://github.com/visionmedia/supertest
    */
-  httpRequest() {
-    return supertestRequest(this);
+  httpRequest(...args) {
+    const instance = supertestRequest(this);
+    if (args.length === 0) return instance;
+    return instance.get(...args);
   },
 };
 
