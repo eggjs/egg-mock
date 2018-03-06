@@ -4,6 +4,7 @@ module.exports = app => {
   app.get('/throw', function* () {
     this.body = 'foo';
     setTimeout(() => {
+      /* eslint-disable no-undef */
       a.b = c;
     }, 1);
   });

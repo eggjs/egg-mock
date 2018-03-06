@@ -1,8 +1,6 @@
 'use strict';
 
 const path = require('path');
-const assert = require('assert');
-const request = require('supertest');
 const mm = require('..');
 
 const fixtures = path.join(__dirname, 'fixtures');
