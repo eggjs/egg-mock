@@ -280,6 +280,32 @@ it('should work', () => {
 
 See [supertest](https://github.com/visionmedia/supertest) to get more APIs.
 
+#### .unexpectHeader(name)
+
+Assert current response not contains the specified header
+
+```js
+it('should work', () => {
+  return app.httpRequest()
+    .get('/')
+    .unexpectHeader('set-cookie')
+    .expect(200);
+});
+```
+
+#### .expectHeader(name)
+
+Assert current response contains the specified header
+
+```js
+it('should work', () => {
+  return app.httpRequest()
+    .get('/')
+    .expectHeader('set-cookie')
+    .expect(200);
+});
+```
+
 ### app.mockContext(options)
 
 ```js

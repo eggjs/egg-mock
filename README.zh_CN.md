@@ -291,6 +291,32 @@ it('should work', () => {
 
 更多信息请查看 [supertest](https://github.com/visionmedia/supertest) 的 API 说明。
 
+#### .unexpectHeader(name)
+
+断言当前请求响应不包含指定 header
+
+```js
+it('should work', () => {
+  return app.httpRequest()
+    .get('/')
+    .unexpectHeader('set-cookie')
+    .expect(200);
+});
+```
+
+#### .expectHeader(name)
+
+断言当前请求响应包含指定 header
+
+```js
+it('should work', () => {
+  return app.httpRequest()
+    .get('/')
+    .expectHeader('set-cookie')
+    .expect(200);
+});
+```
+
 ### app.mockContext(options)
 
 模拟上下文数据
