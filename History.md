@@ -1,4 +1,11 @@
 
+3.15.0 / 2018-03-08
+==================
+
+**features**
+  * [[`9857065`](http://github.com/eggjs/egg-mock/commit/985706518e9ab8be155f285490484e5a304833fc)] - feat: add unexpectHeader() and expectHeader() (#67) (fengmk2 <<fengmk2@gmail.com>>)
+  * [[`f1820d7`](http://github.com/eggjs/egg-mock/commit/f1820d70f2e266d4b18fb7062976b4c14952a16f)] - feat: mm.app() support server event (#65) (fengmk2 <<fengmk2@gmail.com>>)
+
 3.14.1 / 2018-02-28
 ==================
 
