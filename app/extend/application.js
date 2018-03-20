@@ -59,7 +59,7 @@ module.exports = {
     if (!data) {
       return this;
     }
-    mm(this.context, 'session', data);
+    mm(this.context, 'session', Object.assign({ save() {} }, data));
     return this;
   },
 
