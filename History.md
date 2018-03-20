@@ -1,4 +1,10 @@
 
+3.15.1 / 2018-03-20
+==================
+
+**fixes**
+  * [[`3fbf862`](http://github.com/eggjs/egg-mock/commit/3fbf86232ee3c8e4944c8072e127c0f1ede1d26b)] - fix: mockSession save (#68) (TZ | 天猪 <<atian25@qq.com>>)
+
 3.15.0 / 2018-03-08
 ==================
 
