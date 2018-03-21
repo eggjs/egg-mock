@@ -59,7 +59,14 @@ module.exports = {
     if (!data) {
       return this;
     }
-    mm(this.context, 'session', Object.assign({ save() {} }, data));
+    /* istanbul ignore else */
+    if (!data.hasOwnProperty('save')) {
+      Object.defineProperty(data, 'save', {
+        value: () => {},
+        enumerable: false,
+      });
+    }
+    mm(this.context, 'session', data);
     return this;
   },
 
