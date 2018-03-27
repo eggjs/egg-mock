@@ -1,6 +1,7 @@
 'use strict';
 
 const mm = require('..');
+const assert = require('assert');
 
 describe('test/mock_session.test.js', () => {
   afterEach(mm.restore);
@@ -16,12 +17,18 @@ describe('test/mock_session.test.js', () => {
     after(() => app.close());
 
     it('should mock session', () => {
-      app.mockSession({
+      const obj = {
         user: {
           foo: 'bar',
         },
         hello: 'egg mock session data',
-      });
+      };
+
+      const ctx = app.mockContext();
+      app.mockSession(obj);
+
+      assert.deepEqual(ctx.session, obj);
+
       return app.httpRequest()
         .get('/session')
         .expect({
@@ -30,6 +37,14 @@ describe('test/mock_session.test.js', () => {
           },
           hello: 'egg mock session data',
         });
+    });
+
+    it('should support mock session with plain type', () => {
+      const ctx = app.mockContext();
+      app.mockSession();
+      app.mockSession('123');
+      assert(ctx.session === '123');
+      assert(!ctx.session.save);
     });
 
     it('should mock restore', () => {
