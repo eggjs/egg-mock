@@ -39,6 +39,14 @@ describe('test/mock_session.test.js', () => {
         });
     });
 
+    it('should support mock session with plain type', () => {
+      const ctx = app.mockContext();
+      app.mockSession();
+      app.mockSession('123');
+      assert(ctx.session === '123');
+      assert(!ctx.session.save);
+    });
+
     it('should mock restore', () => {
       return app.httpRequest()
         .get('/session')

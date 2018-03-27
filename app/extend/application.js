@@ -59,8 +59,8 @@ module.exports = {
     if (!data) {
       return this;
     }
-    /* istanbul ignore else */
-    if (is.object(data) && !data.hasOwnProperty('save')) {
+
+    if (is.object(data) && !data.save) {
       Object.defineProperty(data, 'save', {
         value: () => {},
         enumerable: false,
