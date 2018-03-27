@@ -28,7 +28,7 @@ describe('test/format_options.test.js', () => {
       formatOptions();
       throw new Error('should not run');
     } catch (err) {
-      assert(/D:\\projectWorkSpace\\summer/.test(err.message));
+      assert(/D:[\\|\/]projectWorkSpace[\\|\/]summer/.test(err.message));
     }
   });
 
