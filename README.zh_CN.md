@@ -190,7 +190,7 @@ mm.app({
 });
 ```
 
-具体值见 https://github.com/eggjs/egg-core/blob/master/lib/loader/egg_loader.js#L82
+具体值见 <https://github.com/eggjs/egg-core/blob/master/lib/loader/egg_loader.js#L82>
 
 ### mm.consoleLevel(level)
 
@@ -202,7 +202,6 @@ mm.consoleLevel('NONE');
 ```
 
 可选 level 为 `DEBUG`, `INFO`, `WARN`, `ERROR`, `NONE`
-
 
 ### mm.home(homePath)
 
@@ -275,6 +274,12 @@ mm.app({
 是否需要清理 log 目录，默认开启。
 
 如果是通过 ava 等并行测试框架进行测试，需要手动在执行测试前进行统一的日志清理，不能通过 mm 来处理，设置 `clean` 为 `false`。
+
+#### typescript {Boolean}
+
+开启 TypeScript 支持，默认关闭。
+
+支持读取环境变量 `process.env.EGG_TYPESCRIPT`。
 
 ### app.httpRequest()
 
@@ -361,7 +366,7 @@ it('should mock user name', function* () {
   app.mockService('user', 'getName', function* (ctx, methodName, args) {
     return 'popomore';
   });
-  const ctx = app.mockContext();  
+  const ctx = app.mockContext();
   yield ctx.service.user.getName();
 });
 ```
@@ -374,7 +379,7 @@ it('should mock user name', function* () {
 app.mockServiceError('user', 'home', new Error('mock error'));
 ```
 
-### app.mockCsrf();
+### app.mockCsrf()
 
 模拟 csrf，不用传递 token
 
