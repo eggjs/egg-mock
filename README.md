@@ -185,14 +185,14 @@ mm.app({
 });
 ```
 
-Environment list https://github.com/eggjs/egg-core/blob/master/lib/loader/egg_loader.js#L82
+Environment list <https://github.com/eggjs/egg-core/blob/master/lib/loader/egg_loader.js#L82>
 
 ### mm.consoleLevel(level)
 
 Mock level that print to stdout/stderr
 
 ```js
-// 不输出到终端
+// DON'T log to terminal
 mm.consoleLevel('NONE');
 ```
 
@@ -264,6 +264,12 @@ Determine whether enable cache. it's cached by baseDir.
 Clean all logs directory, default is true.
 
 If you are using `ava`, disable it.
+
+#### typescript {Boolean}
+
+Enable Typescript support, default is false.
+
+Support read from `process.env.EGG_TYPESCRIPT`.
 
 ### app.httpRequest()
 
@@ -341,7 +347,6 @@ const ctx = app.mockContext();
 console.log(ctx.session.foo);
 ```
 
-
 ### app.mockService(service, methodName, fn)
 
 ```js
@@ -349,7 +354,7 @@ it('should mock user name', function* () {
   app.mockService('user', 'getName', function* (ctx, methodName, args) {
     return 'popomore';
   });
-  const ctx = app.mockContext();  
+  const ctx = app.mockContext();
   yield ctx.service.user.getName();
 });
 ```
@@ -362,7 +367,7 @@ You can mock an error for service
 app.mockServiceError('user', 'home', new Error('mock error'));
 ```
 
-### app.mockCsrf();
+### app.mockCsrf()
 
 ```js
 app.mockCsrf();
