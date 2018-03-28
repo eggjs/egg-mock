@@ -1,4 +1,10 @@
 
+3.16.0 / 2018-03-28
+===================
+
+  * feat: support ts (#70)
+  * fix: mockSession save should not be enumerable (#69)
+
 3.15.1 / 2018-03-20
 ==================
 
