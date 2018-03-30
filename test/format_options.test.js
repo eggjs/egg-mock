@@ -147,25 +147,46 @@ describe('test/format_options.test.js', () => {
 
   it('should not mock process.env.HOME when it has mocked', () => {
     const baseDir = process.cwd();
-
     mm(process.env, 'HOME', '/mockpath');
     mm(process.env, 'EGG_SERVER_ENV', 'default');
     formatOptions();
     assert.notEqual(process.env.HOME, baseDir);
   });
 
-  it('should read egg.typescript', () => {
-    const baseDir = path.join(__dirname, 'fixtures/ts');
-    mm(process, 'cwd', () => baseDir);
-    const opts = formatOptions();
-    assert(opts.typescript === true);
-  });
+  describe('typescript', () => {
+    it('should read egg.typescript', () => {
+      const baseDir = path.join(__dirname, 'fixtures/ts');
+      mm(process, 'cwd', () => baseDir);
+      const opts = formatOptions();
+      assert(opts.typescript === true);
+    });
 
-  it('should read process.env.EGG_TYPESCRIPT', () => {
-    const baseDir = path.join(__dirname, 'fixtures/demo');
-    mm(process, 'cwd', () => baseDir);
-    mm(process.env, 'EGG_TYPESCRIPT', true);
-    const opts = formatOptions();
-    assert(opts.typescript === true);
+    it('should read process.env.EGG_TYPESCRIPT', () => {
+      const baseDir = path.join(__dirname, 'fixtures/demo');
+      mm(process, 'cwd', () => baseDir);
+
+      mm(process.env, 'EGG_TYPESCRIPT', true);
+      assert(formatOptions().typescript === true);
+
+      mm(process.env, 'EGG_TYPESCRIPT', false);
+      assert(!formatOptions().typescript);
+
+      mm(process.env, 'EGG_TYPESCRIPT', 'true');
+      assert(formatOptions().typescript === true);
+
+      mm(process.env, 'EGG_TYPESCRIPT', 'false');
+      assert(!formatOptions().typescript);
+
+      mm(process.env, 'EGG_TYPESCRIPT', undefined);
+      assert(!formatOptions().typescript);
+    });
+
+    it('should read process.env.EGG_TYPESCRIPT with pkg', () => {
+      const baseDir = path.join(__dirname, 'fixtures/ts-false');
+      mm(process, 'cwd', () => baseDir);
+      mm(process.env, 'EGG_TYPESCRIPT', true);
+      const opts = formatOptions();
+      assert(opts.typescript === true);
+    });
   });
 });
