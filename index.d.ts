@@ -87,6 +87,11 @@ export interface MockOption {
    * Enable typescript support
    */
   typescript?: boolean;
+
+  /**
+   * framework support
+   */
+  customEgg?: boolean;
 }
 
 type EnvType = 'default' | 'test' | 'prod' | 'local' | 'unittest';
