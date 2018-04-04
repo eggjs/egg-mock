@@ -154,6 +154,10 @@ describe('test/format_options.test.js', () => {
   });
 
   describe('typescript', () => {
+    beforeEach(() => {
+      mm(process.env, 'EGG_TYPESCRIPT', undefined);
+    });
+
     it('should read egg.typescript', () => {
       const baseDir = path.join(__dirname, 'fixtures/ts');
       mm(process, 'cwd', () => baseDir);
@@ -187,6 +191,14 @@ describe('test/format_options.test.js', () => {
       mm(process.env, 'EGG_TYPESCRIPT', true);
       const opts = formatOptions();
       assert(opts.typescript === true);
+    });
+
+    it('should read process.env.EGG_TYPESCRIPT=false with pkg', () => {
+      const baseDir = path.join(__dirname, 'fixtures/ts');
+      mm(process, 'cwd', () => baseDir);
+      mm(process.env, 'EGG_TYPESCRIPT', false);
+      const opts = formatOptions();
+      assert(opts.typescript === false);
     });
   });
 });
