@@ -153,9 +153,9 @@ describe('test/format_options.test.js', () => {
     assert.notEqual(process.env.HOME, baseDir);
   });
 
-  describe('typescript', () => {
+  describe.only('typescript', () => {
     beforeEach(() => {
-      mm(process.env, 'EGG_TYPESCRIPT', undefined);
+      delete process.env.EGG_TYPESCRIPT;
     });
 
     it('should read egg.typescript', () => {
