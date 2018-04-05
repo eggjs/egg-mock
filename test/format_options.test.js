@@ -153,7 +153,7 @@ describe('test/format_options.test.js', () => {
     assert.notEqual(process.env.HOME, baseDir);
   });
 
-  describe.only('typescript', () => {
+  describe('typescript', () => {
     beforeEach(() => {
       delete process.env.EGG_TYPESCRIPT;
     });
