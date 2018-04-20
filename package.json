@@ -57,9 +57,7 @@
     "mkdirp": "^0.5.1",
     "mz-modules": "^1.0.0",
     "pedding": "^1.1.0",
-    "sdk-base": "^3.0.1",
-    "ts-node": "^3.0.4",
-    "typescript": "^2.3.2"
+    "sdk-base": "^3.0.1"
   },
   "ci": {
     "version": "6, 8, 9"

@@ -82,11 +82,6 @@ export interface MockOption {
    * Remove $baseDir/logs
    */
   clean?: boolean;
-
-  /**
-   * Enable typescript support
-   */
-  typescript?: boolean;
 }
 
 type EnvType = 'default' | 'test' | 'prod' | 'local' | 'unittest';

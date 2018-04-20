@@ -265,12 +265,6 @@ Clean all logs directory, default is true.
 
 If you are using `ava`, disable it.
 
-#### typescript {Boolean}
-
-Enable Typescript support, default is false.
-
-Support read from `process.env.EGG_TYPESCRIPT`.
-
 ### app.httpRequest()
 
 Request current app http server.

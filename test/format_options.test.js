@@ -152,30 +152,4 @@ describe('test/format_options.test.js', () => {
     formatOptions();
     assert.notEqual(process.env.HOME, baseDir);
   });
-
-  describe('typescript', () => {
-    beforeEach(() => {
-      delete process.env.EGG_TYPESCRIPT;
-    });
-
-    it('should read process.env.EGG_TYPESCRIPT', () => {
-      const baseDir = path.join(__dirname, 'fixtures/demo');
-      mm(process, 'cwd', () => baseDir);
-
-      mm(process.env, 'EGG_TYPESCRIPT', true);
-      assert(formatOptions().typescript === true);
-
-      mm(process.env, 'EGG_TYPESCRIPT', false);
-      assert(!formatOptions().typescript);
-
-      mm(process.env, 'EGG_TYPESCRIPT', 'true');
-      assert(formatOptions().typescript === true);
-
-      mm(process.env, 'EGG_TYPESCRIPT', 'false');
-      assert(!formatOptions().typescript);
-
-      mm(process.env, 'EGG_TYPESCRIPT', undefined);
-      assert(!formatOptions().typescript);
-    });
-  });
 });
