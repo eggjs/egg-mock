@@ -16,13 +16,11 @@
   ],
   "scripts": {
     "lint": "eslint lib app index.js test/*.test.js",
-    "test": "npm run lint && npm run test-local && npm run test-ts",
-    "test-ts": "ts-node test/index.test.ts",
+    "test": "npm run lint && npm run test-local",
     "test-local": "egg-bin test",
     "cov": "egg-bin cov",
-    "ci": "npm run autod --check && npm run lint && npm run cov && npm run test-ts",
+    "ci": "npm run autod --check && npm run lint && npm run cov",
     "autod": "autod",
-    "autod-china": "autod --registry=https://registry.npm.taobao.org",
     "contributors": "ali-contributors"
   },
   "dependencies": {
