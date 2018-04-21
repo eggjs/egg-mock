@@ -1,7 +1,7 @@
 module.exports = {
-  getResult: function (result) {
+  getResult(result) {
     return {
-      body: result
+      body: result,
     };
-  }
+  },
 };

@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = () => {
-  exports.test = function*() {
+  exports.test = function* () {
     return 'hello';
   };
 

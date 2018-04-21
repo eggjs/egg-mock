@@ -152,41 +152,4 @@ describe('test/format_options.test.js', () => {
     formatOptions();
     assert.notEqual(process.env.HOME, baseDir);
   });
-
-  describe('typescript', () => {
-    it('should read egg.typescript', () => {
-      const baseDir = path.join(__dirname, 'fixtures/ts');
-      mm(process, 'cwd', () => baseDir);
-      const opts = formatOptions();
-      assert(opts.typescript === true);
-    });
-
-    it('should read process.env.EGG_TYPESCRIPT', () => {
-      const baseDir = path.join(__dirname, 'fixtures/demo');
-      mm(process, 'cwd', () => baseDir);
-
-      mm(process.env, 'EGG_TYPESCRIPT', true);
-      assert(formatOptions().typescript === true);
-
-      mm(process.env, 'EGG_TYPESCRIPT', false);
-      assert(!formatOptions().typescript);
-
-      mm(process.env, 'EGG_TYPESCRIPT', 'true');
-      assert(formatOptions().typescript === true);
-
-      mm(process.env, 'EGG_TYPESCRIPT', 'false');
-      assert(!formatOptions().typescript);
-
-      mm(process.env, 'EGG_TYPESCRIPT', undefined);
-      assert(!formatOptions().typescript);
-    });
-
-    it('should read process.env.EGG_TYPESCRIPT with pkg', () => {
-      const baseDir = path.join(__dirname, 'fixtures/ts-false');
-      mm(process, 'cwd', () => baseDir);
-      mm(process.env, 'EGG_TYPESCRIPT', true);
-      const opts = formatOptions();
-      assert(opts.typescript === true);
-    });
-  });
 });
