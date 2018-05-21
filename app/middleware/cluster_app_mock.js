@@ -3,7 +3,7 @@
 const debug = require('debug')('egg-mock:middleware:cluster_app_mock');
 
 module.exports = () => {
-  return function(ctx, next) {
+  return function clusterAppMock(ctx, next) {
     if (ctx.path !== '/__egg_mock_call_function') return next();
 
     debug('%s %s, body: %j', ctx.method, ctx.url, ctx.request.body);
