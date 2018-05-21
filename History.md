@@ -1,4 +1,10 @@
 
+3.17.2 / 2018-05-21
+==================
+
+**others**
+  * [[`62c3dfa`](http://github.com/eggjs/egg-mock/commit/62c3dfa517b94c56c35fed8af8d9aad29e7c38d4)] - refactor: middleware use promise-based style (#74) (Haoliang Gao <<sakura9515@gmail.com>>)
+
 3.17.1 / 2018-04-21
 ===================
 
