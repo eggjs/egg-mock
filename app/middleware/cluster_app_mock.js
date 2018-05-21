@@ -3,40 +3,40 @@
 const debug = require('debug')('egg-mock:middleware:cluster_app_mock');
 
 module.exports = () => {
-  return function* (next) {
-    if (this.path !== '/__egg_mock_call_function') return yield next;
+  return function(ctx, next) {
+    if (ctx.path !== '/__egg_mock_call_function') return next();
 
-    debug('%s %s, body: %j', this.method, this.url, this.request.body);
-    const { method, property, args, needResult } = this.request.body;
+    debug('%s %s, body: %j', ctx.method, ctx.url, ctx.request.body);
+    const { method, property, args, needResult } = ctx.request.body;
     if (!method) {
-      this.status = 422;
-      this.body = {
+      ctx.status = 422;
+      ctx.body = {
         success: false,
         error: 'Missing method',
       };
       return;
     }
     if (args && !Array.isArray(args)) {
-      this.status = 422;
-      this.body = {
+      ctx.status = 422;
+      ctx.body = {
         success: false,
         error: 'args should be an Array instance',
       };
       return;
     }
     if (property) {
-      if (!this.app[property] || typeof this.app[property][method] !== 'function') {
-        this.status = 422;
-        this.body = {
+      if (!ctx.app[property] || typeof ctx.app[property][method] !== 'function') {
+        ctx.status = 422;
+        ctx.body = {
           success: false,
           error: `method "${method}" not exists on app.${property}`,
         };
         return;
       }
     } else {
-      if (typeof this.app[method] !== 'function') {
-        this.status = 422;
-        this.body = {
+      if (typeof ctx.app[method] !== 'function') {
+        ctx.status = 422;
+        ctx.body = {
           success: false,
           error: `method "${method}" not exists on app`,
         };
@@ -69,13 +69,13 @@ module.exports = () => {
 
     let result;
     if (property) {
-      result = this.app[property][method](...args);
+      result = ctx.app[property][method](...args);
     } else {
-      result = this.app[method](...args);
+      result = ctx.app[method](...args);
     }
     if (!needResult) {
       result = undefined;
     }
-    this.body = { success: true, result };
+    ctx.body = { success: true, result };
   };
 };
