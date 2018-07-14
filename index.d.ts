@@ -87,7 +87,7 @@ export interface MockOption {
 type EnvType = 'default' | 'test' | 'prod' | 'local' | 'unittest';
 type LogLevel = 'DEBUG' | 'INFO' | 'WARN' | 'ERROR' | 'NONE';
 
-interface MockApplication extends BaseMockApplication<Application, Context> { }
+export interface MockApplication extends BaseMockApplication<Application, Context> { }
 
 export interface EggMock {
   /**
