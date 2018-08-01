@@ -89,36 +89,38 @@ type LogLevel = 'DEBUG' | 'INFO' | 'WARN' | 'ERROR' | 'NONE';
 
 export interface MockApplication extends BaseMockApplication<Application, Context> { }
 
-export interface EggMock {
+declare function mm(target: any, key: string, prop: any): void;
+declare namespace mm {
   /**
    * Create a egg mocked application
    */
-  app(option?: MockOption): MockApplication;
+  function app(option?: MockOption): MockApplication;
 
   /**
    * Create a mock cluster server, but you can't use API in application, you should test using supertest
    */
-  cluster(option?: MockOption): MockApplication;
+  function cluster(option?: MockOption): MockApplication;
 
   /**
    * mock the serverEnv of Egg
    */
-  env(env: EnvType): void;
+  function env(env: EnvType): void;
 
   /**
    * mock console level
    */
-  consoleLevel(level: LogLevel): void;
+  function consoleLevel(level: LogLevel): void;
 
   /**
    * set EGG_HOME path
    */
-  home(homePath: string): void;
+  function home(homePath: string): void;
 
   /**
    * restore mock
    */
-  restore(): void;
+  function restore(): void;
 }
-declare const mm: EggMock;
+
+export type EggMock = typeof mm;
 export default mm;
