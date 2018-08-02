@@ -6,7 +6,7 @@ const assert = require('assert');
 const mm = require('..');
 const fixtures = path.join(__dirname, 'fixtures');
 
-describe('test/mock_service.test.js', () => {
+describe('test/mock_service.async.js', () => {
   let app;
   before(async () => {
     app = mm.app({
@@ -59,7 +59,7 @@ describe('test/mock_service.test.js', () => {
   it('should throw', () => {
     assert.throws(() => {
       app.mockService('foo', 'not_exist', 'foo');
-    }, 'property not_exist in original object must be function');
+    }, /property not_exist in original object must be function/);
   });
 
   it('should return from service when mock with generator', done => {

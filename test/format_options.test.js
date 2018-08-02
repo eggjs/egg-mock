@@ -123,7 +123,7 @@ describe('test/format_options.test.js', () => {
       formatOptions({
         plugin: true,
       });
-    }, `should set eggPlugin in ${baseDir}/package.json`);
+    }, new RegExp(`should set eggPlugin in ${baseDir}/package.json`));
   });
 
   it('should mock process.env.HOME when EGG_SERVER_ENV is default, test, prod', () => {

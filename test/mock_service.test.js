@@ -109,7 +109,7 @@ describe('test/mock_service.test.js', () => {
   it('should throw', () => {
     assert.throws(() => {
       app.mockService('foo', 'not_exist', 'foo');
-    }, 'property not_exist in original object must be function');
+    }, /property not_exist in original object must be function/);
   });
 
   it('should return from service when mock with generator', done => {
