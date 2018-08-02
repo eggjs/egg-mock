@@ -94,6 +94,33 @@ function call(method) {
           keepAliveTimeout: 5000,
         });
     });
+
+    it('should app.expectLog() work', function* () {
+      yield app.httpRequest()
+        .get('/logger')
+        .expect(200)
+        .expect({
+          ok: true,
+        });
+      app.expectLog('[app.expectLog() test] ok');
+      app.expectLog('[app.expectLog() test] ok', 'logger');
+      app.expectLog('[app.expectLog(coreLogger) test] ok', 'coreLogger');
+
+      if (method === 'app') {
+        app.expectLog(/\[app\.expectLog\(\) test\] ok/);
+        app.expectLog(/\[app\.expectLog\(\) test\] ok/, app.logger);
+        app.expectLog('[app.expectLog(coreLogger) test] ok', app.coreLogger);
+        app.expectLog(/\[app\.expectLog\(coreLogger\) test\] ok/, 'coreLogger');
+      }
+
+      try {
+        app.expectLog('[app.expectLog(coreLogger) test] ok');
+        throw new Error('should not run this');
+      } catch (err) {
+        assert(err.message.includes('Can\'t find String:"[app.expectLog(coreLogger) test] ok" in '));
+        assert(err.message.includes('app-web.log'));
+      }
+    });
   });
 
   describe(`mm.${method}({ baseDir, plugin=string })`, () => {

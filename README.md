@@ -265,6 +265,23 @@ Clean all logs directory, default is true.
 
 If you are using `ava`, disable it.
 
+### app.expectLog(str[, logger])
+
+Assert some string value in the logger instance.
+
+```js
+it('should work', async () => {
+  await app.httpRequest()
+    .get('/')
+    .expect('hello world')
+    .expect(200);
+
+  app.expectLog('foo in logger');
+  app.expectLog('foo in coreLogger', 'coreLogger');
+  app.expectLog('foo in myCustomLogger', 'myCustomLogger');
+});
+```
+
 ### app.httpRequest()
 
 Request current app http server.

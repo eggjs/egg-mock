@@ -10,4 +10,10 @@ module.exports = app => {
       keepAliveTimeout: this.app.serverKeepAliveTimeout,
     };
   });
+
+  app.get('/logger', function* () {
+    this.logger.info('[app.expectLog() test] ok');
+    this.coreLogger.info('[app.expectLog(coreLogger) test] ok');
+    this.body = { ok: true };
+  });
 };

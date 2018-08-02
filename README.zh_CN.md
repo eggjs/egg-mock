@@ -275,6 +275,23 @@ mm.app({
 
 如果是通过 ava 等并行测试框架进行测试，需要手动在执行测试前进行统一的日志清理，不能通过 mm 来处理，设置 `clean` 为 `false`。
 
+### app.expectLog(str[, logger])
+
+断言指定的字符串记录在指定的日志中。
+
+```js
+it('should work', async () => {
+  await app.httpRequest()
+    .get('/')
+    .expect('hello world')
+    .expect(200);
+
+  app.expectLog('foo in logger');
+  app.expectLog('foo in coreLogger', 'coreLogger');
+  app.expectLog('foo in myCustomLogger', 'myCustomLogger');
+});
+```
+
 ### app.httpRequest()
 
 请求当前应用 http 服务的辅助工具。
