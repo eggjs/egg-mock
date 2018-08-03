@@ -69,7 +69,7 @@
     "node": ">= 4.0.0"
   },
   "publishConfig": {
-    "tag": "release-1"
+    "tag": "latest-1"
   },
   "author": "popomore <sakura9515@gmail.com>"
 }
