@@ -1,4 +1,13 @@
 
+3.18.0 / 2018-08-03
+==================
+
+**features**
+  * [[`f25c50a`](http://github.com/eggjs/egg-mock/commit/f25c50a24433e251e5c9f905170cea87e3ac93e6)] - feat: add `app.expectLog()` for app and cluster (#77) (fengmk2 <<fengmk2@gmail.com>>)
+
+**others**
+  * [[`ffb1187`](http://github.com/eggjs/egg-mock/commit/ffb1187aab11bc544c4bc6c5921ca0fba28e621f)] - chore: improve tsd and add bootstrap.d.ts (#76) (SuperEVO <<zhang740@qq.com>>)
+
 3.17.3 / 2018-07-14
 ===================
 
