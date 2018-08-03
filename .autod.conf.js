@@ -14,6 +14,7 @@ module.exports = {
     'egg-ci',
     'eslint',
     'eslint-config-egg',
+    '@types/power-assert',
   ],
   keep: [
   ],
