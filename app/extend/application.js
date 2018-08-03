@@ -2,6 +2,7 @@
 
 const mm = require('mm');
 const http = require('http');
+const fs = require('fs');
 const merge = require('merge-descriptors');
 const is = require('is-type-of');
 const assert = require('assert');
@@ -399,6 +400,27 @@ module.exports = {
    */
   httpRequest() {
     return supertestRequest(this);
+  },
+
+  /**
+   * expect str/regexp in the logger
+   * @param {String|RegExp} str - test str or regexp
+   * @param {String|Logger} [logger] - logger instance, default is `ctx.logger`
+   * @method App#expectLog
+   */
+  expectLog(str, logger) {
+    logger = logger || this.logger;
+    if (typeof logger === 'string') {
+      logger = this.getLogger(logger);
+    }
+    const filepath = logger.options.file;
+    const content = fs.readFileSync(filepath, 'utf8');
+    if (str instanceof RegExp) {
+      assert(str.test(content), `Can't find RegExp:"${str}" in ${filepath}`);
+    } else {
+      str = String(str);
+      assert(content.includes(str), `Can't find String:"${str}" in ${filepath}`);
+    }
   },
 };
 
