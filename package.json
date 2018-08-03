@@ -11,6 +11,7 @@
     "index.js",
     "index.d.ts",
     "bootstrap.js",
+    "bootstrap.d.ts",
     "app",
     "lib"
   ],
