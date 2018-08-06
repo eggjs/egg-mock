@@ -67,7 +67,7 @@ describe('test/mm.test.js', () => {
     });
   });
 
-  describe('mm.app({clean: false})', () => {
+  describe('mm.app({ clean: false })', () => {
     let app;
     after(() => app.close());
 

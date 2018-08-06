@@ -28,4 +28,35 @@ describe('test/bootstrap.test.js', () => {
       done();
     }
   });
+
+  describe('backgroundTasksFinished()', () => {
+    it('should wait for background task 1 finished', function* () {
+      yield app.httpRequest()
+        .get('/counter')
+        .expect(200)
+        .expect({ counter: 0 });
+      yield app.httpRequest()
+        .get('/counter/plus')
+        .expect(200)
+        .expect({ counter: 0 });
+    });
+
+    it('should wait for background task 2 finished', function* () {
+      yield app.httpRequest()
+        .get('/counter')
+        .expect(200)
+        .expect({ counter: 1 });
+      yield app.httpRequest()
+        .get('/counter/minus')
+        .expect(200)
+        .expect({ counter: 1 });
+    });
+
+    it('should all reset', function* () {
+      yield app.httpRequest()
+        .get('/counter')
+        .expect(200)
+        .expect({ counter: 0 });
+    });
+  });
 });
