@@ -8,7 +8,10 @@ if (process.env.EGG_BASE_DIR) options.baseDir = process.env.EGG_BASE_DIR;
 const app = mock.app(options);
 
 before(() => app.ready());
-afterEach(mock.restore);
+afterEach(() => {
+  mock.restore();
+  return app.backgroundTasksFinished();
+});
 
 module.exports = {
   assert,

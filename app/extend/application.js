@@ -1,5 +1,6 @@
 'use strict';
 
+const debug = require('debug')('egg-mock:application');
 const mm = require('mm');
 const http = require('http');
 const fs = require('fs');
@@ -10,6 +11,7 @@ const extend = require('extend2');
 const supertestRequest = require('../../lib/supertest');
 
 const ORIGIN_TYPES = Symbol('egg-mock:originTypes');
+const BACKGROUND_TASKS = Symbol('Application#backgroundTasks');
 
 module.exports = {
   /**
@@ -421,6 +423,29 @@ module.exports = {
       str = String(str);
       assert(content.includes(str), `Can't find String:"${str}" in ${filepath}`);
     }
+  },
+
+  // private method
+  backgroundTasksFinished() {
+    const tasks = this._backgroundTasks;
+    debug('waiting %d background tasks', tasks.length);
+    if (tasks.length === 0) return;
+
+    this._backgroundTasks = [];
+    return Promise.all(tasks).then(() => {
+      debug('finished %d background tasks', tasks.length);
+    });
+  },
+
+  get _backgroundTasks() {
+    if (!this[BACKGROUND_TASKS]) {
+      this[BACKGROUND_TASKS] = [];
+    }
+    return this[BACKGROUND_TASKS];
+  },
+
+  set _backgroundTasks(tasks) {
+    this[BACKGROUND_TASKS] = tasks;
   },
 };
 

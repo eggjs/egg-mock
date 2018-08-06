@@ -1,5 +1,7 @@
 'use strict';
 
+const sleep = require('mz-modules/sleep');
+
 module.exports = app => {
   app.get('/', function* () {
     this.body = 'foo';
@@ -15,5 +17,28 @@ module.exports = app => {
     this.logger.info('[app.expectLog() test] ok');
     this.coreLogger.info('[app.expectLog(coreLogger) test] ok');
     this.body = { ok: true };
+  });
+
+
+  let counter = 0;
+  app.get('/counter', function* () {
+    this.body = { counter };
+  });
+
+  app.get('/counter/plus', function* () {
+    this.runInBackground(function* () {
+      // mock io delay
+      yield sleep(10);
+      counter++;
+    });
+    this.body = { counter };
+  });
+
+  app.get('/counter/minus', function* () {
+    this.runInBackground(function* () {
+      yield sleep(10);
+      counter--;
+    });
+    this.body = { counter };
   });
 };
