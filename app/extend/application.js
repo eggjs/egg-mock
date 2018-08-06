@@ -429,7 +429,7 @@ module.exports = {
   backgroundTasksFinished() {
     const tasks = this._backgroundTasks;
     debug('waiting %d background tasks', tasks.length);
-    if (tasks.length === 0) return;
+    if (tasks.length === 0) return Promise.resolve();
 
     this._backgroundTasks = [];
     return Promise.all(tasks).then(() => {

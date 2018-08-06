@@ -58,5 +58,14 @@ describe('test/bootstrap.test.js', () => {
         .expect(200)
         .expect({ counter: 0 });
     });
+
+    it('should always return promise instance', () => {
+      let p = app.backgroundTasksFinished();
+      assert(p.then);
+      p = app.backgroundTasksFinished();
+      assert(p.then);
+      p = app.backgroundTasksFinished();
+      assert(p.then);
+    });
   });
 });
