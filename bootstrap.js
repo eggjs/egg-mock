@@ -9,8 +9,9 @@ const app = mock.app(options);
 
 before(() => app.ready());
 afterEach(() => {
-  mock.restore();
-  return app.backgroundTasksFinished();
+  // restore should be the last one
+  return app.backgroundTasksFinished()
+    .then(() => mock.restore());
 });
 
 module.exports = {

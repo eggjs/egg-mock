@@ -52,11 +52,23 @@ describe('test/bootstrap.test.js', () => {
         .expect({ counter: 1 });
     });
 
-    it('should all reset', function* () {
+    it('should wait for background task 3 finished', function* () {
       yield app.httpRequest()
         .get('/counter')
         .expect(200)
         .expect({ counter: 0 });
+      app.mockContext({ superMan: true });
+      yield app.httpRequest()
+        .get('/counter/plus')
+        .expect(200)
+        .expect({ counter: 0 });
+    });
+
+    it('should all reset', function* () {
+      yield app.httpRequest()
+        .get('/counter')
+        .expect(200)
+        .expect({ counter: 10 });
     });
 
     it('should always return promise instance', () => {
