@@ -1,4 +1,10 @@
 
+3.19.0 / 2018-08-06
+==================
+
+**features**
+  * [[`ab5a47e`](https://github.com/eggjs/egg-mock.git/commit/ab5a47e12f1fea4300a44ef19aa4ba300574d18a)] - feat: should wait for background task finish on afterEach (#78) (fengmk2 <<fengmk2@gmail.com>>)
+
 3.18.0 / 2018-08-03
 ==================
 
