@@ -48,7 +48,7 @@
   "devDependencies": {
     "@types/node": "^7.0.18",
     "autod": "^2.9.0",
-    "egg": "^1.7.0",
+    "egg": "^1.16.0",
     "egg-bin": "^4.1.0",
     "egg-ci": "^1.8.0",
     "eslint": "^4.4.1",
