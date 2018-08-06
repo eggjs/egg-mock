@@ -1,4 +1,10 @@
 
+3.19.1 / 2018-08-07
+==================
+
+**fixes**
+  * [[`db3cb11`](http://github.com/eggjs/egg-mock/commit/db3cb11a97ec6bdb3a70222a459241ffc3cc2c47)] - fix: make sure backgroundTasksFinished() return promise (#79) (fengmk2 <<fengmk2@gmail.com>>)
+
 3.19.0 / 2018-08-06
 ==================
 
