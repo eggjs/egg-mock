@@ -26,9 +26,13 @@ module.exports = app => {
   });
 
   app.get('/counter/plus', function* () {
-    this.runInBackground(function* () {
+    this.runInBackground(function* (ctx) {
       // mock io delay
       yield sleep(10);
+      if (ctx.superMan) {
+        counter += 10;
+        return;
+      }
       counter++;
     });
     this.body = { counter };
