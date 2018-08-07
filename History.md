@@ -1,4 +1,10 @@
 
+3.19.2 / 2018-08-07
+==================
+
+**fixes**
+  * [[`1710f7f`](http://github.com/eggjs/egg-mock/commit/1710f7fcfdbd8709d6b4c50817ab0c214c525378)] - fix: put mock restore at the end (#80) (fengmk2 <<fengmk2@gmail.com>>)
+
 3.19.1 / 2018-08-07
 ==================
 
