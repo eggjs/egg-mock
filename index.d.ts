@@ -91,7 +91,6 @@ type LogLevel = 'DEBUG' | 'INFO' | 'WARN' | 'ERROR' | 'NONE';
 export interface MockApplication extends BaseMockApplication<Application, Context> { }
 
 export interface EggMock extends MockMate {
-  (target: any, key: string, prop: any): void;
   /**
    * Create a egg mocked application
    */
