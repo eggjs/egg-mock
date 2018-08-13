@@ -1,6 +1,5 @@
 'use strict';
 const mm = require('mm');
-const supertestRequest = require('../../lib/supertest');
 const mockHttpclient = require('../../lib/mock_httpclient');
 
 module.exports = {
@@ -23,35 +22,14 @@ module.exports = {
   },
 
   /**
-   * mock csrf
-   * @method App#mockCsrf
-   * @return {App} this
-   * @sice 1.11
-   */
-  mockCsrf() {
-    this.deprecate('[egg-mock] app.agent not support mockCsrf');
-    return this;
-  },
-
-  /**
    * @see mm#restore
-   * @method App#mockRestore
+   * @method Agent#mockRestore
    */
   mockRestore: mm.restore,
 
   /**
    * @see mm
-   * @method App#mm
+   * @method Agent#mm
    */
   mm,
-
-  /**
-   * http request helper
-   * @method App#httpRequest
-   * @return {SupertestRequest} req - supertest request
-   * @see https://github.com/visionmedia/supertest
-   */
-  httpRequest() {
-    return supertestRequest(this);
-  },
 };
