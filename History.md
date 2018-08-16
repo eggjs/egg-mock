@@ -1,4 +1,10 @@
 
+3.19.3 / 2018-08-16
+==================
+
+**fixes**
+  * [[`c91bf93`](http://github.com/eggjs/egg-mock/commit/c91bf93e792c788c4cdd7cf786a45fc2ecb4511d)] - fix: allow egg-core module missing (#83) (fengmk2 <<fengmk2@gmail.com>>)
+
 3.19.2 / 2018-08-07
 ==================
 
