@@ -4,6 +4,11 @@ module.exports = agent => {
   agent.received = [];
   agent.messenger.on('action', data => agent.received.push(data));
 
+  agent.messenger.on('broadcast-action', () => {
+    agent.recievedBroadcastAction = true;
+    agent.messenger.sendToApp('agent-recieved-broadcast-action');
+  });
+
   agent.messenger.sendToApp('action', 'send data when agent starting');
   agent.ready(() => {
     agent.messenger.sendToApp('action', 'send data when agent started');
