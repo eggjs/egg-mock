@@ -283,7 +283,7 @@ describe('test/app_proxy.test.js', () => {
       assert(app._app.eggReadyData.baseDir === baseDir);
     });
 
-    it('should send broadcastMessage from app to app', () => {
+    it('should broadcast message successfully', () => {
       assert(app._app.recievedBroadcastAction === true);
       assert(app._agent.recievedBroadcastAction === true);
       assert(app._app.recievedAgentRecievedAction === true);
