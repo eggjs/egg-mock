@@ -418,10 +418,10 @@ module.exports = {
     const filepath = logger.options.file;
     const content = fs.readFileSync(filepath, 'utf8');
     if (str instanceof RegExp) {
-      assert(str.test(content), `Can't find RegExp:"${str}" in ${filepath}`);
+      assert(str.test(content), `Can't find RegExp:"${str}" in ${filepath}, log content: ...${content.substring(content.length - 500)}`);
     } else {
       str = String(str);
-      assert(content.includes(str), `Can't find String:"${str}" in ${filepath}`);
+      assert(content.includes(str), `Can't find String:"${str}" in ${filepath}, log content: ...${content.substring(content.length - 500)}`);
     }
   },
 
