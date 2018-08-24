@@ -1,4 +1,10 @@
 
+3.19.6 / 2018-08-24
+==================
+
+**fixes**
+  * [[`00fb82e`](http://github.com/eggjs/egg-mock/commit/00fb82eac8114f0be1a97421ea270947ea7b5efd)] - fix: fix declaration merging error (#86) (吖猩 <<whxaxes@qq.com>>)
+
 3.19.5 / 2018-08-24
 ==================
 
