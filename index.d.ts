@@ -119,7 +119,7 @@ export interface EggMock extends MockMate {
 }
 
 // use Declaration Merging to avoid overload interface not match error
-interface EggMock {
+export interface EggMock {
   /**
    * restore mock
    */
