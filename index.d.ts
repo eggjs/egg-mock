@@ -1,4 +1,5 @@
 import { Application, Context } from 'egg';
+import { MockMate } from 'mm';
 
 export interface BaseMockApplication<T, C> extends Application { // tslint:disble-line
   ready(): Promise<void>;
@@ -89,38 +90,41 @@ type LogLevel = 'DEBUG' | 'INFO' | 'WARN' | 'ERROR' | 'NONE';
 
 export interface MockApplication extends BaseMockApplication<Application, Context> { }
 
-declare function mm(target: any, key: string, prop: any): void;
-declare namespace mm {
+export interface EggMock extends MockMate {
   /**
    * Create a egg mocked application
    */
-  function app(option?: MockOption): MockApplication;
+  app: (option?: MockOption) => MockApplication;
 
   /**
    * Create a mock cluster server, but you can't use API in application, you should test using supertest
    */
-  function cluster(option?: MockOption): MockApplication;
+  cluster: (option?: MockOption) => MockApplication;
 
   /**
    * mock the serverEnv of Egg
    */
-  function env(env: EnvType): void;
+  env: (env: EnvType) => void;
 
   /**
    * mock console level
    */
-  function consoleLevel(level: LogLevel): void;
+  consoleLevel: (level: LogLevel) => void;
 
   /**
    * set EGG_HOME path
    */
-  function home(homePath: string): void;
+  home: (homePath: string) => void;
 
+}
+
+// use Declaration Merging to avoid overload interface not match error
+interface EggMock {
   /**
    * restore mock
    */
-  function restore(): void;
+  restore: () => void;  
 }
 
-export type EggMock = typeof mm;
+declare const mm: EggMock;
 export default mm;
