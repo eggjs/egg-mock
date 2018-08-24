@@ -116,14 +116,10 @@ export interface EggMock extends MockMate {
    */
   home: (homePath: string) => void;
 
-}
-
-// use Declaration Merging to avoid overload interface not match error
-export interface EggMock {
   /**
    * restore mock
    */
-  restore: () => void;  
+  restore: () => any;
 }
 
 declare const mm: EggMock;
