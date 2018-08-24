@@ -1,4 +1,10 @@
 
+3.19.5 / 2018-08-24
+==================
+
+**fixes**
+  * [[`1635a90`](http://github.com/eggjs/egg-mock/commit/1635a9098d16df4ba4195d2e289476471bf96cb2)] - fix: show expectLog last 500 words on assert error (#85) (fengmk2 <<fengmk2@gmail.com>>)
+
 3.19.4 / 2018-08-24
 ===================
 
