@@ -282,5 +282,16 @@ describe('test/app_proxy.test.js', () => {
       assert(app._agent.eggReadyData.baseDir === baseDir);
       assert(app._app.eggReadyData.baseDir === baseDir);
     });
+
+    it('should broadcast message successfully', () => {
+      assert(app._app.recievedBroadcastAction === true);
+      assert(app._agent.recievedBroadcastAction === true);
+      assert(app._app.recievedAgentRecievedAction === true);
+    });
+
+    it('should send message from app to app', () => {
+      assert(app._app.recievedAppAction === true);
+    });
+
   });
 });
