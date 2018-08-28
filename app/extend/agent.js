@@ -16,11 +16,6 @@ module.exports = {
     return this._mockHttpclient(...args);
   },
 
-  mockUrllib(...args) {
-    this.deprecate('[egg-mock] Please use app.agent.mockHttpclient instead of app.agent.mockUrllib');
-    return this.mockHttpclient(...args);
-  },
-
   /**
    * @see mm#restore
    * @method Agent#mockRestore
