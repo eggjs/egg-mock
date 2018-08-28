@@ -1,4 +1,10 @@
 
+3.19.7 / 2018-08-28
+==================
+
+**fixes**
+  * [[`cc6b976`](http://github.com/eggjs/egg-mock/commit/cc6b976a66103dca44428e9ca4cf6e8d18b8323b)] - fix: app.messenger.broadcast send to self (君羽 <<ImHype@users.noreply.github.com>>)
+
 3.19.6 / 2018-08-24
 ==================
 
