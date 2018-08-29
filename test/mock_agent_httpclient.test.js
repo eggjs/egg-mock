@@ -226,20 +226,6 @@ describe('test/mock_agent_httpclient.test.js', () => {
       });
   });
 
-  it('should deprecate mockUrllib', done => {
-    agent.mockUrllib(url, {
-      data: 'mock url test',
-    });
-    httpclient()
-      .then(data => {
-        assert.deepEqual(data, {
-          get: 'mock url test',
-          post: 'mock url test',
-        });
-        done();
-      });
-  });
-
   it('should mock url and get reponse event on urllib', done => {
     agent.mockHttpclient(url, {
       data: new Buffer('mock response'),

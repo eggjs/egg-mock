@@ -424,6 +424,16 @@ app.mockHttpclient(/\/users\/[a-z]$/i, {
 });
 ```
 
+You can alse mock agent.httpclient
+
+```js
+app.agent.mockHttpclient('https://eggjs.org', {
+  data: {
+    name: 'egg',
+  },
+});
+```
+
 ## Bootstrap
 
 We also provide a bootstrap file for applications' unit test to reduce duplicated code:
