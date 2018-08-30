@@ -1,4 +1,10 @@
 
+3.20.0 / 2018-08-30
+==================
+
+**features**
+  * [[`283eef3`](http://github.com/eggjs/egg-mock/commit/283eef3a4f1b0bcd90cc0d6bcf6de9fe136d8503)] - feat: add `app.agent.mockHttpclient()` for agent (#82) (limerick <<guods2015@gmail.com>>)
+
 3.19.7 / 2018-08-28
 ==================
 
