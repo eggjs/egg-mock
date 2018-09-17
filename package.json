@@ -31,6 +31,7 @@
     "coffee": "^5.1.0",
     "debug": "^4.0.1",
     "detect-port": "^1.2.3",
+    "egg-logger": "^1.7.1",
     "egg-utils": "^2.4.1",
     "extend2": "^1.0.0",
     "get-ready": "^2.0.1",
