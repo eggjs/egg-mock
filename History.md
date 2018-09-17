@@ -1,4 +1,13 @@
 
+3.20.1 / 2018-09-17
+==================
+
+**fixes**
+  * [[`4b5dbb5`](http://github.com/eggjs/egg-mock/commit/4b5dbb512bf8f598d5ea5361c58ae9d40d528ff8)] - fix: add app.mockLog() to improve app.expectLog() more stable (#87) (fengmk2 <<fengmk2@gmail.com>>)
+
+**others**
+  * [[`a64db33`](http://github.com/eggjs/egg-mock/commit/a64db33d2ee68a76f7c41303e79e37099f33b373)] - deps: add egg-logger dependency (#88) (fengmk2 <<fengmk2@gmail.com>>)
+
 3.20.0 / 2018-08-30
 ==================
 
