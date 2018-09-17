@@ -7,6 +7,7 @@ const fs = require('fs');
 const merge = require('merge-descriptors');
 const is = require('is-type-of');
 const assert = require('assert');
+const Transport = require('egg-logger').Transport;
 const mockHttpclient = require('../../lib/mock_httpclient');
 const supertestRequest = require('../../lib/supertest');
 
@@ -320,7 +321,6 @@ module.exports = {
     // make sure mock once
     if (logger._mockLogs) return;
 
-    const Transport = require('egg-logger').Transport;
     const transport = new Transport(logger.options);
     // https://github.com/eggjs/egg-logger/blob/master/lib/logger.js#L64
     const log = logger.log;
