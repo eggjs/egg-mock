@@ -121,6 +121,44 @@ function call(method) {
         assert(err.message.includes('app-web.log'));
       }
     });
+
+    it('should app.mockLog() then app.expectLog() work', function* () {
+      app.mockLog();
+      app.mockLog('logger');
+      app.mockLog('coreLogger');
+      yield app.httpRequest()
+        .get('/logger')
+        .expect(200)
+        .expect({
+          ok: true,
+        });
+      app.expectLog('[app.expectLog() test] ok');
+      app.expectLog('[app.expectLog() test] ok', 'logger');
+      app.expectLog('[app.expectLog(coreLogger) test] ok', 'coreLogger');
+
+      if (method === 'app') {
+        app.expectLog(/\[app\.expectLog\(\) test\] ok/);
+        app.expectLog(/\[app\.expectLog\(\) test\] ok/, app.logger);
+        app.expectLog('[app.expectLog(coreLogger) test] ok', app.coreLogger);
+        app.expectLog(/\[app\.expectLog\(coreLogger\) test\] ok/, 'coreLogger');
+      }
+
+      try {
+        app.expectLog('[app.expectLog(coreLogger) test] ok');
+        throw new Error('should not run this');
+      } catch (err) {
+        assert(err.message.includes('Can\'t find String:"[app.expectLog(coreLogger) test] ok" in '));
+        assert(err.message.includes('app-web.log'));
+      }
+
+      if (method === 'app') {
+        assert(app.logger._mockLogs);
+        assert(app.coreLogger._mockLogs);
+        mm.restore();
+        assert(!app.logger._mockLogs);
+        assert(!app.coreLogger._mockLogs);
+      }
+    });
   });
 
   describe(`mm.${method}({ baseDir, plugin=string })`, () => {

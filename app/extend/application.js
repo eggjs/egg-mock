@@ -308,7 +308,32 @@ module.exports = {
   },
 
   /**
-   * expect str/regexp in the logger
+   * collection logger message, then can be use on `expectLog()`
+   * @param {String|Logger} [logger] - logger instance, default is `ctx.logger`
+   * @method App#mockLog
+   */
+  mockLog(logger) {
+    logger = logger || this.logger;
+    if (typeof logger === 'string') {
+      logger = this.getLogger(logger);
+    }
+    // make sure mock once
+    if (logger._mockLogs) return;
+
+    const Transport = require('egg-logger').Transport;
+    const transport = new Transport(logger.options);
+    // https://github.com/eggjs/egg-logger/blob/master/lib/logger.js#L64
+    const log = logger.log;
+    mm(logger, '_mockLogs', []);
+    mm(logger, 'log', (level, args, meta) => {
+      const message = transport.log(level, args, meta);
+      logger._mockLogs.push(message);
+      log.apply(logger, [ level, args, meta ]);
+    });
+  },
+
+  /**
+   * expect str/regexp in the logger, if your server disk is slow, please call `mockLog()` first.
    * @param {String|RegExp} str - test str or regexp
    * @param {String|Logger} [logger] - logger instance, default is `ctx.logger`
    * @method App#expectLog
@@ -319,7 +344,12 @@ module.exports = {
       logger = this.getLogger(logger);
     }
     const filepath = logger.options.file;
-    const content = fs.readFileSync(filepath, 'utf8');
+    let content;
+    if (logger._mockLogs && logger._mockLogs.length > 0) {
+      content = logger._mockLogs.join('\n');
+    } else {
+      content = fs.readFileSync(filepath, 'utf8');
+    }
     if (str instanceof RegExp) {
       assert(str.test(content), `Can't find RegExp:"${str}" in ${filepath}, log content: ...${content.substring(content.length - 500)}`);
     } else {
