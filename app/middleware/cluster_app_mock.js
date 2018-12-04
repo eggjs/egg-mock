@@ -76,9 +76,9 @@ module.exports = () => {
       Promise.resolve(fn.call(target, ...args)).then(result => {
         ctx.body = needResult ? { success: true, result } : { success: true };
       });
-    } catch (error) {
+    } catch (err) {
       ctx.status = 500;
-      ctx.body = { success: false, error };
+      ctx.body = { success: false, error: err.message };
     }
   };
 };
