@@ -17,7 +17,13 @@ describe('test/mock_cluster_extend.test.js', () => {
   afterEach(mm.restore);
 
   it('should mock cluster with result', function* () {
-    const result = yield app.mockDevice({ name: 'egg' });
+    let result = yield app.mockDevice({ name: 'egg' });
     assert.deepEqual(result, { name: 'egg', mock: true });
+
+    result = yield app.mockGenerator({ name: 'egg generator' });
+    assert.deepEqual(result, { name: 'egg generator', mock: true });
+
+    result = yield app.mockPromise({ name: 'egg promise' });
+    assert.deepEqual(result, { name: 'egg promise', mock: true });
   });
 });
