@@ -1,4 +1,11 @@
 
+3.21.0 / 2018-12-27
+===================
+
+  **features**
+    * [[`93f8009`](https://github.com/eggjs/egg-mock/commit/93f8009c2f4c7d7f24b361f4713e035a2f993134)] - feat: cluster mock support result (#92) (TZ <<atian25@qq.com>>)
+    * [[`be3d146`](https://github.com/eggjs/egg-mock/commit/be3d1466bf438a379b85429c40c510d6be7ecc26)] - feat: bootstrap support run on jest env (#93) (fengmk2 <<fengmk2@gmail.com>>)
+
 3.20.1 / 2018-09-17
 ==================
 
