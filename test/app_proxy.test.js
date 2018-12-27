@@ -3,6 +3,7 @@
 const path = require('path');
 const assert = require('assert');
 const mm = require('..');
+const { sleep } = require('mz-modules');
 const fixtures = path.join(__dirname, 'fixtures');
 const baseDir = path.join(fixtures, 'app-proxy');
 
@@ -259,7 +260,7 @@ describe('test/app_proxy.test.js', () => {
         baseDir,
         cache: false,
       });
-      return app.ready();
+      return app.ready().then(() => sleep(100));
     });
     after(() => app.close());
 
@@ -273,6 +274,7 @@ describe('test/app_proxy.test.js', () => {
     it('should send message from agent to app', () => {
       assert.deepEqual(app._app.received, [
         'send data when server started',
+        'send data to a random worker',
       ]);
     });
 
