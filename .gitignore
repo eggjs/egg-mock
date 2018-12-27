@@ -5,3 +5,4 @@ logs/
 !test/fixtures/yadan/node_modules
 run/
 .vscode
+.nyc_output

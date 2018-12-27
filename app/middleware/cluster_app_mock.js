@@ -1,6 +1,8 @@
 'use strict';
 
 const debug = require('debug')('egg-mock:middleware:cluster_app_mock');
+const is = require('is-type-of');
+const co = require('co');
 
 module.exports = () => {
   return function clusterAppMock(ctx, next) {
@@ -67,15 +69,16 @@ module.exports = () => {
       }
     }
 
-    let result;
-    if (property) {
-      result = ctx.app[property][method](...args);
-    } else {
-      result = ctx.app[method](...args);
+    const target = property ? ctx.app[property] : ctx.app;
+    let fn = target[method];
+    if (is.generatorFunction(fn)) fn = co.wrap(fn);
+    try {
+      Promise.resolve(fn.call(target, ...args)).then(result => {
+        ctx.body = needResult ? { success: true, result } : { success: true };
+      });
+    } catch (err) {
+      ctx.status = 500;
+      ctx.body = { success: false, error: err.message };
     }
-    if (!needResult) {
-      result = undefined;
-    }
-    ctx.body = { success: true, result };
   };
 };
