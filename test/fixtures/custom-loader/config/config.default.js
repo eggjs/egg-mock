@@ -11,5 +11,9 @@ module.exports = {
       directory: 'app/repository',
       inject: 'ctx',
     },
+    env: {
+      directory: 'app/env',
+      inject: 'ctx',
+    },
   },
 };
