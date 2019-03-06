@@ -52,7 +52,7 @@ describe.only('test/mock_custom_loader.js', () => {
       .expect(200);
   });
 
-  it.only('should not override the existing API', async () => {
+  it('should not override the existing API', async () => {
     assert(app.mockEnv === require('../app/extend/application.js').mockEnv);
   });
 
