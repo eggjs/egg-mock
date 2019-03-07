@@ -17,5 +17,6 @@ module.exports = {
   keep: [
   ],
   semver: [
+    'egg@1',
   ],
 };
