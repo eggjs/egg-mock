@@ -10,7 +10,7 @@ env:
 matrix:
   exclude:
   - node_js: '6'
-    env: EGG_VERSION=1
+    env: EGG_VERSION=2
 install:
   - npm i npminstall
   - sed -i.bak '/"egg":/d' package.json
