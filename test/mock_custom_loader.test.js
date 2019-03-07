@@ -5,7 +5,7 @@ const assert = require('assert');
 const mm = require('..');
 const fixtures = path.join(__dirname, 'fixtures');
 
-describe.only('test/mock_custom_loader.js', () => {
+describe('test/mock_custom_loader.js', () => {
   const pkg = require('egg/package.json');
   if (parseInt(pkg.version, 10) < 2) return;
 
