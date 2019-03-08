@@ -31,13 +31,13 @@ export interface BaseMockApplication<T, C> extends Application { // tslint:disbl
   mockServiceError(service: string, methodName: string, err?: Error): T;
 
   mockHttpclient(mockUrl: string | RegExp, mockMethod: string | string[], mockResult: {
-    data?: Buffer | string | JSON;
+    data?: string | object;
     status?: number;
     headers?: any;
   }): Application;
 
   mockHttpclient(mockUrl: string | RegExp, mockResult: {
-    data?: Buffer | string | JSON;
+    data?: string | obejct;
     status?: number;
     headers?: any;
   }): Application;
