@@ -59,7 +59,7 @@
     "sdk-base": "^3.0.1"
   },
   "ci": {
-    "version": "6, 8, 10",
+    "version": "6, 8, 10, 11",
     "license": true
   },
   "homepage": "https://github.com/eggjs/egg-mock",
