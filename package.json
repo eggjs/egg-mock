@@ -20,7 +20,7 @@
     "test": "npm run lint && npm run test-local",
     "test-local": "egg-bin test",
     "cov": "egg-bin cov",
-    "ci": "npm run autod --check && npm run lint && npm run cov",
+    "ci": "npm run lint && npm run cov",
     "autod": "autod",
     "contributors": "ali-contributors"
   },
@@ -49,9 +49,8 @@
   "devDependencies": {
     "@types/node": "^7.0.18",
     "autod": "^3.0.1",
-    "egg": "^1.16.0",
+    "egg": "^1.17.0",
     "egg-bin": "^4.8.5",
-    "egg-ci": "^1.8.0",
     "eslint": "^5.6.0",
     "eslint-config-egg": "^7.1.0",
     "mkdirp": "^0.5.1",
@@ -60,7 +59,7 @@
     "sdk-base": "^3.0.1"
   },
   "ci": {
-    "version": "6, 8, 10",
+    "version": "6, 8, 10, 11",
     "license": true
   },
   "homepage": "https://github.com/eggjs/egg-mock",
