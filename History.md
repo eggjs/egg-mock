@@ -1,4 +1,13 @@
 
+3.22.0 / 2019-03-11
+==================
+
+**features**
+  * [[`81ed542`](http://github.com/eggjs/egg-mock/commit/81ed5427853067d84901c1848e630a8002ecfcf0)] - feat: add mock API for customLoader (#95) (Haoliang Gao <<sakura9515@gmail.com>>)
+
+**fixes**
+  * [[`58d0b32`](http://github.com/eggjs/egg-mock/commit/58d0b32a5851e4cd31492fe0e85c0e81336b6d04)] - fix:  remove nonexistent type and correct typing (#96) (Sinux <<askb@me.com>>)
+
 3.21.0 / 2018-12-27
 ===================
 
