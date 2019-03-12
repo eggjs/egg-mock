@@ -1,4 +1,10 @@
 
+3.22.1 / 2019-03-12
+==================
+
+**fixes**
+  * [[`3f73bad`](http://github.com/eggjs/egg-mock/commit/3f73bad59aa8acbb14399a914d31b8eb348ff493)] - fix: d.ts typo (#97) (TZ | 天猪 <<atian25@qq.com>>)
+
 3.22.0 / 2019-03-11
 ==================
 
