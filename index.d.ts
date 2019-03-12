@@ -37,7 +37,7 @@ export interface BaseMockApplication<T, C> extends Application { // tslint:disbl
   }): Application;
 
   mockHttpclient(mockUrl: string | RegExp, mockResult: {
-    data?: string | obejct;
+    data?: string | object;
     status?: number;
     headers?: any;
   }): Application;
