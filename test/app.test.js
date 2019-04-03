@@ -54,6 +54,17 @@ describe('test/app.test.js', () => {
     yield app.close();
   });
 
+  it('should emit server event on app without superTest', function* () {
+    const baseDir = path.join(fixtures, 'server');
+    const app = mm.app({
+      baseDir,
+    });
+    yield app.ready();
+    assert(app.server);
+    assert(app.emitServer);
+    yield app.close();
+  });
+
   // TODO: implement ready(err)
   it.skip('should emit error when load Application fail', done => {
     const baseDir = path.join(fixtures, 'app-fail');
