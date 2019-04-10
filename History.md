@@ -1,4 +1,10 @@
 
+3.22.2 / 2019-04-10
+==================
+
+**fixes**
+  * [[`a68ca65`](http://github.com/eggjs/egg-mock/commit/a68ca6549428e6c4dc886231d7c6b7fbefab46c6)] - fix: should emit server (#98) (TZ | 天猪 <<atian25@qq.com>>)
+
 3.22.1 / 2019-03-12
 ==================
 
