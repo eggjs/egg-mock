@@ -17,7 +17,7 @@ const BACKGROUND_TASKS = Symbol('Application#backgroundTasks');
 module.exports = {
   /**
    * mock Context
-   * @method App#mockContext
+   * @function App#mockContext
    * @param {Object} data - ctx data
    * @return {Context} ctx
    * @example
@@ -55,7 +55,7 @@ module.exports = {
 
   /**
    * mock cookie session
-   * @method App#mockSession
+   * @function App#mockSession
    * @param {Object} data - session object
    * @return {App} this
    */
@@ -76,7 +76,7 @@ module.exports = {
 
   /**
    * Mock service
-   * @method App#mockService
+   * @function App#mockService
    * @param {String} service - name
    * @param {String} methodName - method
    * @param {Object/Function/Error} fn - mock you data
@@ -97,7 +97,7 @@ module.exports = {
 
   /**
    * mock service that return error
-   * @method App#mockServiceError
+   * @function App#mockServiceError
    * @param {String} service - name
    * @param {String} methodName - method
    * @param {Error} [err] - error infomation
@@ -163,7 +163,7 @@ module.exports = {
 
   /**
    * mock request
-   * @method App#mockRequest
+   * @function App#mockRequest
    * @param {Request} req - mock request
    * @return {Request} req
    */
@@ -197,7 +197,7 @@ module.exports = {
 
   /**
    * mock cookies
-   * @method App#mockCookies
+   * @function App#mockCookies
    * @param {Object} cookies - cookie
    * @return {Context} this
    */
@@ -222,7 +222,7 @@ module.exports = {
 
   /**
    * mock header
-   * @method App#mockHeaders
+   * @function App#mockHeaders
    * @param {Object} headers - header 对象
    * @return {Context} this
    */
@@ -241,9 +241,9 @@ module.exports = {
 
   /**
    * mock csrf
-   * @method App#mockCsrf
+   * @function App#mockCsrf
    * @return {App} this
-   * @sice 1.11
+   * @since 1.11
    */
   mockCsrf() {
     mm(this.context, 'assertCSRF', () => {});
@@ -253,7 +253,8 @@ module.exports = {
 
   /**
    * mock httpclient
-   * @method App#mockHttpclient
+   * @function App#mockHttpclient
+   * @param {...any} args - args
    * @return {Context} this
    */
   mockHttpclient(...args) {
@@ -270,25 +271,25 @@ module.exports = {
 
   /**
    * @see mm#restore
-   * @method App#mockRestore
+   * @function App#mockRestore
    */
   mockRestore: mm.restore,
 
   /**
    * @see mm
-   * @method App#mm
+   * @function App#mm
    */
   mm,
 
   /**
    * override loadAgent
-   * @method App#loadAgent
+   * @function App#loadAgent
    */
   loadAgent() {},
 
   /**
    * mock serverEnv
-   * @method App#mockEnv
+   * @function App#mockEnv
    * @param  {String} env - serverEnv
    * @return {App} this
    */
@@ -300,7 +301,7 @@ module.exports = {
 
   /**
    * http request helper
-   * @method App#httpRequest
+   * @function App#httpRequest
    * @return {SupertestRequest} req - supertest request
    * @see https://github.com/visionmedia/supertest
    */
@@ -311,7 +312,7 @@ module.exports = {
   /**
    * collection logger message, then can be use on `expectLog()`
    * @param {String|Logger} [logger] - logger instance, default is `ctx.logger`
-   * @method App#mockLog
+   * @function App#mockLog
    */
   mockLog(logger) {
     logger = logger || this.logger;
@@ -336,7 +337,7 @@ module.exports = {
    * expect str/regexp in the logger, if your server disk is slow, please call `mockLog()` first.
    * @param {String|RegExp} str - test str or regexp
    * @param {String|Logger} [logger] - logger instance, default is `ctx.logger`
-   * @method App#expectLog
+   * @function App#expectLog
    */
   expectLog(str, logger) {
     logger = logger || this.logger;

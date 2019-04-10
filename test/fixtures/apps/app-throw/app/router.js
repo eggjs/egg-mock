@@ -19,7 +19,7 @@ module.exports = app => {
   app.get('/throw-unhandledRejection-string', function* () {
     this.body = 'foo';
     new Promise((resolve, reject) => {
-      reject('foo reject string error');
+      reject(new Error('foo reject string error'));
     });
   });
 

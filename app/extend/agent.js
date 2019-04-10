@@ -6,7 +6,8 @@ module.exports = {
 
   /**
    * mock httpclient
-   * @method Agent#mockHttpclient
+   * @function Agent#mockHttpclient
+   * @param {...any} args - args
    * @return {Context} this
    */
   mockHttpclient(...args) {
@@ -18,13 +19,13 @@ module.exports = {
 
   /**
    * @see mm#restore
-   * @method Agent#mockRestore
+   * @function Agent#mockRestore
    */
   mockRestore: mm.restore,
 
   /**
    * @see mm
-   * @method Agent#mm
+   * @function Agent#mm
    */
   mm,
 };

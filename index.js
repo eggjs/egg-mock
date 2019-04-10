@@ -26,7 +26,7 @@ Object.assign(mock, mm, {
 
   /**
    * Create a egg mocked application
-   * @method mm#app
+   * @function mm#app
    * @param {Object} [options]
    * - {String} baseDir - The directory of the application
    * - {Object} plugins - Tustom you plugins
@@ -44,7 +44,7 @@ Object.assign(mock, mm, {
 
   /**
    * Create a egg mocked cluster application
-   * @method mm#cluster
+   * @function mm#cluster
    * @see ClusterApplication
    */
   cluster,
