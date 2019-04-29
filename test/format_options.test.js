@@ -116,6 +116,7 @@ describe('test/format_options.test.js', () => {
 
   it('should throw when no eggPlugin and options.plugin === true', () => {
     const baseDir = path.join(__dirname, 'fixtures/plugin_throw');
+    const packageJson = path.join(baseDir, 'package.json');
     mm(process, 'cwd', () => {
       return baseDir;
     });
@@ -123,7 +124,7 @@ describe('test/format_options.test.js', () => {
       formatOptions({
         plugin: true,
       });
-    }, new RegExp(`should set eggPlugin in ${baseDir}/package.json`));
+    }, new RegExp(`should set eggPlugin in ${packageJson}`));
   });
 
   it('should mock process.env.HOME when EGG_SERVER_ENV is default, test, prod', () => {
