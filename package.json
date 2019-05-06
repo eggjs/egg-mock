@@ -61,7 +61,6 @@
     "sdk-base": "^3.0.1"
   },
   "ci": {
-    "type": "travis",
     "version": "6, 8, 10, 12",
     "license": true
   },
