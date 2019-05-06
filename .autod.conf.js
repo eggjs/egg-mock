@@ -7,12 +7,18 @@ module.exports = {
   exclude: [
     'test/fixtures',
   ],
+  dep: [
+    '@types/power-assert',
+  ],
   devdep: [
     'autod',
     'egg',
     'egg-bin',
     'eslint',
     'eslint-config-egg',
+  ],
+  ignore: [
+    'egg-core',
   ],
   keep: [
   ],
