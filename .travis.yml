@@ -7,6 +7,7 @@ node_js:
   - '6'
   - '8'
   - '10'
+  - '12'
 env:
   - EGG_VERSION=1
   - EGG_VERSION=2
@@ -14,6 +15,10 @@ matrix:
   exclude:
   - node_js: '6'
     env: EGG_VERSION=2
+  - node_js: '6'
+    os: windows
+  - node_js: '8'
+    os: windows
 install:
   - npm i npminstall
   - sed -i.bak '/"egg":/d' package.json
