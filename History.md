@@ -1,4 +1,10 @@
 
+3.22.4 / 2019-05-06
+==================
+
+**fixes**
+  * [[`478581a`](http://github.com/eggjs/egg-mock/commit/478581a7851d19286c4e689af421a70cae27d26d)] - fix: remove egg-core deps (#101) (TZ | 天猪 <<atian25@qq.com>>)
+
 3.22.3 / 2019-05-06
 ==================
 
