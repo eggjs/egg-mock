@@ -1,4 +1,10 @@
 
+3.22.3 / 2019-05-06
+==================
+
+**fixes**
+  * [[`6174f9b`](http://github.com/eggjs/egg-mock/commit/6174f9b37698399785b99e86f2f45630f78a084f)] - fix: throw error when an egg plugin test is using bootstrap (#100) (TZ | 天猪 <<atian25@qq.com>>)
+
 3.22.2 / 2019-04-10
 ==================
 
