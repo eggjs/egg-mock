@@ -42,8 +42,8 @@
     "methods": "^1.1.2",
     "mm": "^2.5.0",
     "power-assert": "^1.6.1",
-    "rimraf": "^2.6.3",
     "supertest": "^4.0.2",
+    "mz-modules": "^2.1.0",
     "urllib": "^2.33.3"
   },
   "devDependencies": {
@@ -55,7 +55,6 @@
     "eslint": "^5.16.0",
     "eslint-config-egg": "^7.4.1",
     "mkdirp": "^0.5.1",
-    "mz-modules": "^2.1.0",
     "pedding": "^1.1.0",
     "sdk-base": "^3.0.1"
   },

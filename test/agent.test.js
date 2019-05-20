@@ -3,7 +3,7 @@
 const mm = require('..');
 const fs = require('fs');
 const path = require('path');
-const rimraf = require('rimraf');
+const { rimraf } = require('mz-modules');
 const assert = require('assert');
 
 const fixtures = path.join(__dirname, 'fixtures');
