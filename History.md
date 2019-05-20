@@ -1,4 +1,10 @@
 
+3.23.0 / 2019-05-20
+==================
+
+**features**
+  * [[`9ada7f0`](http://github.com/eggjs/egg-mock/commit/9ada7f004def359a0b17f3824cea946abe4ed1f2)] - feat: mockHttpclient support fn (#103) (TZ | 天猪 <<atian25@qq.com>>)
+
 3.22.4 / 2019-05-06
 ==================
 
