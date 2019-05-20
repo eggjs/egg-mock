@@ -402,7 +402,7 @@ app.get('/', function*() {
 });
 
 app.mockHttpclient('https://eggjs.org', {
-  // can be buffer / string / json，
+  // can be buffer / string / json / function
   // will auto convert to buffer
   // follow options.dataType to convert
   data: 'mock egg',
@@ -411,6 +411,7 @@ app.mockHttpclient('https://eggjs.org', {
 // app.mockHttpclient('https://eggjs.org', [ 'get' , 'head' ], mockResponse); // mock get and head
 // app.mockHttpclient('https://eggjs.org', '*', mockResponse); // mock all methods
 // app.mockHttpclient('https://eggjs.org', mockResponse); // mock all methods by default
+// app.mockHttpclient('https://eggjs.org', 'get', function(url, opt) { return 'xxx' }); // support fn
 
 return app.httpRequest()
   .post('/')

@@ -29,6 +29,7 @@ app.ready().then(() => {
 
   app.mockCsrf();
 
+  app.mockHttpclient('https://eggjs.org', 'mock egg');
   app.mockHttpclient('https://eggjs.org', {
     data: 'mock egg',
     status: 200,
@@ -38,7 +39,19 @@ app.ready().then(() => {
 
   app.mockHttpclient('https://eggjs.org', '*', { data: 'bar' });
 
+  app.mockHttpclient('https://eggjs.org', () => ({
+    data: 'mock egg',
+    status: 200,
+  }));
+
+  app.mockHttpclient('https://eggjs.org', function (url, opts) {
+    url.toLowerCase();
+    opts.data;
+    return 'a';
+  });
+
   app.httpRequest().post('/user').set('a', 'b').send().expect(200);
+
   console.log('   ts run ok');
   app.close();
   mm.restore();

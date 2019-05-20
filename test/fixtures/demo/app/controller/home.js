@@ -38,15 +38,18 @@ exports.header = function* () {
 exports.urllib = function* () {
   const url = 'http://' + this.host;
   const method = this.query.method || 'request';
+  const data = this.query.data ? JSON.parse(this.query.data) : undefined;
   const dataType = this.query.dataType;
   let r = this.app.httpclient[method](url + '/mock_url', {
     dataType,
+    data,
   });
   if (method === 'request') r = r.then(d => d);
   const r1 = yield r;
   const r2 = yield this.app.httpclient[method](url + '/mock_url', {
     method: 'POST',
     dataType,
+    data,
     headers: {
       'x-custom': 'custom',
     },

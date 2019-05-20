@@ -28,7 +28,7 @@ describe('test/mock_httpclient.test.js', () => {
     done = pedding(2, done);
     app.mockCsrf();
     app.mockHttpclient(url, {
-      data: new Buffer('mock response'),
+      data: Buffer.from('mock response'),
     });
 
     request(server)
@@ -60,12 +60,14 @@ describe('test/mock_httpclient.test.js', () => {
     app.httpclient.on('response', function(result) {
       if (count === 0) {
         assert.deepEqual(result.req.options, {
+          data: undefined,
           dataType: undefined,
           method: 'GET',
           headers: {},
         });
       } else if (count === 1) {
         assert.deepEqual(result.req.options, {
+          data: undefined,
           dataType: undefined,
           method: 'POST',
           headers: {
@@ -81,7 +83,7 @@ describe('test/mock_httpclient.test.js', () => {
     done = pedding(2, done);
     app.mockCsrf();
     app.mockHttpclient(url, [ 'get', 'post' ], {
-      data: new Buffer('mock response'),
+      data: Buffer.from('mock response'),
     });
 
     request(server)
@@ -110,7 +112,7 @@ describe('test/mock_httpclient.test.js', () => {
     done = pedding(2, done);
     app.mockCsrf();
     app.mockHttpclient(url, '*', {
-      data: new Buffer('mock response'),
+      data: Buffer.from('mock response'),
     });
 
     request(server)
@@ -138,7 +140,7 @@ describe('test/mock_httpclient.test.js', () => {
   it('should mock url post', done => {
     app.mockCsrf();
     app.mockHttpclient(url, 'post', {
-      data: new Buffer('mock url post'),
+      data: Buffer.from('mock url post'),
     });
 
     request(server)
@@ -265,7 +267,7 @@ describe('test/mock_httpclient.test.js', () => {
   it('should mock url and get reponse event on urllib', done => {
     app.mockCsrf();
     app.mockHttpclient(/\/mock_url$/, {
-      data: new Buffer('mock response'),
+      data: Buffer.from('mock response'),
     });
 
     request(server)
@@ -294,6 +296,23 @@ describe('test/mock_httpclient.test.js', () => {
       .get('/data_type')
       .expect({
         a: 1,
+      })
+      .expect(200);
+  });
+
+  it('should support fn', function* () {
+    app.mockCsrf();
+    app.mockHttpclient(url, 'get', (url, opt) => {
+      return `mock ${url} with ${opt.data.a}`;
+    });
+    app.mockHttpclient(url, 'post', 'mock url post');
+
+    yield request(server)
+      .get('/urllib')
+      .query({ data: JSON.stringify({ a: 'b' }) })
+      .expect({
+        get: `mock ${url} with b`,
+        post: 'mock url post',
       })
       .expect(200);
   });
