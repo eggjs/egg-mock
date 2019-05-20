@@ -1,4 +1,10 @@
 
+3.23.1 / 2019-05-20
+==================
+
+**fixes**
+  * [[`6be0c43`](http://github.com/eggjs/egg-mock/commit/6be0c431ee1fd651c4f0bb6f433d7c4444b74708)] - fix: rimraf (#104) (TZ | 天猪 <<atian25@qq.com>>)
+
 3.23.0 / 2019-05-20
 ==================
 
