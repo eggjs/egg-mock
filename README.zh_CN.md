@@ -311,6 +311,61 @@ it('should work', () => {
 
 更多信息请查看 [supertest](https://github.com/visionmedia/supertest) 的 API 说明。
 
+### app.httpAgent(opt?)
+
+创建一个有会话状态的 http 服务的辅助工具。
+
+**router**
+``` js
+module.exports = app => {
+  app.get('home', '/', function* () {
+    this.cookies.set('cookie', 'hey');
+    this.body = 'home';
+  });
+
+  app.get('session', '/return', function* () {
+    const cookie = this.cookies.get('cookie');
+    if (cookie) {
+      this.body = cookie;
+    } else {
+      this.body = ':(';
+    }
+  });
+};
+```
+
+**test**
+``` js
+let agent;
+before(() => {
+  return app.ready().then(() => {
+    // 使用 supertest 的 Agent opt 参数是一个可选的配置
+    agent = app.httpAgent();
+  });
+});
+
+it('should not cookies', function(done) {
+  agent
+    .get('/return')
+    .expect(':(', done);
+});
+it('should save cookies', function(done) {
+  agent
+    .get('/')
+    .expectHeader('set-cookie')
+    .expect(200, done);
+});
+
+it('should send cookies', function(done) {
+  agent
+    .get('/return')
+    .expect('hey', done);
+});
+```
+
+更多信息请查看 [supertest](https://github.com/visionmedia/supertest) 的 API 说明。
+
+
 #### .unexpectHeader(name)
 
 断言当前请求响应不包含指定 header

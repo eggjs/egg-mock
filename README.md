@@ -300,6 +300,60 @@ it('should work', () => {
 
 See [supertest](https://github.com/visionmedia/supertest) to get more APIs.
 
+### app.httpAgent(opt?)
+
+Request current app http server and has session.
+
+**router**
+``` js
+module.exports = app => {
+  app.get('home', '/', function* () {
+    this.cookies.set('cookie', 'hey');
+    this.body = 'home';
+  });
+
+  app.get('session', '/return', function* () {
+    const cookie = this.cookies.get('cookie');
+    if (cookie) {
+      this.body = cookie;
+    } else {
+      this.body = ':(';
+    }
+  });
+};
+```
+
+**test**
+``` js
+let agent;
+before(() => {
+  return app.ready().then(() => {
+    // use supertest Agent optional opt param
+    agent = app.httpAgent();
+  });
+});
+
+it('should not cookies', function(done) {
+  agent
+    .get('/return')
+    .expect(':(', done);
+});
+it('should save cookies', function(done) {
+  agent
+    .get('/')
+    .expectHeader('set-cookie')
+    .expect(200, done);
+});
+
+it('should send cookies', function(done) {
+  agent
+    .get('/return')
+    .expect('hey', done);
+});
+```
+
+See [supertest](https://github.com/visionmedia/supertest) to get more APIs.
+
 #### .unexpectHeader(name)
 
 Assert current response not contains the specified header
