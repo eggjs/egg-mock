@@ -26,9 +26,15 @@ describe('test/mock_agent_httpclient.test.js', () => {
   afterEach(mm.restore);
 
   it('should mock url and get reponse event on urllib', done => {
-    done = pedding(2, done);
+    done = pedding(3, done);
     agent.mockHttpclient(url, {
       data: Buffer.from('mock response'),
+    });
+
+    agent.httpclient.once('request', function(meta) {
+      assert('url' in meta);
+      assert('args' in meta);
+      done();
     });
 
     agent.httpclient.once('response', function(result) {
