@@ -12,7 +12,7 @@ describe('test/mock_http_agent.test.js', () => {
         baseDir: 'http-agent',
       });
       return app.ready().then(() => {
-        agent = app.httpAgent();
+        agent = app.httpAgent({});
       });
     });
     after(() => app.close());
@@ -20,8 +20,8 @@ describe('test/mock_http_agent.test.js', () => {
 
     it('should not cookies', function(done) {
       agent
-        .get('/return')
-        .expect(':(', done);
+        .get('/return', done)
+        .expect(':(');
     });
 
     it('should save cookies', function(done) {
