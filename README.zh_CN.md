@@ -417,7 +417,7 @@ app.get('/', function*() {
 });
 
 app.mockHttpclient('https://eggjs.org', {
-  // 模拟的参数，可以是 buffer / string / json，
+  // 模拟的参数，可以是 buffer / string / json / function
   // 都会转换成 buffer
   // 按照请求时的 options.dataType 来做对应的转换
   data: 'mock egg',

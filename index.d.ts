@@ -30,17 +30,9 @@ export interface BaseMockApplication<T, C> extends Application { // tslint:disbl
    */
   mockServiceError(service: string, methodName: string, err?: Error): T;
 
-  mockHttpclient(mockUrl: string | RegExp, mockMethod: string | string[], mockResult: {
-    data?: string | object;
-    status?: number;
-    headers?: any;
-  }): Application;
+  mockHttpclient(mockUrl: string | RegExp, mockMethod: string | string[], mockResult: MockHttpClientResult): Application;
 
-  mockHttpclient(mockUrl: string | RegExp, mockResult: {
-    data?: string | object;
-    status?: number;
-    headers?: any;
-  }): Application;
+  mockHttpclient(mockUrl: string | RegExp, mockResult: MockHttpClientResult): Application;
 
   /**
    * mock csrf
@@ -52,6 +44,16 @@ export interface BaseMockApplication<T, C> extends Application { // tslint:disbl
    */
   httpRequest(): any;
 }
+
+interface ResultObject {
+  data?: string | object;
+  status?: number;
+  headers?: any;
+}
+
+type ResultFunction = (url?: string, opts?: any) => ResultObject | string | void;
+
+type MockHttpClientResult = ResultObject | ResultFunction | string;
 
 export interface MockOption {
   /**
