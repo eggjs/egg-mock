@@ -1,5 +1,21 @@
 import { Application, Context } from 'egg';
 import { MockMate } from 'mm';
+import { Test, SuperTest, AgentOptions } from 'supertest';
+
+export interface MockTest extends Test {
+  /**
+   * @description headers need not has key
+   * @param {string} key header key
+   * @param callback
+   */
+  unexpectHeader: (key: string, callback?: () => any) => MockTest;
+  /**
+   * @description headers need has key
+   * @param {string} header header key
+   * @param callback
+   */
+  expectHeader: (key: string, callback?: () => any) => MockTest;
+}
 
 export interface BaseMockApplication<T, C> extends Application { // tslint:disble-line
   ready(): Promise<void>;
@@ -42,7 +58,13 @@ export interface BaseMockApplication<T, C> extends Application { // tslint:disbl
   /**
    * http request helper
    */
-  httpRequest(): any;
+  httpRequest(): SuperTest<MockTest>;
+
+  /**
+   * http agent 
+   * @param option 
+   */
+  httpAgent(option?: AgentOptions): SuperTest<MockTest>;
 }
 
 interface ResultObject {

@@ -10,6 +10,7 @@ const assert = require('assert');
 const Transport = require('egg-logger').Transport;
 const mockHttpclient = require('../../lib/mock_httpclient');
 const supertestRequest = require('../../lib/supertest');
+const supertestAgent = require('../../lib/supertest-agent');
 
 const ORIGIN_TYPES = Symbol('egg-mock:originTypes');
 const BACKGROUND_TASKS = Symbol('Application#backgroundTasks');
@@ -307,6 +308,17 @@ module.exports = {
    */
   httpRequest() {
     return supertestRequest(this);
+  },
+
+  /**
+   * http agent helper
+   * @function App#httpAgent
+   * @return {SupertestAgent} agent - supertest agent
+   * @see https://github.com/visionmedia/supertest
+   * @param {object} options agent config
+   */
+  httpAgent(options) {
+    return supertestAgent(this, options);
   },
 
   /**
