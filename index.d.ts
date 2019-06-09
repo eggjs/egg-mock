@@ -1,5 +1,11 @@
 import { Application, Context } from 'egg';
 import { MockMate } from 'mm';
+import { Test } from 'supertest';
+
+interface EggTest extends Test {
+  unexpectHeader(name: string, b: Function): EggTest;
+  expectHeader(name: string, b: Function): EggTest;
+}
 
 export interface BaseMockApplication<T, C> extends Application { // tslint:disble-line
   ready(): Promise<void>;
@@ -42,7 +48,9 @@ export interface BaseMockApplication<T, C> extends Application { // tslint:disbl
   /**
    * http request helper
    */
-  httpRequest(): any;
+  httpRequest(): {
+    [key: string]: (url: string) => EggTest;
+  };
 }
 
 interface ResultObject {

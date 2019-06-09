@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@types/power-assert": "^1.5.0",
+    "@types/supertest": "^2.0.7",
     "await-event": "^2.1.0",
     "co": "^4.6.0",
     "coffee": "^5.2.1",
@@ -41,9 +42,9 @@
     "merge-descriptors": "^1.0.1",
     "methods": "^1.1.2",
     "mm": "^2.5.0",
+    "mz-modules": "^2.1.0",
     "power-assert": "^1.6.1",
     "supertest": "^4.0.2",
-    "mz-modules": "^2.1.0",
     "urllib": "^2.33.3"
   },
   "devDependencies": {
