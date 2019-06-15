@@ -3,9 +3,11 @@ import { MockMate } from 'mm';
 import { Test } from 'supertest';
 
 interface EggTest extends Test {
-  unexpectHeader(name: string, b: Function): EggTest;
-  expectHeader(name: string, b: Function): EggTest;
+  unexpectHeader(name: string, b?: Function): EggTest;
+  expectHeader(name: string, b?: Function): EggTest;
 }
+
+type Methods = 'get' | 'post' | 'delete' | 'del' | 'put' | 'head' | 'options' | 'patch' | 'trace' | 'connect';
 
 export interface BaseMockApplication<T, C> extends Application { // tslint:disble-line
   ready(): Promise<void>;
@@ -49,6 +51,8 @@ export interface BaseMockApplication<T, C> extends Application { // tslint:disbl
    * http request helper
    */
   httpRequest(): {
+    [key in Methods]: (url: string) => EggTest;
+  } & {
     [key: string]: (url: string) => EggTest;
   };
 }
