@@ -2,20 +2,12 @@ import { Application, Context } from 'egg';
 import { MockMate } from 'mm';
 import { Test, SuperTest, AgentOptions } from 'supertest';
 
-export interface MockTest extends Test {
-  /**
-   * @description headers need not has key
-   * @param {string} key header key
-   * @param callback
-   */
-  unexpectHeader: (key: string, callback?: () => any) => MockTest;
-  /**
-   * @description headers need has key
-   * @param {string} header header key
-   * @param callback
-   */
-  expectHeader: (key: string, callback?: () => any) => MockTest;
+interface EggTest extends Test {
+  unexpectHeader(name: string, b?: Function): EggTest;
+  expectHeader(name: string, b?: Function): EggTest;
 }
+
+type Methods = 'get' | 'post' | 'delete' | 'del' | 'put' | 'head' | 'options' | 'patch' | 'trace' | 'connect';
 
 export interface BaseMockApplication<T, C> extends Application { // tslint:disble-line
   ready(): Promise<void>;
@@ -58,13 +50,17 @@ export interface BaseMockApplication<T, C> extends Application { // tslint:disbl
   /**
    * http request helper
    */
-  httpRequest(): SuperTest<MockTest>;
+  httpRequest(): {
+    [key in Methods]: (url: string) => EggTest;
+  } & {
+    [key: string]: (url: string) => EggTest;
+  };
 
   /**
    * http agent 
    * @param option 
    */
-  httpAgent(option?: AgentOptions): SuperTest<MockTest>;
+  httpAgent(option?: AgentOptions): SuperTest<EggTest>;
 }
 
 interface ResultObject {
