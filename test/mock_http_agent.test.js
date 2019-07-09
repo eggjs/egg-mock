@@ -18,23 +18,23 @@ describe('test/mock_http_agent.test.js', () => {
     after(() => app.close());
     afterEach(mm.restore);
 
-    it('should not cookies', function(done) {
-      agent
-        .get('/return', done)
+    it('should not cookies', function() {
+      return agent
+        .get('/return')
         .expect(':(');
     });
 
-    it('should save cookies', function(done) {
-      agent
+    it('should save cookies', function() {
+      return agent
         .get('/')
         .expectHeader('set-cookie')
-        .expect(200, done);
+        .expect(200);
     });
 
-    it('should send cookies', function(done) {
-      agent
+    it('should send cookies', function() {
+      return agent
         .get('/return')
-        .expect('hey', done);
+        .expect('hey');
     });
   });
 });
