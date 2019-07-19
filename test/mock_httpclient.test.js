@@ -317,7 +317,7 @@ describe('test/mock_httpclient.test.js', () => {
       .expect(200);
   });
 
-  it('should mock fn with multi-times request without error', function* () {
+  it('should mock fn with multi-request without error', function* () {
     app.mockCsrf();
     let i = 0;
     app.mockHttpclient(url, 'post', () => {
