@@ -1,4 +1,11 @@
 
+3.23.2 / 2019-09-10
+==================
+
+**fixes**
+  * [[`e494325`](http://github.com/eggjs/egg-mock/commit/e494325562b84876a96062fd061ab4f8c7787a2e)] - fix: mockHttpclient with multi-request (#106) (吖猩 <<whx89768@alibaba-inc.com>>)
+  * [[`d836536`](http://github.com/eggjs/egg-mock/commit/d8365368e2339f25874a7dfc1c573249ae841e8f)] - fix: fix httpRequest function signature (#105) (Colin Cheng <<zbinlin@gmail.com>>)
+
 3.23.1 / 2019-05-20
 ==================
 
