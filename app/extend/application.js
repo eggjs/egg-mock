@@ -333,13 +333,7 @@ module.exports = {
     });
   },
 
-  /**
-   * expect str/regexp in the logger, if your server disk is slow, please call `mockLog()` first.
-   * @param {String|RegExp} str - test str or regexp
-   * @param {String|Logger} [logger] - logger instance, default is `ctx.logger`
-   * @function App#expectLog
-   */
-  expectLog(str, logger) {
+  __checkExpectLog(expectOrNot, str, logger) {
     logger = logger || this.logger;
     if (typeof logger === 'string') {
       logger = this.getLogger(logger);
@@ -351,12 +345,40 @@ module.exports = {
     } else {
       content = fs.readFileSync(filepath, 'utf8');
     }
+    let match;
+    let type;
     if (str instanceof RegExp) {
-      assert(str.test(content), `Can't find RegExp:"${str}" in ${filepath}, log content: ...${content.substring(content.length - 500)}`);
+      match = str.test(content);
+      type = 'RegExp';
     } else {
-      str = String(str);
-      assert(content.includes(str), `Can't find String:"${str}" in ${filepath}, log content: ...${content.substring(content.length - 500)}`);
+      match = content.includes(String(str));
+      type = 'String';
     }
+    if (expectOrNot) {
+      assert(match, `Can't find ${type}:"${str}" in ${filepath}, log content: ...${content.substring(content.length - 500)}`);
+    } else {
+      assert(!match, `Find ${type}:"${str}" in ${filepath}, log content: ...${content.substring(content.length - 500)}`);
+    }
+  },
+
+  /**
+   * expect str/regexp in the logger, if your server disk is slow, please call `mockLog()` first.
+   * @param {String|RegExp} str - test str or regexp
+   * @param {String|Logger} [logger] - logger instance, default is `ctx.logger`
+   * @function App#expectLog
+   */
+  expectLog(str, logger) {
+    this.__checkExpectLog(true, str, logger);
+  },
+
+  /**
+   * not expect str/regexp in the logger, if your server disk is slow, please call `mockLog()` first.
+   * @param {String|RegExp} str - test str or regexp
+   * @param {String|Logger} [logger] - logger instance, default is `ctx.logger`
+   * @function App#notExpectLog
+   */
+  notExpectLog(str, logger) {
+    this.__checkExpectLog(false, str, logger);
   },
 
   // private method

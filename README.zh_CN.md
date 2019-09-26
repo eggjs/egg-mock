@@ -275,11 +275,11 @@ mm.app({
 
 如果是通过 ava 等并行测试框架进行测试，需要手动在执行测试前进行统一的日志清理，不能通过 mm 来处理，设置 `clean` 为 `false`。
 
-### app.mockLog([logger]) and app.expectLog(str[, logger])
+### app.mockLog([logger]) and app.expectLog(str[, logger]), app.notExpectLog(str[, logger])
 
 断言指定的字符串记录在指定的日志中。
-建议 `app.mockLog()` 和 `app.expectLog()` 配对使用。
-单独使用 `app.expectLog()` 需要依赖日志的写入速度，在服务器磁盘高 IO 的时候，会出现不稳定的结果。
+建议 `app.mockLog()` 和 `app.expectLog()` 或者 `app.notExpectLog()` 配对使用。
+单独使用 `app.expectLog()` 或者 `app.notExpectLog()` 需要依赖日志的写入速度，在服务器磁盘高 IO 的时候，会出现不稳定的结果。
 
 ```js
 it('should work', async () => {
@@ -293,6 +293,10 @@ it('should work', async () => {
   app.expectLog('foo in logger');
   app.expectLog('foo in coreLogger', 'coreLogger');
   app.expectLog('foo in myCustomLogger', 'myCustomLogger');
+
+  app.notExpectLog('bar in logger');
+  app.notExpectLog('bar in coreLogger', 'coreLogger');
+  app.notExpectLog('bar in myCustomLogger', 'myCustomLogger');
 });
 ```
 

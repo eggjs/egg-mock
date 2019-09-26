@@ -265,11 +265,11 @@ Clean all logs directory, default is true.
 
 If you are using `ava`, disable it.
 
-### app.mockLog([logger]) and app.expectLog(str[, logger])
+### app.mockLog([logger]) and app.expectLog(str[, logger]), app.notExpectLog(str[, logger])
 
 Assert some string value in the logger instance.
-It is recommended to pair `app.mockLog()` with `app.expectLog()`.
-Using `app.expectLog()` alone requires dependency on the write speed of the log. When the server disk is high IO, unstable results will occur.
+It is recommended to pair `app.mockLog()` with `app.expectLog()` or `app.notExpectLog()`.
+Using `app.expectLog()` or `app.notExpectLog()` alone requires dependency on the write speed of the log. When the server disk is high IO, unstable results will occur.
 
 ```js
 it('should work', async () => {
@@ -282,6 +282,10 @@ it('should work', async () => {
   app.expectLog('foo in logger');
   app.expectLog('foo in coreLogger', 'coreLogger');
   app.expectLog('foo in myCustomLogger', 'myCustomLogger');
+
+  app.notExpectLog('bar in logger');
+  app.notExpectLog('bar in coreLogger', 'coreLogger');
+  app.notExpectLog('bar in myCustomLogger', 'myCustomLogger');
 });
 ```
 
