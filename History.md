@@ -1,4 +1,10 @@
 
+3.24.0 / 2019-09-26
+==================
+
+**features**
+  * [[`315e685`](http://github.com/eggjs/egg-mock/commit/315e685d2059ec61e62e9109da8b58f9bf5552cd)] - feat: support app.notExpectLog() (#107) (fengmk2 <<fengmk2@gmail.com>>)
+
 3.23.2 / 2019-09-10
 ==================
 
