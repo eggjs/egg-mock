@@ -106,7 +106,7 @@ function call(method) {
         });
     });
 
-    it('should app.expectLog() work', function* () {
+    it('should app.expectLog(), app.notExpectLog() work', function* () {
       yield app.httpRequest()
         .get('/logger')
         .expect(200)
@@ -117,11 +117,20 @@ function call(method) {
       app.expectLog('[app.expectLog() test] ok', 'logger');
       app.expectLog('[app.expectLog(coreLogger) test] ok', 'coreLogger');
 
+      app.notExpectLog('[app.notExpectLog() test] fail');
+      app.notExpectLog('[app.notExpectLog() test] fail', 'logger');
+      app.notExpectLog('[app.notExpectLog(coreLogger) test] fail', 'coreLogger');
+
       if (method === 'app') {
         app.expectLog(/\[app\.expectLog\(\) test\] ok/);
         app.expectLog(/\[app\.expectLog\(\) test\] ok/, app.logger);
         app.expectLog('[app.expectLog(coreLogger) test] ok', app.coreLogger);
         app.expectLog(/\[app\.expectLog\(coreLogger\) test\] ok/, 'coreLogger');
+
+        app.notExpectLog(/\[app\.notExpectLog\(\) test\] fail/);
+        app.notExpectLog(/\[app\.notExpectLog\(\) test\] fail/, app.logger);
+        app.notExpectLog('[app.notExpectLog(coreLogger) test] fail', app.coreLogger);
+        app.notExpectLog(/\[app\.notExpectLog\(coreLogger\) test\] fail/, 'coreLogger');
       }
 
       try {
@@ -129,6 +138,14 @@ function call(method) {
         throw new Error('should not run this');
       } catch (err) {
         assert(err.message.includes('Can\'t find String:"[app.expectLog(coreLogger) test] ok" in '));
+        assert(err.message.includes('app-web.log'));
+      }
+
+      try {
+        app.notExpectLog('[app.expectLog() test] ok');
+        throw new Error('should not run this');
+      } catch (err) {
+        assert(err.message.includes('Find String:"[app.expectLog() test] ok" in '));
         assert(err.message.includes('app-web.log'));
       }
     });
@@ -147,11 +164,20 @@ function call(method) {
       app.expectLog('[app.expectLog() test] ok', 'logger');
       app.expectLog('[app.expectLog(coreLogger) test] ok', 'coreLogger');
 
+      app.notExpectLog('[app.notExpectLog() test] fail');
+      app.notExpectLog('[app.notExpectLog() test] fail', 'logger');
+      app.notExpectLog('[app.notExpectLog(coreLogger) test] fail', 'coreLogger');
+
       if (method === 'app') {
         app.expectLog(/\[app\.expectLog\(\) test\] ok/);
         app.expectLog(/\[app\.expectLog\(\) test\] ok/, app.logger);
         app.expectLog('[app.expectLog(coreLogger) test] ok', app.coreLogger);
         app.expectLog(/\[app\.expectLog\(coreLogger\) test\] ok/, 'coreLogger');
+
+        app.notExpectLog(/\[app\.notExpectLog\(\) test\] fail/);
+        app.notExpectLog(/\[app\.notExpectLog\(\) test\] fail/, app.logger);
+        app.notExpectLog('[app.notExpectLog(coreLogger) test] fail', app.coreLogger);
+        app.notExpectLog(/\[app\.notExpectLog\(coreLogger\) test\] fail/, 'coreLogger');
       }
 
       try {
@@ -159,6 +185,14 @@ function call(method) {
         throw new Error('should not run this');
       } catch (err) {
         assert(err.message.includes('Can\'t find String:"[app.expectLog(coreLogger) test] ok" in '));
+        assert(err.message.includes('app-web.log'));
+      }
+
+      try {
+        app.notExpectLog('[app.expectLog() test] ok');
+        throw new Error('should not run this');
+      } catch (err) {
+        assert(err.message.includes('Find String:"[app.expectLog() test] ok" in '));
         assert(err.message.includes('app-web.log'));
       }
 
