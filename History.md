@@ -1,4 +1,10 @@
 
+3.24.1 / 2019-09-30
+==================
+
+**fixes**
+  * [[`bd305d2`](http://github.com/eggjs/egg-mock/commit/bd305d21bd54395e597f3fce06758fcbb99ba43f)] - fix: single mode will call app.agent.close (#108) (TZ | 天猪 <<atian25@qq.com>>)
+
 3.24.0 / 2019-09-26
 ==================
 
