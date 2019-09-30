@@ -239,7 +239,6 @@ describe('test/app_proxy.test.js', () => {
         'ready',
         'closed',
         'close',
-        'agent',
         '_agent',
         '_app',
         'on',
