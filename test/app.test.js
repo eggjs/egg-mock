@@ -23,6 +23,7 @@ describe('test/app.test.js', () => {
     });
     yield app.ready();
     assert(app.agent === app._agent);
+    assert(app.agent.app === app._app);
   });
 
   it('should not use cache when app is closed', function* () {
