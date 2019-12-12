@@ -1,4 +1,13 @@
 
+3.25.0 / 2019-12-12
+==================
+
+**features**
+  * [[`4c31c9e`](http://github.com/eggjs/egg-mock/commit/4c31c9e2917eea449e2afddf96fc8d2aabe6ad5e)] - feat: support init hook before mock app init (#109) (TZ | 天猪 <<atian25@qq.com>>)
+
+**fixes**
+  * [[`cbab52a`](http://github.com/eggjs/egg-mock/commit/cbab52a697e6e47abd48ce45320b7c40a0463c12)] - fix: enable sendRandom() method in unittest (#114) (GoodMeowing <<36814673+GoodMeowing@users.noreply.github.com>>)
+
 3.24.2 / 2019-11-07
 ==================
 
