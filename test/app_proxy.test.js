@@ -266,13 +266,17 @@ describe('test/app_proxy.test.js', () => {
       assert.deepEqual(app._agent.received, [
         'send data when app starting',
         'send data when app started',
+        'send data to a random agent',
       ]);
     });
 
     it('should send message from agent to app', () => {
-      assert.deepEqual(app._app.received, [
-        'send data when server started',
-      ]);
+      process.nextTick(() => {
+        assert.deepEqual(app._app.received, [
+          'send data when server started',
+          'send data to a random app',
+        ]);
+      });
     });
 
     it('should receive egg-ready', () => {

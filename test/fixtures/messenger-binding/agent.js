@@ -15,6 +15,7 @@ module.exports = agent => {
   });
   agent.messenger.on('egg-ready', () => {
     agent.messenger.sendToApp('action', 'send data when server started');
+    process.nextTick(() => agent.messenger.sendRandom('action', 'send data to a random app'));
   });
   agent.messenger.on('egg-ready', data => {
     agent.eggReady = true;

@@ -20,6 +20,7 @@ module.exports = app => {
 
   app.ready(() => {
     app.messenger.sendToAgent('action', 'send data when app started');
+    app.messenger.sendRandom('action', 'send data to a random agent')
     app.messenger.broadcast('broadcast-action', 'broadcast action');
     app.messenger.sendToApp('app-action', 'send action to app');
   });

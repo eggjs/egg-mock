@@ -340,7 +340,7 @@ module.exports = {
     }
     const filepath = logger.options.file;
     let content;
-    if (logger._mockLogs && logger._mockLogs.length > 0) {
+    if (logger._mockLogs) {
       content = logger._mockLogs.join('\n');
     } else {
       content = fs.readFileSync(filepath, 'utf8');

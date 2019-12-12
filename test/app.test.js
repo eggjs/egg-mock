@@ -225,6 +225,18 @@ function call(method) {
         assert(!app.coreLogger._mockLogs);
       }
     });
+
+    it('should app.mockLog() don\'t read from file', function* () {
+      yield app.httpRequest()
+        .get('/logger')
+        .expect(200)
+        .expect({
+          ok: true,
+        });
+      app.expectLog('INFO');
+      app.mockLog();
+      app.notExpectLog('INFO');
+    });
   });
 
   describe(`mm.${method}({ baseDir, plugin=string })`, () => {

@@ -1,4 +1,10 @@
 
+3.24.2 / 2019-11-07
+==================
+
+**fixes**
+  * [[`3bf5ded`](http://github.com/eggjs/egg-mock/commit/3bf5ded501608f2b5b3199d8b3d0ca0329dd9df7)] - fix: mockLog don't read file (#113) (Yiyu He <<dead_horse@qq.com>>)
+
 3.24.1 / 2019-09-30
 ==================
 
