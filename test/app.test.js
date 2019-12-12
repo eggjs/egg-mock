@@ -66,6 +66,26 @@ describe('test/app.test.js', () => {
     yield app.close();
   });
 
+  it('support options.beforeInit', function* () {
+    const baseDir = path.join(fixtures, 'app');
+    const app = mm.app({
+      baseDir,
+      customEgg: path.join(__dirname, '../node_modules/egg'),
+      cache: false,
+      beforeInit(instance) {
+        return new Promise(resolve => {
+          setTimeout(() => {
+            instance.options.test = 'abc';
+            resolve();
+          }, 100);
+        });
+      },
+    });
+    yield app.ready();
+    assert(!app.options.beforeInit);
+    assert(app.options.test === 'abc');
+  });
+
   // TODO: implement ready(err)
   it.skip('should emit error when load Application fail', done => {
     const baseDir = path.join(fixtures, 'app-fail');
