@@ -45,4 +45,26 @@ module.exports = app => {
     });
     this.body = { counter };
   });
+
+  app.get('/counter/plusplus', function* () {
+    this.runInBackground(function* (ctx) {
+      // mock io delay
+      yield sleep(10);
+      if (ctx.superMan) {
+        counter += 10;
+      } else {
+        counter++;
+      }
+      ctx.runInBackground(function* (ctx) {
+        // mock io delay
+        yield sleep(10);
+        if (ctx.superMan) {
+          counter += 10;
+        } else {
+          counter++;
+        }
+      });
+    });
+    this.body = { counter };
+  });
 };
