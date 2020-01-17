@@ -1,4 +1,10 @@
 
+3.25.1 / 2020-01-17
+==================
+
+**fixes**
+  * [[`51ef091`](http://github.com/eggjs/egg-mock/commit/51ef091cbb06ae74ff7f9591e3071db648ba5346)] - fix: backgroundTasksFinished ensure all tasks finished (#115) (Yiyu He <<dead_horse@qq.com>>)
+
 3.25.0 / 2019-12-12
 ==================
 
