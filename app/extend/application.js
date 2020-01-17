@@ -390,6 +390,10 @@ module.exports = {
     this._backgroundTasks = [];
     return Promise.all(tasks).then(() => {
       debug('finished %d background tasks', tasks.length);
+      if (this._backgroundTasks.length) {
+        debug('new background tasks created: %s', this._backgroundTasks.length);
+        return this.backgroundTasksFinished();
+      }
     });
   },
 
