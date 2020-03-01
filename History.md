@@ -1,4 +1,10 @@
 
+4.0.0 / 2020-03-01
+==================
+
+**features**
+  * [[`c39109f`](http://github.com/eggjs/egg-mock/commit/c39109faa0eff01d8597c3988c04459c3520f309)] - feat: upgrade mm@3 (#116) (Yiyu He <<dead_horse@qq.com>>)
+
 3.25.1 / 2020-01-17
 ==================
 
