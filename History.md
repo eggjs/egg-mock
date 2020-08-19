@@ -1,4 +1,10 @@
 
+4.0.1 / 2020-08-19
+==================
+
+**features**
+  * [[`d5e584e`](http://github.com/eggjs/egg-mock/commit/d5e584e769dd348bc87a99a90f0a6003dfc7a4cf)] - feat: httpclient support mock async function (#117) (Yiyu He <<dead_horse@qq.com>>)
+
 4.0.0 / 2020-03-01
 ==================
 
