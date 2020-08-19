@@ -4,6 +4,7 @@ const pedding = require('pedding');
 const path = require('path');
 const request = require('supertest');
 const assert = require('assert');
+const sleep = require('mz-modules/sleep');
 const mm = require('..');
 const fixtures = path.join(__dirname, 'fixtures');
 
@@ -315,6 +316,29 @@ describe('test/mock_httpclient.test.js', () => {
         post: 'mock url post',
       })
       .expect(200);
+  });
+
+  it('should support async function', function* () {
+    app.mockCsrf();
+    app.mockHttpclient(url, 'get', async (url, opt) => {
+      await sleep(100);
+      return `mock ${url} with ${opt.data.a}`;
+    });
+    app.mockHttpclient(url, 'post', 'mock url post');
+
+    const start = Date.now();
+    yield request(server)
+      .get('/urllib')
+      .query({ data: JSON.stringify({ a: 'b' }) })
+      .expect({
+        get: `mock ${url} with b`,
+        post: 'mock url post',
+      })
+      .expect(200);
+    const used = Date.now() - start;
+    // used ~= 100
+    assert(used < 200);
+    assert(used > 90);
   });
 
   it('should mock fn with multi-request without error', function* () {

@@ -53,6 +53,7 @@
     "coffee": "^5.2.1",
     "egg": "^1.19.0",
     "egg-bin": "^4.13.0",
+    "egg-ci": "^1.15.0",
     "eslint": "^5.16.0",
     "eslint-config-egg": "^7.4.1",
     "mkdirp": "^0.5.1",
@@ -60,7 +61,7 @@
     "sdk-base": "^3.0.1"
   },
   "ci": {
-    "version": "6, 8, 10, 12",
+    "version": "6, 8, 10, 12, 14",
     "license": true
   },
   "homepage": "https://github.com/eggjs/egg-mock",
