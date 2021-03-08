@@ -36,7 +36,7 @@
     "egg-utils": "^2.4.1",
     "extend2": "^1.0.0",
     "get-ready": "^2.0.1",
-    "globby": "^9.2.0",
+    "globby": "^10.0.0",
     "is-type-of": "^1.2.1",
     "ko-sleep": "^1.0.3",
     "merge-descriptors": "^1.0.1",
