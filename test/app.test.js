@@ -109,7 +109,7 @@ describe('test/app.test.js', () => {
     }
 
     assert(catchErr.code === 'customPlugin_99');
-    assert(/framework\.CustomError\: mock error \[https\:\/\/eggjs\.org\/zh-cn\/faq\/customPlugin_99\]/.test(logMsg))
+    assert(/framework\.CustomError\: mock error \[https\:\/\/eggjs\.org\/zh-cn\/faq\/customPlugin_99\]/.test(logMsg));
   });
 
   it('should FrameworkErrorformater work during app boot ready', function* () {
@@ -126,7 +126,7 @@ describe('test/app.test.js', () => {
     }
 
     assert(catchErr.code === 'customPlugin_99');
-    assert(/framework\.CustomError\: mock error \[https\:\/\/eggjs\.org\/zh-cn\/faq\/customPlugin_99\]/.test(logMsg))
+    assert(/framework\.CustomError\: mock error \[https\:\/\/eggjs\.org\/zh-cn\/faq\/customPlugin_99\]/.test(logMsg));
   });
 });
 
