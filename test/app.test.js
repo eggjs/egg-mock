@@ -86,14 +86,47 @@ describe('test/app.test.js', () => {
     assert(app.options.test === 'abc');
   });
 
-  // TODO: implement ready(err)
-  it.skip('should emit error when load Application fail', done => {
+  it('should emit error when load Application fail', done => {
     const baseDir = path.join(fixtures, 'app-fail');
     const app = mm.app({ baseDir, cache: false });
     app.once('error', err => {
       assert(/load error/.test(err.message));
       done();
     });
+  });
+
+  it('should FrameworkErrorformater work during app boot', function* () {
+    let logMsg;
+    let catchErr;
+    mm(process.stderr, 'write', msg => {
+      logMsg = msg;
+    });
+    const app = mm.app({ baseDir: path.join(fixtures, 'app-boot-error') });
+    try {
+      yield app.ready();
+    } catch (err) {
+      catchErr = err;
+    }
+
+    assert(catchErr.code === 'customPlugin_99');
+    assert(/framework\.CustomError\: mock error \[https\:\/\/eggjs\.org\/zh-cn\/faq\/customPlugin_99\]/.test(logMsg))
+  });
+
+  it('should FrameworkErrorformater work during app boot ready', function* () {
+    let logMsg;
+    let catchErr;
+    mm(process.stderr, 'write', msg => {
+      logMsg = msg;
+    });
+    const app = mm.app({ baseDir: path.join(fixtures, 'app-boot-ready-error') });
+    try {
+      yield app.ready();
+    } catch (err) {
+      catchErr = err;
+    }
+
+    assert(catchErr.code === 'customPlugin_99');
+    assert(/framework\.CustomError\: mock error \[https\:\/\/eggjs\.org\/zh-cn\/faq\/customPlugin_99\]/.test(logMsg))
   });
 });
 
