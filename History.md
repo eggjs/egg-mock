@@ -1,4 +1,13 @@
 
+4.1.0 / 2021-04-05
+==================
+
+**features**
+  * [[`ce6ecde`](https://github.com/eggjs/egg-mock.git/commit/ce6ecde700a81ce986347834dbd2dc2d48217f88)] - feat: add consoleLogger error when mockApp init error (mansonchor.github.com <<mansonchor1987@gmail.com>>)
+
+**others**
+  * [[`e7c73e3`](https://github.com/eggjs/egg-mock.git/commit/e7c73e37814b6c9041f37bbcd92b3bb7c35758b3)] - build: remove node@6 (dead-horse <<dead_horse@qq.com>>)
+
 4.0.1 / 2020-08-19
 ==================
 
