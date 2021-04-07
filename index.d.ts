@@ -1,6 +1,6 @@
 import { Application, Context } from 'egg';
 import { MockMate } from 'mm';
-import { Test } from 'supertest';
+import { Test, SuperTest, AgentOptions } from 'supertest';
 
 interface EggTest extends Test {
   unexpectHeader(name: string, b?: Function): EggTest;
@@ -55,6 +55,12 @@ export interface BaseMockApplication<T, C> extends Application { // tslint:disbl
   } & {
     [key: string]: (url: string) => EggTest;
   };
+
+  /**
+   * http agent 
+   * @param option 
+   */
+  httpAgent(option?: AgentOptions): SuperTest<EggTest>;
 }
 
 interface ResultObject {
