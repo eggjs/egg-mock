@@ -1,4 +1,10 @@
 
+3.26.0 / 2021-07-21
+==================
+
+**features**
+  * [[`ef5fef6`](https://github.com/eggjs/egg-mock.git/commit/ef5fef602aa811beb88621d5d060276919f7711d)] - feat: pick https://github.com/eggjs/egg-mock/pull/119/files (#120) (mansonchor.github.com <<mansonchor1987@gmail.com>>)
+
 3.25.1 / 2020-01-17
 ==================
 
