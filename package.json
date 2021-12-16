@@ -17,11 +17,10 @@
   ],
   "scripts": {
     "lint": "eslint lib app index.js test/*.test.js",
-    "tsd": "tsd",
-    "test": "npm run lint && npm run tsd && npm run test-local",
+    "test": "npm run lint && npm run test-local",
     "test-local": "egg-bin test",
     "cov": "egg-bin cov",
-    "ci": "npm run lint && npm run tsd && npm run cov",
+    "ci": "npm run lint && npm run cov",
     "autod": "autod",
     "contributors": "ali-contributors"
   },

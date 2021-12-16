@@ -1,9 +1,11 @@
 import { expectType } from 'tsd';
-import mm, { MockApplication } from '.';
-
-const app = mm.app();
+import { MockApplication } from '.';
+import { app, mock, mm } from './bootstrap';
 
 expectType<MockApplication>(app);
+expectType<MockApplication>(mock.app());
+expectType<MockApplication>(mm.app());
+
 expectType<void>(app.mockLog());
 expectType<void>(app.mockLog('logger'));
 expectType<void>(app.mockLog(app.logger));
