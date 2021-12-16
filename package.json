@@ -17,10 +17,11 @@
   ],
   "scripts": {
     "lint": "eslint lib app index.js test/*.test.js",
-    "test": "npm run lint && npm run test-local",
+    "tsd": "tsd",
+    "test": "npm run lint && npm run tsd && npm run test-local",
     "test-local": "egg-bin test",
     "cov": "egg-bin cov",
-    "ci": "npm run lint && npm run cov",
+    "ci": "npm run lint && npm run tsd && npm run cov",
     "autod": "autod",
     "contributors": "ali-contributors"
   },
@@ -59,10 +60,12 @@
     "eslint-config-egg": "^7.4.1",
     "mkdirp": "^0.5.1",
     "pedding": "^1.1.0",
-    "sdk-base": "^3.0.1"
+    "sdk-base": "^3.0.1",
+    "tsd": "^0.19.0"
   },
   "ci": {
-    "version": "8, 10, 12, 14",
+    "type": "github",
+    "version": "8, 10, 12, 14, 16",
     "license": true
   },
   "homepage": "https://github.com/eggjs/egg-mock",
@@ -78,7 +81,7 @@
     "mock"
   ],
   "engines": {
-    "node": ">= 6.0.0"
+    "node": ">= 8.0.0"
   },
   "author": "popomore <sakura9515@gmail.com>"
 }
