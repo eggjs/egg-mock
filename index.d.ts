@@ -1,4 +1,4 @@
-import { Application, Context } from 'egg';
+import { Application, Context, EggLogger } from 'egg';
 import { MockMate } from 'mm';
 import { Test } from 'supertest';
 
@@ -55,6 +55,13 @@ export interface BaseMockApplication<T, C> extends Application { // tslint:disbl
   } & {
     [key: string]: (url: string) => EggTest;
   };
+
+  /**
+   * mock logger
+   */
+  mockLog(logger?: EggLogger | string): void;
+  expectLog(expected: string | RegExp, logger?: EggLogger | string): void;
+  notExpectLog(expected: string | RegExp, logger?: EggLogger | string): void;
 }
 
 interface ResultObject {
