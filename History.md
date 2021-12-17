@@ -1,4 +1,10 @@
 
+4.2.0 / 2021-12-17
+==================
+
+**features**
+  * [[`b45ad40`](http://github.com/eggjs/egg-mock/commit/b45ad40dd572977986cd86220f090d28c1268b70)] - feat: add mockLog, expectLog to type define (#121) (fengmk2 <<fengmk2@gmail.com>>)
+
 4.1.0 / 2021-04-05
 ==================
 
