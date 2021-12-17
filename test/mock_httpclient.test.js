@@ -326,7 +326,6 @@ describe('test/mock_httpclient.test.js', () => {
     });
     app.mockHttpclient(url, 'post', 'mock url post');
 
-    const start = Date.now();
     yield request(server)
       .get('/urllib')
       .query({ data: JSON.stringify({ a: 'b' }) })
@@ -335,10 +334,6 @@ describe('test/mock_httpclient.test.js', () => {
         post: 'mock url post',
       })
       .expect(200);
-    const used = Date.now() - start;
-    // used ~= 100
-    assert(used < 200);
-    assert(used > 90);
   });
 
   it('should mock fn with multi-request without error', function* () {
