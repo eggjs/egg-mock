@@ -408,6 +408,17 @@ module.exports = {
     this[BACKGROUND_TASKS] = tasks;
   },
 
+  /**
+   * for mock app start fast ready mark, only work in unittest
+   * egg-plugin can use this mark for await ready judge
+   * user control like `EGG_UNITTEST_FAST_READY=true egg-bin test/cov`
+   */
+  get unittestFastReady() {
+    if (process.env.EGG_UNITTEST_FAST_READY === 'true') {
+      return true;
+    }
+    return false;
+  },
 };
 
 function findHeaders(headers, key) {
