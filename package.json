@@ -22,7 +22,7 @@
     "cov": "egg-bin cov",
     "ci": "npm run lint && npm run cov",
     "autod": "autod",
-    "contributors": "ali-contributors"
+    "contributors": "git-contributor"
   },
   "dependencies": {
     "@types/power-assert": "^1.5.0",
@@ -57,6 +57,7 @@
     "egg-errors": "^2.2.1",
     "eslint": "^5.16.0",
     "eslint-config-egg": "^7.4.1",
+    "git-contributor": "^1.1.0",
     "mkdirp": "^0.5.1",
     "pedding": "^1.1.0",
     "sdk-base": "^3.0.1",
