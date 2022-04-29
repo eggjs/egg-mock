@@ -67,7 +67,7 @@
     "os": {
       "github": "linux, macOS"
     },
-    "version": "8, 10, 12, 14, 16, 18",
+    "version": "8, 10, 12, 14, 16",
     "license": true
   },
   "homepage": "https://github.com/eggjs/egg-mock",
