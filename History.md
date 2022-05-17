@@ -1,4 +1,16 @@
 
+4.2.1 / 2022-05-17
+==================
+
+**features**
+  * [[`983e610`](http://github.com/eggjs/egg-mock/commit/983e6106b3047f3c0b8d1871fecf4b851cb3000a)] - feat: allow other envtype (#125) (吖猩 <<whx89768@alibaba-inc.com>>)
+
+**others**
+  * [[`bb9cb79`](http://github.com/eggjs/egg-mock/commit/bb9cb79dbd3d8999cc887d1f0ea952b5df449086)] - 📖 DOC: Change ci status badge (fengmk2 <<fengmk2@gmail.com>>)
+  * [[`cd1f2db`](http://github.com/eggjs/egg-mock/commit/cd1f2dbd08683e60b31b83e3406c32a823124704)] - 📖 DOC: Update contributors (fengmk2 <<fengmk2@gmail.com>>)
+  * [[`74c0d8f`](http://github.com/eggjs/egg-mock/commit/74c0d8f5a9532fa9e3b3f1c29ad27b59d46ea984)] - Create codeql-analysis.yml (fengmk2 <<fengmk2@gmail.com>>)
+  * [[`6bcc866`](http://github.com/eggjs/egg-mock/commit/6bcc8660a94c761dbdcee0a09bcd6d06e8441f49)] - 🤖 TEST: Fix assert cases (#124) (fengmk2 <<fengmk2@gmail.com>>)
+
 4.2.0 / 2021-12-17
 ==================
 
