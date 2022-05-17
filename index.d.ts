@@ -106,7 +106,7 @@ export interface MockOption {
   clean?: boolean;
 }
 
-type EnvType = 'default' | 'test' | 'prod' | 'local' | 'unittest';
+type EnvType = 'default' | 'test' | 'prod' | 'local' | 'unittest' | string & {};
 type LogLevel = 'DEBUG' | 'INFO' | 'WARN' | 'ERROR' | 'NONE';
 
 export interface MockApplication extends BaseMockApplication<Application, Context> { }
