@@ -1,4 +1,10 @@
 
+5.0.0 / 2022-09-29
+==================
+
+**features**
+  * [[`60658ec`](http://github.com/eggjs/egg-mock/commit/60658ecae4a16ac1e52dc3238c279a61262f4620)] - 📦 NEW: [BREAKING] Support egg 3.0 (#126) (fengmk2 <<fengmk2@gmail.com>>)
+
 4.2.1 / 2022-05-17
 ==================
 
