@@ -1,9 +1,8 @@
-'use strict';
 const mm = require('mm');
 const mockHttpclient = require('../../lib/mock_httpclient');
+const mockAgent = require('../../lib/mock_agent');
 
 module.exports = {
-
   /**
    * mock httpclient
    * @function Agent#mockHttpclient
@@ -15,6 +14,15 @@ module.exports = {
       this._mockHttpclient = mockHttpclient(this);
     }
     return this._mockHttpclient(...args);
+  },
+
+  /**
+   * get mock httpclient agent
+   * @function Agent#mockHttpclientAgent
+   * @return {MockAgent} agent
+   */
+  mockAgent() {
+    return mockAgent.getAgent();
   },
 
   /**

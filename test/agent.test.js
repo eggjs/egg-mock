@@ -3,7 +3,7 @@
 const mm = require('..');
 const fs = require('fs');
 const path = require('path');
-const { rimraf } = require('mz-modules');
+const { rimraf } = require('../lib/utils');
 const assert = require('assert');
 
 const fixtures = path.join(__dirname, 'fixtures');
@@ -14,15 +14,15 @@ describe('test/agent.test.js', () => {
   afterEach(() => app.close());
   afterEach(mm.restore);
 
-  it('mock agent ok', function* () {
+  it('mock agent ok', async () => {
     const filepath = path.join(baseDir, 'run/test.txt');
-    rimraf.sync(filepath);
+    await rimraf(filepath);
 
     app = mm.app({
       baseDir,
     });
 
-    yield app.ready();
+    await app.ready();
     assert(fs.readFileSync(filepath, 'utf8') === '123');
   });
 

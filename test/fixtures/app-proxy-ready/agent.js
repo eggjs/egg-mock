@@ -1,7 +1,6 @@
 'use strict';
 
-const sleep = require('ko-sleep');
-
+const { sleep } = require('../../../lib/utils');
 
 module.exports = app => {
   // set timeout let testcase ran before ready

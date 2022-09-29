@@ -407,8 +407,8 @@ return app.httpRequest()
 模拟 httpclient 的请求，例如 `ctx.curl`
 
 ```js
-app.get('/', function*() {
-  const ret = yield this.curl('https://eggjs.org');
+app.get('/', async ctx => {
+  const ret = await ctx.curl('https://eggjs.org');
   this.body = ret.data.toString();
 });
 

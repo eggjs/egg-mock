@@ -3,7 +3,7 @@
 const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
-const sleep = require('mz-modules/sleep');
+const { sleep } = require('../lib/utils');
 const mm = require('..');
 
 const fixtures = path.join(__dirname, 'fixtures');

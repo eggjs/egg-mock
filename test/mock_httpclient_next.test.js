@@ -1,20 +1,19 @@
-'use strict';
-
 const pedding = require('pedding');
 const path = require('path');
 const request = require('supertest');
 const assert = require('assert');
 const { sleep } = require('../lib/utils');
 const mm = require('..');
+
 const fixtures = path.join(__dirname, 'fixtures');
 
-describe('test/mock_httpclient.test.js', () => {
+describe('test/mock_httpclient_next.test.js', () => {
   let app;
   let server;
   let url;
   before(() => {
     app = mm.app({
-      baseDir: path.join(fixtures, 'demo'),
+      baseDir: path.join(fixtures, 'demo_next'),
     });
     return app.ready();
   });
@@ -29,271 +28,255 @@ describe('test/mock_httpclient.test.js', () => {
     done = pedding(2, done);
     app.mockCsrf();
     app.mockHttpclient(url, {
-      data: Buffer.from('mock response'),
+      data: Buffer.from('mock all response'),
     });
 
     request(server)
       .get('/urllib')
       .expect({
-        get: 'mock response',
-        post: 'mock response',
+        get: 'mock all response',
+        post: 'mock all response',
       })
       .expect(200, done);
 
-    app.httpclient.once('response', function(result) {
+    app.httpclient.once('response', result => {
       assert('url' in result.req);
-      assert('size' in result.req);
+      // assert('size' in result.req);
       assert('options' in result.req);
 
-      assert.deepEqual(result.res, {
-        status: 200,
-        statusCode: 200,
-        headers: {},
-        size: 13,
-        aborted: false,
-        rt: 1,
-        keepAliveSocket: false,
-      });
+      assert(result.res.status === 200);
+      assert(result.res.statusCode === 200);
+      assert.deepEqual(result.res.headers, {});
+      assert(result.res.rt);
       done();
     });
 
     let count = 0;
-    app.httpclient.on('response', function(result) {
+    app.httpclient.on('response', result => {
       if (count === 0) {
-        assert.deepEqual(result.req.options, {
-          data: undefined,
-          dataType: undefined,
-          method: 'GET',
-          headers: {},
-        });
+        const options = result.req.options;
+        assert(options.method === 'GET');
       } else if (count === 1) {
-        assert.deepEqual(result.req.options, {
-          data: undefined,
-          dataType: undefined,
-          method: 'POST',
-          headers: {
-            'x-custom': 'custom',
-          },
-        });
+        const options = result.req.options;
+        assert(options.method === 'POST');
+        assert(options.headers['x-custom'] === 'custom');
       }
       count++;
     });
   });
 
-  it('should mock url support multi method', done => {
-    done = pedding(2, done);
+  it('should mock url using app.mockAgent().intercept()', async () => {
+    app.mockCsrf();
+    app.mockAgent()
+      .get(new URL(url).origin)
+      .intercept({
+        path: '/mock_url',
+        method: 'GET',
+      })
+      .reply(200, 'mock GET response');
+    app.mockAgent()
+      .get(new URL(url).origin)
+      .intercept({
+        path: '/mock_url',
+        method: 'POST',
+      })
+      .reply(200, 'mock POST response');
+
+    await request(server)
+      .get('/urllib')
+      .expect({
+        get: 'mock GET response',
+        post: 'mock POST response',
+      })
+      .expect(200);
+  });
+
+  it('should mock url support multi method', async () => {
     app.mockCsrf();
     app.mockHttpclient(url, [ 'get', 'post' ], {
       data: Buffer.from('mock response'),
     });
 
-    request(server)
+    await request(server)
       .get('/urllib')
       .expect({
         get: 'mock response',
         post: 'mock response',
       })
-      .expect(200, done);
-
-    app.httpclient.once('response', function(result) {
-      assert.deepEqual(result.res, {
-        status: 200,
-        statusCode: 200,
-        headers: {},
-        size: 13,
-        aborted: false,
-        rt: 1,
-        keepAliveSocket: false,
-      });
-      done();
-    });
+      .expect(200);
   });
 
-  it('should mock url method support *', done => {
-    done = pedding(2, done);
+  it('should mock url method support *', async () => {
     app.mockCsrf();
     app.mockHttpclient(url, '*', {
-      data: Buffer.from('mock response'),
+      data: Buffer.from('mock * response'),
     });
 
-    request(server)
+    await request(server)
       .get('/urllib')
       .expect({
-        get: 'mock response',
-        post: 'mock response',
+        get: 'mock * response',
+        post: 'mock * response',
       })
-      .expect(200, done);
-
-    app.httpclient.once('response', function(result) {
-      assert.deepEqual(result.res, {
-        status: 200,
-        statusCode: 200,
-        headers: {},
-        size: 13,
-        aborted: false,
-        rt: 1,
-        keepAliveSocket: false,
-      });
-      done();
-    });
+      .expect(200);
   });
 
-  it('should mock url post', done => {
+  it('should mock url post', async () => {
     app.mockCsrf();
     app.mockHttpclient(url, 'post', {
       data: Buffer.from('mock url post'),
     });
 
-    request(server)
+    await request(server)
       .get('/urllib')
       .expect({
         get: 'url get',
         post: 'mock url post',
       })
-      .expect(200, done);
+      .expect(200);
   });
 
-  it('should mock url get and post', done => {
+  it('should mock url get and post', async () => {
     app.mockCsrf();
-    app.mockHttpclient(url, {
-      data: 'mock url get',
-    });
     app.mockHttpclient(url, 'post', {
       data: 'mock url post',
     });
+    app.mockHttpclient(url, {
+      data: 'mock url get',
+    });
 
-    request(server)
+    await request(server)
       .get('/urllib')
       .expect({
         get: 'mock url get',
         post: 'mock url post',
       })
-      .expect(200, done);
+      .expect(200);
   });
 
-  it('should support request', done => {
+  it('should support request', async () => {
     app.mockCsrf();
-    app.mockHttpclient(url, {
-      data: 'mock url get',
-    });
     app.mockHttpclient(url, 'post', {
       data: 'mock url post',
     });
+    app.mockHttpclient(url, {
+      data: 'mock url get',
+    });
 
-    request(server)
+    await request(server)
       .get('/urllib?method=request')
       .expect({
         get: 'mock url get',
         post: 'mock url post',
       })
-      .expect(200, done);
+      .expect(200);
   });
 
-  it('should support curl', done => {
+  it('should support curl', async () => {
     app.mockCsrf();
-    app.mockHttpclient(url, {
-      data: 'mock url get',
-    });
     app.mockHttpclient(url, 'post', {
       data: 'mock url post',
     });
+    app.mockHttpclient(url, {
+      data: 'mock url get',
+    });
 
-    request(server)
+    await request(server)
       .get('/urllib?method=curl')
       .expect({
         get: 'mock url get',
         post: 'mock url post',
       })
-      .expect(200, done);
+      .expect(200);
   });
 
-  it('should support json', done => {
+  it('should support json', async () => {
     app.mockCsrf();
-    app.mockHttpclient(url, {
+    app.mockHttpclient(url, 'get', {
       data: { method: 'get' },
     });
     app.mockHttpclient(url, 'post', {
       data: { method: 'post' },
     });
 
-    request(server)
+    await request(server)
       .get('/urllib?dataType=json')
       .expect({
         get: { method: 'get' },
         post: { method: 'post' },
       })
-      .expect(200, done);
+      .expect(200);
   });
 
-  it('should support text', done => {
+  it('should support text', async () => {
     app.mockCsrf();
-    app.mockHttpclient(url, {
-      data: 'mock url get',
-    });
     app.mockHttpclient(url, 'post', {
       data: 'mock url post',
     });
+    app.mockHttpclient(url, {
+      data: 'mock url get',
+    });
 
-    request(server)
+    await request(server)
       .get('/urllib?dataType=text')
       .expect({
         get: 'mock url get',
         post: 'mock url post',
       })
-      .expect(200, done);
+      .expect(200);
   });
 
-  it('should exits req headers', done => {
+  it('should exits req headers', async () => {
     app.mockCsrf();
     app.mockHttpclient(url, {
       data: 'mock url test',
     });
-    request(server)
+    await request(server)
       .get('/mock_urllib')
       .expect({})
-      .expect(200, done);
+      .expect(200);
   });
 
-  it('should deprecate mockUrllib', done => {
+  it('should deprecate mockUrllib', async () => {
     app.mockCsrf();
     app.mockUrllib(url, {
       data: 'mock url test',
     });
-    request(server)
+    await request(server)
       .get('/mock_urllib')
       .expect({})
-      .expect(200, done);
+      .expect(200);
   });
 
-  it('should mock url and get reponse event on urllib', done => {
+  it('should mock url support RegExp', async () => {
     app.mockCsrf();
     app.mockHttpclient(/\/mock_url$/, {
       data: Buffer.from('mock response'),
     });
 
-    request(server)
+    await request(server)
       .get('/urllib')
       .expect({
         get: 'mock response',
         post: 'mock response',
       })
-      .expect(200, done);
+      .expect(200);
   });
 
-  it('should use copy of mock data', function* () {
+  it('should use copy of mock data', async () => {
     app.mockCsrf();
     app.mockHttpclient(/\/mock_url$/, {
       data: { a: 1 },
     });
 
-    yield request(server)
+    await request(server)
       .get('/data_type')
       .expect({
         a: 1,
       })
       .expect(200);
 
-    yield request(server)
+    await request(server)
       .get('/data_type')
       .expect({
         a: 1,
@@ -301,24 +284,25 @@ describe('test/mock_httpclient.test.js', () => {
       .expect(200);
   });
 
-  it('should support fn', function* () {
+  it('should support fn', async () => {
     app.mockCsrf();
     app.mockHttpclient(url, 'get', (url, opt) => {
-      return `mock ${url} with ${opt.data.a}`;
+      return `mock ${url} with ${opt.path}`;
     });
     app.mockHttpclient(url, 'post', 'mock url post');
 
-    yield request(server)
+    await request(server)
       .get('/urllib')
       .query({ data: JSON.stringify({ a: 'b' }) })
       .expect({
-        get: `mock ${url} with b`,
+        get: `mock ${url}?a=b with /mock_url?a=b`,
         post: 'mock url post',
       })
       .expect(200);
   });
 
-  it('should support async function', function* () {
+  // not support in urllib3
+  it.skip('should support async function', async () => {
     app.mockCsrf();
     app.mockHttpclient(url, 'get', async (url, opt) => {
       await sleep(100);
@@ -326,7 +310,7 @@ describe('test/mock_httpclient.test.js', () => {
     });
     app.mockHttpclient(url, 'post', 'mock url post');
 
-    yield request(server)
+    await request(server)
       .get('/urllib')
       .query({ data: JSON.stringify({ a: 'b' }) })
       .expect({
@@ -336,7 +320,7 @@ describe('test/mock_httpclient.test.js', () => {
       .expect(200);
   });
 
-  it('should mock fn with multi-request without error', function* () {
+  it('should mock fn with multi-request without error', async () => {
     app.mockCsrf();
     let i = 0;
     app.mockHttpclient(url, 'post', () => {
@@ -344,9 +328,9 @@ describe('test/mock_httpclient.test.js', () => {
       return {};
     });
 
-    yield request(server).get('/urllib').expect(200);
-    yield request(server).get('/urllib').expect(200);
-    yield request(server).get('/urllib').expect(200);
+    await request(server).get('/urllib').expect(200);
+    await request(server).get('/urllib').expect(200);
+    await request(server).get('/urllib').expect(200);
     assert(i === 3);
   });
 });
