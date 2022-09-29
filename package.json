@@ -1,6 +1,9 @@
 {
   "name": "egg-mock",
   "version": "4.2.1",
+  "publishConfig": {
+    "tag": "latest-4"
+  },
   "eggPlugin": {
     "name": "egg-mock"
   },
