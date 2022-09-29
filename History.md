@@ -1,4 +1,10 @@
 
+5.0.1 / 2022-09-29
+==================
+
+**features**
+  * [[`ae766ff`](http://github.com/eggjs/egg-mock/commit/ae766ff582a3e14a28b97e15bad5a56efcb542bc)] - 👌 IMPROVE: Mock httpclient support delay ms and repeat times (#127) (fengmk2 <<fengmk2@gmail.com>>)
+
 5.0.0 / 2022-09-29
 ==================
 
