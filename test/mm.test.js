@@ -19,49 +19,49 @@ describe('test/mm.test.js', () => {
     });
     afterEach(() => app.close());
 
-    it('should mock unittest', function* () {
+    it('should mock unittest', async () => {
       app = mm.app({ baseDir: 'apps/env-app', cache: false });
-      yield app.ready();
+      await app.ready();
       assert(app.config.fakeplugin.foo === 'bar-unittest');
       assert(app.config.logger.dir === path.join(baseDir, 'logs/env-app'));
     });
 
-    it('should mock test', function* () {
+    it('should mock test', async () => {
       mm.env('test');
       app = mm.app({ baseDir: 'apps/env-app', cache: false });
-      yield app.ready();
+      await app.ready();
       assert(app.config.fakeplugin.foo === 'bar-test');
       assert(app.config.logger.dir === path.join(baseDir, 'logs/env-app'));
     });
 
-    it('should mock prod', function* () {
+    it('should mock prod', async () => {
       mm.env('prod');
       app = mm.app({ baseDir: 'apps/env-app', cache: false });
-      yield app.ready();
+      await app.ready();
       assert(app.config.fakeplugin.foo === 'bar-prod');
       assert(app.config.logger.dir === path.join(baseDir, 'logs/env-app'));
     });
 
-    it('should mock default', function* () {
+    it('should mock default', async () => {
       mm.env('default');
       app = mm.app({ baseDir: 'apps/env-app', cache: false });
-      yield app.ready();
+      await app.ready();
       assert(app.config.fakeplugin.foo === 'bar-default');
       assert(app.config.logger.dir === path.join(baseDir, 'logs/env-app'));
     });
 
-    it('should mock unittest', function* () {
+    it('should mock unittest', async () => {
       mm.env('unittest');
       app = mm.app({ baseDir: 'apps/env-app', cache: false });
-      yield app.ready();
+      await app.ready();
       assert(app.config.fakeplugin.foo === 'bar-unittest');
       assert(app.config.logger.dir === path.join(baseDir, 'logs/env-app'));
     });
 
-    it('should mock local', function* () {
+    it('should mock local', async () => {
       mm.env('local');
       app = mm.app({ baseDir: 'apps/env-app', cache: false });
-      yield app.ready();
+      await app.ready();
       assert(app.config.fakeplugin.foo === 'bar-default');
       assert(app.config.logger.dir === path.join(baseDir, 'logs/env-app'));
     });
@@ -71,9 +71,9 @@ describe('test/mm.test.js', () => {
     let app;
     after(() => app.close());
 
-    it('keep log dir', function* () {
+    it('keep log dir', async () => {
       app = mm.app({ baseDir: 'apps/app-not-clean', clean: false });
-      yield app.ready();
+      await app.ready();
       assert(fs.existsSync(path.join(__dirname, 'fixtures/apps/app-not-clean/logs/keep')));
     });
   });
@@ -100,7 +100,7 @@ describe('test/mm.test.js', () => {
     });
     after(() => app.close());
 
-    it('should mock home', function* () {
+    it('should mock home', () => {
       assert(app.config.HOME === baseDir);
     });
 

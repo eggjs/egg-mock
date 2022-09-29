@@ -5,22 +5,19 @@ const assert = require('assert');
 const mm = require('..');
 const fixtures = path.join(__dirname, 'fixtures');
 
-describe('test/mock_custom_loader.js', () => {
-  const pkg = require('egg/package.json');
-  if (parseInt(pkg.version, 10) < 2) return;
-
+describe('test/mock_custom_loader.test.js', () => {
   let app;
-  before(function* () {
+  before(async () => {
     app = mm.app({
       baseDir: path.join(fixtures, 'custom-loader'),
     });
-    yield app.ready();
+    await app.ready();
   });
   after(() => app.close());
   afterEach(mm.restore);
 
-  it('should return success', function* () {
-    yield app.httpRequest()
+  it('should return success', async () => {
+    await app.httpRequest()
       .get('/users/popomore')
       .expect({
         adapter: 'docker',
@@ -29,10 +26,10 @@ describe('test/mock_custom_loader.js', () => {
       .expect(200);
   });
 
-  it('should return when mock with data', function* () {
+  it('should return when mock with data', async () => {
     app.mockRepository('user', 'get', 'mock');
     app.mockAdapter('docker', 'inspectDocker', 'mock');
-    yield app.httpRequest()
+    await app.httpRequest()
       .get('/users/popomore')
       .expect({
         adapter: 'mock',
@@ -41,9 +38,9 @@ describe('test/mock_custom_loader.js', () => {
       .expect(200);
   });
 
-  it('should return when mock the instance', function* () {
+  it('should return when mock the instance', async () => {
     app.mockAdapter(app.adapter.docker, 'inspectDocker', 'mock');
-    yield app.httpRequest()
+    await app.httpRequest()
       .get('/users/popomore')
       .expect({
         adapter: 'mock',
@@ -52,8 +49,7 @@ describe('test/mock_custom_loader.js', () => {
       .expect(200);
   });
 
-  it('should not override the existing API', function* () {
+  it('should not override the existing API', () => {
     assert(app.mockEnv === require('../app/extend/application.js').mockEnv);
   });
-
 });

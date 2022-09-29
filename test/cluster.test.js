@@ -24,10 +24,10 @@ describe('test/cluster.test.js', () => {
     });
     after(() => app.close());
 
-    it('should have members', function* () {
+    it('should have members', async () => {
       assert(app.callback() === app);
       assert(app.listen() === app);
-      yield app.ready();
+      await app.ready();
       assert(app.process);
     });
 
@@ -143,35 +143,35 @@ describe('test/cluster.test.js', () => {
       return Promise.all(promises);
     });
 
-    it('should return cached cluster app', function* () {
+    it('should return cached cluster app', async () => {
       app1 = mm.cluster({
         baseDir: 'demo',
         coverage: false,
       });
-      yield app1.ready();
+      await app1.ready();
 
       app2 = mm.cluster({
         baseDir: 'demo',
         coverage: false,
       });
-      yield app2.ready();
+      await app2.ready();
 
       assert(app1 === app2);
     });
 
-    it('should return new app if cached app has been closed', function* () {
+    it('should return new app if cached app has been closed', async () => {
       app1 = mm.cluster({
         baseDir: 'demo',
         coverage: false,
       });
-      yield app1.ready();
-      yield app1.close();
+      await app1.ready();
+      await app1.close();
 
       app2 = mm.cluster({
         baseDir: 'demo',
         coverage: false,
       });
-      yield app2.ready();
+      await app2.ready();
 
       assert(app2 !== app1);
     });
@@ -182,7 +182,7 @@ describe('test/cluster.test.js', () => {
     let app;
     after(() => app.close());
 
-    it('should get eggPath', done => {
+    it('should get eggPath', async () => {
       app = mm.cluster({
         baseDir: 'demo',
         customEgg: path.join(__dirname, 'fixtures/chair'),
@@ -190,10 +190,10 @@ describe('test/cluster.test.js', () => {
         cache: false,
         coverage: false,
       });
-      app
+      await app
         .debug()
         .expect('stdout', /\/path\/to\/eggPath/)
-        .end(done);
+        .end();
     });
   });
 
@@ -201,7 +201,7 @@ describe('test/cluster.test.js', () => {
     let app;
     after(() => app.close());
 
-    it('should get 2 workers', done => {
+    it('should get 2 workers', async () => {
       app = mm.cluster({
         baseDir: 'demo',
         customEgg: path.join(__dirname, 'fixtures/chair'),
@@ -210,9 +210,9 @@ describe('test/cluster.test.js', () => {
         coverage: false,
       });
       app.debug();
-      app.expect('stdout', /app_worker#1:/)
+      await app.expect('stdout', /app_worker#1:/)
         .expect('stdout', /app_worker#2:/)
-        .end(done);
+        .end();
     });
   });
 
@@ -220,7 +220,7 @@ describe('test/cluster.test.js', () => {
     let app;
     after(() => app.close());
 
-    it('should pass execArgv', done => {
+    it('should pass execArgv', async () => {
       app = mm.cluster({
         baseDir: 'custom_egg',
         customEgg: path.join(__dirname, 'fixtures/bar'),
@@ -232,9 +232,9 @@ describe('test/cluster.test.js', () => {
         },
       });
       // app.debug();
-      app.expect('stdout', /app_worker#1:/)
+      await app.expect('stdout', /app_worker#1:/)
         .expect('stderr', /Debugger listening/)
-        .end(done);
+        .end();
     });
   });
 
@@ -242,15 +242,15 @@ describe('test/cluster.test.js', () => {
     let app;
     after(() => app.close());
 
-    it('should pass execArgv', done => {
+    it('should pass execArgv', async () => {
       app = mm.cluster({
         baseDir: 'yadan_app',
         workers: 1,
         cache: false,
         coverage: false,
       });
-      app.expect('stdout', /app_worker#1:/)
-        .end(done);
+      await app.expect('stdout', /app_worker#1:/)
+        .end();
     });
   });
 
@@ -258,7 +258,7 @@ describe('test/cluster.test.js', () => {
     let app;
     after(() => app.close());
 
-    it('should load files', done => {
+    it('should load files', async () => {
       mm(process.env, 'EGG_BIN_PREREQUIRE', 'true');
       mm(process.env, 'DEBUG', 'egg-mock:prerequire');
       app = mm.cluster({
@@ -267,10 +267,10 @@ describe('test/cluster.test.js', () => {
         cache: false,
         coverage: false,
       });
-      app
-        .expect('stderr', /prerequire app\/extend\/application.js/)
+      await app
+        .expect('stderr', /prerequire .+?\/app\/extend\/application.js/)
         .expect('code', 0)
-        .end(done);
+        .end();
     });
   });
 
@@ -278,7 +278,7 @@ describe('test/cluster.test.js', () => {
     let app;
     after(() => app.close());
 
-    it('should use it', function* () {
+    it('should use it', async () => {
       app = mm.cluster({
         baseDir: path.join(fixtures, 'demo'),
         cache: false,
@@ -286,7 +286,7 @@ describe('test/cluster.test.js', () => {
         port: 5566,
       });
       // app.debug();
-      yield app.ready();
+      await app.ready();
 
       app.expect('stdout', /egg started on http:\/\/127.0.0.1:5566/);
     });
