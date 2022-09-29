@@ -57,7 +57,7 @@
     "mkdirp": "^0.5.1",
     "pedding": "^1.1.0",
     "sdk-base": "^3.0.1",
-    "tsd": "^0.19.0"
+    "tsd": "^0.24.1"
   },
   "ci": {
     "os": "linux, macOS",
