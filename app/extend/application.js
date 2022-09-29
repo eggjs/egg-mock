@@ -1,5 +1,3 @@
-'use strict';
-
 const debug = require('debug')('egg-mock:application');
 const mm = require('mm');
 const http = require('http');
@@ -8,6 +6,7 @@ const merge = require('merge-descriptors');
 const is = require('is-type-of');
 const assert = require('assert');
 const Transport = require('egg-logger').Transport;
+const mockAgent = require('../../lib/mock_agent');
 const mockHttpclient = require('../../lib/mock_httpclient');
 const supertestRequest = require('../../lib/supertest');
 
@@ -267,6 +266,15 @@ module.exports = {
   mockUrllib(...args) {
     this.deprecate('[egg-mock] Please use app.mockHttpclient instead of app.mockUrllib');
     return this.mockHttpclient(...args);
+  },
+
+  /**
+   * get mock httpclient agent
+   * @function App#mockHttpclientAgent
+   * @return {MockAgent} agent
+   */
+  mockAgent() {
+    return mockAgent.getAgent();
   },
 
   /**

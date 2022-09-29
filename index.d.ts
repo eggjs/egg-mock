@@ -1,7 +1,9 @@
 import { Application, Context, EggLogger } from 'egg';
 import { MockMate } from 'mm';
 import { Test } from 'supertest';
+import { MockAgent } from 'urllib';
 
+export { MockAgent };
 interface EggTest extends Test {
   unexpectHeader(name: string, b?: Function): EggTest;
   expectHeader(name: string, b?: Function): EggTest;
@@ -41,6 +43,7 @@ export interface BaseMockApplication<T, C> extends Application { // tslint:disbl
   mockHttpclient(mockUrl: string | RegExp, mockMethod: string | string[], mockResult: MockHttpClientResult): Application;
 
   mockHttpclient(mockUrl: string | RegExp, mockResult: MockHttpClientResult): Application;
+  mockAgent(): MockAgent;
 
   /**
    * mock csrf

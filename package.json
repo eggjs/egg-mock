@@ -18,10 +18,9 @@
   "scripts": {
     "lint": "eslint lib app index.js test/*.test.js",
     "test": "npm run lint && npm run test-local",
-    "test-local": "egg-bin test",
+    "test-local": "egg-bin test --full-trace",
     "cov": "egg-bin cov",
     "ci": "npm run lint && npm run cov",
-    "autod": "autod",
     "contributors": "git-contributor"
   },
   "dependencies": {
@@ -38,37 +37,31 @@
     "get-ready": "^2.0.1",
     "globby": "^9.2.0",
     "is-type-of": "^1.2.1",
-    "ko-sleep": "^1.0.3",
     "merge-descriptors": "^1.0.1",
     "methods": "^1.1.2",
     "mm": "^3.0.2",
-    "mz-modules": "^2.1.0",
     "power-assert": "^1.6.1",
-    "supertest": "^4.0.2",
-    "urllib": "^2.33.3"
+    "supertest": "^6.2.4",
+    "urllib": "^3.2.3"
   },
   "devDependencies": {
     "@types/node": "^7.0.18",
-    "autod": "^3.1.0",
-    "coffee": "^5.2.1",
-    "egg": "^2",
-    "egg-bin": "^4.13.0",
-    "egg-ci": "^1.15.0",
+    "coffee": "^5.4.0",
+    "egg": "^3.3.3",
+    "egg-bin": "^5.2.0",
+    "egg-ci": "^2.1.0",
     "egg-errors": "^2.2.1",
-    "eslint": "^5.16.0",
-    "eslint-config-egg": "^7.4.1",
+    "eslint": "^8.24.0",
+    "eslint-config-egg": "^12.0.0",
     "git-contributor": "^1.1.0",
     "mkdirp": "^0.5.1",
     "pedding": "^1.1.0",
     "sdk-base": "^3.0.1",
-    "tsd": "^0.19.0"
+    "tsd": "^0.24.1"
   },
   "ci": {
-    "type": "github",
-    "os": {
-      "github": "linux, macOS"
-    },
-    "version": "8, 10, 12, 14, 16",
+    "os": "linux, macOS",
+    "version": "14, 16, 18",
     "license": true
   },
   "homepage": "https://github.com/eggjs/egg-mock",
@@ -84,7 +77,7 @@
     "mock"
   ],
   "engines": {
-    "node": ">= 8.0.0"
+    "node": ">= 14.17.0"
   },
   "author": "popomore <sakura9515@gmail.com>"
 }

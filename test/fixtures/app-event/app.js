@@ -1,6 +1,6 @@
 'use strict';
 
-const sleep = require('ko-sleep');
+const { sleep } = require('../../../lib/utils');
 
 module.exports = app => {
   app.ready(() => {

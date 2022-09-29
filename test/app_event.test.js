@@ -1,11 +1,9 @@
-'use strict';
-
 const path = require('path');
 const request = require('supertest');
 const pedding = require('pedding');
 const assert = require('assert');
-const sleep = require('ko-sleep');
 const mm = require('..');
+const { sleep } = require('../lib/utils');
 const fixtures = path.join(__dirname, 'fixtures');
 const baseDir = path.join(fixtures, 'app-event');
 
