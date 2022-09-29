@@ -172,6 +172,65 @@ describe('test/mock_httpclient_next.test.js', () => {
       .expect(200);
   });
 
+  it('should support persist = false', async () => {
+    app.mockCsrf();
+    app.mockHttpclient(url, {
+      data: 'mock url',
+      persist: false,
+    });
+
+    await request(server)
+      .get('/urllib?method=request')
+      .expect({
+        get: 'mock url',
+        post: 'url post',
+      })
+      .expect(200);
+  });
+
+  it('should support persist = true and ignore repeats = 1', async () => {
+    app.mockCsrf();
+    app.mockHttpclient(url, {
+      data: 'mock url',
+      persist: true,
+      repeats: 1,
+    });
+
+    await request(server)
+      .get('/urllib?method=request')
+      .expect({
+        get: 'mock url',
+        post: 'mock url',
+      })
+      .expect(200);
+  });
+
+  it('should support persist = false and repeats = 2', async () => {
+    app.mockCsrf();
+    app.mockHttpclient(url, {
+      data: 'mock url',
+      delay: 100,
+      persist: false,
+      repeats: 2,
+    });
+
+    await request(server)
+      .get('/urllib?method=request')
+      .expect({
+        get: 'mock url',
+        post: 'mock url',
+      })
+      .expect(200);
+
+    await request(server)
+      .get('/urllib?method=request')
+      .expect({
+        get: 'url get',
+        post: 'url post',
+      })
+      .expect(200);
+  });
+
   it('should support curl', async () => {
     app.mockCsrf();
     app.mockHttpclient(url, 'post', {
@@ -229,17 +288,6 @@ describe('test/mock_httpclient_next.test.js', () => {
   it('should exits req headers', async () => {
     app.mockCsrf();
     app.mockHttpclient(url, {
-      data: 'mock url test',
-    });
-    await request(server)
-      .get('/mock_urllib')
-      .expect({})
-      .expect(200);
-  });
-
-  it('should deprecate mockUrllib', async () => {
-    app.mockCsrf();
-    app.mockUrllib(url, {
       data: 'mock url test',
     });
     await request(server)

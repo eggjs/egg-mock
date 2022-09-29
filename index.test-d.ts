@@ -1,11 +1,26 @@
 import { expectType } from 'tsd';
+import { Application } from 'egg';
 import { MockApplication, MockAgent } from '.';
 import { app, mock, mm } from './bootstrap';
 
 expectType<MockApplication>(app);
 expectType<MockApplication>(mock.app());
 expectType<MockApplication>(mm.app());
+
 expectType<MockAgent>(mm.app().mockAgent());
+
+expectType<Application>(mm.app().mockHttpclient('url', 'post', { data: 'ok' }));
+expectType<Application>(mm.app().mockHttpclient('url', 'post', 'data'));
+expectType<Application>(mm.app().mockHttpclient('url', {
+  data: 'mock response',
+  repeats: 1,
+}));
+expectType<Application>(mm.app().mockHttpclient('url', () => {}));
+expectType<Application>(mm.app().mockHttpclient('url', 'post', () => {}));
+expectType<Application>(mm.app().mockHttpclient('url', 'get', {
+  data: 'mock response',
+  repeats: 1,
+}));
 
 expectType<void>(app.mockLog());
 expectType<void>(app.mockLog('logger'));

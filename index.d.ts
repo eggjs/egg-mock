@@ -43,6 +43,7 @@ export interface BaseMockApplication<T, C> extends Application { // tslint:disbl
   mockHttpclient(mockUrl: string | RegExp, mockMethod: string | string[], mockResult: MockHttpClientResult): Application;
 
   mockHttpclient(mockUrl: string | RegExp, mockResult: MockHttpClientResult): Application;
+
   mockAgent(): MockAgent;
 
   /**
@@ -71,6 +72,9 @@ interface ResultObject {
   data?: string | object;
   status?: number;
   headers?: any;
+  delay?: number;
+  persist?: boolean;
+  repeats?: number;
 }
 
 type ResultFunction = (url?: string, opts?: any) => ResultObject | string | void;
