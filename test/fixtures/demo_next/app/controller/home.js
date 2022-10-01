@@ -60,6 +60,16 @@ exports.urllib = function* () {
   };
 };
 
+exports.streaming = async ctx => {
+  const url = 'http://' + ctx.host;
+  const response = await ctx.httpclient.request(url + '/mock_url', {
+    method: 'GET',
+    streaming: true,
+  });
+  ctx.status = response.status;
+  ctx.body = response.res;
+};
+
 exports.mockUrlGet = function* () {
   this.body = 'url get';
 };

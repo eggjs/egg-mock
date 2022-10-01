@@ -1,5 +1,6 @@
 const pedding = require('pedding');
 const path = require('path');
+const fs = require('fs');
 const request = require('supertest');
 const assert = require('assert');
 const { sleep } = require('../lib/utils');
@@ -89,6 +90,18 @@ describe('test/mock_httpclient_next.test.js', () => {
         post: 'mock POST response',
       })
       .expect(200);
+  });
+
+  it('should support on streaming', async () => {
+    app.mockHttpclient(url, 'get', {
+      data: fs.readFileSync(__filename),
+    });
+
+    const res = await request(server)
+      .get('/streaming')
+      .expect(200);
+    assert.match(res.body.toString(), /should support on streaming/);
+    assert.equal(res.body.toString(), fs.readFileSync(__filename, 'utf8'));
   });
 
   it('should mock url support multi method', async () => {
