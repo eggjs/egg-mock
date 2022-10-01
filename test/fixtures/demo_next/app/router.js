@@ -18,4 +18,6 @@ module.exports = function(app) {
   app.get('/user', app.controller.user.get);
   app.post('/user', app.controller.user.post);
   app.post('/file', app.controller.file);
+
+  app.get('/streaming', 'home.streaming');
 };
