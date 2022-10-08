@@ -42,7 +42,7 @@
     "mm": "^3.0.2",
     "power-assert": "^1.6.1",
     "supertest": "^6.2.4",
-    "urllib": "^3.2.3"
+    "urllib-next": "^3.2.3"
   },
   "devDependencies": {
     "@types/node": "^7.0.18",
