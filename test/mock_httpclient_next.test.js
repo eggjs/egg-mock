@@ -309,7 +309,7 @@ describe('test/mock_httpclient_next.test.js', () => {
       .expect(200);
   });
 
-  it('should mock url support RegExp', async () => {
+  it('should mock url path support RegExp', async () => {
     app.mockCsrf();
     app.mockHttpclient(/\/mock_url$/, {
       data: Buffer.from('mock response'),
@@ -320,6 +320,21 @@ describe('test/mock_httpclient_next.test.js', () => {
       .expect({
         get: 'mock response',
         post: 'mock response',
+      })
+      .expect(200);
+  });
+
+  it('should mock full url support RegExp', async () => {
+    app.mockCsrf();
+    app.mockHttpclient(/http:\/\/127\.0\.0\.1:\d+\/mock_url$/, [ 'get', 'post' ], {
+      data: Buffer.from('mock full 127 url response'),
+    });
+
+    await request(server)
+      .get('/urllib')
+      .expect({
+        get: 'mock full 127 url response',
+        post: 'mock full 127 url response',
       })
       .expect(200);
   });
