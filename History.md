@@ -1,4 +1,13 @@
 
+5.0.2 / 2022-10-09
+==================
+
+**fixes**
+  * [[`299f7ec`](http://github.com/eggjs/egg-mock/commit/299f7ecc7314737c182c1745fce0d32c61cd657d)] - 🐛 FIX: Should use urllib-next package (#129) (fengmk2 <<fengmk2@gmail.com>>)
+
+**others**
+  * [[`17a6713`](http://github.com/eggjs/egg-mock/commit/17a6713663555f55832c12fa12c68803a59aa925)] - 🤖 TEST: Add httpclient streaming mocking (#128) (fengmk2 <<fengmk2@gmail.com>>)
+
 5.0.1 / 2022-09-29
 ==================
 
