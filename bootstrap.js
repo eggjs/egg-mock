@@ -3,15 +3,21 @@
 const assert = require('power-assert');
 const path = require('path');
 const mock = require('./index').default;
+const mockParallelApp = require('./lib/parallel/app');
+const { getEggOptions } = require('./lib/utils');
 
-const options = {};
-if (process.env.EGG_BASE_DIR) options.baseDir = process.env.EGG_BASE_DIR;
+const options = getEggOptions();
 
 // throw error when an egg plugin test is using bootstrap
 const pkgInfo = require(path.join(options.baseDir || process.cwd(), 'package.json'));
 if (pkgInfo.eggPlugin) throw new Error('DO NOT USE bootstrap to test plugin');
 
-const app = mock.app(options);
+let app;
+if (process.env.ENABLE_MOCHA_PARALLEL && process.env.AUTO_AGENT) {
+  app = mockParallelApp(options);
+} else {
+  app = mock.app(options);
+}
 
 if (typeof beforeAll === 'function') {
   // jest
