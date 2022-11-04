@@ -1,4 +1,10 @@
 
+5.1.0 / 2022-11-04
+==================
+
+**features**
+  * [[`22f508c`](http://github.com/eggjs/egg-mock/commit/22f508cba2f6330172db89efde3a678ed35c5258)] - feat: impl parallel app for mocha parallel mode (#130) (killa <<killa123@126.com>>)
+
 5.0.2 / 2022-10-09
 ==================
 
