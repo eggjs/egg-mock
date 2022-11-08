@@ -1,4 +1,10 @@
 
+5.2.0 / 2022-11-08
+==================
+
+**features**
+  * [[`209c921`](http://github.com/eggjs/egg-mock/commit/209c921cd07eeb541793d5eb28a4982c891ef337)] - feat: add EGG_FRAMEWORK for bootstrap custom framework (#131) (killa <<killa123@126.com>>)
+
 5.1.0 / 2022-11-04
 ==================
 
