@@ -455,6 +455,10 @@ describe('test app', () => {
 });
 ```
 
+### env for custom bootstrap
+EGG_BASE_DIR: the base dir of egg app
+EGG_FRAMEWORK: the framework of egg app
+
 ## Questions & Suggestions
 
 Please open an issue [here](https://github.com/eggjs/egg/issues).
