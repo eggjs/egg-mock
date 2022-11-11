@@ -1,4 +1,10 @@
 
+5.2.1 / 2022-11-11
+==================
+
+**fixes**
+  * [[`18c366d`](http://github.com/eggjs/egg-mock/commit/18c366d4d8f110e8b5e166bb4109be6659f59dd2)] - fix: use global hook for register global hook (#132) (killa <<killa123@126.com>>)
+
 5.2.0 / 2022-11-08
 ==================
 
