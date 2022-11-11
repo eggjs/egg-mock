@@ -17,18 +17,16 @@ if (process.env.ENABLE_MOCHA_PARALLEL && process.env.AUTO_AGENT) {
   app = mockParallelApp(options);
 } else {
   app = mock.app(options);
+  if (typeof beforeAll === 'function') {
+    // jest
+    beforeAll(() => app.ready());
+  } else {
+    // mocha
+    before(() => app.ready());
+  }
+  afterEach(() => app.backgroundTasksFinished());
+  afterEach(mock.restore);
 }
-
-if (typeof beforeAll === 'function') {
-  // jest
-  beforeAll(() => app.ready());
-} else {
-  // mocha
-  before(() => app.ready());
-}
-afterEach(() => app.backgroundTasksFinished());
-// restore should be the last one
-afterEach(mock.restore);
 
 module.exports = {
   assert,
