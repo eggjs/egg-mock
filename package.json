@@ -17,10 +17,11 @@
   ],
   "scripts": {
     "lint": "eslint lib app index.js test/*.test.js",
-    "test": "npm run lint && npm run test-local",
+    "tsd": "tsd",
+    "test": "npm run lint && npm run tsd && npm run test-local",
     "test-local": "egg-bin test --full-trace",
     "cov": "egg-bin cov",
-    "ci": "npm run lint && npm run cov",
+    "ci": "npm run lint && npm run tsd && npm run cov",
     "contributors": "git-contributor"
   },
   "dependencies": {
@@ -46,7 +47,7 @@
     "urllib-next": "^3.2.3"
   },
   "devDependencies": {
-    "@types/node": "^7.0.18",
+    "@types/node": "^14.18.34",
     "coffee": "^5.4.0",
     "egg": "^3.3.3",
     "egg-bin": "^5.2.0",

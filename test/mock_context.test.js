@@ -1,5 +1,3 @@
-'use strict';
-
 const assert = require('assert');
 const mm = require('..');
 
@@ -57,16 +55,20 @@ describe('test/mock_context.test.js', () => {
       });
   });
 
-  it('should work on POST file with user login', () => {
+  it('should work on POST file with user login', async () => {
     const ctx = app.mockContext({
       user: {
         foo: 'bar',
       },
+      traceId: `trace-${Date.now}`,
     });
     assert(ctx.user.foo === 'bar');
+    const ctxFromStorage = app.ctxStorage.getStore();
+    assert(ctxFromStorage === ctx);
+    assert(app.currentContext === ctx);
 
     app.mockCsrf();
-    return app.httpRequest()
+    await app.httpRequest()
       .post('/file')
       .field('title', 'file title')
       .attach('file', __filename)
@@ -79,6 +81,15 @@ describe('test/mock_context.test.js', () => {
         user: {
           foo: 'bar',
         },
+        traceId: ctx.traceId,
+        ctxFromStorageUser: ctxFromStorage.user,
+        ctxFromStorageTraceId: ctxFromStorage.traceId,
       });
+    const ctxFromStorage2 = app.ctxStorage.getStore();
+    assert(ctxFromStorage2 === ctx);
+    mm.restore();
+    const ctxFromStorage3 = app.ctxStorage.getStore();
+    assert(!ctxFromStorage3);
+    assert(!app.currentContext);
   });
 });

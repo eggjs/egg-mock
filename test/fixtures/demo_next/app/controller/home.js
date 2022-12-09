@@ -40,13 +40,18 @@ exports.urllib = function* () {
   const method = this.query.method || 'request';
   const data = this.query.data ? JSON.parse(this.query.data) : undefined;
   const dataType = this.query.dataType;
-  let r = this.app.httpclient[method](url + '/mock_url', {
+  const foo = this.query.foo;
+  let requestUrl = url + '/mock_url';
+  if (foo) {
+    requestUrl = `${requestUrl}?foo=${foo}`;
+  }
+  let r = this.app.httpclient[method](requestUrl, {
     dataType,
     data,
   });
   if (method === 'request') r = r.then(d => d);
   const r1 = yield r;
-  const r2 = yield this.app.httpclient[method](url + '/mock_url', {
+  const r2 = yield this.app.httpclient[method](requestUrl, {
     method: 'POST',
     dataType,
     data,

@@ -49,7 +49,9 @@ module.exports = {
     const req = this.mockRequest(data);
     const res = new http.ServerResponse(req);
 
-    return this.createContext(req, res);
+    const ctx = this.createContext(req, res);
+    mm(this.ctxStorage, 'getStore', () => ctx);
+    return ctx;
   },
 
   /**
