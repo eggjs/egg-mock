@@ -1,9 +1,11 @@
 import { expectType } from 'tsd';
-import { Application } from 'egg';
+import { Application, Context } from 'egg';
 import { MockApplication, MockAgent } from '.';
 import { app, mock, mm } from './bootstrap';
 
 expectType<MockApplication>(app);
+expectType<Context>(app.currentConext);
+expectType<Context | undefined>(app.ctxStorage.getStore());
 expectType<MockApplication>(mock.app());
 expectType<MockApplication>(mm.app());
 
