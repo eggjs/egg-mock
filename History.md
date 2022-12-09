@@ -1,4 +1,10 @@
 
+5.3.0 / 2022-12-09
+==================
+
+**features**
+  * [[`6608f01`](http://github.com/eggjs/egg-mock/commit/6608f01983b6891fad2eea758e426bb205dff117)] - 📦 NEW: mock context support ctxStorage (#133) (fengmk2 <<fengmk2@gmail.com>>)
+
 5.2.1 / 2022-11-11
 ==================
 
