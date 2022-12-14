@@ -25,6 +25,10 @@ module.exports = {
     return mockAgent.getAgent();
   },
 
+  mockAgentRestore() {
+    return mockAgent.restore();
+  },
+
   /**
    * @see mm#restore
    * @function Agent#mockRestore

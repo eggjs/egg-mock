@@ -12,6 +12,7 @@ describe('test/mock_httpclient_next.test.js', () => {
   let app;
   let server;
   let url;
+  let url2;
   before(() => {
     app = mm.app({
       baseDir: path.join(fixtures, 'demo_next'),
@@ -21,6 +22,7 @@ describe('test/mock_httpclient_next.test.js', () => {
   before(() => {
     server = app.listen();
     url = `http://127.0.0.1:${server.address().port}/mock_url`;
+    url2 = `http://127.0.0.1:${server.address().port}/mock_url2`;
   });
   after(() => app.close());
   afterEach(mm.restore);
@@ -145,6 +147,95 @@ describe('test/mock_httpclient_next.test.js', () => {
       .expect({
         get: 'url get',
         post: 'mock url post',
+      })
+      .expect(200);
+  });
+
+  it('should use first mock data on duplicate url mock', async () => {
+    app.mockCsrf();
+    app.mockHttpclient(url, 'post', {
+      data: Buffer.from('mock url1 first post'),
+    });
+    // should ignore this same url mock data, use the first mock data
+    app.mockHttpclient(url, 'post', {
+      data: Buffer.from('mock url1 second post'),
+    });
+    app.mockHttpclient(url2, 'post', {
+      data: Buffer.from('mock url2 post'),
+    });
+
+    await request(server)
+      .get('/urllib')
+      .expect({
+        get: 'url get',
+        post: 'mock url1 first post',
+      })
+      .expect(200);
+    await request(server)
+      .get('/urllib')
+      .query({
+        mock_url: '/mock_url2',
+      })
+      .expect({
+        get: 'url get',
+        post: 'mock url2 post',
+      })
+      .expect(200);
+  });
+
+  it('should mock work on query', async () => {
+    app.mockCsrf();
+    // mockHttpclient not support query, should use mockAgent instead
+    app.mockHttpclient(`${url}?foo=foo1`, 'get', {
+      data: Buffer.from('mock foo1'),
+    });
+    app.mockHttpclient(`${url}?foo=foo2`, 'get', {
+      data: Buffer.from('mock foo1'),
+    });
+    await request(server)
+      .get('/urllib')
+      .query({ foo: 'foo1' })
+      .expect({
+        get: 'mock foo1',
+        post: 'url post',
+      })
+      .expect(200);
+    await request(server)
+      .get('/urllib')
+      .query({ foo: 'foo2' })
+      .expect({
+        get: 'mock foo1',
+        post: 'url post',
+      })
+      .expect(200);
+    await app.mockAgentRestore();
+
+    app.mockAgent().get(new URL(url).origin)
+      .intercept({
+        path: '/mock_url?foo=foo1',
+        method: 'GET',
+      })
+      .reply(200, 'mock new foo1');
+    app.mockAgent().get(new URL(url).origin)
+      .intercept({
+        path: '/mock_url?foo=foo2',
+        method: 'GET',
+      })
+      .reply(200, 'mock new foo2');
+    await request(server)
+      .get('/urllib')
+      .query({ foo: 'foo1' })
+      .expect({
+        get: 'mock new foo1',
+        post: 'url post',
+      })
+      .expect(200);
+    await request(server)
+      .get('/urllib')
+      .query({ foo: 'foo2' })
+      .expect({
+        get: 'mock new foo2',
+        post: 'url post',
       })
       .expect(200);
   });

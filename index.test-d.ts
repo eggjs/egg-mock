@@ -35,3 +35,6 @@ expectType<void>(app.expectLog(/foo string/, 'coreLogger'));
 expectType<void>(app.expectLog(/foo string/, app.coreLogger));
 expectType<void>(mm.env('default'));
 expectType<void>(mm.env('devserver'));
+
+expectType<Promise<void>>(app.mockAgentRestore());
+expectType<Promise<void>>(app.mockRestore());

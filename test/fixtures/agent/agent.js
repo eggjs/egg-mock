@@ -1,14 +1,11 @@
-'use strict';
-
 const fs = require('fs');
 const path = require('path');
-const mkdirp = require('mkdirp');
 const Client = require('./client');
 
-module.exports = function(agent) {
+module.exports = agent => {
   const done = agent.readyCallback('agent:agent');
   const p = path.join(__dirname, 'run/test.txt');
-  mkdirp.sync(path.join(__dirname, 'run'));
+  fs.mkdirSync(path.join(__dirname, 'run'), { recursive: true });
   fs.writeFile(p, '123', done);
 
   agent.client = agent.cluster(Client).create();
