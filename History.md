@@ -1,4 +1,10 @@
 
+5.4.0 / 2022-12-14
+==================
+
+**features**
+  * [[`0bd71bc`](http://github.com/eggjs/egg-mock/commit/0bd71bc732b430f679854cceb5017238aca67f38)] - 📦 NEW: Allow restore mockAgent only (#134) (fengmk2 <<fengmk2@gmail.com>>)
+
 5.3.0 / 2022-12-09
 ==================
 
