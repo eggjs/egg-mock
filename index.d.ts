@@ -45,6 +45,8 @@ export interface BaseMockApplication<T, C> extends Application { // tslint:disbl
   mockHttpclient(mockUrl: string | RegExp, mockResult: MockHttpClientResult): Application;
 
   mockAgent(): MockAgent;
+  mockAgentRestore(): Promise<void>;
+  mockRestore(): Promise<void>;
 
   /**
    * mock csrf

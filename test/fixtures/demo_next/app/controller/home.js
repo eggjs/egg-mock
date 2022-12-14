@@ -41,7 +41,7 @@ exports.urllib = function* () {
   const data = this.query.data ? JSON.parse(this.query.data) : undefined;
   const dataType = this.query.dataType;
   const foo = this.query.foo;
-  let requestUrl = url + '/mock_url';
+  let requestUrl = url + (this.query.mock_url || '/mock_url');
   if (foo) {
     requestUrl = `${requestUrl}?foo=${foo}`;
   }
@@ -76,6 +76,11 @@ exports.streaming = async ctx => {
 };
 
 exports.mockUrlGet = function* () {
+  const foo = this.query.foo;
+  if (foo) {
+    this.body = `url get with foo: ${foo}`;
+    return;
+  }
   this.body = 'url get';
 };
 

@@ -56,14 +56,13 @@
     "eslint": "^8.24.0",
     "eslint-config-egg": "^12.0.0",
     "git-contributor": "^1.1.0",
-    "mkdirp": "^0.5.1",
     "mocha": "^10.1.0",
     "pedding": "^1.1.0",
     "tsd": "^0.24.1"
   },
   "ci": {
     "os": "linux, macOS",
-    "version": "14, 16, 18",
+    "version": "14.17.0, 14, 16, 18",
     "license": true
   },
   "homepage": "https://github.com/eggjs/egg-mock",
