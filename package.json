@@ -51,7 +51,6 @@
     "coffee": "^5.4.0",
     "egg": "^3.3.3",
     "egg-bin": "^5.2.0",
-    "egg-ci": "^2.1.0",
     "egg-errors": "^2.2.1",
     "eslint": "^8.24.0",
     "eslint-config-egg": "^12.0.0",
@@ -59,11 +58,6 @@
     "mocha": "^10.1.0",
     "pedding": "^1.1.0",
     "tsd": "^0.24.1"
-  },
-  "ci": {
-    "os": "linux, macOS",
-    "version": "14.17.0, 14, 16, 18",
-    "license": true
   },
   "homepage": "https://github.com/eggjs/egg-mock",
   "repository": {
