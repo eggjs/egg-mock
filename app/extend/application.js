@@ -34,7 +34,8 @@ module.exports = {
    * };
    * ```
    */
-  mockContext(data) {
+  mockContext(data, options) {
+    options = Object.assign({ mockCtxStorage: true }, options);
     data = data || {};
 
     if (this._customMockContext) {
@@ -50,8 +51,17 @@ module.exports = {
     const res = new http.ServerResponse(req);
 
     const ctx = this.createContext(req, res);
-    mm(this.ctxStorage, 'getStore', () => ctx);
+    if (options.mockCtxStorage) {
+      mm(this.ctxStorage, 'getStore', () => ctx);
+    }
     return ctx;
+  },
+
+  async mockContextScope(fn, data) {
+    const ctx = this.mockContext(data, {
+      mockCtxStorage: false,
+    });
+    return await this.ctxStorage.run(ctx, fn, ctx);
   },
 
   /**

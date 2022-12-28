@@ -22,6 +22,11 @@ export interface BaseMockApplication<T, C> extends Application { // tslint:disbl
   mockContext(data?: any): C;
 
   /**
+   * mock Context
+   */
+  mockContextScope<R>(fn: (ctx: C) => Promise<R>,data?: any): R;
+
+  /**
    * mock cookie session
    */
   mockSession(data: any): T;
