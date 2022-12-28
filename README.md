@@ -333,6 +333,18 @@ const ctx = app.mockContext({
 console.log(ctx.user.name); // Jason
 ```
 
+### app.mockContextScope(fn, options)
+
+```js
+await app.mockContextScope(async ctx => {
+  console.log(ctx.user.name); // Jason
+}, {
+  user: {
+    name: 'Jason'
+  }
+});
+```
+
 ### app.mockCookies(data)
 
 ```js

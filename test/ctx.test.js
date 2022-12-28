@@ -48,4 +48,33 @@ describe('test/ctx.test.js', () => {
     assert(!mockData.method);
   });
 
+  describe('mockContextScope', () => {
+    it('should not conflict with nest call', async () => {
+      await app.mockContextScope(async ctx => {
+        const currentStore = app.ctxStorage.getStore();
+        assert(ctx === currentStore);
+
+        await app.mockContextScope(async nestCtx => {
+          const currentStore = app.ctxStorage.getStore();
+          assert(nestCtx === currentStore);
+        });
+      });
+    });
+
+    it('should not conflict with concurrent call', async () => {
+      await Promise.all([
+        await app.mockContextScope(async ctx => {
+          const currentStore = app.ctxStorage.getStore();
+          assert(ctx === currentStore);
+        }),
+        await app.mockContextScope(async ctx => {
+          const currentStore = app.ctxStorage.getStore();
+          assert(ctx === currentStore);
+        }),
+      ]);
+
+    });
+  });
+
+
 });
