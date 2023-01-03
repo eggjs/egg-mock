@@ -18,6 +18,7 @@ module.exports = {
    * mock Context
    * @function App#mockContext
    * @param {Object} data - ctx data
+   * @param {Object} [options] - mock ctx options
    * @return {Context} ctx
    * @example
    * ```js

@@ -1,6 +1,5 @@
-'use strict';
-
 exports.get = function* () {
+  this.set('x-request-url', this.url);
   this.body = this.user;
 };
 
