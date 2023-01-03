@@ -17,6 +17,9 @@ describe('test/mock_context.test.js', () => {
       user: {
         foo: 'bar',
       },
+      tracer: {
+        traceId: 'foo-traceId',
+      },
     });
 
     assert(ctx.user.foo === 'bar');
@@ -25,7 +28,8 @@ describe('test/mock_context.test.js', () => {
       .expect(200)
       .expect({
         foo: 'bar',
-      });
+      })
+      .expect('x-request-url', '/user');
   });
 
   it('should work on POST with user login', () => {
