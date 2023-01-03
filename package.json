@@ -25,7 +25,6 @@
     "contributors": "git-contributor"
   },
   "dependencies": {
-    "@types/power-assert": "^1.5.0",
     "@types/supertest": "^2.0.7",
     "await-event": "^2.1.0",
     "co": "^4.6.0",
@@ -41,7 +40,6 @@
     "merge-descriptors": "^1.0.1",
     "methods": "^1.1.2",
     "mm": "^3.0.2",
-    "power-assert": "^1.6.1",
     "sdk-base": "^3.0.1",
     "supertest": "^6.2.4",
     "urllib-next": "^3.2.3"
