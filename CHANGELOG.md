@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.7.1](https://github.com/eggjs/egg-mock/compare/v5.7.0...v5.7.1) (2023-01-07)
+
+
+### Bug Fixes
+
+* should add egg to peerDependencies ([#139](https://github.com/eggjs/egg-mock/issues/139)) ([2134fc7](https://github.com/eggjs/egg-mock/commit/2134fc73661e4c2de433aceda2ea45811c8bff8b))
+
 ## [5.7.0](https://github.com/eggjs/egg-mock/compare/v5.6.0...v5.7.0) (2023-01-03)
 
 
