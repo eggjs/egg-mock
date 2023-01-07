@@ -1,4 +1,4 @@
-const debug = require('debug')('egg-mock:application');
+const debug = require('util').debuglog('egg-mock:application');
 const mm = require('mm');
 const http = require('http');
 const fs = require('fs');

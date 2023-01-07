@@ -1,6 +1,4 @@
-'use strict';
-
-const debug = require('debug')('egg-mock:middleware:cluster_app_mock');
+const debug = require('util').debuglog('egg-mock:middleware:cluster_app_mock');
 const is = require('is-type-of');
 const co = require('co');
 
