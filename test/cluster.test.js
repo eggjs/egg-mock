@@ -260,7 +260,7 @@ describe('test/cluster.test.js', () => {
 
     it('should load files', async () => {
       mm(process.env, 'EGG_BIN_PREREQUIRE', 'true');
-      mm(process.env, 'DEBUG', 'egg-mock:prerequire');
+      mm(process.env, 'NODE_DEBUG', 'egg-mock:prerequire');
       app = mm.cluster({
         baseDir: 'yadan_app',
         workers: 1,
