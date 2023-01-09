@@ -19,8 +19,8 @@
     "lint": "eslint lib app index.js test/*.test.js",
     "tsd": "tsd",
     "test": "npm run lint && npm run tsd && npm run test-local",
-    "test-local": "egg-bin test --full-trace",
-    "cov": "egg-bin cov",
+    "test-local": "egg-bin test --full-trace -r ./register.js",
+    "cov": "egg-bin cov -r ./register.js",
     "ci": "npm run lint && npm run tsd && npm run cov",
     "contributors": "git-contributor"
   },
