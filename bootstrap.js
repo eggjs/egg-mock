@@ -20,12 +20,9 @@ if (process.env.ENABLE_MOCHA_PARALLEL && process.env.AUTO_AGENT) {
   if (typeof beforeAll === 'function') {
     // jest
     beforeAll(() => app.ready());
-  } else {
-    // mocha
-    before(() => app.ready());
+    afterEach(() => app.backgroundTasksFinished());
+    afterEach(mock.restore);
   }
-  afterEach(() => app.backgroundTasksFinished());
-  afterEach(mock.restore);
 }
 
 module.exports = {
