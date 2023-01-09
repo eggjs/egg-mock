@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.8.1](https://github.com/eggjs/egg-mock/compare/v5.8.0...v5.8.1) (2023-01-09)
+
+
+### Bug Fixes
+
+* add register.js to files ([#141](https://github.com/eggjs/egg-mock/issues/141)) ([a87e801](https://github.com/eggjs/egg-mock/commit/a87e8019724dbb2401bd41ccf95be26c571e8e8f))
+
 ## [5.8.0](https://github.com/eggjs/egg-mock/compare/v5.7.1...v5.8.0) (2023-01-09)
 
 
