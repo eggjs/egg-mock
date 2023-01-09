@@ -13,7 +13,8 @@
     "bootstrap.js",
     "bootstrap.d.ts",
     "app",
-    "lib"
+    "lib",
+    "register.js"
   ],
   "scripts": {
     "lint": "eslint lib app index.js test/*.test.js",
