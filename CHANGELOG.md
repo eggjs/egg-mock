@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.8.0](https://github.com/eggjs/egg-mock/compare/v5.7.1...v5.8.0) (2023-01-09)
+
+
+### Features
+
+* use mocha global hook to register before/after ([#140](https://github.com/eggjs/egg-mock/issues/140)) ([9ef65de](https://github.com/eggjs/egg-mock/commit/9ef65de3382c15c5fdeff2e8d0b14eed8144a41b))
+
 ## [5.7.1](https://github.com/eggjs/egg-mock/compare/v5.7.0...v5.7.1) (2023-01-07)
 
 
