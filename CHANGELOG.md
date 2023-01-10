@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.8.2](https://github.com/eggjs/egg-mock/compare/v5.8.1...v5.8.2) (2023-01-10)
+
+
+### Bug Fixes
+
+* ignore bootstrap error on non egg project ([#142](https://github.com/eggjs/egg-mock/issues/142)) ([880c282](https://github.com/eggjs/egg-mock/commit/880c282481024005456074a123b4b1f185971f4c))
+
 ## [5.8.1](https://github.com/eggjs/egg-mock/compare/v5.8.0...v5.8.1) (2023-01-09)
 
 
