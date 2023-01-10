@@ -2,7 +2,7 @@ const debug = require('util').debuglog('egg-mock:bootstrap');
 const assert = require('assert');
 const path = require('path');
 const mock = require('./index').default;
-const agent = require('./lib/agent');
+const { setupAgent } = require('./lib/agent');
 const mockParallelApp = require('./lib/parallel/app');
 const { getEggOptions } = require('./lib/utils');
 
@@ -17,8 +17,14 @@ debug('env.ENABLE_MOCHA_PARALLEL: %s, process.env.AUTO_AGENT: %s',
   process.env.ENABLE_MOCHA_PARALLEL, process.env.AUTO_AGENT);
 if (process.env.ENABLE_MOCHA_PARALLEL && process.env.AUTO_AGENT) {
   // setup agent first
-  agent.setupAgent();
-  app = mockParallelApp(options);
+  app = mockParallelApp({
+    ...options,
+    beforeInit: async _app => {
+      const agent = await setupAgent();
+      _app.options.clusterPort = agent.options.clusterPort;
+      debug('mockParallelApp beforeInit get clusterPort: %s', _app.options.clusterPort);
+    },
+  });
   debug('mockParallelApp app: %s', !!app);
 } else {
   app = mock.app(options);
