@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.8.3](https://github.com/eggjs/egg-mock/compare/v5.8.2...v5.8.3) (2023-01-11)
+
+
+### Bug Fixes
+
+* app should wait for agent ready on parallel mode ([#144](https://github.com/eggjs/egg-mock/issues/144)) ([205e836](https://github.com/eggjs/egg-mock/commit/205e836ba11a869da208c441a9b90edd6e61b3b1))
+
 ## [5.8.2](https://github.com/eggjs/egg-mock/compare/v5.8.1...v5.8.2) (2023-01-10)
 
 
