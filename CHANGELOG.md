@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.8.4](https://github.com/eggjs/egg-mock/compare/v5.8.3...v5.8.4) (2023-01-12)
+
+
+### Bug Fixes
+
+* only await app ready when app exists ([#145](https://github.com/eggjs/egg-mock/issues/145)) ([f4ed458](https://github.com/eggjs/egg-mock/commit/f4ed458441449da70fd4108747377b7890dc08fb))
+
 ## [5.8.3](https://github.com/eggjs/egg-mock/compare/v5.8.2...v5.8.3) (2023-01-11)
 
 
