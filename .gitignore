@@ -1,4 +1,4 @@
-/node_modules/
+node_modules/
 coverage/
 logs/
 !test/fixtures/apps/app-not-clean/logs/keep

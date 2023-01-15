@@ -439,6 +439,65 @@ return app.httpRequest()
   .expect('mock egg');
 ```
 
+## Bootstrap
+
+我们提供了一个 bootstrap 来减少单测中的重复代码:
+
+```js
+const { app, mock, assert } = require('egg-mock/bootstrap');
+
+describe('test app', () => {
+  it('should request success', () => {
+    // mock data will be restored each case
+    mock.data(app, 'method', { foo: 'bar' });
+    return app.httpRequest()
+      .get('/foo')
+      .expect(res => {
+        assert(!res.headers.foo);
+      })
+      .expect(/bar/);
+  });
+});
+
+describe('test ctx', () => {
+  it('can use ctx', async function() {
+    const res = await this.ctx.service.foo();
+    assert(res === 'foo');
+  });
+});
+```
+
+我们将会在每个 case 中自定注入 ctx, 可以通过 `app.currentContext` 来获取当前的 ctx。
+并且第一次使用 `app.mockContext` 会自动复用当前 case 的上下文。
+
+```js
+const { app, mock, assert } = require('egg-mock/bootstrap');
+
+describe('test ctx', () => {
+  it('should can use ctx', () => {
+    const ctx = app.currentContext;
+    assert(ctx);
+  });
+
+  it('should reuse ctx', () => {
+    const ctx = app.currentContext;
+    // 第一次调用会复用上下文
+    const mockCtx = app.mockContext();
+    assert(ctx === mockCtx);
+    // 后续调用会新建上下文
+    // 极不建议多次调用 app.mockContext
+    // 这会导致上下文污染
+    // 建议使用 app.mockContextScope
+    const mockCtx2 = app.mockContext();
+    assert(ctx !== mockCtx);
+  });
+});
+```
+
+### env for custom bootstrap
+EGG_BASE_DIR: the base dir of egg app
+EGG_FRAMEWORK: the framework of egg app
+
 ## Questions & Suggestions
 
 Please open an issue [here](https://github.com/eggjs/egg/issues).

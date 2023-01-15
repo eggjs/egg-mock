@@ -465,6 +465,39 @@ describe('test app', () => {
       .expect(/bar/);
   });
 });
+
+describe('test ctx', () => {
+  it('can use ctx', async function() {
+    const res = await this.ctx.service.foo();
+    assert(res === 'foo');
+  });
+});
+```
+
+We inject ctx to every test case, so you can use `app.currentContext` in your test case.
+and the first call of `app.mockContext` will reuse `app.currentContext`.
+
+```js
+const { app, mock, assert } = require('egg-mock/bootstrap');
+
+describe('test ctx', () => {
+  it('should can use ctx', () => {
+    const ctx = app.currentContext;
+    assert(ctx);
+  });
+
+  it('should reuse ctx', () => {
+    const ctx = app.currentContext;
+    // first call will reuse app.currentContext
+    const mockCtx = app.mockContext();
+    assert(ctx === mockCtx);
+    // next call will create a new context
+    // multi call app.mockContext will get wrong context with app.currentContext
+    // so we recommend to use app.mockContextScope
+    const mockCtx2 = app.mockContext();
+    assert(ctx !== mockCtx);
+  });
+});
 ```
 
 ### env for custom bootstrap
