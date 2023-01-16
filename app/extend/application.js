@@ -56,13 +56,12 @@ module.exports = {
     if (options.reuseCtxStorage !== false) {
       if (this.currentContext && !this.currentContext[REUSED_CTX]) {
         this.currentContext[REUSED_CTX] = true;
-        ctx = this.currentContext;
+        return this.currentContext;
       }
-    } else {
-      ctx = this.createContext(req, res);
-      if (options.mockCtxStorage) {
-        mm(this.ctxStorage, 'getStore', () => ctx);
-      }
+    }
+    ctx = this.createContext(req, res);
+    if (options.mockCtxStorage) {
+      mm(this.ctxStorage, 'getStore', () => ctx);
     }
     return ctx;
   },
