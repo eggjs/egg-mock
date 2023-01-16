@@ -52,14 +52,13 @@ module.exports = {
     const req = this.mockRequest(data);
     const res = new http.ServerResponse(req);
 
-    let ctx;
     if (options.reuseCtxStorage !== false) {
       if (this.currentContext && !this.currentContext[REUSED_CTX]) {
         this.currentContext[REUSED_CTX] = true;
         return this.currentContext;
       }
     }
-    ctx = this.createContext(req, res);
+    const ctx = this.createContext(req, res);
     if (options.mockCtxStorage) {
       mm(this.ctxStorage, 'getStore', () => ctx);
     }
