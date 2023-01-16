@@ -2,6 +2,7 @@ const debug = require('util').debuglog('egg-mock:register');
 const mock = require('./index').default;
 const agentHandler = require('./lib/agent_handler');
 const appHandler = require('./lib/app_handler');
+const injectContext = require('./lib/inject_context');
 
 exports.mochaGlobalSetup = async () => {
   debug('mochaGlobalSetup, agent.setupAgent() start');
@@ -33,3 +34,29 @@ exports.mochaHooks = {
     await mock.restore();
   },
 };
+
+/**
+ * Find active node mocha instances.
+ *
+ * @return {Array}
+ */
+function findNodeJSMocha () {
+  const children = require.cache || {};
+
+  return Object.keys(children)
+    .filter(function (child) {
+      const val = children[child].exports;
+      return typeof val === 'function' && val.name === 'Mocha';
+    })
+    .map(function (child) {
+      return children[child].exports;
+    });
+}
+
+require('mocha');
+const modules = findNodeJSMocha();
+
+for (const module of modules) {
+  injectContext(module);
+}
+

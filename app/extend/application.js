@@ -12,6 +12,7 @@ const supertestRequest = require('../../lib/supertest');
 
 const ORIGIN_TYPES = Symbol('egg-mock:originTypes');
 const BACKGROUND_TASKS = Symbol('Application#backgroundTasks');
+const REUSED_CTX = Symbol('Context#reusedInSuite');
 
 module.exports = {
   /**
@@ -51,6 +52,12 @@ module.exports = {
     const req = this.mockRequest(data);
     const res = new http.ServerResponse(req);
 
+    if (options.reuseCtxStorage !== false) {
+      if (this.currentContext && !this.currentContext[REUSED_CTX]) {
+        this.currentContext[REUSED_CTX] = true;
+        return this.currentContext;
+      }
+    }
     const ctx = this.createContext(req, res);
     if (options.mockCtxStorage) {
       mm(this.ctxStorage, 'getStore', () => ctx);
@@ -61,6 +68,7 @@ module.exports = {
   async mockContextScope(fn, data) {
     const ctx = this.mockContext(data, {
       mockCtxStorage: false,
+      reuseCtxStorage: false,
     });
     return await this.ctxStorage.run(ctx, fn, ctx);
   },
