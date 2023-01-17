@@ -70,7 +70,7 @@
   "homepage": "https://github.com/eggjs/egg-mock",
   "repository": {
     "type": "git",
-    "url": "git@github.com:eggjs/egg-mock.git"
+    "url": "git+https://github.com/eggjs/egg-mock.git"
   },
   "bugs": {
     "url": "https://github.com/eggjs/egg/issues"
