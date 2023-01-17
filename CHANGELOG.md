@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.9.2](https://github.com/eggjs/egg-mock/compare/v5.9.1...v5.9.2) (2023-01-17)
+
+
+### Bug Fixes
+
+* mocha should be peer deps ([#148](https://github.com/eggjs/egg-mock/issues/148)) ([9a5fcca](https://github.com/eggjs/egg-mock/commit/9a5fcca1ff19f2bc7d74a8122becc1bf0ddfe89d))
+
 ## [5.8.4](https://github.com/eggjs/egg-mock/compare/v5.8.3...v5.8.4) (2023-01-12)
 
 
