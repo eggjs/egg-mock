@@ -38,3 +38,5 @@ expectType<void>(mm.env('devserver'));
 
 expectType<Promise<void>>(app.mockAgentRestore());
 expectType<Promise<void>>(app.mockRestore());
+expectType<Promise<void>>(app.mockContextScope(async () => {}));
+expectType<Promise<void>>(app.mockContextScope(async (ctx) => {}));

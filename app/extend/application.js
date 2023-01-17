@@ -70,7 +70,7 @@ module.exports = {
       mockCtxStorage: false,
       reuseCtxStorage: false,
     });
-    return await this.ctxStorage.run(ctx, fn, ctx);
+    await this.ctxStorage.run(ctx, fn, ctx);
   },
 
   /**
