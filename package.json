@@ -45,7 +45,8 @@
     "urllib-next": "^3.2.3"
   },
   "peerDependencies": {
-    "egg": "^3.12.0"
+    "egg": "^3.12.0",
+    "mocha": "^10.2.0"
   },
   "devDependencies": {
     "@eggjs/tegg": "^3.2.2",
