@@ -12,6 +12,6 @@ jobs:
     uses: artusjs/github-actions/.github/workflows/node-release.yml@egg
     secrets:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+      GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
     with:
       checkTest: false
