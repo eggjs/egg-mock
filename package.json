@@ -42,7 +42,7 @@
     "mm": "^3.0.2",
     "sdk-base": "^3.0.1",
     "supertest": "^6.2.4",
-    "urllib-next": "^3.2.3"
+    "urllib": "^3.10.1"
   },
   "peerDependencies": {
     "egg": "^3.12.0",

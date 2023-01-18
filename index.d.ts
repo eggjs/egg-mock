@@ -1,7 +1,7 @@
 import { Application, Context, EggLogger } from 'egg';
 import { MockMate } from 'mm';
 import { Test } from 'supertest';
-import { MockAgent } from 'urllib-next';
+import { MockAgent } from 'urllib';
 
 export { MockAgent };
 interface EggTest extends Test {
