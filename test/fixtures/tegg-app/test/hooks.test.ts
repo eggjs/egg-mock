@@ -16,6 +16,7 @@ describe('test/hooks.test.ts', () => {
   after(() => {
     afterCtx = app.currentContext;
     assert(beforeCtx);
+    assert(beforeCtx !== itCtxList['foo']);
     assert(itCtxList['foo'] !== itCtxList['bar']);
     assert(afterCtx === beforeCtx);
     assert(beforeEachCtxList['foo'] === afterEachCtxList['foo']);
@@ -62,7 +63,7 @@ describe('test/hooks.test.ts', () => {
     });
 
     after(() => {
-      assert(itCtxList[0] === itCtxList[1]);
+      assert(itCtxList[0] !== itCtxList[1]);
     })
   });
 });
