@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.9.4](https://github.com/eggjs/egg-mock/compare/v5.9.3...v5.9.4) (2023-01-18)
+
+
+### Bug Fixes
+
+* use originalUrl to check mock call function request ([#149](https://github.com/eggjs/egg-mock/issues/149)) ([abe1c07](https://github.com/eggjs/egg-mock/commit/abe1c07a2abb4b98c37a34725e4917caafe6dc7e))
+
 ## [5.9.3](https://github.com/eggjs/egg-mock/compare/v5.9.2...v5.9.3) (2023-01-18)
 
 
