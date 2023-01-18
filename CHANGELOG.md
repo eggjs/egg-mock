@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.9.3](https://github.com/eggjs/egg-mock/compare/v5.9.2...v5.9.3) (2023-01-18)
+
+
+### Bug Fixes
+
+* every it should has self ctx ([#150](https://github.com/eggjs/egg-mock/issues/150)) ([bf33c1c](https://github.com/eggjs/egg-mock/commit/bf33c1cbde00b0f10d49184bda305c2c98a58401))
+
 ## [5.9.2](https://github.com/eggjs/egg-mock/compare/v5.9.1...v5.9.2) (2023-01-17)
 
 
