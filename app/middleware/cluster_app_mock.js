@@ -4,8 +4,8 @@ const co = require('co');
 
 module.exports = () => {
   return function clusterAppMock(ctx, next) {
-    if (ctx.path !== '/__egg_mock_call_function') return next();
-
+    // use originalUrl to make sure other middlewares can't change request url
+    if (ctx.originalUrl !== '/__egg_mock_call_function') return next();
     debug('%s %s, body: %j', ctx.method, ctx.url, ctx.request.body);
     const { method, property, args, needResult } = ctx.request.body;
     if (!method) {
