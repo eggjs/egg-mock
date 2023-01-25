@@ -15,58 +15,58 @@ describe('test/app.test.js', () => {
   // test mm.cluster
   call('cluster');
 
-  it('should alias app.agent to app._agent', function* () {
+  it('should alias app.agent to app._agent', async () => {
     const baseDir = path.join(fixtures, 'app');
     const app = mm.app({
       baseDir,
       customEgg: path.join(__dirname, '../node_modules/egg'),
     });
-    yield app.ready();
+    await app.ready();
     assert(app.agent === app._agent);
     assert(app.agent.app === app._app);
   });
 
-  it('should not use cache when app is closed', function* () {
+  it('should not use cache when app is closed', async () => {
     const baseDir = path.join(fixtures, 'app');
     const app1 = mm.app({
       baseDir,
       customEgg: path.join(__dirname, '../node_modules/egg'),
     });
-    yield app1.ready();
-    yield app1.close();
+    await app1.ready();
+    await app1.close();
 
     const app2 = mm.app({
       baseDir,
       customEgg: path.join(__dirname, '../node_modules/egg'),
     });
-    yield app2.ready();
-    yield app2.close();
+    await app2.ready();
+    await app2.close();
 
     assert(app1 !== app2);
   });
 
-  it('should auto find framework when egg.framework exists on package.json', function* () {
+  it('should auto find framework when egg.framework exists on package.json', async () => {
     const baseDir = path.join(fixtures, 'yadan_app');
     const app = mm.app({
       baseDir,
     });
-    yield app.ready();
+    await app.ready();
     assert(app.config.foobar === 'yadan');
-    yield app.close();
+    await app.close();
   });
 
-  it('should emit server event on app without superTest', function* () {
+  it('should emit server event on app without superTest', async () => {
     const baseDir = path.join(fixtures, 'server');
     const app = mm.app({
       baseDir,
     });
-    yield app.ready();
+    await app.ready();
     assert(app.server);
     assert(app.emitServer);
-    yield app.close();
+    await app.close();
   });
 
-  it('support options.beforeInit', function* () {
+  it('support options.beforeInit', async () => {
     const baseDir = path.join(fixtures, 'app');
     const app = mm.app({
       baseDir,
@@ -81,7 +81,7 @@ describe('test/app.test.js', () => {
         });
       },
     });
-    yield app.ready();
+    await app.ready();
     assert(!app.options.beforeInit);
     assert(app.options.test === 'abc');
   });
@@ -95,7 +95,7 @@ describe('test/app.test.js', () => {
     });
   });
 
-  it('should FrameworkErrorformater work during app boot', function* () {
+  it('should FrameworkErrorformater work during app boot', async () => {
     let logMsg;
     let catchErr;
     mm(process.stderr, 'write', msg => {
@@ -103,7 +103,7 @@ describe('test/app.test.js', () => {
     });
     const app = mm.app({ baseDir: path.join(fixtures, 'app-boot-error') });
     try {
-      yield app.ready();
+      await app.ready();
     } catch (err) {
       catchErr = err;
     }
@@ -112,7 +112,7 @@ describe('test/app.test.js', () => {
     assert(/framework\.CustomError\: mock error \[ https\:\/\/eggjs\.org\/zh-cn\/faq\/customPlugin_99 \]/.test(logMsg));
   });
 
-  it('should FrameworkErrorformater work during app boot ready', function* () {
+  it('should FrameworkErrorformater work during app boot ready', async () => {
     let logMsg;
     let catchErr;
     mm(process.stderr, 'write', msg => {
@@ -120,7 +120,7 @@ describe('test/app.test.js', () => {
     });
     const app = mm.app({ baseDir: path.join(fixtures, 'app-boot-ready-error') });
     try {
-      yield app.ready();
+      await app.ready();
     } catch (err) {
       catchErr = err;
     }
@@ -160,8 +160,8 @@ function call(method) {
         });
     });
 
-    it('should app.expectLog(), app.notExpectLog() work', function* () {
-      yield app.httpRequest()
+    it('should app.expectLog(), app.notExpectLog() work', async () => {
+      await app.httpRequest()
         .get('/logger')
         .expect(200)
         .expect({
@@ -204,11 +204,11 @@ function call(method) {
       }
     });
 
-    it('should app.mockLog() then app.expectLog() work', function* () {
+    it('should app.mockLog() then app.expectLog() work', async () => {
       app.mockLog();
       app.mockLog('logger');
       app.mockLog('coreLogger');
-      yield app.httpRequest()
+      await app.httpRequest()
         .get('/logger')
         .expect(200)
         .expect({
@@ -259,8 +259,8 @@ function call(method) {
       }
     });
 
-    it('should app.mockLog() don\'t read from file', function* () {
-      yield app.httpRequest()
+    it('should app.mockLog() don\'t read from file', async () => {
+      await app.httpRequest()
         .get('/logger')
         .expect(200)
         .expect({
@@ -269,6 +269,13 @@ function call(method) {
       app.expectLog('INFO');
       app.mockLog();
       app.notExpectLog('INFO');
+    });
+
+    it('should request with ua', async () => {
+      await app.httpRequest()
+        .get('/ua')
+        .expect(200)
+        .expect(/egg-mock\//);
     });
   });
 
@@ -414,9 +421,9 @@ function call(method) {
       });
       app2.ready(done);
     });
-    after(function* () {
-      yield app1.close();
-      yield app2.close();
+    after(async () => {
+      await app1.close();
+      await app2.close();
     });
 
     it('should equal', () => {

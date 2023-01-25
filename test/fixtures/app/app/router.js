@@ -1,61 +1,65 @@
 const { sleep } = require('../../../../lib/utils');
 
 module.exports = app => {
-  app.get('/', function* () {
-    this.body = 'foo';
+  app.get('/', async ctx => {
+    ctx.body = 'foo';
   });
 
-  app.get('/keepAliveTimeout', function* () {
-    this.body = {
-      keepAliveTimeout: this.app.serverKeepAliveTimeout,
+  app.get('/keepAliveTimeout', async ctx => {
+    ctx.body = {
+      keepAliveTimeout: ctx.app.serverKeepAliveTimeout,
     };
   });
 
-  app.get('/logger', function* () {
-    this.logger.info('[app.expectLog() test] ok');
-    this.coreLogger.info('[app.expectLog(coreLogger) test] ok');
-    this.body = { ok: true };
+  app.get('/ua', async ctx => {
+    ctx.body = ctx.get('user-agent');
+  });
+
+  app.get('/logger', async ctx => {
+    ctx.logger.info('[app.expectLog() test] ok');
+    ctx.coreLogger.info('[app.expectLog(coreLogger) test] ok');
+    ctx.body = { ok: true };
   });
 
 
   let counter = 0;
-  app.get('/counter', function* () {
-    this.body = { counter };
+  app.get('/counter', async ctx => {
+    ctx.body = { counter };
   });
 
-  app.get('/counter/plus', function* () {
-    this.runInBackground(function* (ctx) {
+  app.get('/counter/plus', async ctx => {
+    ctx.runInBackground(async ctx => {
       // mock io delay
-      yield sleep(10);
+      await sleep(10);
       if (ctx.superMan) {
         counter += 10;
         return;
       }
       counter++;
     });
-    this.body = { counter };
+    ctx.body = { counter };
   });
 
-  app.get('/counter/minus', function* () {
-    this.runInBackground(function* () {
-      yield sleep(10);
+  app.get('/counter/minus', async ctx => {
+    ctx.runInBackground(async () => {
+      await sleep(10);
       counter--;
     });
-    this.body = { counter };
+    ctx.body = { counter };
   });
 
-  app.get('/counter/plusplus', function* () {
-    this.runInBackground(function* (ctx) {
+  app.get('/counter/plusplus', async ctx => {
+    ctx.runInBackground(async ctx => {
       // mock io delay
-      yield sleep(10);
+      await sleep(10);
       if (ctx.superMan) {
         counter += 10;
       } else {
         counter++;
       }
-      ctx.runInBackground(function* (ctx) {
+      ctx.runInBackground(async ctx => {
         // mock io delay
-        yield sleep(10);
+        await sleep(10);
         if (ctx.superMan) {
           counter += 10;
         } else {
@@ -63,6 +67,6 @@ module.exports = app => {
         }
       });
     });
-    this.body = { counter };
+    ctx.body = { counter };
   });
 };
