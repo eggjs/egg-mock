@@ -1,5 +1,5 @@
 const path = require('path');
-const agentRegister = require('../lib/parallel/agent_register');
+const agentRegister = require('../register');
 
 describe('test/parallel.test.js', () => {
   before(async () => {

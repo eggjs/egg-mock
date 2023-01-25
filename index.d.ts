@@ -2,6 +2,7 @@ import { Application, Context, EggLogger } from 'egg';
 import { MockMate } from 'mm';
 import { Test } from 'supertest';
 import { MockAgent } from 'urllib';
+import { Suite } from 'mocha';
 
 export { MockAgent };
 interface EggTest extends Test {
@@ -155,6 +156,14 @@ export interface EggMock extends MockMate {
    * restore mock
    */
   restore: () => any;
+
+  /**
+   * If you use mm.app instead of egg-mock/bootstrap to bootstrap app.
+   * Should manually call setGetAppCallback,
+   * then egg-mock will inject ctx for each test case
+   * @param cb
+   */
+  setGetAppCallback: (cb: (suite: Suite) => Promise<MockApplication> ) => void;
 }
 
 declare const mm: EggMock;
