@@ -37,6 +37,13 @@ module.exports = {
    * ```
    */
   mockContext(data, options) {
+    function mockRequest(req) {
+      for (const key in (data.headers) || {}) {
+        mm(req.headers, key, data.headers[key]);
+        mm(req.headers, key.toLowerCase(), data.headers[key]);
+      }
+    }
+
     options = Object.assign({ mockCtxStorage: true }, options);
     data = data || {};
 
@@ -54,6 +61,7 @@ module.exports = {
 
     if (options.reuseCtxStorage !== false) {
       if (this.currentContext && !this.currentContext[REUSED_CTX]) {
+        mockRequest(this.currentContext.request.req);
         this.currentContext[REUSED_CTX] = true;
         return this.currentContext;
       }
@@ -70,7 +78,7 @@ module.exports = {
       mockCtxStorage: false,
       reuseCtxStorage: false,
     });
-    await this.ctxStorage.run(ctx, fn, ctx);
+    return await this.ctxStorage.run(ctx, fn, ctx);
   },
 
   /**

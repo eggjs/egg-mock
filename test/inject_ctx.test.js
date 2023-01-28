@@ -17,7 +17,7 @@ describe('test/inject_ctx.test.js', () => {
     })
       .debug()
       .expect('code', 0)
-      .expect('stdout', /9 passing/)
+      .expect('stdout', /10 passing/)
       .end();
   });
 
