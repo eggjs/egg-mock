@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.10.0](https://github.com/eggjs/egg-mock/compare/v5.9.4...v5.10.0) (2023-01-28)
+
+
+### Features
+
+* add default ua egg-mock/${version} ([#151](https://github.com/eggjs/egg-mock/issues/151)) ([ccb28f5](https://github.com/eggjs/egg-mock/commit/ccb28f5a99148528459f1f8b120254f3feb64561))
+* impl setGetAppCallback ([#152](https://github.com/eggjs/egg-mock/issues/152)) ([b7d902c](https://github.com/eggjs/egg-mock/commit/b7d902cf990ee90181f24e9722f42560858118eb))
+
 ## [5.9.4](https://github.com/eggjs/egg-mock/compare/v5.9.3...v5.9.4) (2023-01-18)
 
 
