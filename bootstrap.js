@@ -16,7 +16,7 @@ appHandler.setupApp();
 module.exports = {
   assert,
   get app() {
-    return appHandler.getApp();
+    return appHandler.getBootstrapApp();
   },
   mock,
   mm: mock,

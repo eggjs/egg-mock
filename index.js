@@ -75,6 +75,8 @@ Object.assign(mock, mm, {
       mm(process.env, 'EGG_HOME', homePath);
     }
   },
+
+  setGetAppCallback: require('./lib/app_handler').setGetAppCallback,
 });
 
 process.setMaxListeners(100);

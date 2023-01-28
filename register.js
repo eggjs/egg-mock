@@ -18,7 +18,7 @@ exports.mochaGlobalTeardown = async () => {
 
 exports.mochaHooks = {
   async beforeAll() {
-    const app = appHandler.getApp();
+    const app = await appHandler.getApp();
     debug('mochaHooks.beforeAll call, _app: %s', app);
 
     if (app) {
@@ -26,7 +26,7 @@ exports.mochaHooks = {
     }
   },
   async afterEach() {
-    const app = appHandler.getApp();
+    const app = await appHandler.getApp();
     debug('mochaHooks.afterEach call, _app: %s', app);
     if (app) {
       await app.backgroundTasksFinished();
@@ -40,15 +40,15 @@ exports.mochaHooks = {
  *
  * @return {Array}
  */
-function findNodeJSMocha () {
+function findNodeJSMocha() {
   const children = require.cache || {};
 
   return Object.keys(children)
-    .filter(function (child) {
+    .filter(function(child) {
       const val = children[child].exports;
       return typeof val === 'function' && val.name === 'Mocha';
     })
-    .map(function (child) {
+    .map(function(child) {
       return children[child].exports;
     });
 }

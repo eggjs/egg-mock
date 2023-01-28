@@ -500,6 +500,28 @@ describe('test ctx', () => {
 });
 ```
 
+And if you use mm.app to bootstrap app, you can manually call setGetAppCallback,
+then egg-mock will inject ctx for each test case.
+```js
+// test/.setup.js
+const mm = require('egg-mock');
+const path = require('path');
+before(async function() {
+  const app = this.app = mm.app();
+  mm.setGetAppCallback(() => {
+    return app;
+  });
+  await app.ready();
+});
+
+
+// test/index.test.js
+it('should work', function() {
+  // eslint-disable-next-line no-undef
+  assert(this.app.currentContext);
+});
+```
+
 ### env for custom bootstrap
 EGG_BASE_DIR: the base dir of egg app
 EGG_FRAMEWORK: the framework of egg app
