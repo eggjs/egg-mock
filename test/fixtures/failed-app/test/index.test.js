@@ -1,32 +1,53 @@
 const assert = require('assert');
-const { app } = require('../../../../bootstrap');
 
 describe('test/index.test.ts', () => {
-  describe('hook error', () => {
-    beforeEach(() => {
-      assert.fail('failed hook');
+  describe('before error', () => {
+    before(() => {
+      throw new Error('before error');
     });
 
-    it('should fail', () => {
-      // eslint-disable-next-line no-undef
-      assert(app.currentContext);
-      assert.fail('failed case');
+    it('should not print', () => {
+      assert.fail('never arrive');
     });
   });
 
-  describe('mockContext failed', () => {
-    before(() => {
-      app.mockContextScope = () => {
-        throw new Error('mockContextScope error');
-      };
+  describe('after error', () => {
+    after(() => {
+      throw new Error('after error');
     });
 
-    it('foo', () => {
-      //...
+    it('should print', () => {
+      console.log('after error test case should print');
+    });
+  });
+
+  describe('beforeEach error', () => {
+    beforeEach(() => {
+      throw new Error('beforeEach error');
     });
 
-    it('should not run', () => {
-      console.log('it should not run');
+    it('should not print', () => {
+      assert.fail('never arrive');
+    });
+  });
+
+  describe('afterEach error', () => {
+    afterEach(() => {
+      throw new Error('afterEach error');
+    });
+
+    it('should print', () => {
+      console.log('afterEach error test case should print');
+    });
+  });
+
+  describe('case error', () => {
+    it('should failed', () => {
+      assert.fail('should fail');
+    });
+
+    it('should work', () => {
+      // ...
     });
   });
 });
