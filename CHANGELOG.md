@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.10.1](https://github.com/eggjs/egg-mock/compare/v5.10.0...v5.10.1) (2023-01-29)
+
+
+### Bug Fixes
+
+* fix mockContext with headers ([#153](https://github.com/eggjs/egg-mock/issues/153)) ([5e3e816](https://github.com/eggjs/egg-mock/commit/5e3e816395d8be37548d4bb72c3e3dc2d098bee1))
+
 ## [5.10.0](https://github.com/eggjs/egg-mock/compare/v5.9.4...v5.10.0) (2023-01-28)
 
 
