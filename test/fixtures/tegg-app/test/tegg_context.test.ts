@@ -30,13 +30,31 @@ describe('test/tegg_context.test.ts', () => {
         tracer: {
           traceId: 'mock_with_data',
         },
+        headers: {
+          'user-agent': 'mock_agent',
+        },
       });
       assert(ctx.tracer.traceId === 'mock_with_data');
+      assert(ctx.get('user-agent') === 'mock_agent');
     });
 
     it('should mock ctx work', () => {
       const traceId = logService.getTracerId();
       assert(traceId === 'mock_with_data');
+    });
+  });
+
+  describe('mockModuleContextWithHeaders', () => {
+    beforeEach(async () => {
+      await app.mockModuleContext({
+        headers: {
+          'user-agent': 'mock_agent',
+        },
+      });
+    });
+
+    it('should mock ctx work', () => {
+      assert(app.currentContext.get('user-agent') === 'mock_agent');
     });
   });
 });
