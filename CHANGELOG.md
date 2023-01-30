@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.10.3](https://github.com/eggjs/egg-mock/compare/v5.10.2...v5.10.3) (2023-01-30)
+
+
+### Bug Fixes
+
+* inject failed should make suite/test failed ([#154](https://github.com/eggjs/egg-mock/issues/154)) ([f9f2d4c](https://github.com/eggjs/egg-mock/commit/f9f2d4c5184b2fd2a60485d9333bfefb2c42fabb))
+
 ## [5.10.2](https://github.com/eggjs/egg-mock/compare/v5.10.1...v5.10.2) (2023-01-30)
 
 
