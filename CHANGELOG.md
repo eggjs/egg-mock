@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.10.2](https://github.com/eggjs/egg-mock/compare/v5.10.1...v5.10.2) (2023-01-30)
+
+
+### Bug Fixes
+
+* make sure app ready on parallel mode ([#155](https://github.com/eggjs/egg-mock/issues/155)) ([83c600e](https://github.com/eggjs/egg-mock/commit/83c600e8cb8139a232f1066c2925562574102dbe))
+
 ## [5.10.1](https://github.com/eggjs/egg-mock/compare/v5.10.0...v5.10.1) (2023-01-29)
 
 
