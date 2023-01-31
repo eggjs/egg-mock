@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.10.4](https://github.com/eggjs/egg-mock/compare/v5.10.3...v5.10.4) (2023-01-31)
+
+
+### Bug Fixes
+
+* use symbol to access suite app ([#156](https://github.com/eggjs/egg-mock/issues/156)) ([a130dd3](https://github.com/eggjs/egg-mock/commit/a130dd307258df540b65b6d445b56681f69d9232))
+
 ## [5.10.3](https://github.com/eggjs/egg-mock/compare/v5.10.2...v5.10.3) (2023-01-30)
 
 
