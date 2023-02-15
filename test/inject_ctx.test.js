@@ -1,7 +1,7 @@
 const coffee = require('coffee');
 const path = require('path');
 
-describe('test/inject_ctx.test.js', () => {
+describe.only('test/inject_ctx.test.js', () => {
   it('should inject ctx to runner', async () => {
     const fixture = path.join(__dirname, 'fixtures/tegg-app');
 
@@ -15,7 +15,7 @@ describe('test/inject_ctx.test.js', () => {
         EGG_FRAMEWORK: require.resolve('egg'),
       },
     })
-      // .debug()
+      .debug()
       .expect('code', 0)
       .expect('stdout', /10 passing/)
       .end();
