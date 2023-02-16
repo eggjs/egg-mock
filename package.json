@@ -81,7 +81,7 @@
     "mock"
   ],
   "engines": {
-    "node": ">= 14.17.0"
+    "node": ">= 14.18.0"
   },
   "author": "popomore <sakura9515@gmail.com>"
 }
