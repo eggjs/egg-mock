@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.10.5](https://github.com/eggjs/egg-mock/compare/v5.10.4...v5.10.5) (2023-02-16)
+
+
+### Bug Fixes
+
+* should close app on afterAll hook ([#158](https://github.com/eggjs/egg-mock/issues/158)) ([081b157](https://github.com/eggjs/egg-mock/commit/081b1574c31cfe274083b21a1e11bc81304ab1d5))
+
 ## [5.10.4](https://github.com/eggjs/egg-mock/compare/v5.10.3...v5.10.4) (2023-01-31)
 
 
