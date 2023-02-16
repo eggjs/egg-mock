@@ -20,8 +20,8 @@
     "lint": "eslint lib app index.js test/*.test.js",
     "tsd": "tsd",
     "test": "npm run lint && npm run tsd && npm run test-local",
-    "test-local": "egg-bin test --full-trace -r ./register.js",
-    "cov": "egg-bin cov -r ./register.js",
+    "test-local": "egg-bin test -r ./register.js --ts false",
+    "cov": "egg-bin cov -r ./register.js --ts false",
     "ci": "npm run lint && npm run tsd && npm run cov",
     "contributors": "git-contributor"
   },
@@ -55,14 +55,14 @@
     "@eggjs/tegg-plugin": "^3.2.2",
     "@eggjs/tsconfig": "^1.1.0",
     "@types/mocha": "^10.0.1",
-    "@types/node": "^14.18.34",
+    "@types/node": "^18.13.0",
     "egg": "^3.12.0",
-    "egg-bin": "^5.2.0",
+    "egg-bin": "^6.0.0",
     "egg-errors": "^2.2.1",
     "egg-tracer": "^2.0.0",
     "eslint": "^8.24.0",
     "eslint-config-egg": "^12.0.0",
-    "git-contributor": "^1.1.0",
+    "git-contributor": "^2.0.0",
     "mocha": "^10.1.0",
     "pedding": "^1.1.0",
     "tsd": "^0.24.1",
@@ -81,7 +81,7 @@
     "mock"
   ],
   "engines": {
-    "node": ">= 14.17.0"
+    "node": ">= 14.18.0"
   },
   "author": "popomore <sakura9515@gmail.com>"
 }
