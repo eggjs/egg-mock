@@ -20,7 +20,6 @@ exports.mochaHooks = {
   async beforeAll() {
     const app = await appHandler.getApp();
     debug('mochaHooks.beforeAll call, _app: %s', app);
-
     if (app) {
       await app.ready();
     }
@@ -32,6 +31,13 @@ exports.mochaHooks = {
       await app.backgroundTasksFinished();
     }
     await mock.restore();
+  },
+  async afterAll() {
+    const app = await appHandler.getApp();
+    debug('mochaHooks.afterAll call, _app: %s', app);
+    if (app) {
+      await app.close();
+    }
   },
 };
 
