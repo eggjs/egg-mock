@@ -1,7 +1,6 @@
-import assert from 'assert';
 import { app } from '../../../../bootstrap';
 import { LogService } from '../app/modules/foo/LogService';
-
+import assert from 'assert';
 describe('test/tegg.test.ts', () => {
   describe('async function', () => {
     it('should work', async () => {

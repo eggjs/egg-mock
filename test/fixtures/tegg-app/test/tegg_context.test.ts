@@ -11,11 +11,14 @@ describe('test/tegg_context.test.ts', () => {
   });
 
   describe('mock ctx property', () => {
-    it('should mock ctx work', async () => {
+    beforeEach(async () => {
       ctx = await app.mockModuleContext();
       mm(ctx.tracer, 'traceId', 'mockTraceId');
+    });
+
+    it('should mock ctx work', () => {
       const traceId = logService.getTracerId();
-      assert.strictEqual(traceId, 'mockTraceId');
+      assert(traceId === 'mockTraceId');
     });
   });
 
@@ -31,13 +34,13 @@ describe('test/tegg_context.test.ts', () => {
           'user-agent': 'mock_agent',
         },
       });
-      assert.strictEqual(ctx.tracer.traceId, 'mock_with_data');
-      assert.strictEqual(ctx.get('user-agent'), 'mock_agent');
+      assert(ctx.tracer.traceId === 'mock_with_data');
+      assert(ctx.get('user-agent') === 'mock_agent');
     });
 
     it('should mock ctx work', () => {
       const traceId = logService.getTracerId();
-      assert.strictEqual(traceId, 'mock_with_data');
+      assert(traceId === 'mock_with_data');
     });
   });
 
@@ -51,7 +54,7 @@ describe('test/tegg_context.test.ts', () => {
     });
 
     it('should mock ctx work', () => {
-      assert.strictEqual(app.currentContext.get('user-agent'), 'mock_agent');
+      assert(app.currentContext.get('user-agent') === 'mock_agent');
     });
   });
 });

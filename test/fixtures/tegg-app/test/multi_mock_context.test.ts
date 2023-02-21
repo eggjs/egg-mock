@@ -1,14 +1,14 @@
-import assert from 'assert';
 import { app } from '../../../../bootstrap';
+import assert from 'assert';
 
 describe('test/multi_mock_context.test.ts', () => {
   describe('mockContext', () => {
-    it('should only reused once', async () => {
+    it('should only reused once', async function () {
       const currentContext = app.currentContext;
       const ctx1 = app.mockContext();
       const ctx2 = app.mockContext();
-      assert.strictEqual(currentContext, ctx1);
-      assert.notStrictEqual(ctx2, ctx1);
+      assert(currentContext === ctx1);
+      assert(ctx2 !== ctx1);
     });
   });
 });
