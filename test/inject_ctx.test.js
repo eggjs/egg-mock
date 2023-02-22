@@ -1,7 +1,7 @@
 const coffee = require('coffee');
 const path = require('path');
 
-describe.only('test/inject_ctx.test.js', () => {
+describe('test/inject_ctx.test.js', () => {
   it('should inject ctx to runner', async () => {
     const fixture = path.join(__dirname, 'fixtures/tegg-app');
 
