@@ -33,6 +33,8 @@ exports.mochaHooks = {
     await mock.restore();
   },
   async afterAll() {
+    // skip auto app close on parallel
+    if (process.env.ENABLE_MOCHA_PARALLEL) return;
     const app = await appHandler.getApp();
     debug('mochaHooks.afterAll call, _app: %s', app);
     if (app) {
