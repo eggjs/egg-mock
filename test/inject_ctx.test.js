@@ -2,20 +2,21 @@ const coffee = require('coffee');
 const path = require('path');
 
 describe('test/inject_ctx.test.js', () => {
+  const eggBinFile = require.resolve('egg-bin//dist/bin/cli');
+
   it('should inject ctx to runner', async () => {
     const fixture = path.join(__dirname, 'fixtures/tegg-app');
 
-    await coffee.fork(require.resolve('egg-bin/bin/egg-bin'), [
+    await coffee.fork(eggBinFile, [
       'test',
       '-r', require.resolve('../register'),
-      '--full-trace',
     ], {
       cwd: fixture,
       env: {
         EGG_FRAMEWORK: require.resolve('egg'),
       },
     })
-      .debug()
+      // .debug()
       .expect('code', 0)
       .expect('stdout', /10 passing/)
       .end();
@@ -24,10 +25,9 @@ describe('test/inject_ctx.test.js', () => {
   it('should inject ctx to runner with setGetAppCallback', async () => {
     const fixture = path.join(__dirname, 'fixtures/setup-app');
 
-    await coffee.fork(require.resolve('egg-bin/bin/egg-bin'), [
+    await coffee.fork(eggBinFile, [
       'test',
       '-r', require.resolve('../register'),
-      '--full-trace',
     ], {
       cwd: fixture,
     })
@@ -40,10 +40,9 @@ describe('test/inject_ctx.test.js', () => {
   it('hook/case error should failed', async () => {
     const fixture = path.join(__dirname, 'fixtures/failed-app');
 
-    await coffee.fork(require.resolve('egg-bin/bin/egg-bin'), [
+    await coffee.fork(eggBinFile, [
       'test',
       '-r', require.resolve('../register'),
-      '--full-trace',
     ], {
       cwd: fixture,
       env: {
@@ -68,10 +67,9 @@ describe('test/inject_ctx.test.js', () => {
     it('get app error should failed', async () => {
       const fixture = path.join(__dirname, 'fixtures/get-app-failed');
 
-      await coffee.fork(require.resolve('egg-bin/bin/egg-bin'), [
+      await coffee.fork(eggBinFile, [
         'test',
         '-r', require.resolve('../register'),
-        '--full-trace',
       ], {
         cwd: fixture,
         env: {
@@ -87,10 +85,9 @@ describe('test/inject_ctx.test.js', () => {
     it('create context error should failed', async () => {
       const fixture = path.join(__dirname, 'fixtures/create-context-failed');
 
-      await coffee.fork(require.resolve('egg-bin/bin/egg-bin'), [
+      await coffee.fork(eggBinFile, [
         'test',
         '-r', require.resolve('../register'),
-        '--full-trace',
       ], {
         cwd: fixture,
         env: {
@@ -108,10 +105,9 @@ describe('test/inject_ctx.test.js', () => {
     it('get app error should failed', async () => {
       const fixture = path.join(__dirname, 'fixtures/test-case-get-app-failed');
 
-      await coffee.fork(require.resolve('egg-bin/bin/egg-bin'), [
+      await coffee.fork(eggBinFile, [
         'test',
         '-r', require.resolve('../register'),
-        '--full-trace',
       ], {
         cwd: fixture,
         env: {
@@ -127,10 +123,9 @@ describe('test/inject_ctx.test.js', () => {
     it('create context error should failed', async () => {
       const fixture = path.join(__dirname, 'fixtures/test-case-create-context-failed');
 
-      await coffee.fork(require.resolve('egg-bin/bin/egg-bin'), [
+      await coffee.fork(eggBinFile, [
         'test',
         '-r', require.resolve('../register'),
-        '--full-trace',
       ], {
         cwd: fixture,
         env: {
