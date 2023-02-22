@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.10.6](https://github.com/eggjs/egg-mock/compare/v5.10.5...v5.10.6) (2023-02-22)
+
+
+### Bug Fixes
+
+* disable app close on parallel ([#160](https://github.com/eggjs/egg-mock/issues/160)) ([5a08d33](https://github.com/eggjs/egg-mock/commit/5a08d33ffcbc047ef374a5ab99bee00ad5675808))
+
 ## [5.10.5](https://github.com/eggjs/egg-mock/compare/v5.10.4...v5.10.5) (2023-02-16)
 
 
