@@ -5,7 +5,7 @@
     "name": "egg-mock"
   },
   "description": "mock server for egg",
-  "typings": "index.d.ts",
+  "types": "index.d.ts",
   "main": "index.js",
   "files": [
     "app.js",
