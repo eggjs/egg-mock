@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.10.7](https://github.com/eggjs/egg-mock/compare/v5.10.6...v5.10.7) (2023-05-29)
+
+
+### Bug Fixes
+
+* set types to index.d.ts ([#161](https://github.com/eggjs/egg-mock/issues/161)) ([7de47a1](https://github.com/eggjs/egg-mock/commit/7de47a1e6bb8d4d003b93c130d1e08c7ac0c8bf7))
+
 ## [5.10.6](https://github.com/eggjs/egg-mock/compare/v5.10.5...v5.10.6) (2023-02-22)
 
 
