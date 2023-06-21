@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.10.8](https://github.com/eggjs/egg-mock/compare/v5.10.7...v5.10.8) (2023-06-21)
+
+
+### Bug Fixes
+
+* fix mocha failed title for inject_ctx ([#162](https://github.com/eggjs/egg-mock/issues/162)) ([f6f59ac](https://github.com/eggjs/egg-mock/commit/f6f59ac48789fb2c81dfd3025b626c2ed4090a36))
+
 ## [5.10.7](https://github.com/eggjs/egg-mock/compare/v5.10.6...v5.10.7) (2023-05-29)
 
 
