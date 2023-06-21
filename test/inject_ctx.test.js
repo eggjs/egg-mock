@@ -64,6 +64,16 @@ describe('test/inject_ctx.test.js', () => {
   });
 
   describe('run suite', () => {
+    //   test/inject_ctx.test.js
+    //     run suite
+    //   1) "before all" hook: beforeAll in "{root}"
+    //   2) "after all" hook: afterAll in "{root}"
+    //   0 passing (7ms)
+    //   2 failing
+    //   1) "before all" hook: beforeAll in "{root}":
+    //      Error: mock get app failed
+    //   2) "after all" hook: afterAll in "{root}":
+    //      Error: mock get app failed
     it('get app error should failed', async () => {
       const fixture = path.join(__dirname, 'fixtures/get-app-failed');
 
@@ -78,10 +88,17 @@ describe('test/inject_ctx.test.js', () => {
       })
         // .debug()
         .expect('code', 1)
-        .expect('stdout', /get app for "root suite": mock get app failed/)
+        .expect('stdout', /"before all" hook: beforeAll in "{root}"/)
         .end();
     });
 
+    //   test/inject_ctx.test.js
+    //     run suite
+    //   1) "before all" hook: egg-mock-mock-ctx-failed in "{root}"
+    //   0 passing (4ms)
+    //   1 failing
+    //   1) "before all" hook: egg-mock-mock-ctx-failed in "{root}":
+    //      Error: mock create context failed
     it('create context error should failed', async () => {
       const fixture = path.join(__dirname, 'fixtures/create-context-failed');
 
@@ -94,14 +111,47 @@ describe('test/inject_ctx.test.js', () => {
           EGG_FRAMEWORK: require.resolve('egg'),
         },
       })
+        .debug()
+        .expect('code', 1)
+        .expect('stdout', /Error: mock create context failed/)
+        .end();
+    });
+
+    //   1) "before all" hook: beforeAll in "{root}"
+    //   2) "after all" hook: afterAll in "{root}"
+    //   0 passing (432ms)
+    //   2 failing
+    //   1) "before all" hook: beforeAll in "{root}":
+    //      Error: mock app ready failed
+    //   2) "after all" hook: afterAll in "{root}":
+    //      Error: mock app ready failed
+    it('app.ready error should failed', async () => {
+      const fixture = path.join(__dirname, 'fixtures/app-ready-failed');
+
+      await coffee.fork(eggBinFile, [
+        'test',
+        '-r', require.resolve('../register'),
+      ], {
+        cwd: fixture,
+        env: {
+          EGG_FRAMEWORK: require.resolve('egg'),
+        },
+      })
         // .debug()
         .expect('code', 1)
-        .expect('stdout', /inject context for "root suite": mock create context failed/)
+        .expect('stdout', /mock app ready failed/)
         .end();
     });
   });
 
   describe('run test', () => {
+    //  test case get app error
+    //     1) should not print
+    //   0 passing (5ms)
+    //   1 failing
+    //   1) test case get app error
+    //        should not print:
+    //      Error: mock get app failed
     it('get app error should failed', async () => {
       const fixture = path.join(__dirname, 'fixtures/test-case-get-app-failed');
 
@@ -116,10 +166,19 @@ describe('test/inject_ctx.test.js', () => {
       })
         // .debug()
         .expect('code', 1)
-        .expect('stdout', /get app for "test case get app error - should not print": mock get app failed/)
+        .expect('stdout', /Error: mock get app failed/)
         .end();
     });
 
+    //   test case create context error
+    //     1) should not print
+    //   0 passing (7ms)
+    //   1 failing
+    //   1) test case create context error
+    //        should not print:
+    //      Error: mock create context failed
+    //       at Object.mockContextScope (test/index.test.js:12:15)
+    //       at next (/Users/killa/workspace/egg-mock/lib/inject_context.js:107:30)
     it('create context error should failed', async () => {
       const fixture = path.join(__dirname, 'fixtures/test-case-create-context-failed');
 
@@ -134,7 +193,7 @@ describe('test/inject_ctx.test.js', () => {
       })
         // .debug()
         .expect('code', 1)
-        .expect('stdout', /create context for "test case create context error" error: mock create context failed/)
+        .expect('stdout', /Error: mock create context failed/)
         .end();
     });
   });

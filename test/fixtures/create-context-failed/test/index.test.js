@@ -8,6 +8,12 @@ setGetAppCallback(() => {
     mockContextScope: async () => {
       throw new Error('mock create context failed');
     },
+    close: async () => {
+      // ...
+    },
+    backgroundTasksFinished: async () => {
+      // ...
+    },
   };
 });
 

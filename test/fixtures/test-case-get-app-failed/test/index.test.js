@@ -11,6 +11,12 @@ setGetAppCallback((suite, test) => {
     mockContextScope: async scope => {
       await scope({});
     },
+    backgroundTasksFinished: async () => {
+      // ...
+    },
+    close: async () => {
+      // ...
+    },
   };
 });
 

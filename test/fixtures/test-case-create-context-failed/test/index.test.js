@@ -12,6 +12,12 @@ setGetAppCallback((suite, test) => {
         throw new Error('mock create context failed');
       }
     },
+    backgroundTasksFinished: async () => {
+      // ...
+    },
+    close: async () => {
+      // ...
+    },
   };
 });
 
