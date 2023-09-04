@@ -40,3 +40,5 @@ expectType<Promise<void>>(app.mockAgentRestore());
 expectType<Promise<void>>(app.mockRestore());
 expectType<Promise<void>>(app.mockContextScope(async () => {}));
 expectType<Promise<void>>(app.mockContextScope(async (ctx) => {}));
+
+expectType<Promise<void>>(app.backgroundTasksFinished());
