@@ -7,3 +7,4 @@ run/
 .vscode
 .idea
 .nyc_output
+package-lock.json
