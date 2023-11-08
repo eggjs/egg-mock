@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.10.9](https://github.com/eggjs/egg-mock/compare/v5.10.8...v5.10.9) (2023-11-08)
+
+
+### Bug Fixes
+
+* allow to call mockHttpclient multi times ([#165](https://github.com/eggjs/egg-mock/issues/165)) ([370e42d](https://github.com/eggjs/egg-mock/commit/370e42d777d89dcfde1773db6404284439b38725))
+
 ## [5.10.8](https://github.com/eggjs/egg-mock/compare/v5.10.7...v5.10.8) (2023-06-21)
 
 
