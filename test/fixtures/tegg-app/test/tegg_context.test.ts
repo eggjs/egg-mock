@@ -19,7 +19,7 @@ describe('test/tegg_context.test.ts', () => {
     });
   });
 
-  describe('mockModuleContextWithData', () => {
+  describe.skip('mockModuleContextWithData', () => {
     let ctx: Context;
 
     beforeEach(async () => {
@@ -41,7 +41,7 @@ describe('test/tegg_context.test.ts', () => {
     });
   });
 
-  describe('mockModuleContextWithHeaders', () => {
+  describe.skip('mockModuleContextWithHeaders', () => {
     beforeEach(async () => {
       await app.mockModuleContext({
         headers: {

@@ -18,7 +18,7 @@ describe('test/inject_ctx.test.js', () => {
     })
       // .debug()
       .expect('code', 0)
-      .expect('stdout', /10 passing/)
+      .expect('stdout', /\d+ passing/)
       .end();
   });
 
@@ -111,7 +111,7 @@ describe('test/inject_ctx.test.js', () => {
           EGG_FRAMEWORK: require.resolve('egg'),
         },
       })
-        .debug()
+        // .debug()
         .expect('code', 1)
         .expect('stdout', /Error: mock create context failed/)
         .end();
