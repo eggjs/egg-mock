@@ -74,6 +74,11 @@ export interface BaseMockApplication<T, C> extends Application { // tslint:disbl
   mockLog(logger?: EggLogger | string): void;
   expectLog(expected: string | RegExp, logger?: EggLogger | string): void;
   notExpectLog(expected: string | RegExp, logger?: EggLogger | string): void;
+
+  /**
+   * background task
+   */
+  backgroundTasksFinished(): Promise<void>;
 }
 
 interface ResultObject {

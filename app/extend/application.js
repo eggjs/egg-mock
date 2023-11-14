@@ -422,7 +422,6 @@ module.exports = {
     this.__checkExpectLog(false, str, logger);
   },
 
-  // private method
   backgroundTasksFinished() {
     const tasks = this._backgroundTasks;
     debug('waiting %d background tasks', tasks.length);
