@@ -346,7 +346,6 @@ const ctx = app.mockContext({
 console.log(ctx.user.name); // Jason
 ```
 
-
 ### app.mockContextScope(fn, options)
 
 安全的模拟上下文数据，同一用例用多次调用 mockContext 可能会造成 AsyncLocalStorage 污染

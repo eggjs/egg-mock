@@ -37,7 +37,7 @@
     "extend2": "^1.0.0",
     "get-ready": "^2.0.1",
     "globby": "^11.1.0",
-    "is-type-of": "^1.2.1",
+    "is-type-of": "^2.1.0",
     "merge-descriptors": "^1.0.1",
     "methods": "^1.1.2",
     "mm": "^3.0.2",
