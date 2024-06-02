@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.12.0](https://github.com/eggjs/egg-mock/compare/v5.11.0...v5.12.0) (2024-06-02)
+
+
+### Features
+
+* change backgroundTasksFinished method from private to public ([#163](https://github.com/eggjs/egg-mock/issues/163)) ([86b4d45](https://github.com/eggjs/egg-mock/commit/86b4d452f0e5e851e8fd550a74f244c91de5c093))
+
 ## [5.11.0](https://github.com/eggjs/egg-mock/compare/v5.10.9...v5.11.0) (2024-06-02)
 
 
