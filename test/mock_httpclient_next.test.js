@@ -121,6 +121,48 @@ describe('test/mock_httpclient_next.test.js', () => {
       .expect(200);
   });
 
+  it('should mockHttpclient call multi times work with Regex', async () => {
+    app.mockCsrf();
+    app.mockHttpclient(/\/not\/match\//, {
+      data: Buffer.from('mock not match response'),
+    });
+    app.mockHttpclient(/\/mock_url/, {
+      data: Buffer.from('mock 1 match response'),
+    });
+    app.mockHttpclient(/\/mock_url/, {
+      data: Buffer.from('mock 2 match response'),
+    });
+
+    await request(server)
+      .get('/urllib')
+      .expect({
+        get: 'mock 1 match response',
+        post: 'mock 1 match response',
+      })
+      .expect(200);
+  });
+
+  it('should mockHttpclient call multi times work with url string', async () => {
+    app.mockCsrf();
+    app.mockHttpclient(`${url}-not-match`, {
+      data: Buffer.from('mock not match response'),
+    });
+    app.mockHttpclient(url, {
+      data: Buffer.from('mock 1 match response'),
+    });
+    app.mockHttpclient(url, {
+      data: Buffer.from('mock 2 match response'),
+    });
+
+    await request(server)
+      .get('/urllib')
+      .expect({
+        get: 'mock 1 match response',
+        post: 'mock 1 match response',
+      })
+      .expect(200);
+  });
+
   it('should mock url method support *', async () => {
     app.mockCsrf();
     app.mockHttpclient(url, '*', {
