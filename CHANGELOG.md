@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.11.0](https://github.com/eggjs/egg-mock/compare/v5.10.9...v5.11.0) (2024-06-02)
+
+
+### Features
+
+* use egg-logger@3 and sdk-base@4 ([#167](https://github.com/eggjs/egg-mock/issues/167)) ([e02e72e](https://github.com/eggjs/egg-mock/commit/e02e72ef561ae029be3671ebf2a8e37ad06dc2d1))
+
 ## [5.10.9](https://github.com/eggjs/egg-mock/compare/v5.10.8...v5.10.9) (2023-11-08)
 
 
