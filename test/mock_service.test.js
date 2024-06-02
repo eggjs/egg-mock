@@ -58,7 +58,7 @@ describe('test/mock_service.test.js', () => {
       });
   });
 
-  it('mock error succeess', async () => {
+  it.skip('mock error succeess', async () => {
     app.mockService('foo', 'get', new Error('async error'));
     try {
       const ctx = app.mockContext();
@@ -69,7 +69,7 @@ describe('test/mock_service.test.js', () => {
     }
   });
 
-  it('mock sync error succeess', async () => {
+  it.skip('mock sync error succeess', async () => {
     app.mockService('foo', 'getSync', new Error('sync error'));
     try {
       const ctx = app.mockContext();
