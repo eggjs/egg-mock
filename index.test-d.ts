@@ -1,6 +1,6 @@
 import { expectType } from 'tsd';
 import { Application, Context } from 'egg';
-import { MockApplication, MockAgent } from '.';
+import { MockApplication, MockAgent, ResultObject } from '.';
 import { app, mock, mm } from './bootstrap';
 
 expectType<MockApplication>(app);
@@ -42,3 +42,6 @@ expectType<Promise<void>>(app.mockContextScope(async () => {}));
 expectType<Promise<void>>(app.mockContextScope(async (ctx) => {}));
 
 expectType<Promise<void>>(app.backgroundTasksFinished());
+
+const result: ResultObject = {};
+expectType<number>(result.status!);
