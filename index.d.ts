@@ -5,14 +5,15 @@ import { MockAgent } from 'urllib';
 import { Suite } from 'mocha';
 
 export { MockAgent };
-interface EggTest extends Test {
+
+export interface EggTest extends Test {
   unexpectHeader(name: string, b?: Function): EggTest;
   expectHeader(name: string, b?: Function): EggTest;
 }
 
-type Methods = 'get' | 'post' | 'delete' | 'del' | 'put' | 'head' | 'options' | 'patch' | 'trace' | 'connect';
+export type Methods = 'get' | 'post' | 'delete' | 'del' | 'put' | 'head' | 'options' | 'patch' | 'trace' | 'connect';
 
-export interface BaseMockApplication<T, C> extends Application { // tslint:disble-line
+export interface BaseMockApplication<T, C> extends Application {
   ready(): Promise<void>;
   close(): Promise<void>;
   callback(): any;
@@ -81,8 +82,8 @@ export interface BaseMockApplication<T, C> extends Application { // tslint:disbl
   backgroundTasksFinished(): Promise<void>;
 }
 
-interface ResultObject {
-  data?: string | object;
+export interface ResultObject {
+  data?: string | object | Buffer;
   status?: number;
   headers?: any;
   delay?: number;
@@ -90,9 +91,9 @@ interface ResultObject {
   repeats?: number;
 }
 
-type ResultFunction = (url?: string, opts?: any) => ResultObject | string | void;
+export type ResultFunction = (url?: string, opts?: any) => ResultObject | string | void;
 
-type MockHttpClientResult = ResultObject | ResultFunction | string;
+export type MockHttpClientResult = ResultObject | ResultFunction | string;
 
 export interface MockOption {
   /**
@@ -126,8 +127,8 @@ export interface MockOption {
   clean?: boolean;
 }
 
-type EnvType = 'default' | 'test' | 'prod' | 'local' | 'unittest' | string & {};
-type LogLevel = 'DEBUG' | 'INFO' | 'WARN' | 'ERROR' | 'NONE';
+export type EnvType = 'default' | 'test' | 'prod' | 'local' | 'unittest' | string & {};
+export type LogLevel = 'DEBUG' | 'INFO' | 'WARN' | 'ERROR' | 'NONE';
 
 export interface MockApplication extends BaseMockApplication<Application, Context> { }
 
