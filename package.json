@@ -23,8 +23,7 @@
     "test": "npm run lint && npm run tsd && npm run test-local",
     "test-local": "egg-bin test -r ./register.js --ts false",
     "cov": "egg-bin cov -r ./register.js --ts false",
-    "ci": "npm run lint && npm run tsd && npm run cov",
-    "contributors": "git-contributor"
+    "ci": "npm run lint && npm run tsd && npm run cov"
   },
   "dependencies": {
     "@types/supertest": "^2.0.7",
@@ -63,7 +62,6 @@
     "egg-tracer": "^2.0.0",
     "eslint": "^8.24.0",
     "eslint-config-egg": "^12.0.0",
-    "git-contributor": "^2.0.0",
     "mocha": "^10.1.0",
     "pedding": "^1.1.0",
     "tsd": "^0.31.0",
