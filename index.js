@@ -23,6 +23,7 @@ Object.assign(mock, mm, {
   restore() {
     cluster.restore();
     mockAgent.restore(app);
+    // return promise
     return mm.restore();
   },
 
