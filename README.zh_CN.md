@@ -494,6 +494,7 @@ describe('test ctx', () => {
 ```
 
 ### env for custom bootstrap
+
 EGG_BASE_DIR: the base dir of egg app
 EGG_FRAMEWORK: the framework of egg app
 
@@ -505,16 +506,8 @@ Please open an issue [here](https://github.com/eggjs/egg/issues).
 
 [MIT](LICENSE)
 
-<!-- GITCONTRIBUTOR_START -->
-
 ## Contributors
 
-|[<img src="https://avatars.githubusercontent.com/u/360661?v=4" width="100px;"/><br/><sub><b>popomore</b></sub>](https://github.com/popomore)<br/>|[<img src="https://avatars.githubusercontent.com/u/156269?v=4" width="100px;"/><br/><sub><b>fengmk2</b></sub>](https://github.com/fengmk2)<br/>|[<img src="https://avatars.githubusercontent.com/u/227713?v=4" width="100px;"/><br/><sub><b>atian25</b></sub>](https://github.com/atian25)<br/>|[<img src="https://avatars.githubusercontent.com/u/985607?v=4" width="100px;"/><br/><sub><b>dead-horse</b></sub>](https://github.com/dead-horse)<br/>|[<img src="https://avatars.githubusercontent.com/u/452899?v=4" width="100px;"/><br/><sub><b>shepherdwind</b></sub>](https://github.com/shepherdwind)<br/>|[<img src="https://avatars.githubusercontent.com/u/456108?v=4" width="100px;"/><br/><sub><b>shaoshuai0102</b></sub>](https://github.com/shaoshuai0102)<br/>|
-| :---: | :---: | :---: | :---: | :---: | :---: |
-|[<img src="https://avatars.githubusercontent.com/u/2160731?v=4" width="100px;"/><br/><sub><b>mansonchor</b></sub>](https://github.com/mansonchor)<br/>|[<img src="https://avatars.githubusercontent.com/u/5856440?v=4" width="100px;"/><br/><sub><b>whxaxes</b></sub>](https://github.com/whxaxes)<br/>|[<img src="https://avatars.githubusercontent.com/u/3139237?v=4" width="100px;"/><br/><sub><b>brickyang</b></sub>](https://github.com/brickyang)<br/>|[<img src="https://avatars.githubusercontent.com/u/880513?v=4" width="100px;"/><br/><sub><b>zbinlin</b></sub>](https://github.com/zbinlin)<br/>|[<img src="https://avatars.githubusercontent.com/u/36814673?v=4" width="100px;"/><br/><sub><b>GoodMeowing</b></sub>](https://github.com/GoodMeowing)<br/>|[<img src="https://avatars.githubusercontent.com/u/5243774?v=4" width="100px;"/><br/><sub><b>ngot</b></sub>](https://github.com/ngot)<br/>|
-|[<img src="https://avatars.githubusercontent.com/u/3274850?v=4" width="100px;"/><br/><sub><b>geekdada</b></sub>](https://github.com/geekdada)<br/>|[<img src="https://avatars.githubusercontent.com/u/7784713?v=4" width="100px;"/><br/><sub><b>shinux</b></sub>](https://github.com/shinux)<br/>|[<img src="https://avatars.githubusercontent.com/u/7530656?v=4" width="100px;"/><br/><sub><b>zhang740</b></sub>](https://github.com/zhang740)<br/>|[<img src="https://avatars.githubusercontent.com/u/225856?v=4" width="100px;"/><br/><sub><b>caoer</b></sub>](https://github.com/caoer)<br/>|[<img src="https://avatars.githubusercontent.com/u/7970645?v=4" width="100px;"/><br/><sub><b>lidianhao123</b></sub>](https://github.com/lidianhao123)<br/>|[<img src="https://avatars.githubusercontent.com/u/9961514?v=4" width="100px;"/><br/><sub><b>limerickgds</b></sub>](https://github.com/limerickgds)<br/>|
-[<img src="https://avatars.githubusercontent.com/u/7971415?v=4" width="100px;"/><br/><sub><b>paranoidjk</b></sub>](https://github.com/paranoidjk)<br/>|[<img src="https://avatars.githubusercontent.com/u/1207064?v=4" width="100px;"/><br/><sub><b>gxcsoccer</b></sub>](https://github.com/gxcsoccer)<br/>|[<img src="https://avatars.githubusercontent.com/u/2127199?v=4" width="100px;"/><br/><sub><b>okoala</b></sub>](https://github.com/okoala)<br/>|[<img src="https://avatars.githubusercontent.com/u/10825163?v=4" width="100px;"/><br/><sub><b>ImHype</b></sub>](https://github.com/ImHype)<br/>|[<img src="https://avatars.githubusercontent.com/u/16033313?v=4" width="100px;"/><br/><sub><b>linjiajian999</b></sub>](https://github.com/linjiajian999)<br/>
+[![Contributors](https://contrib.rocks/image?repo=eggjs/egg-mock)](https://github.com/eggjs/egg-mock/graphs/contributors)
 
-This project follows the git-contributor [spec](https://github.com/xudafeng/git-contributor), auto updated at `Fri Apr 29 2022 22:49:14 GMT+0800`.
-
-<!-- GITCONTRIBUTOR_END -->
+Made with [contributors-img](https://contrib.rocks).

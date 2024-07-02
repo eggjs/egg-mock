@@ -4,7 +4,9 @@ const app = require('./lib/app');
 const mockAgent = require('./lib/mock_agent');
 
 // egg-bin will set this flag to require files for instrument
-if (process.env.EGG_BIN_PREREQUIRE) require('./lib/prerequire');
+if (process.env.EGG_BIN_PREREQUIRE) {
+  require('./lib/prerequire');
+}
 
 /**
  * @namespace mm
@@ -22,7 +24,7 @@ Object.assign(mock, mm, {
     cluster.restore();
     mm.restore();
     // return promise
-    return mockAgent.restore();
+    return mockAgent.restore(app);
   },
 
   /**

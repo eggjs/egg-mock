@@ -22,11 +22,11 @@ module.exports = {
    * @return {MockAgent} agent
    */
   mockAgent() {
-    return mockAgent.getAgent();
+    return mockAgent.getAgent(this);
   },
 
   mockAgentRestore() {
-    return mockAgent.restore();
+    return mockAgent.restore(this);
   },
 
   /**
