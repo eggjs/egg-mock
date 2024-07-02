@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.12.2](https://github.com/eggjs/egg-mock/compare/v5.12.1...v5.12.2) (2024-07-02)
+
+
+### Bug Fixes
+
+* export mockHttpClient types ([#169](https://github.com/eggjs/egg-mock/issues/169)) ([ddab25f](https://github.com/eggjs/egg-mock/commit/ddab25f1b06e1e513c2dd523bf7d773970d37031))
+
 ## [5.12.1](https://github.com/eggjs/egg-mock/compare/v5.12.0...v5.12.1) (2024-07-02)
 
 
