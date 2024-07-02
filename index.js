@@ -22,9 +22,8 @@ module.exports.default = mock;
 Object.assign(mock, mm, {
   restore() {
     cluster.restore();
-    mm.restore();
-    // return promise
-    return mockAgent.restore(app);
+    mockAgent.restore(app);
+    return mm.restore();
   },
 
   /**
