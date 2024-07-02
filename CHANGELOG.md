@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.12.1](https://github.com/eggjs/egg-mock/compare/v5.12.0...v5.12.1) (2024-07-02)
+
+
+### Bug Fixes
+
+* support httpclient mock on allowH2 = true ([#168](https://github.com/eggjs/egg-mock/issues/168)) ([3a434bb](https://github.com/eggjs/egg-mock/commit/3a434bb6a90c98b957b6d92e059c09297bf7cf18))
+
 ## [5.12.0](https://github.com/eggjs/egg-mock/compare/v5.11.0...v5.12.0) (2024-06-02)
 
 
