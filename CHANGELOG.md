@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.12.3](https://github.com/eggjs/egg-mock/compare/v5.12.2...v5.12.3) (2024-07-02)
+
+
+### Bug Fixes
+
+* don't close used mock agent ([#170](https://github.com/eggjs/egg-mock/issues/170)) ([3e7a504](https://github.com/eggjs/egg-mock/commit/3e7a5044e3a687c8accbfc9f8a60c469bf4fdad6))
+
 ## [5.12.2](https://github.com/eggjs/egg-mock/compare/v5.12.1...v5.12.2) (2024-07-02)
 
 
