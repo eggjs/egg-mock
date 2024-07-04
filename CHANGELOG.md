@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.12.4](https://github.com/eggjs/egg-mock/compare/v5.12.3...v5.12.4) (2024-07-04)
+
+
+### Bug Fixes
+
+* should reset agent on restore ([#171](https://github.com/eggjs/egg-mock/issues/171)) ([088ac41](https://github.com/eggjs/egg-mock/commit/088ac41d96daecf62c544ca954812d3721ac06cc))
+
 ## [5.12.3](https://github.com/eggjs/egg-mock/compare/v5.12.2...v5.12.3) (2024-07-02)
 
 

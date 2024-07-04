@@ -1,6 +1,6 @@
 {
   "name": "egg-mock",
-  "version": "5.12.3",
+  "version": "5.12.4",
   "eggPlugin": {
     "name": "egg-mock"
   },
