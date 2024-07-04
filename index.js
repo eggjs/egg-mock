@@ -20,11 +20,10 @@ module.exports.default = mock;
 
 // inherit & extends mm
 Object.assign(mock, mm, {
-  restore() {
+  async restore() {
     cluster.restore();
-    mockAgent.restore(app);
-    // return promise
-    return mm.restore();
+    await mockAgent.restore();
+    return await mm.restore();
   },
 
   /**

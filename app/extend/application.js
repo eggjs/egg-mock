@@ -306,8 +306,8 @@ module.exports = {
     return mockAgent.getAgent(this);
   },
 
-  mockAgentRestore() {
-    return mockAgent.restore(this);
+  async mockAgentRestore() {
+    await mockAgent.restore();
   },
 
   /**
