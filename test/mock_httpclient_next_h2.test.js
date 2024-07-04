@@ -192,6 +192,17 @@ describe('test/mock_httpclient_next_h2.test.js', () => {
       .expect(200);
   });
 
+  it('should auto restore after each case', async () => {
+    app.mockCsrf();
+    await request(server)
+      .get('/urllib')
+      .expect({
+        get: 'url get',
+        post: 'url post',
+      })
+      .expect(200);
+  });
+
   it('should use first mock data on duplicate url mock', async () => {
     app.mockCsrf();
     app.mockHttpclient(url, 'post', {

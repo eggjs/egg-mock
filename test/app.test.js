@@ -253,7 +253,7 @@ function call(method) {
       if (method === 'app') {
         assert(app.logger._mockLogs);
         assert(app.coreLogger._mockLogs);
-        mm.restore();
+        await mm.restore();
         assert(!app.logger._mockLogs);
         assert(!app.coreLogger._mockLogs);
       }
