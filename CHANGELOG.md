@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.12.5](https://github.com/eggjs/egg-mock/compare/v5.12.4...v5.12.5) (2024-07-05)
+
+
+### Bug Fixes
+
+* should run restore in the current event loop ([#172](https://github.com/eggjs/egg-mock/issues/172)) ([1f9fc01](https://github.com/eggjs/egg-mock/commit/1f9fc0179ac524cbeb0532b92783233c0274ce71))
+
 ## [5.12.4](https://github.com/eggjs/egg-mock/compare/v5.12.3...v5.12.4) (2024-07-04)
 
 
