@@ -41,12 +41,12 @@
     "methods": "^1.1.2",
     "mm": "^3.0.2",
     "sdk-base": "^4.2.1",
-    "supertest": "^6.2.4",
-    "urllib": "^3.10.1"
+    "supertest": "^6.2.4"
   },
   "peerDependencies": {
     "egg": "^3.12.0",
-    "mocha": "^10.2.0"
+    "mocha": "^10.2.0",
+    "urllib": "^3 || ^4"
   },
   "devDependencies": {
     "@eggjs/tegg": "^3.2.2",
@@ -65,7 +65,8 @@
     "mocha": "^10.1.0",
     "pedding": "^1.1.0",
     "tsd": "^0.31.0",
-    "typescript": "5"
+    "typescript": "5",
+    "urllib": "^4.6.3"
   },
   "homepage": "https://github.com/eggjs/egg-mock",
   "repository": {
