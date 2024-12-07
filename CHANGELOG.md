@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.13.0](https://github.com/eggjs/egg-mock/compare/v5.12.5...v5.13.0) (2024-12-07)
+
+
+### Features
+
+* mv urllib to peerDependencies ([#174](https://github.com/eggjs/egg-mock/issues/174)) ([df7dc48](https://github.com/eggjs/egg-mock/commit/df7dc48be38f7f323f91213aa3ce3bd5e7879a58))
+
 ## [5.12.5](https://github.com/eggjs/egg-mock/compare/v5.12.4...v5.12.5) (2024-07-05)
 
 
