@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.14.0](https://github.com/eggjs/egg-mock/compare/v5.13.0...v5.14.0) (2024-12-09)
+
+
+### Features
+
+* detect-port@2, is-type-of@2, get-ready@3 ([#175](https://github.com/eggjs/egg-mock/issues/175)) ([0364af8](https://github.com/eggjs/egg-mock/commit/0364af8d87237bc6c08e2f9306945daa1d9144c9))
+
 ## [5.13.0](https://github.com/eggjs/egg-mock/compare/v5.12.5...v5.13.0) (2024-12-07)
 
 
