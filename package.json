@@ -26,13 +26,13 @@
     "ci": "npm run lint && npm run tsd && npm run cov"
   },
   "dependencies": {
+    "@eggjs/utils": "^4.0.2",
     "@types/supertest": "^2.0.7",
     "await-event": "^2.1.0",
     "co": "^4.6.0",
     "coffee": "^5.2.1",
     "detect-port": "^2.0.1",
     "egg-logger": "^3.5.0",
-    "egg-utils": "^2.4.1",
     "extend2": "^1.0.0",
     "get-ready": "^3.1.0",
     "globby": "^11.1.0",
