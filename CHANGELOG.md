@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.15.0](https://github.com/eggjs/egg-mock/compare/v5.14.0...v5.15.0) (2024-12-10)
+
+
+### Features
+
+* use @eggjs/utils ([#176](https://github.com/eggjs/egg-mock/issues/176)) ([48000cb](https://github.com/eggjs/egg-mock/commit/48000cb468fd25ac258d728ecc9afca21a8f6284))
+
 ## [5.14.0](https://github.com/eggjs/egg-mock/compare/v5.13.0...v5.14.0) (2024-12-09)
 
 
