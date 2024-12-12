@@ -1,6 +1,8 @@
 {
   "eggPlugin": {
     "name": "a",
-    "dependencies": [ "egg-mock" ]
+    "dependencies": [
+      "egg-mock"
+    ]
   }
 }
