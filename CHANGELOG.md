@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.15.1](https://github.com/eggjs/egg-mock/compare/v5.15.0...v5.15.1) (2024-12-12)
+
+
+### Bug Fixes
+
+* try to use urllib4 ([#177](https://github.com/eggjs/egg-mock/issues/177)) ([c8551b9](https://github.com/eggjs/egg-mock/commit/c8551b98f044c7315a67f579cc2c1b4f5dde73c4))
+
 ## [5.15.0](https://github.com/eggjs/egg-mock/compare/v5.14.0...v5.15.0) (2024-12-10)
 
 
