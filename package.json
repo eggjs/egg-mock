@@ -1,6 +1,6 @@
 {
   "name": "egg-mock",
-  "version": "5.15.1",
+  "version": "6.0.0-beta.0",
   "eggPlugin": {
     "name": "egg-mock"
   },
@@ -44,9 +44,9 @@
     "supertest": "^6.2.4"
   },
   "peerDependencies": {
-    "egg": "^3.12.0",
+    "egg": "beta",
     "mocha": "^10.2.0",
-    "urllib": "^3 || ^4"
+    "urllib": "^4"
   },
   "devDependencies": {
     "@eggjs/tegg": "^3.2.2",
@@ -55,18 +55,18 @@
     "@eggjs/tegg-plugin": "^3.2.2",
     "@eggjs/tsconfig": "^1.1.0",
     "@types/mocha": "^10.0.1",
-    "@types/node": "20",
-    "egg": "^3.12.0",
+    "@types/node": "22",
+    "egg": "beta",
     "egg-bin": "^6.0.0",
     "egg-errors": "^2.2.1",
     "egg-tracer": "^2.0.0",
-    "eslint": "^8.24.0",
-    "eslint-config-egg": "^12.0.0",
+    "eslint": "8",
+    "eslint-config-egg": "^14",
     "mocha": "^10.1.0",
     "pedding": "^1.1.0",
     "tsd": "^0.31.0",
     "typescript": "5",
-    "urllib": "3"
+    "urllib": "4"
   },
   "homepage": "https://github.com/eggjs/egg-mock",
   "repository": {
@@ -81,7 +81,7 @@
     "mock"
   ],
   "engines": {
-    "node": ">= 14.18.0"
+    "node": ">= 18.19.0"
   },
   "author": "popomore <sakura9515@gmail.com>"
 }

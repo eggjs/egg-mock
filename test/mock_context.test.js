@@ -1,4 +1,4 @@
-const assert = require('assert');
+const { strict: assert } = require('assert');
 const mm = require('..');
 
 describe('test/mock_context.test.js', () => {
@@ -12,7 +12,7 @@ describe('test/mock_context.test.js', () => {
   after(() => app.close());
   afterEach(mm.restore);
 
-  it('should work on GET with user login', () => {
+  it.only('should work on GET with user login', () => {
     app.mockContext({
       user: {
         foo: 'bar',

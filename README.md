@@ -4,6 +4,7 @@
 [![Node.js CI](https://github.com/eggjs/egg-mock/actions/workflows/nodejs.yml/badge.svg)](https://github.com/eggjs/egg-mock/actions/workflows/nodejs.yml)
 [![Test coverage][codecov-image]][codecov-url]
 [![npm download][download-image]][download-url]
+[![Node.js Version](https://img.shields.io/node/v/egg-mock.svg?style=flat)](https://nodejs.org/en/download/)
 
 [npm-image]: https://img.shields.io/npm/v/egg-mock.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/egg-mock
