@@ -17,6 +17,7 @@ function mock(...args) {
 }
 module.exports = mock;
 module.exports.default = mock;
+module.exports.mm = mock;
 
 // inherit & extends mm
 Object.assign(mock, mm, {

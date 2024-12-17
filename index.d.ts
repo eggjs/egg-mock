@@ -127,10 +127,21 @@ export interface MockOption {
   clean?: boolean;
 }
 
+export interface MockClusterOption extends MockOption {
+  workers?: number | string;
+  cache?: boolean;
+  /**
+   * opt for egg-bin
+   */
+  opt?: object;
+}
+
 export type EnvType = 'default' | 'test' | 'prod' | 'local' | 'unittest' | string & {};
 export type LogLevel = 'DEBUG' | 'INFO' | 'WARN' | 'ERROR' | 'NONE';
 
-export interface MockApplication extends BaseMockApplication<Application, Context> { }
+export interface MockApplication extends BaseMockApplication<Application, Context> {
+  [key: string]: any;
+}
 
 export interface EggMock extends MockMate {
   /**
@@ -141,7 +152,7 @@ export interface EggMock extends MockMate {
   /**
    * Create a mock cluster server, but you can't use API in application, you should test using supertest
    */
-  cluster: (option?: MockOption) => MockApplication;
+  cluster: (option?: MockClusterOption) => MockApplication;
 
   /**
    * mock the serverEnv of Egg
@@ -173,4 +184,5 @@ export interface EggMock extends MockMate {
 }
 
 declare const mm: EggMock;
+export { mm }
 export default mm;
